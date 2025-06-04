@@ -1,0 +1,37 @@
+import { useCallback, useEffect, useState } from "react";
+import { ThemeContext, type Theme } from "..";
+
+const THEME_KEY = 'lm-publisher-theme';
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const [theme, setTheme] = useState<Theme>('system');
+
+    const applyTheme = useCallback((theme: Theme) => {
+        setTheme(theme);
+        localStorage.setItem(THEME_KEY, theme);
+        document.body.setAttribute('theme', theme);
+    }, []);
+
+    useEffect(() => {
+        const storedTheme =
+            (localStorage.getItem(THEME_KEY) as Theme) || 'light';
+            applyTheme(storedTheme);
+    }, [applyTheme]);
+
+    useEffect(() => {
+        if (theme === "system") {
+            const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+                .matches
+                ? "dark"
+                : "light";
+            applyTheme(systemTheme);
+            return;
+        }
+    }, [theme, applyTheme]);
+
+    return (
+        <ThemeContext.Provider value={{theme, applyTheme }}>
+            {children}
+        </ThemeContext.Provider>
+    );
+}

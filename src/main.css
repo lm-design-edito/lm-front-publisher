@@ -1,6 +1,8 @@
 body {
-  --lm-publisher-bg-color: var(--lmui-c-charcoal-dark);
-  --lm-publisher-text-color: var(--lmui-c-smoke-dark);
+  --lm-publisher-bg-color: var(--lmui-c-white);
+  --lm-publisher-text-color: var(--lmui-c-slate-dark);
+  --lm-publisher-accent-color: var(--lmui-c-sea-light);
+  --lm-publisher-link-color: var(--lmui-c-sea-light);
 
   --lm-publisher-grid-gap: 16px;
   --lm-publisher-grid-margins: 24px;
@@ -9,11 +11,22 @@ body {
   color: var(--lm-publisher-text-color)
 }
 
+body[theme=dark] {
+  --lm-publisher-bg-color: var(--lmui-c-charcoal-dark);
+  --lm-publisher-text-color: var(--lmui-c-smoke-dark);
+  --lm-publisher-accent-color: var(--lmui-c-sea-light);
+
+}
+
 #root {
   margin: var(--lm-publisher-grid-margins);
 }
 
 
 a {
-  color: white;
+  color: var(--lm-publisher-link-color);
+}
+
+.accent {
+  color: var(--lm-publisher-accent-color);
 }
