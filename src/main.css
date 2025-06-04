@@ -1,0 +1,19 @@
+body {
+  --lm-publisher-bg-color: var(--lmui-c-charcoal-dark);
+  --lm-publisher-text-color: var(--lmui-c-smoke-dark);
+
+  --lm-publisher-grid-gap: 16px;
+  --lm-publisher-grid-margins: 24px;
+  background: var(--lm-publisher-bg-color);
+  font-family: var(--ff-marr-sans);
+  color: var(--lm-publisher-text-color)
+}
+
+#root {
+  margin: var(--lm-publisher-grid-margins);
+}
+
+
+a {
+  color: white;
+}
