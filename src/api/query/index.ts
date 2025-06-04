@@ -5,6 +5,27 @@ import { isAuthError } from "../auth/is-auth-error";
 import { HANDLED_AUTH_ERRORS } from "../auth/handled-auth-errors";
 import { getToken, saveToken } from "../auth/token";
 
+
+export type APIReponseType = {
+    httpStatus: number;
+    payload: unknown;
+    success: boolean;
+    type: string;
+}
+
+export type APIREsponseErrorType = {
+    httpStatus: number;
+    error: unknown;
+    success: false;
+    type: 'error';
+}
+
+export type APIREsponseSuccessType = {
+    httpStatus: number;
+    success: true;
+    type: 'success';
+}
+
 const responseMiddleware = (response: Response) => {
     if (!response.headers) {
         return;

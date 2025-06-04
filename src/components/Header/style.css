@@ -1,0 +1,23 @@
+.header {
+    border-bottom: 1px solid var(--lm-publisher-border-color);
+    padding: var(--lm-publisher-grid-margins) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .logo {
+    color: var(--lm-publisher-title-color);
+}
+
+.header__left,
+.header__right {
+    display: flex;
+    align-items: center;
+    gap: var(--lm-publisher-spacer)
+}
+
+.header__left h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
