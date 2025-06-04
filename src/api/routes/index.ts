@@ -3,7 +3,9 @@ const API_ROUTES = {
     AUTH_REFRESH_JWT_TOKEN: 'auth/refresh-token',
     AUTH_POST_LOGIN: 'auth/login',
     AUTH_POST_LOGOUT: 'auth/logout',
+    AUTH_POST_LOGOUT_EVERYWHERE: 'auth/logout-everywhere',
     AUTH_POST_SIGNUP: 'auth/signup',
+    AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN: 'auth/request-email-verification-token',
     
 }
 
