@@ -9,7 +9,7 @@ type AuthLoginParams = {
     password: string,
 };
 
-export const postLogin = async (params: AuthLoginParams) =>  api.query(API_ROUTES.AUTH_POST_LOGIN, {
+export const postLogin = async (params: AuthLoginParams) => api.query(API_ROUTES.AUTH_POST_LOGIN, {
     method: 'POST',
     body: JSON.stringify(params),
 });

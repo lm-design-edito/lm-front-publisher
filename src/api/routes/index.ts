@@ -6,6 +6,8 @@ const API_ROUTES = {
     AUTH_POST_LOGOUT_EVERYWHERE: 'auth/logout-everywhere',
     AUTH_POST_SIGNUP: 'auth/signup',
     AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN: 'auth/request-email-verification-token',
+
+    ADMIN_USERS_UPDATE: 'admin/users/update',
     
 }
 

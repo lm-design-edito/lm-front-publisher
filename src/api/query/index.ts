@@ -3,9 +3,20 @@ import { getCsrfToken } from "../auth/get-csrf-token"
 import { refreshJWT } from "../auth/refresh-jwt";
 import { isAuthError } from "../auth/is-auth-error";
 import { HANDLED_AUTH_ERRORS } from "../auth/handled-auth-errors";
+import { getToken, saveToken } from "../auth/token";
+
+const responseMiddleware = (response: Response) => {
+    if (!response.headers) {
+        return;
+    }
+    if (response.headers.get('X-Access-Token')) {
+        saveToken(response.headers.get('X-Access-Token') || '');
+    }
+}
 
 export const handleQuery = async (request: string, options?: RequestInit) => {
     const response = await authQuery(request, options);
+    responseMiddleware(response);
     return await response.json();
 }
 
@@ -31,12 +42,15 @@ export const authQuery = async (request: string, options?: RequestInit) => {
 /* C'est assez explicite je pense comme nom de fonction héhé */
 export const getAuthedOptions = async (options?: RequestInit) => {
     const csrfToken = await getCsrfToken();
+    const token = getToken();
+
     return options = {
         ...(options ? options : {}),
         headers: {
             ...(options && options.headers ? options.headers : {}),
             'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken || ''
+            'X-CSRF-Token': csrfToken || '',
+            ...token ? {  'Authorization': `Bearer ${token}` } : {}
         },
         credentials: 'include'
     }
