@@ -7,6 +7,8 @@ body {
   --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
   --lm-publisher-border-color: var(--lmui-c-snow-medium);
 
+  --lm-publisher-text-error-color: var(--lmui-c-red-medium);
+
   --lm-publisher-grid-gap: 16px;
   --lm-publisher-grid-margins: 24px;
   --lm-publisher-spacer: 8px;

@@ -1,6 +1,9 @@
 .dev-bar {
+    --dev-bar-accent-color: var(--lmui-c-red-medium);
+    --dev-bar-border-color: var(--lmui-c-red-light);
+
     position: relative;
-    border-bottom: 3px solid red;
+    border-bottom: 3px solid var(--dev-bar-border-color);
     padding: var(--lm-publisher-grid-margins);
 }
 
@@ -10,7 +13,7 @@
     left: 0;
     margin: 0;
     padding: 0 24px;
-    background: red;
+    background: var(--dev-bar-accent-color);
     text-transform: uppercase;
     font-size: 0.6rem;
     color: white;

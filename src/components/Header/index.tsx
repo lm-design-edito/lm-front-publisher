@@ -39,7 +39,7 @@ export default function Header() {
             <div className="header__left">
                 <Link to="/" className="header__title">
                     <LMLogo />
-                    <h1 className="header__title">LM Publisher</h1>
+                    <h1>LM Publisher</h1>
                 </Link>
                 <HeaderLocation />
             </div>

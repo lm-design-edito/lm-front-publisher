@@ -12,6 +12,7 @@ export function useWhoAmI(params?: Parameters<typeof api.queries.auth.whoAmI>[0]
   if (isLoading) {
     return {
       user: null,
+      isAuthenticated: false,
       isLoading: true,
       isError: false,
     };
@@ -20,12 +21,14 @@ export function useWhoAmI(params?: Parameters<typeof api.queries.auth.whoAmI>[0]
   if (isSuccess && data.success) {
     return {
       user: data.payload,
+      isAuthenticated: true,
       isLoading: false,
       isError: false,
     };
   } else {
     return {
       user: null,
+      isAuthenticated: false,
       isLoading: false,
       isError: true,
     };

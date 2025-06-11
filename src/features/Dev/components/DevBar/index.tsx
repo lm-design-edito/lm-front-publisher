@@ -30,10 +30,16 @@ const DevBar = () => {
                 </div>
             </div>
             <div className="dev-bar__category">
-                <span className="dev-bar__subtitle">Router</span>
+                <span className="dev-bar__subtitle">Public Routes</span>
                 <div className="dev-bar__actions">
                     <Link to="/signup">Sign up</Link>
                     <Link to="/login">Login</Link>
+                </div>
+            </div>
+            <div className="dev-bar__category">
+                <span className="dev-bar__subtitle">Admin Routes</span>
+                <div className="dev-bar__actions">
+                    <Link to="/admin">Admin</Link>
                 </div>
             </div>
         </div>

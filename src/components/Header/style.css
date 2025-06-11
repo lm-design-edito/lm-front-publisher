@@ -13,12 +13,18 @@
     align-items: center;
 }
 
+.header__title {
+    text-decoration: none;
+    color: var(--lm-publisher-title-color);
+}
+.header__title:hover h1,
+.header__title:hover {
+    color: var(--lm-publisher-link-color);
+}
+
 .header__location:before {
     content: "|";
     padding-right: 8px;
-}
-.header .logo {
-    color: var(--lm-publisher-title-color);
 }
 
 .header__left,
