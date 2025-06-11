@@ -4,6 +4,7 @@ body {
   --lm-publisher-title-color: var(--lmui-c-charcoal-dark);
   --lm-publisher-accent-color: var(--lmui-c-sea-light);
   --lm-publisher-link-color: var(--lmui-c-sea-light);
+  --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
   --lm-publisher-border-color: var(--lmui-c-snow-medium);
 
   --lm-publisher-grid-gap: 16px;
@@ -12,7 +13,9 @@ body {
 
   background: var(--lm-publisher-bg-color);
   font-family: var(--ff-marr-sans);
-  color: var(--lm-publisher-text-color)
+  color: var(--lm-publisher-text-color);
+  padding: 0;
+  margin: 0;
 }
 
 body[theme=dark] {
@@ -24,12 +27,15 @@ body[theme=dark] {
 
 }
 
-#root {
-  margin: var(--lm-publisher-grid-margins);
+.app-content {
+  margin: var(--lm-publisher-grid-margins)
 }
 
 a {
   color: var(--lm-publisher-link-color);
+}
+a:hover {
+  color: var(--lm-publisher-link-hover-color);
 }
 
 .accent {

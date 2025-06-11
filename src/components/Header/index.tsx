@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import ThemeSwitch from "../ui/ThemeSwitch";
 import './style.css'
-import { useWhoAmI } from "../../api/composables/auth/use-who-am-i";
+import ThemeSwitch from "../../features/UI/components/ThemeSwitch";
+import { LoginState } from "../../features/Authentification/components/LoginState";
 
 const LMLogo = () => (
     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo">
@@ -11,12 +11,6 @@ const LMLogo = () => (
 )
 
 export default function Header() {
-    const { user } = useWhoAmI();
-
-    /* @todo: create a custom hook "getMyUser" for this */
-    // Mutation to fetch the current user information
-
-
     return (
         <header className="header">
             <Link to="/" className="header__left">
@@ -24,19 +18,8 @@ export default function Header() {
                 <h1>LM Publisher</h1>
             </Link>
             <div className="header__right">
-                <span>{user ? `Connecté en tant que : ${user.username}` : 'Non connecté'}</span>
+                <LoginState />
                 <ThemeSwitch />
-                {/* <nav>
-                    <Link to="/">
-                    Home
-                    </Link>{' '}
-                    <Link to="/login">
-                    Login
-                    </Link>
-                    <Link to="/signup">
-                    Signup
-                    </Link>
-                </nav> */}
             </div>
         </header>
     );

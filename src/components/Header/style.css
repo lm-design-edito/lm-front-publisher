@@ -1,6 +1,6 @@
 .header {
     border-bottom: 1px solid var(--lm-publisher-border-color);
-    padding: var(--lm-publisher-grid-margins) 0;
+    padding: var(--lm-publisher-grid-margins);
     display: flex;
     align-items: center;
     justify-content: space-between;

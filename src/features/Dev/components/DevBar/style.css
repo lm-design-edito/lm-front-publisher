@@ -1,0 +1,44 @@
+.dev-bar {
+    position: relative;
+    border-bottom: 3px solid red;
+    padding: var(--lm-publisher-grid-margins);
+}
+
+.dev-bar__title {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    margin: 0;
+    padding: 0 24px;
+    background: red;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    color: white;
+}
+
+.dev-bar__content {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dev-bar__actions {
+    display: flex;
+    gap: 8px;
+}
+
+.dev-bar__actions button,
+.dev-bar__actions a {
+    padding: 0;
+    background: none;
+    color: var(--lm-publisher-text-color);
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.dev-bar__actions button:hover,
+.dev-bar__actions a:hover {
+    color: var(--lm-publisher-accent-color);
+}

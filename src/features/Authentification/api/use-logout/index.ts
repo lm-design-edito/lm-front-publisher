@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../..";
+import { api } from "../../../../api";
 
 type useLogoutReturn = Awaited<ReturnType<typeof api.queries.auth.logout>>;
 

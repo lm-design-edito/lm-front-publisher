@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../../..";
+import { api } from "../../../../api";
 
 export function useWhoAmI(params?: Parameters<typeof api.queries.auth.whoAmI>[0]) {
   const { data, isSuccess, isLoading } = useQuery({

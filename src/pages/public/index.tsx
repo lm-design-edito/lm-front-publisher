@@ -1,27 +1,11 @@
-import { api } from "../../api";
-
-function Index() {
-
-  // api.queries.auth.signup({
-  //   username: 'test-user-lea-2',
-  //   email: 'tanda+2@ext.lemonde.fr',
-  //   password: 'test-password-lea',
-  // })
-
-
-  // api.queries.auth.login({
-  //   username: 'test-user-lea-2',
-  //   // email: 'tanda+1@ext.lemonde.fr',
-  //   password: 'test-password-lea',
-  // });
-
-  // api.queries.auth.requestEmailVerificationToken({
-  //   email: 'tanda+2@ext.lemonde.fr'
-  // })
-
+function IndexPage() {
   return (
-    <h2>Public Index page</h2>
+    <>
+      <h1>Bienvenue sur <span className="accent">LM Publisher</span>.</h1>
+      <p>Ici ça publish fort</p>
+      <p>Pour toute question, besoin de support 24/7 : <span className="accent">fabas@lemonde.fr</span></p>
+    </>
   )
 }
 
-export default Index
+export default IndexPage

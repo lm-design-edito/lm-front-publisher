@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../../..";
+import { api } from "../../../../api";
 
 type UseLoginParams = Parameters<typeof api.queries.auth.login>[0]
 type UseLoginReturn = Awaited<ReturnType<typeof api.queries.auth.login>>
