@@ -6,6 +6,17 @@
     justify-content: space-between;
 }
 
+.header__left, 
+.header__title {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.header__location:before {
+    content: "|";
+    padding-right: 8px;
+}
 .header .logo {
     color: var(--lm-publisher-title-color);
 }
