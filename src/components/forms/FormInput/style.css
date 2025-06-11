@@ -1,14 +1,4 @@
-.form__input {
+/* .form__input {
     display: flex;
     gap: 8px;
-}
-
-.form__input--error .form__error {
-    display: flex;;
-}
-
-.form__error {
-    display: none;
-    color:  var(--lm-publisher-text-error-color);
-    font-size: 0.8rem;
-}
+} */

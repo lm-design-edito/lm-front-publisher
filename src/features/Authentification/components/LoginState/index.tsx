@@ -7,7 +7,7 @@ export const LoginState = () => {
     }
     return (
          <span>
-            Connecté en tant que : {user.username}
+            Connecté en tant que : <span className="accent">{user.username}</span>
         </span>
     );
 }

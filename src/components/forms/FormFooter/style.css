@@ -1,0 +1,9 @@
+.form__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--lm-publisher-spacer-2);
+}
+
+.form__footer button {
+    flex-shrink: 0;
+}

@@ -10,6 +10,7 @@ export default function ThemeSwitch() {
   return (
     <button
       onClick={toggleTheme}
+      className="lmui-button lmui-button_secondary lmui-button_s"
       aria-label="Toggle theme"
     >
       Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode

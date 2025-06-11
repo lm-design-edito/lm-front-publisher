@@ -15,7 +15,10 @@ export type APIReponseType = {
 
 export type APIREsponseErrorType = {
     httpStatus: number;
-    error: unknown;
+    error: {
+        code: string;
+        message: string;
+    };
     success: false;
     type: 'error';
 }

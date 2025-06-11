@@ -19,7 +19,10 @@ const getLocationName = (pathname: string) => {
         return 'Login';
     }
     if (pathname.includes('signup')) {
-        return 'Sign up';
+        return 'Inscription';
+    }
+    if (pathname.includes('check-email')) {
+        return 'Valider l\'inscription';
     }
     return pathname.replace('/', '');
 }

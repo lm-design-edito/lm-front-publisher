@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as zod from "zod"
 import './style.css'
 import FormInput from "../../../../components/forms/FormInput";
+import Form from "../../../../components/forms/Form";
+import FormSubmit from "../../../../components/forms/FormSubmit";
 
 const signupFormSchema = zod.object({
     username: zod.string().min(5, "Le nom d'utilisateur doit faire au moins 5 caractères"),
@@ -16,19 +18,18 @@ export const SignupForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors, isValid }
     } = useForm<SignupFormSchemaValues>({ resolver: zodResolver(signupFormSchema) });
     
     const onSubmit = () => {
         console.log('on submit')
     }
-
-    console.log({errors})
-
+    
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <FormInput
+                    isValid={isValid}
                     error={errors.username}
                     label="Nom d'utilisateur"
                     labelProps={{ htmlFor: "username" }}
@@ -41,6 +42,7 @@ export const SignupForm = () => {
                     }}
                 />
                 <FormInput
+                    isValid={isValid}
                     error={errors.email}
                     label="Adresse e-mail"
                     labelProps={{ htmlFor: "email" }}
@@ -53,6 +55,7 @@ export const SignupForm = () => {
                     }}
                 />
                 <FormInput
+                    isValid={isValid}
                     error={errors.password}
                     label="Mot de passe"
                     labelProps={{ htmlFor: "password" }}
@@ -64,9 +67,8 @@ export const SignupForm = () => {
                         required: true
                     }} 
                 />
-                <button type="submit">S'inscrire</button>
-
-            </form>
+                <FormSubmit>S'inscrire</FormSubmit>
+            </Form>
         </div>
     )
 }

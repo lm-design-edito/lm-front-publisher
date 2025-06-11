@@ -3,7 +3,7 @@ import { SignupForm } from "../../../features/Authentification/components/Signup
 function SignupPage() {
   return (
     <>
-      <h2>Signup page</h2>
+      <h2>Inscription</h2>
       <SignupForm />
     </>
   )

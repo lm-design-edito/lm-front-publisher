@@ -5,9 +5,9 @@ export const Route = createFileRoute('/admin/')({
   beforeLoad: async ({context}) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {
         throw redirect({
-                to: '/login',
-                search: {
-                redirect: location.href,
+              to: '/login',
+              search: {
+              redirect: location.href,
             },
         })
     }

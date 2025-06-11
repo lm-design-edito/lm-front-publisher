@@ -9,7 +9,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const applyTheme = useCallback((theme: Theme) => {
         setTheme(theme);
         localStorage.setItem(THEME_KEY, theme);
-        document.body.setAttribute('theme', theme);
+        document.documentElement.setAttribute('data-color-mode', theme);
     }, []);
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import { LoginForm } from "../../../features/Authentification"
 function LoginPage() {
   return (
     <>
-      <h2>Login page</h2>
+      <h2>Connexion</h2>
       <LoginForm />
     </>
   )
