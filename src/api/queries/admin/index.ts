@@ -1,7 +1,5 @@
-import { postAdminUsersUpdate } from "./users";
+import { adminUsersUpdate } from "./users";
 
 export const admin = {
-    post: {
-        usersUpdate: postAdminUsersUpdate
-    }
+    usersUpdate: adminUsersUpdate
 }

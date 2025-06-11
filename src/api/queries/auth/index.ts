@@ -1,16 +1,14 @@
-import { postLogin } from "./login";
-import { postLogout, postLogoutEverywhere } from "./logout";
-import { postRequestEmailVerificationToken } from "./request-email-verification-token";
-import { postSignup } from "./signup";
-import { postWhoAmI } from "./whoami";
+import { login } from "./login";
+import { logout, logoutEverywhere } from "./logout";
+import { requestEmailVerificationToken } from "./request-email-verification-token";
+import { signup } from "./signup";
+import { whoAmI } from "./whoami";
 
 export const auth = {
-    post: {
-        whoAmI: postWhoAmI,
-        login: postLogin,
-        logout: postLogout,
-        logoutEverywhere: postLogoutEverywhere,
-        signup: postSignup,
-        requestEmailVerificationToken: postRequestEmailVerificationToken
-    }
+    whoAmI,
+    login,
+    logout,
+    logoutEverywhere,
+    signup,
+    requestEmailVerificationToken
 }

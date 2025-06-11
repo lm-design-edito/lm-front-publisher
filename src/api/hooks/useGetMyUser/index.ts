@@ -11,7 +11,7 @@ export function useGetMyUser() {
 
     const { mutate: whoAmIMutate } = useMutation({
         mutationKey: ['whoAmI'],
-        mutationFn: api.queries.auth.post.whoAmI,
+        mutationFn: api.queries.auth.whoAmI,
         onSuccess(data, variables, context) {
             if (data.success && data.payload) {
                 console.log('whoAmI success', {data, variables, context});

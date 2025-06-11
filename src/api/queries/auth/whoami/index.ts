@@ -18,7 +18,7 @@ export type WhoAmIResponse = APIREsponseSuccessType & {
     }
 }
 
-export const postWhoAmI = async (params: WhoAmIParams): Promise<WhoAmIResponse> => api.query(API_ROUTES.AUTH_POST_WHOAMI, {
+export const whoAmI = async (params: WhoAmIParams): Promise<WhoAmIResponse> => api.query(API_ROUTES.AUTH_POST_WHOAMI, {
     method: 'POST',
     body: JSON.stringify(params),
 });

@@ -7,7 +7,7 @@ type SignupParams = {
     email: string,
 };
 
-export const postSignup = async (params: SignupParams) =>  api.query(API_ROUTES.AUTH_POST_SIGNUP, {
+export const signup = async (params: SignupParams) =>  api.query(API_ROUTES.AUTH_POST_SIGNUP, {
     method: 'POST',
     body: JSON.stringify(params),
 });

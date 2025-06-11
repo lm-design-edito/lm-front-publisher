@@ -11,7 +11,7 @@ type AdminUsersUpdate = {
     googleId?: string
 };
 
-export const postAdminUsersUpdate = async (params: AdminUsersUpdate) => api.query(API_ROUTES.ADMIN_USERS_UPDATE, {
+export const adminUsersUpdate = async (params: AdminUsersUpdate) => api.query(API_ROUTES.ADMIN_USERS_UPDATE, {
     method: 'POST',
     body: JSON.stringify(params),
 });

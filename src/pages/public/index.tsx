@@ -2,20 +2,20 @@ import { api } from "../../api";
 
 function Index() {
 
-  // api.queries.auth.post.signup({
+  // api.queries.auth.signup({
   //   username: 'test-user-lea-2',
   //   email: 'tanda+2@ext.lemonde.fr',
   //   password: 'test-password-lea',
   // })
 
 
-  // api.queries.auth.post.login({
+  // api.queries.auth.login({
   //   username: 'test-user-lea-2',
   //   // email: 'tanda+1@ext.lemonde.fr',
   //   password: 'test-password-lea',
   // });
 
-  // api.queries.auth.post.requestEmailVerificationToken({
+  // api.queries.auth.requestEmailVerificationToken({
   //   email: 'tanda+2@ext.lemonde.fr'
   // })
 
