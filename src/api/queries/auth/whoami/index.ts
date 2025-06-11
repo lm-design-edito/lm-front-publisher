@@ -2,7 +2,7 @@ import { api } from "../../..";
 import type { APIREsponseSuccessType } from "../../../query";
 import API_ROUTES from "../../../routes";
 
-type WhoAmIParams = {};
+export type WhoAmIParams = unknown
 
 export type WhoAmIResponse = APIREsponseSuccessType & {
     payload: {
@@ -18,7 +18,7 @@ export type WhoAmIResponse = APIREsponseSuccessType & {
     }
 }
 
-export const whoAmI = async (params: WhoAmIParams): Promise<WhoAmIResponse> => api.query(API_ROUTES.AUTH_POST_WHOAMI, {
+export const whoAmI = async (params?: WhoAmIParams): Promise<WhoAmIResponse> => api.query(API_ROUTES.AUTH_POST_WHOAMI, {
     method: 'POST',
     body: JSON.stringify(params),
 });

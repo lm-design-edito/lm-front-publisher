@@ -10,5 +10,5 @@ export const auth = {
     logout,
     logoutEverywhere,
     signup,
-    requestEmailVerificationToken
+    requestEmailVerificationToken,
 }
