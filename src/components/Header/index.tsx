@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import './style.css'
 import ThemeSwitch from "../../features/UI/components/ThemeSwitch";
-import { LoginState } from "../../features/Authentification/components/LoginState";
+import { LoginState } from "../../features/authentification/components/LoginState";
 
 const LMLogo = () => (
     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo">
@@ -23,6 +23,9 @@ const getLocationName = (pathname: string) => {
     }
     if (pathname.includes('check-email')) {
         return 'Valider l\'inscription';
+    }
+    if (pathname.includes('admin/users')) {
+        return 'Liste des utilisateurs';
     }
     return pathname.replace('/', '');
 }

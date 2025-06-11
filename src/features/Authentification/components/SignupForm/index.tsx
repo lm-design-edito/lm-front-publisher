@@ -5,6 +5,11 @@ import './style.css'
 import FormInput from "../../../../components/forms/FormInput";
 import Form from "../../../../components/forms/Form";
 import FormSubmit from "../../../../components/forms/FormSubmit";
+import { useSignup } from "../../api/use-signup";
+import FormFooter from "../../../../components/forms/FormFooter";
+import QueriesStatus from "../../../../components/QueriesStatus";
+import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 
 const signupFormSchema = zod.object({
     username: zod.string().min(5, "Le nom d'utilisateur doit faire au moins 5 caractères"),
@@ -15,13 +20,36 @@ const signupFormSchema = zod.object({
 type SignupFormSchemaValues = zod.infer<typeof signupFormSchema>
 
 export const SignupForm = () => {
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors, isValid }
     } = useForm<SignupFormSchemaValues>({ resolver: zodResolver(signupFormSchema) });
+    const [APIError, setAPIError] = useState<string | null>(null);
     
-    const onSubmit = () => {
+    const {mutate: signup} = useSignup({
+        onSuccess: (data) => {
+            console.log('on success signup', data);
+            navigate({
+                to: '/check-email',
+            });
+            // Handle successful signup, e.g., redirect to login page or show success message
+        },
+        onError: (error) => {
+            setAPIError(error.message); // Reset API error on new attempt
+            console.error('Signup failed:', error);
+            // Handle signup error, e.g., show error message
+        }
+    }); // Assuming you have a useSignup hook for handling signup logic
+
+    const onSubmit = (values: SignupFormSchemaValues) => {
+        setAPIError("")
+        signup({
+            username: values.username,
+            email: values.email,
+            password: values.password
+        });
         console.log('on submit')
     }
     
@@ -67,7 +95,10 @@ export const SignupForm = () => {
                         required: true
                     }} 
                 />
-                <FormSubmit>S'inscrire</FormSubmit>
+                <FormFooter>
+                    <FormSubmit>S'inscrire</FormSubmit>
+                    {APIError && <QueriesStatus error={true}>{APIError}</QueriesStatus>}
+                </FormFooter>
             </Form>
         </div>
     )

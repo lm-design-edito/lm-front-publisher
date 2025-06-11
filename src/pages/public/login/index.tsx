@@ -1,4 +1,4 @@
-import { LoginForm } from "../../../features/Authentification"
+import { LoginForm } from "../../../features/authentification"
 
 function LoginPage() {
   return (

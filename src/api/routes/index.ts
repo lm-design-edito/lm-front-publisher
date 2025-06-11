@@ -9,6 +9,7 @@ const API_ROUTES = {
     AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN: 'auth/request-email-verification-token',
 
     ADMIN_USERS_UPDATE: 'admin/users/update',
+    ADMIN_USERS_LIST: 'admin/users/list',
     
 }
 

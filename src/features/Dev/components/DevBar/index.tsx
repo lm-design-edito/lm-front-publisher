@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { useLogin } from '../../../Authentification/api/use-login';
-import { useLogout } from '../../../Authentification/api/use-logout';
+import { useLogin } from '../../../authentification/api/use-login';
+import { useLogout } from '../../../authentification/api/use-logout';
 import './style.css'
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
@@ -40,6 +40,7 @@ const DevBar = () => {
                 <span className="dev-bar__subtitle">Admin Routes</span>
                 <div className="dev-bar__actions">
                     <Link to="/admin">Admin</Link>
+                    <Link to="/admin/users">Liste users</Link>
                 </div>
             </div>
         </div>

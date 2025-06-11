@@ -4,12 +4,12 @@ import * as zod from "zod"
 import FormInput from "../../../../components/forms/FormInput";
 import Form from "../../../../components/forms/Form";
 import { useLogin } from "../../api/use-login";
+import { useWhoAmI } from "../../api/use-who-am-i";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import QueriesStatus from "../../../../components/QueriesStatus";
 import FormSubmit from "../../../../components/forms/FormSubmit";
 import FormFooter from "../../../../components/forms/FormFooter";
-import { useWhoAmI } from "../../api/use-who-am-i";
 
 const loginFormSchema = zod.object({
     email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -55,7 +55,7 @@ export const LoginForm = () => {
     }, [isAuthenticated, navigate])
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} onFocus={() => setAPIError('')}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
                 error={errors.email}
                 label="Adresse e-mail"

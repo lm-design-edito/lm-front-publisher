@@ -15,3 +15,10 @@ export const adminUsersUpdate = async (params: AdminUsersUpdate) => api.query(AP
     method: 'POST',
     body: JSON.stringify(params),
 });
+
+
+type AdminUsersList = unknown;
+export const adminUsersList = async (params: AdminUsersList) => api.query(API_ROUTES.ADMIN_USERS_LIST, {
+    method: 'POST',
+    body: JSON.stringify(params),
+});
