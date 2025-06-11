@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import './style.css'
-import ThemeSwitch from "../../features/UI/components/ThemeSwitch";
+import ThemeSwitch from "../../features/ui/components/ThemeSwitch";
 import { LoginState } from "../../features/authentification/components/LoginState";
 
 const LMLogo = () => (
