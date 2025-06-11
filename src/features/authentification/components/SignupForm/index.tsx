@@ -10,6 +10,7 @@ import FormFooter from "../../../../components/forms/FormFooter";
 import QueriesStatus from "../../../../components/QueriesStatus";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useWhoAmI } from "../../api/use-who-am-i";
 
 const signupFormSchema = zod.object({
     username: zod.string().min(5, "Le nom d'utilisateur doit faire au moins 5 caractères"),
@@ -20,7 +21,8 @@ const signupFormSchema = zod.object({
 type SignupFormSchemaValues = zod.infer<typeof signupFormSchema>
 
 export const SignupForm = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,

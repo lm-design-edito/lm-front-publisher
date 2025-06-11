@@ -27,6 +27,9 @@ const getLocationName = (pathname: string) => {
     if (pathname.includes('admin/users')) {
         return 'Liste des utilisateurs';
     }
+    if (pathname.includes('images/formatter')) {
+        return 'Image Formatter';
+    }
     return pathname.replace('/', '');
 }
 

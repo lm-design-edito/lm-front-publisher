@@ -16,6 +16,7 @@ import { Route as LoginImport } from './routes/login'
 import { Route as CheckEmailImport } from './routes/check-email'
 import { Route as IndexImport } from './routes/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
 // Create/Update Routes
@@ -47,6 +48,12 @@ const IndexRoute = IndexImport.update({
 const AdminIndexRoute = AdminIndexImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ImagesFormatterIndexRoute = ImagesFormatterIndexImport.update({
+  id: '/images/formatter/',
+  path: '/images/formatter/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersIndexImport
       parentRoute: typeof rootRoute
     }
+    '/images/formatter/': {
+      id: '/images/formatter/'
+      path: '/images/formatter'
+      fullPath: '/images/formatter'
+      preLoaderRoute: typeof ImagesFormatterIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -114,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/admin': typeof AdminIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
+  '/images/formatter': typeof ImagesFormatterIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -123,6 +138,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/admin': typeof AdminIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
+  '/images/formatter': typeof ImagesFormatterIndexRoute
 }
 
 export interface FileRoutesById {
@@ -133,6 +149,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
+  '/images/formatter/': typeof ImagesFormatterIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -144,8 +161,16 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin'
     | '/admin/users'
+    | '/images/formatter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/check-email' | '/login' | '/signup' | '/admin' | '/admin/users'
+  to:
+    | '/'
+    | '/check-email'
+    | '/login'
+    | '/signup'
+    | '/admin'
+    | '/admin/users'
+    | '/images/formatter'
   id:
     | '__root__'
     | '/'
@@ -154,6 +179,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin/'
     | '/admin/users/'
+    | '/images/formatter/'
   fileRoutesById: FileRoutesById
 }
 
@@ -164,6 +190,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
+  ImagesFormatterIndexRoute: typeof ImagesFormatterIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -173,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
+  ImagesFormatterIndexRoute: ImagesFormatterIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -190,7 +218,8 @@ export const routeTree = rootRoute
         "/login",
         "/signup",
         "/admin/",
-        "/admin/users/"
+        "/admin/users/",
+        "/images/formatter/"
       ]
     },
     "/": {
@@ -210,6 +239,9 @@ export const routeTree = rootRoute
     },
     "/admin/users/": {
       "filePath": "admin/users/index.tsx"
+    },
+    "/images/formatter/": {
+      "filePath": "images/formatter/index.tsx"
     }
   }
 }
