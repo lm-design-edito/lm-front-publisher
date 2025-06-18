@@ -11,37 +11,37 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SignupImport } from './routes/signup'
-import { Route as LoginImport } from './routes/login'
-import { Route as CheckEmailImport } from './routes/check-email'
 import { Route as IndexImport } from './routes/index'
+import { Route as SignupIndexImport } from './routes/signup/index'
+import { Route as LoginIndexImport } from './routes/login/index'
+import { Route as CheckEmailIndexImport } from './routes/check-email/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
 // Create/Update Routes
 
-const SignupRoute = SignupImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CheckEmailRoute = CheckEmailImport.update({
-  id: '/check-email',
-  path: '/check-email',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignupIndexRoute = SignupIndexImport.update({
+  id: '/signup/',
+  path: '/signup/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginIndexRoute = LoginIndexImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckEmailIndexRoute = CheckEmailIndexImport.update({
+  id: '/check-email/',
+  path: '/check-email/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,32 +74,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/check-email': {
-      id: '/check-email'
-      path: '/check-email'
-      fullPath: '/check-email'
-      preLoaderRoute: typeof CheckEmailImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupImport
-      parentRoute: typeof rootRoute
-    }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/check-email/': {
+      id: '/check-email/'
+      path: '/check-email'
+      fullPath: '/check-email'
+      preLoaderRoute: typeof CheckEmailIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup/': {
+      id: '/signup/'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupIndexImport
       parentRoute: typeof rootRoute
     }
     '/admin/users/': {
@@ -123,20 +123,20 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/check-email': typeof CheckEmailRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/admin': typeof AdminIndexRoute
+  '/check-email': typeof CheckEmailIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/check-email': typeof CheckEmailRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/admin': typeof AdminIndexRoute
+  '/check-email': typeof CheckEmailIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
 }
@@ -144,10 +144,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/check-email': typeof CheckEmailRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/admin/': typeof AdminIndexRoute
+  '/check-email/': typeof CheckEmailIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/signup/': typeof SignupIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
   '/images/formatter/': typeof ImagesFormatterIndexRoute
 }
@@ -156,28 +156,28 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/check-email'
     | '/login'
     | '/signup'
-    | '/admin'
     | '/admin/users'
     | '/images/formatter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/check-email'
     | '/login'
     | '/signup'
-    | '/admin'
     | '/admin/users'
     | '/images/formatter'
   id:
     | '__root__'
     | '/'
-    | '/check-email'
-    | '/login'
-    | '/signup'
     | '/admin/'
+    | '/check-email/'
+    | '/login/'
+    | '/signup/'
     | '/admin/users/'
     | '/images/formatter/'
   fileRoutesById: FileRoutesById
@@ -185,20 +185,20 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CheckEmailRoute: typeof CheckEmailRoute
-  LoginRoute: typeof LoginRoute
-  SignupRoute: typeof SignupRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  CheckEmailIndexRoute: typeof CheckEmailIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  SignupIndexRoute: typeof SignupIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
   ImagesFormatterIndexRoute: typeof ImagesFormatterIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CheckEmailRoute: CheckEmailRoute,
-  LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
   AdminIndexRoute: AdminIndexRoute,
+  CheckEmailIndexRoute: CheckEmailIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  SignupIndexRoute: SignupIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
   ImagesFormatterIndexRoute: ImagesFormatterIndexRoute,
 }
@@ -214,10 +214,10 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/check-email",
-        "/login",
-        "/signup",
         "/admin/",
+        "/check-email/",
+        "/login/",
+        "/signup/",
         "/admin/users/",
         "/images/formatter/"
       ]
@@ -225,17 +225,17 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
-    "/check-email": {
-      "filePath": "check-email.tsx"
-    },
-    "/login": {
-      "filePath": "login.tsx"
-    },
-    "/signup": {
-      "filePath": "signup.tsx"
-    },
     "/admin/": {
       "filePath": "admin/index.tsx"
+    },
+    "/check-email/": {
+      "filePath": "check-email/index.tsx"
+    },
+    "/login/": {
+      "filePath": "login/index.tsx"
+    },
+    "/signup/": {
+      "filePath": "signup/index.tsx"
     },
     "/admin/users/": {
       "filePath": "admin/users/index.tsx"

@@ -1,8 +1,17 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import ImageFormatterPage from '../../../pages/images/formatter'
+
+const ImageFormatterPage = () => {
+  return (
+    <>
+      <h2>Image Formatter</h2>
+      <p>@todo</p>
+      {/* <ImageFormatter /> */}
+    </>
+  )
+}
 
 export const Route = createFileRoute('/images/formatter/')({
-  component: RouteComponent,
+  component: ImageFormatterPage,
   beforeLoad: async ({context}) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
@@ -15,7 +24,3 @@ export const Route = createFileRoute('/images/formatter/')({
     // You can add any pre-load logic here if needed
   },
 })
-
-function RouteComponent() {
-  return <ImageFormatterPage />
-}

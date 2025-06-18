@@ -1,0 +1,11 @@
+.index-page__top {
+    width: 60%;
+    padding-bottom: var(--lm-publisher-spacer-8);
+    border-bottom: 1px solid var(--lm-publisher-border-color);
+}
+
+@media screen and (min-width: 768px) {
+    .index-page {
+        margin: max(20vh, 60px) 0 80px;
+    }
+}

@@ -15,6 +15,7 @@
   --lm-publisher-spacer: 8px;
   --lm-publisher-spacer-2: 16px;
   --lm-publisher-spacer-3: 24px;
+  --lm-publisher-spacer-8: 64px;
 }
 
 :root[data-color-mode=dark] {
@@ -34,9 +35,10 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
 .app-content {
-  margin: var(--lm-publisher-grid-margins)
+  margin: var(--lm-publisher-grid-margins) auto;
+  padding: var(--lm-publisher-grid-margins);
+  max-width: 1200px;
 }
 
 a {
@@ -51,6 +53,9 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: .5rem;
   color: var(--lm-publisher-title-color);
 }
 
@@ -59,7 +64,14 @@ h2,
   font-size: 22px;
   font-weight: 500;
   color: var(--lm-publisher-title-color);
+  margin-bottom: var(--lm-publisher-spacer-3);
+}
+
+p {
   margin: 0;
   padding: 0;
-  margin-bottom: var(--lm-publisher-spacer-3);
+}
+
+.m-spacer-8 {
+  margin: var(--lm-publisher-spacer-8) 0;
 }

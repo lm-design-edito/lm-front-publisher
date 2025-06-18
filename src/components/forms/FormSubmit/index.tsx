@@ -1,3 +1,4 @@
+import Button from "../../buttons/Button";
 import Loader from "../../Loader";
 
 type FormSubmitProps = {
@@ -8,7 +9,9 @@ type FormSubmitProps = {
 
 const FormSubmit = ({ isLoading, children, className, ...props }: FormSubmitProps) => {
   return (
-    <button type="submit" className={`lmui-button lmui-button_m ${className || ''}`} {...props}>{children} {isLoading ? <Loader />: <></>}</button>
+    <Button type="submit" className={className} size="m" {...props}>
+      {children} {isLoading ? <Loader />: <></>}
+    </Button>
   );
 }
 

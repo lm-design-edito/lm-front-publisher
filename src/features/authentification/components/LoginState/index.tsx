@@ -1,9 +1,10 @@
+import ButtonLink from "../../../../components/buttons/ButtonLink";
 import { useWhoAmI } from "../../api/use-who-am-i";
 
 export const LoginState = () => {
     const { user } = useWhoAmI();
     if (!user) {
-        return <span>Non connecté</span>
+        return <ButtonLink to="/login" variant="secondary" size="s">Login</ButtonLink>
     }
     return (
          <span>

@@ -1,3 +1,4 @@
+import Button from "../../../../components/buttons/Button";
 import { useTheme } from "../../hooks/useTheme";
 
 export default function ThemeSwitch() {
@@ -8,12 +9,13 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <button
+    <Button 
+      aria-label="Toggle theme" 
+      variant="secondary"
       onClick={toggleTheme}
-      className="lmui-button lmui-button_secondary lmui-button_s"
-      aria-label="Toggle theme"
+      size="s"
     >
-      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
-    </button>
+      Passer en {theme === 'light' ? 'Dark' : 'Light'} Mode
+    </Button>
   )
 }

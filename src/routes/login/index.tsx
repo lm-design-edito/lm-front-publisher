@@ -1,8 +1,17 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import SignupPage from '../pages/public/signup'
+import { LoginForm } from '../../features/authentification'
 
-export const Route = createFileRoute('/signup')({
-  component: RouteComponent,
+const LoginPage = () => {
+  return (
+      <>
+        <h2>Connexion</h2>
+        <LoginForm />
+      </>
+    )
+}
+
+export const Route = createFileRoute('/login/')({
+  component: LoginPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && context.auth.isAuthenticated) {
       throw redirect({
@@ -14,10 +23,8 @@ export const Route = createFileRoute('/signup')({
     }
     // This is a placeholder for any pre-load logic you might want to implement
     // For example, you could check user permissions or load initial data
-    console.log('Loading signup route...')
-  },
+    console.log('Loading login route...')
+  }
 })
 
-function RouteComponent() {
-  return <SignupPage />
-}
+
