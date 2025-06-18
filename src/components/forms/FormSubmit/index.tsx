@@ -1,5 +1,4 @@
 import Button from "../../buttons/Button";
-import Loader from "../../Loader";
 
 type FormSubmitProps = {
     children?: React.ReactNode;
@@ -7,11 +6,9 @@ type FormSubmitProps = {
     isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const FormSubmit = ({ isLoading, children, className, ...props }: FormSubmitProps) => {
+const FormSubmit = ({ children, className, ...props }: FormSubmitProps) => {
   return (
-    <Button type="submit" className={className} size="m" {...props}>
-      {children} {isLoading ? <Loader />: <></>}
-    </Button>
+    <Button type="submit" className={className} size="m" {...props}>{children}</Button>
   );
 }
 
