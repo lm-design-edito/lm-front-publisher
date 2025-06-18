@@ -14,8 +14,6 @@ export default function ThemeSwitch() {
       variant="secondary"
       onClick={toggleTheme}
       size="s"
-    >
-      Passer en {theme === 'light' ? 'Dark' : 'Light'} Mode
-    </Button>
+    >{theme === 'light' ? "☀" : "☽" }</Button>
   )
 }

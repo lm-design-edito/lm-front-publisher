@@ -4,6 +4,7 @@ import API_ROUTES from "../../routes";
 let csrfToken: string | null = null
 
 export const getCsrfToken = async () => {
+    return '';
     if (csrfToken !== null) return csrfToken
     csrfToken = await fetchCsrfToken()
     console.log('getCsrfToken', {csrfToken})

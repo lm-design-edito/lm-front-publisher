@@ -6,6 +6,6 @@
 
 @media screen and (min-width: 768px) {
     .index-page {
-        margin: max(20vh, 60px) 0 80px;
+        margin: max(10vh, 60px) 0 80px;
     }
 }

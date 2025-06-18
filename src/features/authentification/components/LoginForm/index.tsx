@@ -31,7 +31,7 @@ export const LoginForm = () => {
 
     const { mutate: login, isPending } = useLogin({
         onSuccess: () => {
-            console.log('on success navigate to /admin');
+            console.log('on success navigate to homepage');
         },
         onError: (error) => {
             setAPIError(error.message); // Reset API error on new attempt
@@ -49,8 +49,8 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log('User is already logged in, redirecting to /admin');
-            navigate({ to: '/admin' }); // Assuming you have a redirectTo function to handle navigation
+            console.log('User is already logged in, redirecting to /');
+            navigate({ to: '/' });
         }
     }, [isAuthenticated, navigate])
 

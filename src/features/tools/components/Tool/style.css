@@ -1,0 +1,24 @@
+.tool {
+    padding: var(--lm-publisher-spacer-3);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 8px;
+    background: var(--lm-publisher-tool-bg);
+
+    text-decoration: none;
+}
+
+.tool__title {
+    transition: color 0.3s ease;
+}
+
+.tool:hover .tool__title {
+    color: var(--lm-publisher-link-color);
+}
+
+.tool__description {
+    color: var(--lm-publisher-text-color);
+}

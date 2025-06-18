@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useWhoAmI } from "../features/authentification/api/use-who-am-i"
-import AvailableServicesList from "../features/services/components/AvailableServicesList";
+import AvailableToolsList from "../features/tools/components/AvailableToolsList";
 import './style.css';
 
 const IndexPage = () => {
@@ -15,7 +15,7 @@ const IndexPage = () => {
       </div>
       {isAuthenticated && 
         <div className="index-page__content">
-          <AvailableServicesList className="m-spacer-8" />
+          <AvailableToolsList className="m-spacer-8" />
         </div>
       }
     </div>

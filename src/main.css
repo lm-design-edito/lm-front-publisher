@@ -10,6 +10,10 @@
   --lm-publisher-text-error-color: var(--lmui-c-red-light);
   --lm-publisher-text-success-color: var(--lmui-c-form-border-valid-dark);
 
+  --lm-publisher-tool-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgba(0, 91, 133, 0.04) 94.37%);
+
+  --lm-publisher-width: 1200px;
+
   --lm-publisher-grid-gap: 16px;
   --lm-publisher-grid-margins: 24px;
   --lm-publisher-spacer: 8px;
@@ -24,6 +28,8 @@
   --lm-publisher-text-color: var(--lmui-c-smoke-dark);
   --lm-publisher-accent-color: var(--lmui-c-sea-light);
   --lm-publisher-border-color: var(--lmui-c-slate-lighter);
+
+  --lm-publisher-tool-bg: linear-gradient(232deg, rgb(129, 199, 231, 0.09) 0%, rgba(129, 199, 231, 0.04) 94.37%);
 }
 
 body {
@@ -38,7 +44,7 @@ body {
 .app-content {
   margin: var(--lm-publisher-grid-margins) auto;
   padding: var(--lm-publisher-grid-margins);
-  max-width: 1200px;
+  max-width: var(--lm-publisher-width);
 }
 
 a {
@@ -57,6 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin-bottom: .5rem;
   color: var(--lm-publisher-title-color);
+  font-weight: 500;
 }
 
 h2,
@@ -74,4 +81,8 @@ p {
 
 .m-spacer-8 {
   margin: var(--lm-publisher-spacer-8) 0;
+}
+
+th {
+  font-weight: 500;
 }

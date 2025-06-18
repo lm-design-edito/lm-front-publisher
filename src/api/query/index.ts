@@ -41,12 +41,13 @@ const responseMiddleware = (response: Response) => {
 export const handleQuery = async (request: string, options?: RequestInit) => {
     const response = await authQuery(request, options);
     responseMiddleware(response);
+
     return await response.json();
 }
 
 /* @todo: c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
 export const query = async (request: string, options?: RequestInit) => {
-    const jsonResponse = handleQuery(request, options);
+    const jsonResponse = await handleQuery(request, options);
     const authError = isAuthError(jsonResponse);
 
     if (!authError) {
@@ -82,13 +83,19 @@ export const getAuthedOptions = async (options?: RequestInit) => {
 
 /* @todo */
 export const authQueryOnError = async (errorCode: string) => {
+    console.log({errorCode})
     const authedOptions = await getAuthedOptions();
     switch(errorCode) {
         case HANDLED_AUTH_ERRORS.CSRF_TOKEN:
+            console.log('CSRF token error, fetching new token');
             return getCsrfToken();
         case HANDLED_AUTH_ERRORS.JWT_TOKEN:
-            return refreshJWT(authedOptions);
+            console.log('JWT token error, refreshing token');
+            return refreshJWT({
+                ...authedOptions,
+                method: 'POST',
+            });
         default: 
-            return new Promise(() => {})
+            return new Promise((resolve) => { return resolve(true); });
     }
 }

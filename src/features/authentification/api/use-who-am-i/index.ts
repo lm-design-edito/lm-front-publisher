@@ -3,8 +3,9 @@ import { api } from "../../../../api";
 
 export function useWhoAmI(params?: Parameters<typeof api.queries.auth.whoAmI>[0]) {
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ["whoAmI"],
+    queryKey: ["who-am-i"],
     queryFn: () => {
+      console.log('useWhoAmI');
       return api.queries.auth.whoAmI(params);
     },
   });

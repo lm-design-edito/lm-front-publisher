@@ -1,6 +1,6 @@
 import { HANDLED_AUTH_ERRORS_VALUES } from "../handled-auth-errors";
 
-const INTERCEPT_AUTHENTIFICATION_CODES_STATUS = [403];
+const INTERCEPT_AUTHENTIFICATION_CODES_STATUS = [403, 401];
 
 /* @todo: un enfer à lire cette fonction */
 export const isAuthError = (jsonResponse: object) => {

@@ -17,7 +17,7 @@ export function useSignup(clbs?: {
     mutationFn: (params: UseSignupParams) => api.queries.auth.signup(params),
     onSuccess: (data: UseSignupReturn) => {
         client.invalidateQueries({
-            queryKey: ["whoAmI"],
+            queryKey: ["who-am-i"],
         });
 
         if (!data.success) {
@@ -30,10 +30,8 @@ export function useSignup(clbs?: {
     },
     onError: (err) => {
         clbs?. onError?.(formatAPIError(err));
-
-        console.log('invalidate queries who am i');
         client.invalidateQueries({
-            queryKey: ["whoAmI"],
+            queryKey: ["who-am-i"],
         });
     }
   });

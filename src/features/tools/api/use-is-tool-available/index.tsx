@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../../api";
 
-export function useIsServiceAllowed(serviceName: string) {
+export function useIsToolAvailable(serviceName: string) {
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ["whoAmI"],
+    queryKey: ["who-am-i"],
     queryFn: () => {
+        console.log('useIsToolAvailable.who-am-i');
       return api.queries.auth.whoAmI();
     },
   });

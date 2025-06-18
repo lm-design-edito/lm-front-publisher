@@ -13,16 +13,14 @@ export function useLogout(clbs?: {
     mutationFn: () => api.queries.auth.logout(),
     onSuccess: (data) => {
         clbs?.onSuccess?.(data);
-        console.log('logout:invalidate queries who am i');
         client.invalidateQueries({
-            queryKey: ["whoAmI"],
+            queryKey: ["who-am-i"],
         });
     },
     onError: (data) => {
         clbs?.onError?.(data);
-        console.log('logout:invalidate queries who am i');
         client.invalidateQueries({
-            queryKey: ["whoAmI"],
+            queryKey: ["who-am-i"],
         });
     }
   });
