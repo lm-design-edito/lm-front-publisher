@@ -86,3 +86,21 @@ p {
 th {
   font-weight: 500;
 }
+
+.lm-publisher-flex {
+  display: flex;
+}
+
+.lm-publisher-center-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lm-publisher-flex--spacer {
+  gap: var(--lm-publisher-spacer)
+}
+
+.lm-publisher-flex--spacer-2 {
+  gap: var(--lm-publisher-spacer-2)
+}

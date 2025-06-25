@@ -4,6 +4,7 @@ import { useWhoAmI } from "../../../authentification/api/use-who-am-i";
 import { useUsersList } from "../../api/use-users-list";
 import './style.css';
 import Table, { type Column, type Row } from "../../../../components/tables/Table";
+import Button from "../../../../components/buttons/Button";
 
 const UserBadge = ({ badge }: { badge: string }) => {
   const color = useMemo(() => {
@@ -30,6 +31,15 @@ const UserStatus = ({ verified }: { verified: boolean }) => {
   );
 }
 
+type UserRow = {
+  _id: string;
+  username: string;
+  email: string;
+  role: string;
+  verified: boolean;
+  badges: string[];
+  actions?: React.ReactNode;
+}
 
 const UsersList = () => {
   const { user } = useWhoAmI();
@@ -46,7 +56,7 @@ const UsersList = () => {
     } : null)).filter((user) => user !== null);
   }, [list, user])
 
-  const columns: Column<typeof userList[0]>[] = useMemo(() => (
+  const columns: Column<UserRow>[] = useMemo(() => (
     [
       { id: '_id', label: 'ID' },
       { id: 'username', label: 'Username' },
@@ -69,12 +79,27 @@ const UsersList = () => {
             </>
           ) : <span>Aucun badge</span>
 
+        }, 
+      },
+      {
+        id: 'actions', label: 'Actions', cell: {
+          className: 'users-list__actions-cell',
+          render: () => (
+            <div className="users-list__actions lm-publisher-center-flex lm-publisher-flex--spacer">
+              <Button size="s" variant="secondary">
+                Modifier
+              </Button>
+              <Button size="s" variant="secondary" color="danger">
+                Supprimer
+              </Button>
+            </div>
+          )
         }
       },
     ]
   ), [])
 
-  const rows: Row<typeof userList[0]>[] = useMemo(() => (
+  const rows: Row<UserRow>[] = useMemo(() => (
     userList.map((user) => ({
       ...user,
       rowId: user._id, // Unique identifier for the row

@@ -3,6 +3,8 @@ import ButtonLink from "../../../../components/buttons/ButtonLink";
 import { useLogout } from "../../api/use-logout";
 import { useWhoAmI } from "../../api/use-who-am-i";
 
+import './style.css';
+
 export const LoginState = () => {
     const { mutate: logout, isPending: isPendingLogout } = useLogout();
     const { user } = useWhoAmI();
@@ -13,9 +15,11 @@ export const LoginState = () => {
         </>
     }
     return (
-         <span>
-            Connecté en tant que : <span className="accent">{user.username}</span>
-             <Button onClick={()=>logout()} variant="secondary" size="s" isLoading={isPendingLogout}>Logout</Button>
+        <span className={`login-state lm-publisher-center-flex lm-publisher-flex--spacer`}>
+            <span className="login-state__user">
+                Bonjour <span className="accent">{user.username}</span>, 
+            </span>
+            <Button onClick={()=>logout()} variant="secondary" size="s" isLoading={isPendingLogout}>Logout</Button>
         </span>
     );
 }

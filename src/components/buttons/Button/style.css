@@ -1,0 +1,13 @@
+.lmui-button_danger {
+    background-color: var(--lmui-c-primary-red-bg);
+    color: var(--lmui-c-primary-red-font);
+}
+.lmui-button_danger.lmui-button_secondary {
+    color: var(--lmui-c-tertiary-red-font);
+    border-color: var(--lmui-c-tertiary-red-font);
+}
+
+.lmui-button_success {
+    background-color: var(--lmui-c-primary-green-bg);
+    color: var(--lmui-c-primary-green-font);
+}
