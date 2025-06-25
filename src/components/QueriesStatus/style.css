@@ -3,10 +3,10 @@
   justify-content: center;
 }
 
-.queries-status--success {
+.queries-status_success {
     color: var(--lm-publisher-text-success-color);
 }
 
-.queries-status--error {
+.queries-status_error {
     color: var(--lm-publisher-text-error-color);
 }

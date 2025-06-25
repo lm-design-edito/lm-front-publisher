@@ -68,7 +68,7 @@ export const UsersList = () => {
         id: 'actions', label: 'Actions', cell: {
           className: 'users-list__actions-cell',
           render: () => (
-            <div className="users-list__actions lm-publisher-center-flex lm-publisher-flex--spacer">
+            <div className="users-list__actions lm-publisher-center-flex lm-publisher-flex-spacer">
               <Button size="s" variant="secondary">
                 Modifier
               </Button>

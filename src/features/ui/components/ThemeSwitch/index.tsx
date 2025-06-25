@@ -18,7 +18,7 @@ export function ThemeSwitch({ className = '', minified, size = 'm' }: ThemeSwitc
 
   return (
     <Button 
-      className={`theme-switch ${className} ${minified ? 'theme-switch--minified' : ''}`}
+      className={`theme-switch ${className} ${minified ? 'theme-switch_minified' : ''}`}
       aria-label="Changer le thème" 
       variant="secondary"
       onClick={toggleTheme}

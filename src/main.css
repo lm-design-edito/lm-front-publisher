@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2,
-.lm-publisher-title2 {
+.lm-publisher-title_2 {
   font-size: 22px;
   font-weight: 500;
   color: var(--lm-publisher-title-color);
@@ -111,7 +111,7 @@ th {
   flex: 1;
 }
 
-.lm-publisher-flex--wrap {
+.lm-publisher-flex-wrap {
   flex-wrap: wrap;
 }
 
@@ -121,15 +121,15 @@ th {
   align-items: center;
 }
 
-.lm-publisher-flex--column {
+.lm-publisher-flex-column {
   display: flex;
   flex-direction: column;
 }
 
-.lm-publisher-flex--spacer {
+.lm-publisher-flex-spacer {
   gap: var(--lm-publisher-spacer)
 }
 
-.lm-publisher-flex--spacer-2 {
+.lm-publisher-flex-spacer-2 {
   gap: var(--lm-publisher-spacer-2)
 }
