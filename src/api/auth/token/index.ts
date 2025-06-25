@@ -8,7 +8,12 @@ const getToken = ()  => {
     return sessionStorage.getItem(TOKEN_KEY);
 }
 
+const removeTokenFromStorage = () => {
+    sessionStorage.removeItem(TOKEN_KEY);
+}
+
 export {
     saveToken,
-    getToken
+    getToken,
+    removeTokenFromStorage
 }

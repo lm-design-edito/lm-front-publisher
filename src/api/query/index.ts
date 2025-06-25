@@ -91,6 +91,7 @@ export const authQueryOnError = async (errorCode: string) => {
             return getCsrfToken();
         case HANDLED_AUTH_ERRORS.JWT_TOKEN:
             console.log('JWT token error, refreshing token');
+            alert('AUTH.ERROR JWT: Votre session a expiré, nous allons vous reconnecter.');
             return refreshJWT({
                 ...authedOptions,
                 method: 'POST',
