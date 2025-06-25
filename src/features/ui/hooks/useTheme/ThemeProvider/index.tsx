@@ -13,21 +13,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     useEffect(() => {
-        const storedTheme =
-            (localStorage.getItem(THEME_KEY) as Theme) || 'light';
-            applyTheme(storedTheme);
-    }, [applyTheme]);
-
-    useEffect(() => {
-        if (theme === "system") {
-            const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
                 .matches
                 ? "dark"
                 : "light";
-            applyTheme(systemTheme);
-            return;
-        }
-    }, [theme, applyTheme]);
+        const storedTheme =  (localStorage.getItem(THEME_KEY) as Theme) || systemTheme || 'light';
+        applyTheme(storedTheme);
+    }, [applyTheme]);
 
     return (
         <ThemeContext.Provider value={{theme, applyTheme }}>
