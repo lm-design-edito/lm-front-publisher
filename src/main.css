@@ -79,8 +79,17 @@ p {
   padding: 0;
 }
 
+.m-spacer {
+  margin: var(--lm-publisher-spacer) 0;
+}
+.m-t-spacer {
+  margin-top: var(--lm-publisher-spacer);
+}
 .m-spacer-8 {
   margin: var(--lm-publisher-spacer-8) 0;
+}
+.m-t-spacer-8 {
+  margin-top: var(--lm-publisher-spacer-8);
 }
 
 th {

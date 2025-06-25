@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import './style.css'
 import ThemeSwitch from "../../features/ui/components/ThemeSwitch";
-import { LoginState } from "../../features/authentification/components/LoginState";
+import { AuthActions } from "../../features/authentification/components/AuthActions";
 
 const LMLogo = () => (
     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo">
@@ -53,7 +53,7 @@ export default function Header() {
                 <HeaderLocation />
             </div>
             <div className="header__right">
-                <LoginState />
+                <AuthActions />
                 <ThemeSwitch />
             </div>
         </header>

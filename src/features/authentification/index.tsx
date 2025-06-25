@@ -1,7 +1,7 @@
 import { LoginForm } from './components/LoginForm';
-import { LoginState } from './components/LoginState';
+import { AuthActions } from './components/AuthActions';
 
 export {
     LoginForm,
-    LoginState
+    AuthActions
 }
