@@ -10,6 +10,7 @@ import { FormLabel }from "../../../../components/forms/FormLabel";
 import { useImageFormatToWidth } from "../../api/use-image-format-to-width";
 import { QueriesStatus } from "../../../../components/QueriesStatus";
 import { useState } from "react";
+import { FieldSet } from "../../../../components/forms/Fieldset";
 
 const imageFormatterFormSchema = zod.object({
     width: zod.coerce.number().min(1, "La largeur doit être supérieure à 0"),
@@ -56,10 +57,9 @@ export const ImageFormatterForm = () => {
                 error={errors['width']} // No error handling for this input, but you can add it if needed
                 isValid={isValid} // Assuming the input is valid, you can change this based on your validation logic
             />
-            <div className="image-formatter-form__input">
-                <FormLabel>
-                    Choisir une image
-                </FormLabel>
+            <FieldSet
+                legend={<FormLabel>Options de formatage</FormLabel>}
+            >
                 <FormInput
                      error={errors['imageUpload']} 
                     inputProps={{
@@ -70,7 +70,7 @@ export const ImageFormatterForm = () => {
                         ...register("imageUpload")
                     }}
                 />
-            </div>
+            </FieldSet>
             <FormFooter>
                 <FormSubmit isLoading={isPending}>
                     Formatter
