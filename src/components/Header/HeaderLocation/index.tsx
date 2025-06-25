@@ -23,6 +23,18 @@ const getLocationName = (pathname: string) => {
     if (pathname.includes('images/formatter')) {
         return 'Image Formatter';
     }
+    if (pathname.includes('images/resize')) {
+        return 'Image Resizer';
+    }
+    if (pathname.includes('images/convert')) {
+        return 'Image Converter';
+    }
+    if (pathname.includes('images/optimize')) {
+        return 'Image Optimizer';
+    }
+    if (pathname.includes('images/generator')) {
+        return 'Générateur de média d\'appels';
+    }
     return pathname.replace('/', '');
 }
 

@@ -32,33 +32,34 @@ const otherTools: Tool[] = [
 ];
 
 const getToolBadges = (tools: Tool[]): string[] => {
-    return tools
-        .map(tool => ('badge' in tool && typeof tool.badge === 'string' ? tool.badge : ''))
-        .filter((badge): badge is string => badge.trim().length > 0);
+    return [...new Set(tools.map(tool => ('badge' in tool && typeof tool.badge === 'string' ? tool.badge : ''))
+        .filter((badge): badge is string => badge.trim().length > 0))];
 }
 
 const toolsBadges = getToolBadges(tools);
 const adminToolsBadges = getToolBadges(adminTools);
 const otherToolsBadges = getToolBadges(otherTools);
 
-console.log({otherToolsBadges})
 const AvailableToolsList = ({ className = '' }: AvailableToolsListProps) => {
     const availableTools = useAvailableToolList(toolsBadges); 
     const availableAdminTools = useAvailableToolList(adminToolsBadges);
     const availableOtherTools = useAvailableToolList(otherToolsBadges);
 
     const listTools = useCallback((badgesList: string[], toolsList: Tool[]) => {
+        console.log({ badgesList, toolsList });
         return badgesList.map(toolName => {
-            const toolData = toolsList.find(t => 'badge' in t && t.badge === toolName);
-            if (!toolData) {
+            const toolDatas = toolsList.filter(t => 'badge' in t && t.badge === toolName);
+            if (!toolDatas.length) {
                 return null;
             }
-            return <Tool
-                key={'badge' in toolData ? toolData.badge : toolName}
-                name={toolData.name}
-                description={'description' in toolData ? toolData.description : ''}
-                url={toolData.url}
-            />
+            return toolDatas.map(toolData => (
+                <Tool
+                    key={'url' in toolData ? toolData.url : toolName}
+                    name={toolData.name}
+                    description={'description' in toolData ? toolData.description : ''}
+                    url={toolData.url}
+                />
+            ));
         });
     }, []);
 

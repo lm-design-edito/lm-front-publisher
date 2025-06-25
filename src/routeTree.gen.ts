@@ -17,6 +17,7 @@ import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as CheckEmailIndexImport } from './routes/check-email/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AccountIndexImport } from './routes/account/index'
+import { Route as ImagesGeneratorIndexImport } from './routes/images/generator/index'
 import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
@@ -55,6 +56,12 @@ const AdminIndexRoute = AdminIndexImport.update({
 const AccountIndexRoute = AccountIndexImport.update({
   id: '/account/',
   path: '/account/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ImagesGeneratorIndexRoute = ImagesGeneratorIndexImport.update({
+  id: '/images/generator/',
+  path: '/images/generator/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -130,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImagesFormatterIndexImport
       parentRoute: typeof rootRoute
     }
+    '/images/generator/': {
+      id: '/images/generator/'
+      path: '/images/generator'
+      fullPath: '/images/generator'
+      preLoaderRoute: typeof ImagesGeneratorIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -144,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
+  '/images/generator': typeof ImagesGeneratorIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -155,6 +170,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
+  '/images/generator': typeof ImagesGeneratorIndexRoute
 }
 
 export interface FileRoutesById {
@@ -167,6 +183,7 @@ export interface FileRoutesById {
   '/signup/': typeof SignupIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
   '/images/formatter/': typeof ImagesFormatterIndexRoute
+  '/images/generator/': typeof ImagesGeneratorIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -180,6 +197,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin/users'
     | '/images/formatter'
+    | '/images/generator'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -190,6 +208,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin/users'
     | '/images/formatter'
+    | '/images/generator'
   id:
     | '__root__'
     | '/'
@@ -200,6 +219,7 @@ export interface FileRouteTypes {
     | '/signup/'
     | '/admin/users/'
     | '/images/formatter/'
+    | '/images/generator/'
   fileRoutesById: FileRoutesById
 }
 
@@ -212,6 +232,7 @@ export interface RootRouteChildren {
   SignupIndexRoute: typeof SignupIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
   ImagesFormatterIndexRoute: typeof ImagesFormatterIndexRoute
+  ImagesGeneratorIndexRoute: typeof ImagesGeneratorIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -223,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupIndexRoute: SignupIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
   ImagesFormatterIndexRoute: ImagesFormatterIndexRoute,
+  ImagesGeneratorIndexRoute: ImagesGeneratorIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -242,7 +264,8 @@ export const routeTree = rootRoute
         "/login/",
         "/signup/",
         "/admin/users/",
-        "/images/formatter/"
+        "/images/formatter/",
+        "/images/generator/"
       ]
     },
     "/": {
@@ -268,6 +291,9 @@ export const routeTree = rootRoute
     },
     "/images/formatter/": {
       "filePath": "images/formatter/index.tsx"
+    },
+    "/images/generator/": {
+      "filePath": "images/generator/index.tsx"
     }
   }
 }
