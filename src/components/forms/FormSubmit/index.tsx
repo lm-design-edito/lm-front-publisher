@@ -6,7 +6,7 @@ export type FormSubmitProps = {
     isLoading?: boolean;
 } & ButtonProps;
 
-export const FormSubmit = ({ children, className, ...props }: FormSubmitProps) => {
+export const FormSubmit = ({ children, className = '', ...props }: FormSubmitProps) => {
   return (
     <Button type="submit" className={className} size="m" {...props}>{children}</Button>
   );

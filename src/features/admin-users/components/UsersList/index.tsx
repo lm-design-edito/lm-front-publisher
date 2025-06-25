@@ -48,7 +48,7 @@ export const UsersList = () => {
       { id: 'status', label: 'Status', cell: {
         render: (row) => row.status ? <UserStatus status={row.status || ''} /> : null
       }},
-      { id: 'verified', label: 'Status', cell: {
+      { id: 'verified', label: 'État', cell: {
         render: (row) => <UserVerified verified={row.verified} />
       }},
       { id: 'badges', label: 'Badges', cell: {
@@ -72,8 +72,11 @@ export const UsersList = () => {
               <Button size="s" variant="secondary">
                 Modifier
               </Button>
+              <Button size="s" variant="secondary" color="warning">
+                Suspendre
+              </Button>
               <Button size="s" variant="secondary" color="danger">
-                Supprimer
+                Bannir
               </Button>
             </div>
           )

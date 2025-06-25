@@ -7,6 +7,7 @@ import { UserRole } from "../../../../components/user/UserRole";
 import { useWhoAmI } from "../../../authentification/api/use-who-am-i";
 import { LogoutButton } from "../../../authentification/components/LogoutButton";
 import { LogoutEverywhereButton } from "../../../authentification/components/LogoutEverywhereButton";
+import { ThemeSwitch } from "../../../ui";
 
 export const MyUser = () => {
     const { user, isLoading } = useWhoAmI();
@@ -80,10 +81,26 @@ export const MyUser = () => {
                     </FieldSet>
                 </div>
             )}
-            <div className="lm-publisher-m-spacer-3 lm-publisher-flex lm-publisher-flex--wrap lm-publisher-flex--spacer">
+            <div>
+
+            </div>
+            <FieldSet
+                legend="Préférences"
+                className="lm-publisher-m-spacer-3"
+                contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                lm-publisher-flex--spacer"
+            >
+                <ThemeSwitch />
+            </FieldSet>
+            <FieldSet
+                legend="Déconnexion"
+                 className="lm-publisher-m-spacer-8"
+                contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                lm-publisher-flex--spacer"
+            >
                 <LogoutButton size="m" />
                 <LogoutEverywhereButton size="m" />
-            </div>
+            </FieldSet>
         </div>
     );
 }

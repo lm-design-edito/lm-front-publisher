@@ -5,9 +5,9 @@ export type FormFooterProps = {
     className?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const FormFooter = ({children, className, ...props}: FormFooterProps) => {
+export const FormFooter = ({children, className = '', ...props}: FormFooterProps) => {
   return (
-    <div className={`form__footer ${className || ''}`} {...props}>
+    <div className={`form__footer ${className}`} {...props}>
       {children}
     </div>
   );

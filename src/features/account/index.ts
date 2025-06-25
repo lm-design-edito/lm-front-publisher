@@ -1,4 +1,4 @@
-import MyUser from "./components/MyUser";
+import { MyUser } from "./components/MyUser";
 
 export {
     MyUser

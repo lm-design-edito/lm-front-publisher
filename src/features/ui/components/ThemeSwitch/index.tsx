@@ -3,7 +3,13 @@ import { useTheme } from "../../hooks/useTheme";
 
 import './style.css';
 
-export function ThemeSwitch() {
+export type ThemeSwitchProps = {
+  className?: string;
+  minified?: boolean;
+  size?: 's' | 'm' | 'l';
+};
+
+export function ThemeSwitch({ className = '', minified, size = 'm' }: ThemeSwitchProps) {
   const { theme, applyTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -12,11 +18,16 @@ export function ThemeSwitch() {
 
   return (
     <Button 
-      className="theme-switch"
+      className={`theme-switch ${className} ${minified ? 'theme-switch--minified' : ''}`}
       aria-label="Changer le thème" 
       variant="secondary"
       onClick={toggleTheme}
-      size="s"
-    >{theme === 'light' ? "☀" : "☽" }</Button>
+      size={size}
+    >{
+      minified ? 
+        theme === 'light' ? "☀️" : "🌙"
+        :
+        theme === 'light' ? "Passer en Dark Mode" : "Passer en Light Mode"
+    }</Button>
   )
 }

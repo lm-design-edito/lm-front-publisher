@@ -10,14 +10,14 @@ export type ButtonLinkProps = {
     isLoading?: boolean;
 } & LinkProps;
 
-export const ButtonLink = ({size, isLoading, variant, className, children, ...props}: ButtonLinkProps) => {
+export const ButtonLink = ({size, isLoading, variant, className = '', children, ...props}: ButtonLinkProps) => {
     const variantClass = variant ? `lmui-button_${variant}` : 'lmui-button_primary';
     const sizeClass = size ? `lmui-button_${size}` : 'lmui-button_m';
 
     return (
         <Link
             {...props}
-            className={`button-link lmui-button ${variantClass} ${sizeClass} ${className || ''}`}
+            className={`button-link lmui-button ${variantClass} ${sizeClass} ${className}`}
         >
             {children}
             {isLoading && <Loader />}

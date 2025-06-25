@@ -7,8 +7,8 @@ export type QueriesStatusProps = {
   error?: boolean;
 }
 
-export const QueriesStatus = ({children, success, error, className, ...props}: QueriesStatusProps) => {
+export const QueriesStatus = ({children, success, error, className = '', ...props}: QueriesStatusProps) => {
   return (
-    <div className={`queries-status ${success ? 'queries-status--success' : ''} ${error ? 'queries-status--error' : ''} ${className || ''}`} {...props}>{children}</div>
+    <div className={`queries-status ${success ? 'queries-status--success' : ''} ${error ? 'queries-status--error' : ''} ${className}`} {...props}>{children}</div>
   );
 }

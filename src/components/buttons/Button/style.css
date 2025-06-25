@@ -1,3 +1,4 @@
+/** Danger Button **/
 .lmui-button_danger {
     background-color: var(--lmui-c-primary-red-bg);
     color: var(--lmui-c-primary-red-font);
@@ -7,6 +8,19 @@
     border-color: var(--lmui-c-tertiary-red-font);
 }
 
+
+/** Warning Button **/
+.lmui-button_warning {
+    background-color: var(--lmui-c-secondary-yellow-bg);
+    color: var(--lmui-c-secondary-yellow-font);  
+}
+.lmui-button_warning.lmui-button_secondary {
+    color: var(--lmui-c-secondary-yellow-font);
+    border-color: var(--lmui-c-secondary-yellow-font);  
+}
+
+
+/** Success Button **/
 .lmui-button_success {
     background-color: var(--lmui-c-primary-green-bg);
     color: var(--lmui-c-primary-green-font);

@@ -10,7 +10,7 @@ type AuthActionsProps = {
     size?: 's' | 'm' | 'l';
 }
 
-export const AuthActions = ({ className, size = 's' }: AuthActionsProps) => {
+export const AuthActions = ({ className = '', size = 's' }: AuthActionsProps) => {
     const { user } = useWhoAmI();
     if (!user) {
         return <div className={`auth-actions lm-publisher-center-flex lm-publisher-flex--spacer ${className}`}>

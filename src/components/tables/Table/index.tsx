@@ -25,9 +25,9 @@ export type TableProps<T> = {
     rows?: Array<Row<T>>; // Optional rows prop with index signature
 }
 
-export function Table<T>({ className, title, columns, emptyRowsLabel, rows }: TableProps<T>) {
+export function Table<T>({ className = '', title, columns, emptyRowsLabel, rows }: TableProps<T>) {
     return (
-        <div className={`lmui-chart ${className || ''}`}>
+        <div className={`lmui-chart ${className}`}>
             {title && <h3 className="lmui-chart__title">{title}</h3>}
             <div className="lmui-chart__scroller">
                 <table className="lmui-chart-table">

@@ -11,8 +11,6 @@ const LMLogo = () => (
     </svg>
 )
 
-
-
 export function Header() {
     return (
         <header className="header">
@@ -25,7 +23,7 @@ export function Header() {
             </div>
             <div className="header__right">
                 <AuthActions />
-                <ThemeSwitch />
+                <ThemeSwitch minified size="s" />
             </div>
         </header>
     );

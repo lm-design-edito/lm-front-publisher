@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../../api";
 import { useMemo } from "react";
 
-export function useAvailableToolList(toolsList: string[]) {
+export function useAvailableToolList(toolBadges: string[]) {
     const { data, isSuccess, isLoading } = useQuery({
         queryKey: ["who-am-i"],
         queryFn: () => {
@@ -18,11 +18,11 @@ export function useAvailableToolList(toolsList: string[]) {
 
         if (isSuccess && data.success) {
             const user = data.payload;
-            return toolsList.filter(serviceName => user.isAdmin || user.badges.includes(serviceName));
+            return toolBadges.filter(badge => user.isAdmin || user.badges.includes(badge) || badge === 'all');
         } else {
             return [];
         }
-    }, [isSuccess, isLoading, data, toolsList]);
+    }, [isSuccess, isLoading, data, toolBadges]);
 
     return availableTools;
 }

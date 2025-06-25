@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { AdminUserTools } from '../../../admin-users/config/admin-users-tools';
 import { ImageTools } from '../../../images/config/image-tools';
+import { AccountTool } from '../../../account/config/account';
 
 import { useAvailableToolList } from '../../api/use-available-tool-list';
 import Tool from '../Tool';
@@ -15,7 +16,7 @@ type Tool = {
     url: string;
     icon?: string;
     description?: string;
-    role?: string; // Optional role for admin tools
+    badge?: string; // Optional role for admin tools
 };
 
 const tools: Tool[] = [
@@ -26,25 +27,34 @@ const adminTools: Tool[] = [
     ...AdminUserTools
 ];
 
-const getRoles = (tools: Tool[]) => {
-    return tools.map(tool => 'role' in tool ? tool.role : '').filter(role => role !== undefined && role !== null);
+const otherTools: Tool[] = [  
+    ...AccountTool
+];
+
+const getToolBadges = (tools: Tool[]): string[] => {
+    return tools
+        .map(tool => ('badge' in tool && typeof tool.badge === 'string' ? tool.badge : ''))
+        .filter((badge): badge is string => badge.trim().length > 0);
 }
 
-const toolsRoles = getRoles(tools);
-const adminToolsRoles = getRoles(adminTools);
+const toolsBadges = getToolBadges(tools);
+const adminToolsBadges = getToolBadges(adminTools);
+const otherToolsBadges = getToolBadges(otherTools);
 
-const AvailableToolsList = ({ className }: AvailableToolsListProps) => {
-    const availableTools = useAvailableToolList(toolsRoles); 
-    const availableAdminTools = useAvailableToolList(adminToolsRoles);
-    
-    const listTools = useCallback((rolesList: string[], toolsList: Tool[]) => {
-        return rolesList.map(toolName => {
-            const toolData = toolsList.find(t => 'role' in t && t.role === toolName);
+console.log({otherToolsBadges})
+const AvailableToolsList = ({ className = '' }: AvailableToolsListProps) => {
+    const availableTools = useAvailableToolList(toolsBadges); 
+    const availableAdminTools = useAvailableToolList(adminToolsBadges);
+    const availableOtherTools = useAvailableToolList(otherToolsBadges);
+
+    const listTools = useCallback((badgesList: string[], toolsList: Tool[]) => {
+        return badgesList.map(toolName => {
+            const toolData = toolsList.find(t => 'badge' in t && t.badge === toolName);
             if (!toolData) {
                 return null;
             }
             return <Tool
-                key={'role' in toolData ? toolData.role : toolName}
+                key={'badge' in toolData ? toolData.badge : toolName}
                 name={toolData.name}
                 description={'description' in toolData ? toolData.description : ''}
                 url={toolData.url}
@@ -55,18 +65,34 @@ const AvailableToolsList = ({ className }: AvailableToolsListProps) => {
     return (
         <>
             {availableTools.length > 0 && 
-                <div className={`available-services-list ${className || ''}`}>
-                    <h2>Outils</h2>
+                <div className={`available-services-list ${className}`}>
+                    <div className="available-services-list__header">
+                        <h2>Outils</h2>
+                    </div>
                     <div className="available-services-list__elements">
                         {listTools(availableTools, tools)}
                     </div>
                 </div>
             }
             {availableAdminTools.length > 0 && 
-                <div className={`available-services-list ${className || ''}`}>
-                    <h2>Admin</h2>
+                <div className={`available-services-list ${className}`}>
+                    <div className="available-services-list__header">
+                        <h2>Admin</h2>
+                        <p>Outils disponibles pour les administrateurs ou ROOT</p>
+                    </div>
                     <div className="available-services-list__elements">
                         {listTools(availableAdminTools, adminTools)}
+                    </div>
+                </div>
+            }
+            {availableOtherTools.length > 0 && 
+                <div className={`available-services-list ${className}`}>
+                    <div className="available-services-list__header">
+                        <h2>Autre</h2> 
+                        <p>Outils disponibles pour tous les utilisateurs</p>    
+                    </div>
+                    <div className="available-services-list__elements">
+                        {listTools(availableOtherTools, otherTools)}
                     </div>
                 </div>
             }

@@ -1,3 +1,7 @@
-.theme-switch {
+.theme-switch--minified {
+    width: 32px;
+}
+.theme-switch--minified.lmui-button_s {
     width: 24px;
 }
+
