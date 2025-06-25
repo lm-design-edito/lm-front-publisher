@@ -2,9 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import { ThemeContext, type Theme } from "..";
 
 const THEME_KEY = 'lm-publisher-theme';
+const getWantedTheme = (): Theme => {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+   return (localStorage.getItem(THEME_KEY) as Theme) || systemTheme || 'light';
+}
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setTheme] = useState<Theme>('system');
+    const [theme, setTheme] = useState<Theme>(getWantedTheme());
 
     const applyTheme = useCallback((theme: Theme) => {
         setTheme(theme);
@@ -13,12 +20,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     useEffect(() => {
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-                .matches
-                ? "dark"
-                : "light";
-        const storedTheme =  (localStorage.getItem(THEME_KEY) as Theme) || systemTheme || 'light';
-        applyTheme(storedTheme);
+        applyTheme(getWantedTheme());
     }, [applyTheme]);
 
     return (
