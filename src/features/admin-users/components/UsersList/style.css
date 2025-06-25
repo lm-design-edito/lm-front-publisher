@@ -1,0 +1,47 @@
+.users-list {
+    --user-list-cell-hoverable-height: 200px;
+}
+
+.users-list .lmui-chart__scroller {
+    padding-bottom: var(--user-list-cell-hoverable-height);
+    overflow-x: auto;
+}
+
+.users-list__badges-cell {
+    position: relative;
+    cursor: pointer;
+}
+
+.users-list__badges {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    max-height: var(--user-list-cell-hoverable-height);
+    padding: 10px 14px;
+
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    border-radius: 6px;
+    background-color: var(--lmui-c-block-bg);
+    box-shadow: var(--lmui-c-block-box-shadow);
+    
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    overflow: auto;
+}
+
+.users-list__badges-cell:hover .users-list__badges {
+   
+    opacity: 1;
+    pointer-events: all;
+}
+
+.users-list__badges-cell span {
+    text-overflow: ellipsis;
+}

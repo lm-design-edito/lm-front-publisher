@@ -1,5 +1,17 @@
 import { api } from "../../..";
+import type { APIREsponseErrorType, APIREsponseSuccessType } from "../../../query";
 import API_ROUTES from "../../../routes";
+
+type AdminUser = {
+    _id: string,
+    role: 'root' | 'admin' | 'user',
+    status: 'active' | 'suspended' | 'banned',
+    verified: boolean,
+    email: string,
+    username: string,
+    badges: string[],
+    googleId?: string
+}
 
 type AdminUsersUpdate = {
     _id: string,
@@ -9,7 +21,9 @@ type AdminUsersUpdate = {
     email?: string
     password?: string
     googleId?: string
+    badges: string[]
 };
+
 
 export const adminUsersUpdate = async (params: AdminUsersUpdate) => api.query(API_ROUTES.ADMIN_USERS_UPDATE, {
     method: 'POST',
@@ -17,8 +31,15 @@ export const adminUsersUpdate = async (params: AdminUsersUpdate) => api.query(AP
 });
 
 
-type AdminUsersList = unknown;
-export const adminUsersList = async (params: AdminUsersList) => api.query(API_ROUTES.ADMIN_USERS_LIST, {
+
+type AdminUsersListRequestParams = unknown;
+type AdminUsersListResponse =  ( APIREsponseSuccessType & {
+    payload: {
+        list: AdminUser[]
+    }
+} | APIREsponseErrorType) 
+
+export const adminUsersList = async (params: AdminUsersListRequestParams): Promise<AdminUsersListResponse> => api.query(API_ROUTES.ADMIN_USERS_LIST, {
     method: 'POST',
     body: JSON.stringify(params),
 });

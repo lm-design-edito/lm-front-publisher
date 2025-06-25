@@ -1,7 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../../../api";
 
-export function useUsersList(params?: Parameters<typeof api.queries.admin.usersList>[0]) {
+type UseUsersListParams = Parameters<typeof api.queries.admin.usersList>[0]
+type UseUsersListReturn = {
+    isLoading: boolean,
+    list: {
+        _id: string,
+        role: string,
+        username: string,
+        email: string,
+        badges: string[],
+        verified: boolean,  
+    }[]
+}
+export function useUsersList(params?: UseUsersListParams): UseUsersListReturn {
     const { data, isSuccess, isLoading } = useQuery({
         queryKey: ["users-list"],
         queryFn: () => {
