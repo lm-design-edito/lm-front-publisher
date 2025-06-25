@@ -1,0 +1,6 @@
+fieldset {
+    padding: 12px 16px;
+    border: 1px solid var(--lm-publisher-border-color);
+    border-radius: 5px;
+    font-size: var(--lmui-len-font-size-placeholder-focus);
+}

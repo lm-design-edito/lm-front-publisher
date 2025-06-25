@@ -4,11 +4,11 @@ import { useLogout } from '../../../authentification/api/use-logout';
 import './style.css'
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
-import Loader from '../../../../components/Loader';
+import { Loader }from '../../../../components/Loader';
 
 const devMode = import.meta.env.VITE_DEV_MODE === 'true';
 
-const DevBar = () => {
+export const DevBar = () => {
     const { mutate: login, isPending: isPendingLoading } = useLogin();
     const { mutate: logout, isPending: isPendingLogout } = useLogout();
     const { mutate: requestEmailVerificationToken, isPending: isPendingRequestEmailVerification } = useMutation({
@@ -60,5 +60,3 @@ const DevBar = () => {
         </div>
     </div>
 }
-
-export default  DevBar;

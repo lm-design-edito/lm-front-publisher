@@ -14,7 +14,7 @@ const IndexPage = () => {
         <p>Ici ça publish fort !</p>
         <p>Pour toute question, besoin de support 24/7 : <span className="accent">fabas@lemonde.fr</span></p>
 
-        <div className="m-t-spacer-8">
+        <div className="lm-publisher-m-t-spacer-8">
           <small>La team Design Edito.</small>
         </div>
 
@@ -22,10 +22,10 @@ const IndexPage = () => {
       {
         isAuthenticated ?
           <div className="index-page__content">
-            <AvailableToolsList className="m-spacer-8" />
+            <AvailableToolsList className="lm-publisher-m-spacer-8" />
           </div>
         :
-          <AuthActions className="m-spacer-8" size="l" />
+          <AuthActions className="lm-publisher-m-spacer-8" size="l" />
       }
     </div>
   )

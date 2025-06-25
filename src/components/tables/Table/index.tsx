@@ -1,8 +1,8 @@
-import TableCell from "../TableCell";
-import TableHeaderColumn from "../TableHeaderColumn";
-import TableRow from "../TableRow";
+import { TableCell } from "../TableCell";
+import { TableHeaderColumn } from "../TableHeaderColumn";
+import { TableRow } from "../TableRow";
 
-type Column<T> = {
+export type Column<T> = {
     id: keyof T; // Unique identifier for the column
     label: React.ReactNode; // Content to display in the column header,
     title?: string; // Optional title for the column header
@@ -13,11 +13,11 @@ type Column<T> = {
     }
 }
 
-type Row<T> = T & {
+export type Row<T> = T & {
     rowId: string; // Unique identifier for the row, used as a key in rendering
 }
 
-interface TableProps<T> {
+export type TableProps<T> = {
     className?: string; // Optional className prop for styling
     title?: string; // Optional title prop
     emptyRowsLabel: React.ReactNode; // Label to display when the table is empty
@@ -25,7 +25,7 @@ interface TableProps<T> {
     rows?: Array<Row<T>>; // Optional rows prop with index signature
 }
 
-function Table<T>({ className, title, columns, emptyRowsLabel, rows }: TableProps<T>) {
+export function Table<T>({ className, title, columns, emptyRowsLabel, rows }: TableProps<T>) {
     return (
         <div className={`lmui-chart ${className || ''}`}>
             {title && <h3 className="lmui-chart__title">{title}</h3>}
@@ -67,7 +67,3 @@ function Table<T>({ className, title, columns, emptyRowsLabel, rows }: TableProp
         </div>
     );
 }
-
-export default Table;
-
-export type { Column, Row };

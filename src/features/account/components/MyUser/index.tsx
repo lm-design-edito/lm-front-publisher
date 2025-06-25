@@ -1,0 +1,89 @@
+import { Loader }from "../../../../components/Loader";
+import { UserBadge }from "../../../../components/user/UserBadge";
+import { FieldSet } from "../../../../components/forms/Fieldset";
+import { UserStatus }from "../../../../components/user/UserStatus";
+import { UserVerified }from "../../../../components/user/UserVerified";
+import { UserRole } from "../../../../components/user/UserRole";
+import { useWhoAmI } from "../../../authentification/api/use-who-am-i";
+import { LogoutButton } from "../../../authentification/components/LogoutButton";
+import { LogoutEverywhereButton } from "../../../authentification/components/LogoutEverywhereButton";
+
+export const MyUser = () => {
+    const { user, isLoading } = useWhoAmI();
+
+    return (
+        <div>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <div className="lm-publisher-flex lm-publisher-flex--column lm-publisher-flex--spacer-2">
+
+                    <FieldSet
+                        legend="ID"
+                    >
+                        {user?._id || 'Aucun ID défini'}
+                    </FieldSet>
+                    <div className="lm-publisher-flex lm-publisher-flex--wrap lm-publisher-flex--spacer">
+                        <FieldSet
+                            legend="Nom utilisateur"
+                            className="lm-publisher-flex-1"
+                            contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                            lm-publisher-flex--spacer"
+                        >
+                            {user?.username || 'Aucun nom d\'utilisateur défini'}
+                        </FieldSet>
+                        <FieldSet
+                            legend="Email"
+                            className="lm-publisher-flex-1"
+                            contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                        lm-publisher-flex--spacer"
+                        >
+                            {user?.email || 'Aucun email défini'}
+                        </FieldSet>
+                    </div>
+                    <div className="lm-publisher-flex lm-publisher-flex--wrap lm-publisher-flex--spacer">
+
+                        <FieldSet
+                            legend="Statut"
+                            className="lm-publisher-flex-1"
+                            contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                        lm-publisher-flex--spacer"
+                        >
+                            <UserStatus status={user?.status || 'Aucun statut défini'} />
+                        </FieldSet>
+                        <FieldSet
+                            legend="État"
+                            className="lm-publisher-flex-1"
+                            contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                        lm-publisher-flex--spacer"
+                        >
+                            <UserVerified verified={user?.verified || false} />
+                        </FieldSet>
+                        <FieldSet
+                            legend="Rôle"
+                            className="lm-publisher-flex-1"
+                            contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                        lm-publisher-flex--spacer"
+                        >
+                            <UserRole role={user?.role || 'Aucun rôle défini'} />
+                        </FieldSet>
+
+                    </div>
+                    <FieldSet
+                        legend="Badges"
+                        contentClassName="lm-publisher-flex lm-publisher-flex--wrap 
+                        lm-publisher-flex--spacer"
+                    >
+                        {user?.badges && user?.badges.length ? user?.badges.map((badge) => (
+                            <UserBadge key={badge} badge={badge} />
+                        )) : <span>Aucun badge</span>}
+                    </FieldSet>
+                </div>
+            )}
+            <div className="lm-publisher-m-spacer-3 lm-publisher-flex lm-publisher-flex--wrap lm-publisher-flex--spacer">
+                <LogoutButton size="m" />
+                <LogoutEverywhereButton size="m" />
+            </div>
+        </div>
+    );
+}

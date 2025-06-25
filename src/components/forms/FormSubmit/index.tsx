@@ -1,15 +1,13 @@
-import Button from "../../buttons/Button";
+import { Button, type ButtonProps } from "../../buttons/Button";
 
-type FormSubmitProps = {
+export type FormSubmitProps = {
     children?: React.ReactNode;
     className?: string;
     isLoading?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & ButtonProps;
 
-const FormSubmit = ({ children, className, ...props }: FormSubmitProps) => {
+export const FormSubmit = ({ children, className, ...props }: FormSubmitProps) => {
   return (
     <Button type="submit" className={className} size="m" {...props}>{children}</Button>
   );
 }
-
-export default FormSubmit

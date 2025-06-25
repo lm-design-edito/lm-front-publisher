@@ -1,10 +1,9 @@
-import ImageFormatterForm from "../ImageFormatterForm";
+import { ImageFormatterForm } from "../ImageFormatterForm";
 
-const ImageFormatter = () => {
+export const ImageFormatter = () => {
     return (
         <div className="image-formatter">
             <ImageFormatterForm />
         </div>
     );
 }
-export default ImageFormatter;

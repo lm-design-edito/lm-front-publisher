@@ -1,47 +1,28 @@
 import { useMemo } from "react";
-import Loader from "../../../../components/Loader";
+import { Loader }from "../../../../components/Loader";
 import { useWhoAmI } from "../../../authentification/api/use-who-am-i";
 import { useUsersList } from "../../api/use-users-list";
 import './style.css';
-import Table, { type Column, type Row } from "../../../../components/tables/Table";
-import Button from "../../../../components/buttons/Button";
+import { Table,  type Column, type Row } from "../../../../components/tables/Table";
+import { Button } from "../../../../components/buttons/Button";
+import { UserBadge }from "../../../../components/user/UserBadge";
+import { UserStatus }from "../../../../components/user/UserStatus";
+import { UserVerified }from "../../../../components/user/UserVerified";
+import { UserRole }from "../../../../components/user/UserRole";
 
-const UserBadge = ({ badge }: { badge: string }) => {
-  const color = useMemo(() => {
-    switch (badge.split('.')[0]) {
-      case 'admin':
-        return 'red';
-      case 'storage':
-        return 'purple';
-      default:
-        return 'blue';
-    }
-  }, [badge]);
 
-  return (
-    <span className={`lmui-badge lmui-badge_secondary lmui-badge_s lmui-badge_${color}`}>{badge}</span>
-  );
-};
-
-const UserStatus = ({ verified }: { verified: boolean }) => {
-  const color = useMemo(() => verified ? 'green' : 'red', [verified]);
-
-  return (
-    <span className={`lmui-badge lmui-badge_secondary lmui-badge_s lmui-badge_${color}`}>{verified ? 'Vérifié' : 'Non vérifié'}</span>
-  );
-}
-
-type UserRow = {
+export type UserListRow = {
   _id: string;
   username: string;
   email: string;
   role: string;
   verified: boolean;
+  status?: string; // Optional status field
   badges: string[];
   actions?: React.ReactNode;
 }
 
-const UsersList = () => {
+export const UsersList = () => {
   const { user } = useWhoAmI();
   const { list, isLoading } = useUsersList();
 
@@ -56,22 +37,24 @@ const UsersList = () => {
     } : null)).filter((user) => user !== null);
   }, [list, user])
 
-  const columns: Column<UserRow>[] = useMemo(() => (
+  const columns: Column<UserListRow>[] = useMemo(() => (
     [
       { id: '_id', label: 'ID' },
       { id: 'username', label: 'Username' },
       { id: 'email', label: 'Email' },
-      { id: 'role', label: 'Role' },
-      {
-        id: 'verified', label: 'Status', cell: {
-          render: (row) => <UserStatus verified={row.verified} />
-        }
-      },
-      {
-        id: 'badges', label: 'Badges', cell: {
-          className: 'users-list__badges-cell',
-          render: (row) => row.badges ? (
-            <>
+      { id: 'role', label: 'Role', cell: {
+        render: (row) => <UserRole role={row.role || ''} />
+      }},
+      { id: 'status', label: 'Status', cell: {
+        render: (row) => row.status ? <UserStatus status={row.status || ''} /> : null
+      }},
+      { id: 'verified', label: 'Status', cell: {
+        render: (row) => <UserVerified verified={row.verified} />
+      }},
+      { id: 'badges', label: 'Badges', cell: {
+        className: 'users-list__badges-cell',
+        render: (row) => row.badges ? (
+          <>
               <span>Voir la liste</span>
               <div className="users-list__badges">
                 {row.badges.map((badge) => <UserBadge key={badge} badge={badge} />)}
@@ -99,7 +82,7 @@ const UsersList = () => {
     ]
   ), [])
 
-  const rows: Row<UserRow>[] = useMemo(() => (
+  const rows: Row<UserListRow>[] = useMemo(() => (
     userList.map((user) => ({
       ...user,
       rowId: user._id, // Unique identifier for the row
@@ -120,4 +103,3 @@ const UsersList = () => {
     />
   )
 }
-export default UsersList;

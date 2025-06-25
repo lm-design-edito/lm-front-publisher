@@ -1,9 +1,9 @@
-import Button from "../../../../components/buttons/Button";
+import { Button } from "../../../../components/buttons/Button";
 import { useTheme } from "../../hooks/useTheme";
 
 import './style.css';
 
-export default function ThemeSwitch() {
+export function ThemeSwitch() {
   const { theme, applyTheme } = useTheme();
 
   const toggleTheme = () => {

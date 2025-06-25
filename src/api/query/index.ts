@@ -29,6 +29,10 @@ export type APIREsponseSuccessType = {
     type: 'success';
 }
 
+export type QueryOptions = {
+    ignoreToken?: boolean;
+} & RequestInit;
+
 const responseMiddleware = (response: Response) => {
     if (!response.headers) {
         return;
@@ -38,7 +42,7 @@ const responseMiddleware = (response: Response) => {
     }
 }
 
-export const handleQuery = async (request: string, options?: RequestInit) => {
+export const handleQuery = async (request: string, options?: QueryOptions) => {
     const response = await authQuery(request, options);
     responseMiddleware(response);
 
@@ -46,7 +50,7 @@ export const handleQuery = async (request: string, options?: RequestInit) => {
 }
 
 /* @todo: c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
-export const query = async (request: string, options?: RequestInit) => {
+export const query = async (request: string, options?: QueryOptions) => {
     const jsonResponse = await handleQuery(request, options);
     const authError = isAuthError(jsonResponse);
 
@@ -59,23 +63,24 @@ export const query = async (request: string, options?: RequestInit) => {
 }
 
 /* Ca c'est la fonction qui ajoute les auths */
-export const authQuery = async (request: string, options?: RequestInit) => {
+export const authQuery = async (request: string, options?: QueryOptions) => {
     const authedOptions = await getAuthedOptions(options);
     return fetch(getAPIUrl(request), authedOptions);
 }
 
 /* C'est assez explicite je pense comme nom de fonction héhé */
-export const getAuthedOptions = async (options?: RequestInit) => {
+export const getAuthedOptions = async (options?: QueryOptions) => {
+    const { ignoreToken, ...fetchOptions } = options || {};
     const csrfToken = await getCsrfToken();
     const token = getToken();
 
     return options = {
-        ...(options ? options : {}),
+        ...(fetchOptions ? fetchOptions : {}),
         headers: {
-            ...(options && options.headers ? options.headers : {}),
+            ...(fetchOptions && fetchOptions.headers ? fetchOptions.headers : {}),
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrfToken || '',
-            ...token ? {  'Authorization': `Bearer ${token}` } : {}
+            ...token && !ignoreToken ? {  'Authorization': `Bearer ${token}` } : {}
         },
         credentials: 'include'
     }

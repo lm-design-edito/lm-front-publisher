@@ -1,8 +1,8 @@
 import type { FieldError } from "react-hook-form";
 import './style.css'
-import FormLabel from "../FormLabel";
+import { FormLabel }from "../FormLabel";
 
-type FormInputProps = {
+export type FormInputProps = {
     className?: string;
     isValid?: boolean;
     error?: FieldError;
@@ -11,7 +11,7 @@ type FormInputProps = {
     inputProps: React.InputHTMLAttributes<HTMLInputElement>
 }
 
-const FormInput = ({ className, label, error, isValid, labelProps = {}, inputProps }: FormInputProps) => {
+export const FormInput = ({ className, label, error, isValid, labelProps = {}, inputProps }: FormInputProps) => {
   return (
     <div className={`${className || ''} lmui-form form__input ${error ? "form__input--error " : ""}`}>
       <div className="lmui-form__input-wrapper">
@@ -24,5 +24,3 @@ const FormInput = ({ className, label, error, isValid, labelProps = {}, inputPro
     </div>
   );
 }
-
-export default FormInput

@@ -1,7 +1,8 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import './style.css'
-import ThemeSwitch from "../../features/ui/components/ThemeSwitch";
+import { ThemeSwitch }from "../../features/ui/components/ThemeSwitch";
 import { AuthActions } from "../../features/authentification/components/AuthActions";
+import { HeaderLocation } from "./HeaderLocation";
 
 const LMLogo = () => (
     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg" className="logo">
@@ -10,39 +11,9 @@ const LMLogo = () => (
     </svg>
 )
 
-const getLocationName = (pathname: string) => {
-    if (!pathname) {
-        return null;
-    }
-    
-    if (pathname.includes('login')) {
-        return 'Login';
-    }
-    if (pathname.includes('signup')) {
-        return 'Inscription';
-    }
-    if (pathname.includes('check-email')) {
-        return 'Valider l\'inscription';
-    }
-    if (pathname.includes('admin/users')) {
-        return 'Liste des utilisateurs';
-    }
-    if (pathname.includes('images/formatter')) {
-        return 'Image Formatter';
-    }
-    return pathname.replace('/', '');
-}
 
-const HeaderLocation = () => {
-    const location = useLocation()
-    const locationName = getLocationName(location.pathname);
-    if (!locationName) {
-        return null
-    } 
-    return <span className="header__location">{locationName}</span>;
-}
 
-export default function Header() {
+export function Header() {
     return (
         <header className="header">
             <div className="header__left">

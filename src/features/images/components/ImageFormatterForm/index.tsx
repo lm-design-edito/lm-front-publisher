@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
-import Form from "../../../../components/forms/Form";
-import FormSubmit from "../../../../components/forms/FormSubmit";
-import FormFooter from "../../../../components/forms/FormFooter";
-import FormInput from "../../../../components/forms/FormInput";
-import FormLabel from "../../../../components/forms/FormLabel";
+import { Form } from "../../../../components/forms/Form";
+import { FormSubmit }from "../../../../components/forms/FormSubmit";
+import { FormFooter }from "../../../../components/forms/FormFooter";
+import { FormInput }from "../../../../components/forms/FormInput";
+import { FormLabel }from "../../../../components/forms/FormLabel";
 import { useImageFormatToWidth } from "../../api/use-image-format-to-width";
-import QueriesStatus from "../../../../components/QueriesStatus";
+import { QueriesStatus } from "../../../../components/QueriesStatus";
 import { useState } from "react";
 
 const imageFormatterFormSchema = zod.object({
@@ -20,7 +20,7 @@ const imageFormatterFormSchema = zod.object({
 
 type ImageFormatterFormValues = zod.infer<typeof imageFormatterFormSchema>;
 
-const ImageFormatterForm = () => {
+export const ImageFormatterForm = () => {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm<ImageFormatterFormValues>({
         resolver: zodResolver(imageFormatterFormSchema)
     });
@@ -80,5 +80,3 @@ const ImageFormatterForm = () => {
         </Form>
   );
 }   
-
-export default ImageFormatterForm;

@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import ImageFormatter from '../../../features/images/components/ImageFormatter'
+import { ImageFormatter } from '../../../features/images/components/ImageFormatter'
 
 const ImageFormatterPage = () => {
   return (

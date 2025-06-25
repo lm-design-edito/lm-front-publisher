@@ -1,10 +1,9 @@
-import { useNavigate } from "@tanstack/react-router";
-import Button from "../../../../components/buttons/Button";
-import ButtonLink from "../../../../components/buttons/ButtonLink";
-import { useLogout } from "../../api/use-logout";
+import { Link } from "@tanstack/react-router";
+import { ButtonLink } from "../../../../components/buttons/ButtonLink";
 import { useWhoAmI } from "../../api/use-who-am-i";
 
 import './style.css';
+import { LogoutButton } from "../LogoutButton";
 
 type AuthActionsProps = {
     className?: string;
@@ -12,16 +11,6 @@ type AuthActionsProps = {
 }
 
 export const AuthActions = ({ className, size = 's' }: AuthActionsProps) => {
-    const navigate = useNavigate();
-    const { mutate: logout, isPending: isPendingLogout } = useLogout({
-        onSuccess: () => {
-            console.warn("Logout successful, user logged out.");
-            navigate({ to: '/' });
-        },
-        onError: (error) => {
-            console.error("Logout failed:", error);
-        }
-    });
     const { user } = useWhoAmI();
     if (!user) {
         return <div className={`auth-actions lm-publisher-center-flex lm-publisher-flex--spacer ${className}`}>
@@ -32,9 +21,9 @@ export const AuthActions = ({ className, size = 's' }: AuthActionsProps) => {
     return (
         <span className={`auth-actions lm-publisher-center-flex lm-publisher-flex--spacer ${className}`}>
             <span className="auth-actions__user">
-                Bonjour <span className="accent">{user.username}</span>, 
+                Bonjour <Link to="/account">{user.username}</Link>, 
             </span>
-            <Button size={size} onClick={() => logout()} variant="secondary" isLoading={isPendingLogout}>Logout</Button>
+            <LogoutButton size={size} />
         </span>
     );
 }

@@ -16,6 +16,7 @@ import { Route as SignupIndexImport } from './routes/signup/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as CheckEmailIndexImport } from './routes/check-email/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AccountIndexImport } from './routes/account/index'
 import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
@@ -51,6 +52,12 @@ const AdminIndexRoute = AdminIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AccountIndexRoute = AccountIndexImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ImagesFormatterIndexRoute = ImagesFormatterIndexImport.update({
   id: '/images/formatter/',
   path: '/images/formatter/',
@@ -72,6 +79,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountIndexImport
       parentRoute: typeof rootRoute
     }
     '/admin/': {
@@ -123,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
   '/check-email': typeof CheckEmailIndexRoute
   '/login': typeof LoginIndexRoute
@@ -133,6 +148,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
   '/check-email': typeof CheckEmailIndexRoute
   '/login': typeof LoginIndexRoute
@@ -144,6 +160,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/check-email/': typeof CheckEmailIndexRoute
   '/login/': typeof LoginIndexRoute
@@ -156,6 +173,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/admin'
     | '/check-email'
     | '/login'
@@ -165,6 +183,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account'
     | '/admin'
     | '/check-email'
     | '/login'
@@ -174,6 +193,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/account/'
     | '/admin/'
     | '/check-email/'
     | '/login/'
@@ -185,6 +205,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountIndexRoute: typeof AccountIndexRoute
   AdminIndexRoute: typeof AdminIndexRoute
   CheckEmailIndexRoute: typeof CheckEmailIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
@@ -195,6 +216,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountIndexRoute: AccountIndexRoute,
   AdminIndexRoute: AdminIndexRoute,
   CheckEmailIndexRoute: CheckEmailIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
@@ -214,6 +236,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/account/",
         "/admin/",
         "/check-email/",
         "/login/",
@@ -224,6 +247,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/account/": {
+      "filePath": "account/index.tsx"
     },
     "/admin/": {
       "filePath": "admin/index.tsx"

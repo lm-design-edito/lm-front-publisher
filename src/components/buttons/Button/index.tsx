@@ -1,7 +1,7 @@
-import Loader from "../../Loader";
+import { Loader }from "../../Loader";
 import './style.css'
 
-type ButtonProps = {
+export type ButtonProps = {
     children?: React.ReactNode;
     variant?: 'primary' | 'secondary' | 'tertiary';
     color?:  'danger' | 'success';
@@ -10,7 +10,7 @@ type ButtonProps = {
     isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({size, variant, color, className, children, isLoading, ...props}: ButtonProps) => {
+export const Button = ({size, variant, color, className, children, isLoading, ...props}: ButtonProps) => {
     const variantClass = variant ? `lmui-button_${variant}` : 'lmui-button_primary';
     const sizeClass = size ? `lmui-button_${size}` : 'lmui-button_m';
     const colorClass = color ? `lmui-button_${color}` : '';
@@ -25,5 +25,3 @@ const Button = ({size, variant, color, className, children, isLoading, ...props}
         </button>
 )
 }
-
-export default Button;
