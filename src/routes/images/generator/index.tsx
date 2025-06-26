@@ -1,14 +1,16 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { ImageGeneratorForm } from '../../../features/image-tools/format/components/ImageGeneratorForm';
-import { ImageGeneratorToolInfos } from '../../../features/image-tools/config/image-tools-infos';
+import {
+  ImageGeneratorForm,
+  ImageGeneratorInfos,
+} from '@features/image-tools/generator';
 import { Headline } from '../../../components/Headline';
 
 const ImageGeneratorPage = () => {
   return (
     <>
       <Headline
-        title={ImageGeneratorToolInfos.name}
-        description={ImageGeneratorToolInfos.description}
+        title={ImageGeneratorInfos.name}
+        description={ImageGeneratorInfos.description}
       />
       <div className="lm-publisher-m-spacer-3">
         <ImageGeneratorForm />

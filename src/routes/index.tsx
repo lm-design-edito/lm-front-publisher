@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useWhoAmI } from '../features/authentification/api/use-who-am-i';
+import { useWhoAmI } from '@features/authentification';
 import { ServiceList } from '@features/services';
 
 import './style.css';

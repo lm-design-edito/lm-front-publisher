@@ -1,13 +1,7 @@
-import { LoginForm } from './components/LoginForm';
-import { AuthActions } from './components/AuthActions';
-import { LogoutEverywhereButton } from './components/LogoutEverywhereButton';
-import { LogoutButton } from './components/LogoutButton';
-import { SignupForm } from './components/SignupForm';
+export { LoginForm } from './components/login-form';
+export { AuthActions } from './components/auth-actions';
+export { LogoutEverywhereButton } from './components/logout-everywhere-button';
+export { LogoutButton } from './components/logout-button';
+export { SignupForm } from './components/signup-form';
 
-export {
-  AuthActions,
-  LoginForm,
-  LogoutButton,
-  LogoutEverywhereButton,
-  SignupForm,
-};
+export * from './api';

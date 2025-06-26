@@ -3,7 +3,7 @@ import { ButtonLink } from '../../../../components/buttons/ButtonLink';
 import { useWhoAmI } from '../../api/use-who-am-i';
 
 import './style.css';
-import { LogoutButton } from '../LogoutButton';
+import { LogoutButton } from '../logout-button';
 
 type AuthActionsProps = {
   className?: string;

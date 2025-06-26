@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import './style.css';
 import { ThemeSwitch } from '@features/ui/theme-switch';
-import { AuthActions } from '../../features/authentification/components/AuthActions';
+import { AuthActions } from '../../features/authentification/components/auth-actions';
 import { HeaderLocation } from './HeaderLocation';
 
 const LMLogo = () => (

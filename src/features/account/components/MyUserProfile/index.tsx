@@ -5,8 +5,8 @@ import { UserStatus } from '../../../../components/user/UserStatus';
 import { UserVerified } from '../../../../components/user/UserVerified';
 import { UserRole } from '../../../../components/user/UserRole';
 import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
-import { LogoutButton } from '../../../authentification/components/LogoutButton';
-import { LogoutEverywhereButton } from '../../../authentification/components/LogoutEverywhereButton';
+import { LogoutButton } from '../../../authentification/components/logout-button';
+import { LogoutEverywhereButton } from '../../../authentification/components/logout-everywhere-button';
 import { ThemeSwitch } from '@features/ui/theme-switch';
 
 export const MyUserProfile = () => {
