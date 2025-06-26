@@ -9,7 +9,7 @@ import { LogoutButton } from "../../../authentification/components/LogoutButton"
 import { LogoutEverywhereButton } from "../../../authentification/components/LogoutEverywhereButton";
 import { ThemeSwitch } from "../../../ui";
 
-export const MyUser = () => {
+export const MyUserProfile = () => {
     const { user, isLoading } = useWhoAmI();
 
     return (

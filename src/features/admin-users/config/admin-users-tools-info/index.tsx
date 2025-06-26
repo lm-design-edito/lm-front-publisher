@@ -1,4 +1,4 @@
-const AdminUserTools = [
+const AdminUserToolsInfo = [
     {
         name: 'User Management',
         description: 'Gestion des utilisateurs',
@@ -9,5 +9,5 @@ const AdminUserTools = [
 ]
 
 export {
-    AdminUserTools
+    AdminUserToolsInfo
 };

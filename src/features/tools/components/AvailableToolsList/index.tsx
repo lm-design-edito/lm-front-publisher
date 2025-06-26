@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { AdminUserTools } from '../../../admin-users/config/admin-users-tools';
+import { AdminUserToolsInfo } from '../../../admin-users/config/admin-users-tools-info';
 import { ImageToolsInfos } from '../../../images/config/image-tools-infos';
-import { AccountTool } from '../../../account/config/account';
+import { AccountToolsInfo } from '../../../account/config/account-tools-info';
 
 import { useAvailableToolList } from '../../api/use-available-tool-list';
 import Tool from '../Tool';
@@ -25,11 +25,11 @@ const tools: Tool[] = [
 ]
 
 const adminTools: Tool[] = [  
-    ...AdminUserTools
+    ...AdminUserToolsInfo
 ];
 
 const otherTools: Tool[] = [  
-    ...AccountTool
+    ...AccountToolsInfo
 ];
 
 const getToolBadges = (tools: Tool[]): string[] => {

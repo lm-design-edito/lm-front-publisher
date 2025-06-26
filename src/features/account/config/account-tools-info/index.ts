@@ -1,4 +1,4 @@
-const AccountTool = [
+const AccountToolsInfo = [
     {
         name: 'Mon compte',
         description: 'Gestion du compte utilisateur',
@@ -9,5 +9,5 @@ const AccountTool = [
 ]
 
 export {
-    AccountTool
+    AccountToolsInfo
 };
