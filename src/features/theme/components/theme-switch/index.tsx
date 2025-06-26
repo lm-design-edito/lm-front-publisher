@@ -1,4 +1,4 @@
-import { Button } from '../../../../common-components/buttons/Button';
+import { Button } from '../../../../common-components/buttons/button';
 import { useTheme } from '../../api/use-theme';
 
 import './style.css';

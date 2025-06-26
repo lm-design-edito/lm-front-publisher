@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
-import { Button } from '../../../../common-components/buttons/Button';
+import { Button } from '../../../../common-components/buttons/button';
 import { useLogoutEverywhere } from '../../api/use-logout-everywhere';
 
 type LogoutEverywhereButtonProps = {

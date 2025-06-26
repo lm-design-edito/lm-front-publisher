@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from '../../buttons/Button';
+import { Button, type ButtonProps } from '../../buttons/button';
 
 export type FormSubmitProps = {
   children?: React.ReactNode;
