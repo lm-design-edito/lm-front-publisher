@@ -3,12 +3,11 @@ import './style.css';
 export type QueriesStatusProps = {
   children?: React.ReactNode;
   className?: string;
-  success?: boolean;
-  error?: boolean;
+  status: 'loading' | 'error' | 'success';
 }
 
-export const QueriesStatus = ({children, success, error, className = '', ...props}: QueriesStatusProps) => {
+export const QueriesStatus = ({children, status, className = '', ...props}: QueriesStatusProps) => {
   return (
-    <div className={`queries-status ${success ? 'queries-status_success' : ''} ${error ? 'queries-status_error' : ''} ${className}`} {...props}>{children}</div>
+    <div className={`queries-status queries-status_${status} ${className}`} {...props}>{children}</div>
   );
 }

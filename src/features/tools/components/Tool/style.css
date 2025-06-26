@@ -11,6 +11,11 @@
     text-decoration: none;
 }
 
+.tool_disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .tool__title {
     transition: color 0.3s ease;
 }

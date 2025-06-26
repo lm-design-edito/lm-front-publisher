@@ -1,10 +1,13 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { LoginForm } from '../../features/authentification'
+import { Headline } from '../../components/Headline'
 
 const LoginPage = () => {
   return (
       <>
-        <h2>Connexion</h2>
+        <Headline 
+          title="Connexion"
+        />
         <LoginForm />
       </>
     )

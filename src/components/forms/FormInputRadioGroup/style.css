@@ -1,0 +1,19 @@
+.form-input-radio-group__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-input-radio-group .form-input-radio-group__content {
+    display: flex;
+    flex-direction: column;
+    gap: var( --lm-publisher-spacer-05);
+}
+
+.form-input-radio-group .form-label {
+    color: var(--lmui-c-form-placeholder);
+}
+
+.form-input-radio-group_error {
+    border: 1px solid var(--lm-publisher-form-error-color);
+}

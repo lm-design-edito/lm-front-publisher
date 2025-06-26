@@ -6,11 +6,10 @@ import { Form } from "../../../../components/forms/Form";
 import { FormSubmit }from "../../../../components/forms/FormSubmit";
 import { FormFooter }from "../../../../components/forms/FormFooter";
 import { FormInput }from "../../../../components/forms/FormInput";
-import { FormLabel }from "../../../../components/forms/FormLabel";
 import { useImageFormatToWidth } from "../../api/use-image-format-to-width";
 import { QueriesStatus } from "../../../../components/QueriesStatus";
 import { useState } from "react";
-import { FieldSet } from "../../../../components/forms/Fieldset";
+import { FormInputFile } from "../../../../components/forms/FormInputFile";
 
 const imageFormatterFormSchema = zod.object({
     width: zod.coerce.number().min(1, "La largeur doit être supérieure à 0"),
@@ -46,9 +45,18 @@ export const ImageFormatterForm = () => {
     };
     return (
         <Form onSubmit={handleSubmit(onSubmit)} className="image-formatter-form">
+            <FormInputFile 
+                label="Image"
+                labelProps={{ htmlFor: "image-upload" }}
+                inputProps={{
+                    id: "image-upload",
+                    ...register("imageUpload") 
+                }}
+                error={errors['imageUpload']} // Replace 'imageUpload' with your actual field name
+            />
             <FormInput
                 className="image-formatter-form__input"
-                label="Largeur de l'image"
+                label="Largeur souhaitée de l'image"
                 inputProps={{
                     type: "number",
                     placeholder: "800",
@@ -57,25 +65,11 @@ export const ImageFormatterForm = () => {
                 error={errors['width']} // No error handling for this input, but you can add it if needed
                 isValid={isValid} // Assuming the input is valid, you can change this based on your validation logic
             />
-            <FieldSet
-                legend={<FormLabel>Options de formatage</FormLabel>}
-            >
-                <FormInput
-                     error={errors['imageUpload']} 
-                    inputProps={{
-                        type: "file",
-                        accept: "image/*",
-                        multiple: false,
-                        id: "image-upload",
-                        ...register("imageUpload")
-                    }}
-                />
-            </FieldSet>
             <FormFooter>
                 <FormSubmit isLoading={isPending}>
                     Formatter
                 </FormSubmit>
-                {APIError && <QueriesStatus error>{APIError}</QueriesStatus> }
+                {APIError && <QueriesStatus status="error">{APIError}</QueriesStatus> }
             </FormFooter>
         </Form>
   );

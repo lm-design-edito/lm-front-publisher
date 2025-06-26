@@ -84,7 +84,7 @@ export const LoginForm = () => {
             />
             <FormFooter>
                 <FormSubmit isLoading={isPending}>Se connecter</FormSubmit>
-                {APIError && <QueriesStatus error={true}>{APIError}</QueriesStatus>}
+                {APIError && <QueriesStatus status='error'>{APIError}</QueriesStatus>}
             </FormFooter>
         </Form>
     )

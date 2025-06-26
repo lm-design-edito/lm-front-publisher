@@ -98,7 +98,7 @@ export const SignupForm = () => {
                 />
                 <FormFooter>
                     <FormSubmit>S'inscrire</FormSubmit>
-                    {APIError && <QueriesStatus error={true}>{APIError}</QueriesStatus>}
+                    {APIError && <QueriesStatus status="error">{APIError}</QueriesStatus>}
                 </FormFooter>
             </Form>
         </div>

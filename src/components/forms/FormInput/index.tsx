@@ -1,6 +1,7 @@
 import type { FieldError } from "react-hook-form";
 import './style.css'
 import { FormLabel }from "../FormLabel";
+import { FormFieldError } from "../FormFieldError";
 
 export type FormInputProps = {
     className?: string;
@@ -13,14 +14,12 @@ export type FormInputProps = {
 
 export const FormInput = ({ className = '', label, error, isValid, labelProps = {}, inputProps }: FormInputProps) => {
   return (
-    <div className={`${className} lmui-form form__input ${error ? "form__input_error " : ""}`}>
+    <div className={`${className} lmui-form form-input ${error ? "form-input_error " : ""}`}>
       <div className="lmui-form__input-wrapper">
         <input {...inputProps } className={`${inputProps.className || ''} lmui-form__input ${error ? 'lmui-form__input-error-state': ''} ${isValid ? 'lmui-form__input-valid-state': ''}`}/> 
         <FormLabel {...labelProps}>{label}</FormLabel>
       </div>
-      <span className="form__error lmui-form__error-message lmui-form__error-visible">
-          {error ? error.message : ""}
-      </span>
+      <FormFieldError error={error} />
     </div>
   );
 }

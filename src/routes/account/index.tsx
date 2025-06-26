@@ -1,11 +1,14 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { MyUser } from '../../features/account/components/MyUser'
+import { Headline } from '../../components/Headline'
 
 
 const AccountPage = () => {
   return (
     <div className="account-page">
-      <h2>Mon compte</h2>
+      <Headline 
+        title="Mon compte" 
+      />
       <MyUser />
     </div>
   )

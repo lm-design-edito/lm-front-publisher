@@ -1,0 +1,8 @@
+.form-field-error {
+    color: var(--lm-publisher-form-error-color);
+    display: none;
+}
+
+.form-field-error_visible {
+    display: inherit;
+}

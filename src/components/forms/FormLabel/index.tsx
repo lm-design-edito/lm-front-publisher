@@ -8,5 +8,5 @@ export const FormLabel = ({ children, className = '', ...props }: LabelProps) =>
         return null;
     }
 
-    return  <label className={`${className} lmui-form__placeholder form__label`} {...props}>{children}</label>
+    return  <label className={`${className} lmui-form__placeholder form-label`} {...props}>{children}</label>
 }

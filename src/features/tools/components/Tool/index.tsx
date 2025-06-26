@@ -6,11 +6,12 @@ type ToolProps = {
     description?: string;
     url: string;
     icon?: string;
+    disabled?: boolean; // Optional prop to disable the link
   // Define any props that the Service component might need
 } 
-const Tool = ({name, description, url}: ToolProps) => {
+const Tool = ({name, description, url, disabled}: ToolProps) => {
   return (
-    <Link className="tool" to={url}>
+    <Link className={`tool ${disabled ? 'tool_disabled' : ''}`} to={url}>
       <h4 className="tool__title">{name}</h4>
       <p className="tool__description">{description}</p>
     </Link>

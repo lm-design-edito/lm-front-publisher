@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { AdminUserTools } from '../../../admin-users/config/admin-users-tools';
-import { ImageTools } from '../../../images/config/image-tools';
+import { ImageToolsInfos } from '../../../images/config/image-tools-infos';
 import { AccountTool } from '../../../account/config/account';
 
 import { useAvailableToolList } from '../../api/use-available-tool-list';
@@ -16,11 +16,12 @@ type Tool = {
     url: string;
     icon?: string;
     description?: string;
+    disabled?: boolean; // Optional prop to disable the link
     badge?: string; // Optional role for admin tools
 };
 
 const tools: Tool[] = [
-    ...ImageTools
+    ...ImageToolsInfos
 ]
 
 const adminTools: Tool[] = [  
@@ -46,7 +47,6 @@ const AvailableToolsList = ({ className = '' }: AvailableToolsListProps) => {
     const availableOtherTools = useAvailableToolList(otherToolsBadges);
 
     const listTools = useCallback((badgesList: string[], toolsList: Tool[]) => {
-        console.log({ badgesList, toolsList });
         return badgesList.map(toolName => {
             const toolDatas = toolsList.filter(t => 'badge' in t && t.badge === toolName);
             if (!toolDatas.length) {
@@ -58,6 +58,7 @@ const AvailableToolsList = ({ className = '' }: AvailableToolsListProps) => {
                     name={toolData.name}
                     description={'description' in toolData ? toolData.description : ''}
                     url={toolData.url}
+                    disabled={toolData.disabled || false}
                 />
             ));
         });

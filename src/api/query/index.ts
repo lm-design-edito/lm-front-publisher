@@ -27,6 +27,7 @@ export type APIREsponseSuccessType = {
     httpStatus: number;
     success: true;
     type: 'success';
+    payload: unknown;
 }
 
 export type QueryOptions = {
@@ -88,7 +89,7 @@ export const getAuthedOptions = async (options?: QueryOptions) => {
 
 /* @todo */
 export const authQueryOnError = async (errorCode: string) => {
-    console.log({errorCode})
+    console.log('AuthQueryOnError:switch', {errorCode})
     const authedOptions = await getAuthedOptions();
     switch(errorCode) {
         case HANDLED_AUTH_ERRORS.CSRF_TOKEN:
