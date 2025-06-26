@@ -42,11 +42,66 @@ const responseMiddleware = (response: Response) => {
   }
 };
 
+const createSuccessResponse = (
+  response: Response,
+  payload: unknown = {},
+): APIREsponseSuccessType => {
+  return {
+    httpStatus: response.status,
+    success: true,
+    type: 'success',
+    payload,
+  };
+};
+
+const createErrorResponse = (response: Response): APIREsponseErrorType => {
+  return {
+    httpStatus: response.status,
+    success: false,
+    type: 'error',
+    error: {
+      code: response.statusText,
+      message: response.statusText,
+    },
+  };
+};
+
+const responseJsonMiddleware = async (response: Response) => {
+  responseMiddleware(response);
+  return await response.json();
+};
+
+const responseTextMiddleware = async (response: Response) => {
+  if (response.ok) {
+    return createSuccessResponse(response, await response.text());
+  }
+
+  return createErrorResponse(response);
+};
+
+/** Return formatted response */
+const handleResponse = async (response: Response) => {
+  if (response.headers && response.headers.get('content-type')) {
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      return responseJsonMiddleware(response);
+    }
+    if (
+      contentType.includes('text/html') ||
+      contentType.includes('text/plain')
+    ) {
+      responseTextMiddleware(response);
+    }
+  }
+  if (response.ok) {
+    return createSuccessResponse(response, {});
+  }
+  return createErrorResponse(response);
+};
+
 export const handleQuery = async (request: string, options?: QueryOptions) => {
   const response = await authQuery(request, options);
-  responseMiddleware(response);
-
-  return await response.json();
+  return handleResponse(response);
 };
 
 /* @todo: c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
