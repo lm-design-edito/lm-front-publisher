@@ -1,7 +1,7 @@
-import { imagesFormatToWidth } from "./format";
-import { imagesGenerate } from "./generate";
+import { imagesFormatToWidth } from './format';
+import { imagesGenerate } from './generate';
 
 export const images = {
-    formatToWidth: imagesFormatToWidth,
-    generate: imagesGenerate
-}
+  formatToWidth: imagesFormatToWidth,
+  generate: imagesGenerate,
+};

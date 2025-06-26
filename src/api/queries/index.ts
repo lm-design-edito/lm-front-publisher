@@ -3,7 +3,7 @@ import { auth } from './auth';
 import { images } from './images';
 
 export const queries = {
-    auth,
-    admin,
-    images
-}
+  auth,
+  admin,
+  images,
+};

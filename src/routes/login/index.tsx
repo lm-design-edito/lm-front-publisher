@@ -1,17 +1,15 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import { LoginForm } from '../../features/authentification'
-import { Headline } from '../../components/Headline'
+import { createFileRoute, redirect } from '@tanstack/react-router';
+import { LoginForm } from '../../features/authentification';
+import { Headline } from '../../components/Headline';
 
 const LoginPage = () => {
   return (
-      <>
-        <Headline 
-          title="Connexion"
-        />
-        <LoginForm />
-      </>
-    )
-}
+    <>
+      <Headline title="Connexion" />
+      <LoginForm />
+    </>
+  );
+};
 
 export const Route = createFileRoute('/login/')({
   component: LoginPage,
@@ -22,12 +20,10 @@ export const Route = createFileRoute('/login/')({
         search: {
           redirect: location.href,
         },
-      })
+      });
     }
     // This is a placeholder for any pre-load logic you might want to implement
     // For example, you could check user permissions or load initial data
-    console.log('Loading login route...')
-  }
-})
-
-
+    console.log('Loading login route...');
+  },
+});

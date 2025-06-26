@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 const CheckEmailPage = () => {
   return (
@@ -6,9 +6,9 @@ const CheckEmailPage = () => {
       <h2>Validez votre inscription</h2>
       <p>Valider l'inscription grâce au lien reçu par mail</p>
     </>
-  )
-}
+  );
+};
 
 export const Route = createFileRoute('/check-email/')({
   component: CheckEmailPage,
-})
+});

@@ -1,11 +1,14 @@
-import { api } from "../../..";
-import API_ROUTES from "../../../routes";
+import { api } from '../../..';
+import API_ROUTES from '../../../routes';
 
 type RequestEmailVerificationTokenType = {
-    email: string
+  email: string;
 };
 
-export const requestEmailVerificationToken = async (params: RequestEmailVerificationTokenType) =>  api.query(API_ROUTES.AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN, {
+export const requestEmailVerificationToken = async (
+  params: RequestEmailVerificationTokenType,
+) =>
+  api.query(API_ROUTES.AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN, {
     method: 'POST',
     body: JSON.stringify(params),
-});
+  });

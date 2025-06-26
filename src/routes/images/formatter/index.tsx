@@ -1,7 +1,7 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import { ImageFormatterForm } from '../../../features/images/components/ImageFormatterForm'
-import { Headline } from '../../../components/Headline'
-import { ImageFormatterToolInfos } from '../../../features/images/config/image-tools-infos'
+import { createFileRoute, redirect } from '@tanstack/react-router';
+import { ImageFormatterForm } from '../../../features/images/components/ImageFormatterForm';
+import { Headline } from '../../../components/Headline';
+import { ImageFormatterToolInfos } from '../../../features/images/config/image-tools-infos';
 
 const ImageFormatterPage = () => {
   return (
@@ -12,20 +12,20 @@ const ImageFormatterPage = () => {
       />
       <ImageFormatterForm />
     </div>
-  )
-}
+  );
+};
 
 export const Route = createFileRoute('/images/formatter/')({
   component: ImageFormatterPage,
-  beforeLoad: async ({context}) => {
+  beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
         to: '/login',
         search: {
-            redirect: location.href,
-        }
-      })
+          redirect: location.href,
+        },
+      });
     }
     // You can add any pre-load logic here if needed
   },
-})
+});

@@ -1,5 +1,5 @@
-import { Button } from "../../../../components/buttons/Button";
-import { useTheme } from "../../hooks/use-theme";
+import { Button } from '../../../../components/buttons/Button';
+import { useTheme } from '../../hooks/use-theme';
 
 import './style.css';
 
@@ -9,7 +9,11 @@ export type ThemeSwitchProps = {
   size?: 's' | 'm' | 'l';
 };
 
-export function ThemeSwitch({ className = '', minified, size = 'm' }: ThemeSwitchProps) {
+export function ThemeSwitch({
+  className = '',
+  minified,
+  size = 'm',
+}: ThemeSwitchProps) {
   const { theme, applyTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -17,17 +21,20 @@ export function ThemeSwitch({ className = '', minified, size = 'm' }: ThemeSwitc
   };
 
   return (
-    <Button 
+    <Button
       className={`theme-switch ${className} ${minified ? 'theme-switch_minified' : ''}`}
-      aria-label="Changer le thème" 
+      aria-label="Changer le thème"
       variant="secondary"
       onClick={toggleTheme}
       size={size}
-    >{
-      minified ? 
-        theme === 'light' ? "☀️" : "🌙"
-        :
-        theme === 'light' ? "Passer en Dark Mode" : "Passer en Light Mode"
-    }</Button>
-  )
+    >
+      {minified
+        ? theme === 'light'
+          ? '☀️'
+          : '🌙'
+        : theme === 'light'
+          ? 'Passer en Dark Mode'
+          : 'Passer en Light Mode'}
+    </Button>
+  );
 }

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 export type UserRoleProps = {
   role: string;
@@ -10,22 +10,26 @@ export const UserRole = ({ role }: UserRoleProps) => {
       case 'root':
         return {
           color: 'red',
-          label: 'Root'
-        }
+          label: 'Root',
+        };
       case 'admin':
         return {
           color: 'purple',
-          label: 'Admin'
+          label: 'Admin',
         };
       default:
         return {
           color: 'blue',
-          label: 'Utilisateur'
+          label: 'Utilisateur',
         };
     }
   }, [role]);
 
   return (
-    <span className={`lmui-badge lmui-badge_tertiary lmui-badge_s lmui-badge_${userInfo.color}`}>{userInfo.label}</span>
+    <span
+      className={`lmui-badge lmui-badge_tertiary lmui-badge_s lmui-badge_${userInfo.color}`}
+    >
+      {userInfo.label}
+    </span>
   );
 };

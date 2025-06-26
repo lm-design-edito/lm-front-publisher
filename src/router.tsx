@@ -1,19 +1,20 @@
-import { createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen.ts";
+import { createRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen.ts';
 
 // Create a new router instance
-export const router = createRouter({ routeTree, 
+export const router = createRouter({
+  routeTree,
   context: {
     auth: {
       isAuthenticated: false,
-      isLoading: true
-    }
-  } 
-})
+      isLoading: true,
+    },
+  },
+});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }

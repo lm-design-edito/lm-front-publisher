@@ -5,9 +5,9 @@ import { LogoutButton } from './components/LogoutButton';
 import { SignupForm } from './components/SignupForm';
 
 export {
-    AuthActions,
-    LoginForm,
-    LogoutButton,
-    LogoutEverywhereButton,
-    SignupForm,
-}
+  AuthActions,
+  LoginForm,
+  LogoutButton,
+  LogoutEverywhereButton,
+  SignupForm,
+};

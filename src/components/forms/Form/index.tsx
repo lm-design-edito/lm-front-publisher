@@ -1,13 +1,13 @@
-import './style.css'
+import './style.css';
 
 export type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-export const Form = ({children, ...props}: FormProps) => {
+export const Form = ({ children, ...props }: FormProps) => {
   return (
     <form {...props} className={`form ${props.className || ''}`}>
-        {children}
+      {children}
     </form>
   );
-}
+};

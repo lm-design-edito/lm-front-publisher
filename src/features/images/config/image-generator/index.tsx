@@ -1,17 +1,17 @@
 const ImageGeneratorTemplates = [
-    { name: 'lines', label: 'Livres', attributes: ['checked'] },
-    { name: 'tiles', label: 'Tuiles' },
-    { name: 'white-filter', label: 'Filtre blanc' },
-    { name: 'gradient-pink-filter', label: 'Filtre rose dégradé' },
-    { name: 'pattern', label: 'Trame' },
-    { name: 'logo-LM', label: 'Logo LeMonde centré' },
+  { name: 'lines', label: 'Livres', attributes: ['checked'] },
+  { name: 'tiles', label: 'Tuiles' },
+  { name: 'white-filter', label: 'Filtre blanc' },
+  { name: 'gradient-pink-filter', label: 'Filtre rose dégradé' },
+  { name: 'pattern', label: 'Trame' },
+  { name: 'logo-LM', label: 'Logo LeMonde centré' },
 ];
 
 const ImageGeneratorConfigTemplates: Record<string, unknown> = {
   lines: {
     inputOperations: [
       {
-        name: "frame",
+        name: 'frame',
         params: {
           dimensions: {
             widthPx: 1348,
@@ -22,19 +22,19 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
             yRatio: 0.5,
           },
           positions: {
-            left: "50%",
-            top: "50%",
-            translateX: "-50%",
-            translateY: "-50%",
+            left: '50%',
+            top: '50%',
+            translateX: '-50%',
+            translateY: '-50%',
           },
           background: {
-            type: "line",
+            type: 'line',
             colorPalette: {
               extract: {
                 nbColor: 5,
               },
               densify: {
-                types: ["default"],
+                types: ['default'],
               },
             },
             params: {
@@ -43,21 +43,21 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
                 selectColorPaletteIndex: 2,
                 primaryTransformations: [
                   {
-                    type: "saturate",
+                    type: 'saturate',
                     intensity: 95,
-                    intensityMode: "set",
+                    intensityMode: 'set',
                   },
                 ],
                 secondaryTransformations: [
                   {
-                    type: "saturate",
+                    type: 'saturate',
                     intensity: 95,
-                    intensityMode: "set",
+                    intensityMode: 'set',
                   },
                   {
-                    type: "lighten",
+                    type: 'lighten',
                     intensity: 20,
-                    intensityMode: "add",
+                    intensityMode: 'add',
                   },
                 ],
               },
@@ -70,12 +70,12 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
     qualities: [100],
     widths: [920],
     heights: [640],
-    formats: ["png"],
+    formats: ['png'],
   },
   tiles: {
     inputOperations: [
       {
-        name: "frame",
+        name: 'frame',
         params: {
           dimensions: {
             widthPx: 1348,
@@ -86,26 +86,26 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
             yRatio: 0.9,
           },
           positions: {
-            left: "50%",
+            left: '50%',
             top: 0,
-            translateX: "-50%",
+            translateX: '-50%',
           },
           // background: { r: 200, g: 200, b: 200, alpha: 50 },
           background: {
-            type: "tile",
+            type: 'tile',
             colorPalette: {
               extract: {
                 nbColor: 5,
               },
               densify: {
-                types: ["default", 'default-lighten', 'default-saturate'],
+                types: ['default', 'default-lighten', 'default-saturate'],
                 ligthenIntensity: 10,
                 saturateIntensity: 20,
               },
               compose: {
                 nbColor: 10,
-                mix: true
-              }
+                mix: true,
+              },
             },
             params: {
               coverageRatio: 1,
@@ -123,68 +123,71 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
     qualities: [100],
     widths: [920],
     heights: [640],
-    formats: ["png"],
+    formats: ['png'],
   },
-  "white-filter": {
+  'white-filter': {
     inputOperations: [
       {
-        name: "compose", 
+        name: 'compose',
         params: {
           images: [
             {
               input: {
-                mode: "fill",
+                mode: 'fill',
                 nbChannels: 4,
                 background: { r: 255, g: 255, b: 255, alpha: 0.5 },
               },
               positions: {
                 left: 0,
-                top: 0
+                top: 0,
               },
-            }
-          ]
-        }
-      }
+            },
+          ],
+        },
+      },
     ],
     checkValidOperations: true,
     qualities: [100],
     widths: [920],
     heights: [640],
-    formats: ["png"],
+    formats: ['png'],
   },
-  "gradient-pink-filter": {
+  'gradient-pink-filter': {
     inputOperations: [
       {
-        name: "compose",
+        name: 'compose',
         params: {
           images: [
             {
               input: {
-                mode: "gradient",
+                mode: 'gradient',
                 angleDeg: 45,
                 colorStops: [
-                  { color: {  r: 255, g: 255, b: 255, alpha: 0 }, offsetPercent: 30 },
-                  { color: { r: 255, g: 87, b: 186, alpha: 0.5 }, offsetPercent: 80 }
-                ]
+                  {
+                    color: { r: 255, g: 255, b: 255, alpha: 0 },
+                    offsetPercent: 30,
+                  },
+                  {
+                    color: { r: 255, g: 87, b: 186, alpha: 0.5 },
+                    offsetPercent: 80,
+                  },
+                ],
               },
               positions: {
                 left: 0,
-                top: 0
+                top: 0,
               },
-            }
-          ]
-        }
-      }
+            },
+          ],
+        },
+      },
     ],
     checkValidOperations: true,
     qualities: [100],
     widths: [920],
     heights: [640],
-    formats: ["png"],
+    formats: ['png'],
   },
 };
 
-export {
-    ImageGeneratorTemplates,
-    ImageGeneratorConfigTemplates
-}
+export { ImageGeneratorTemplates, ImageGeneratorConfigTemplates };

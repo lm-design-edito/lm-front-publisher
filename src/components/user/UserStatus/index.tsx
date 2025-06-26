@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 type UserStatusProps = {
   status: string;
@@ -10,27 +10,31 @@ export const UserStatus = ({ status }: UserStatusProps) => {
       case 'active':
         return {
           color: 'green',
-          label: 'Actif'
-        }
+          label: 'Actif',
+        };
       case 'suspended':
         return {
           color: 'orange',
-          label: 'Suspendu'
-        }
+          label: 'Suspendu',
+        };
       case 'banned':
         return {
           color: 'red',
-          label: 'Banni'
-        }
+          label: 'Banni',
+        };
       default:
         return {
           color: 'grey',
-          label: 'Inconnu'
-        }
+          label: 'Inconnu',
+        };
     }
   }, [status]);
 
   return (
-    <span className={`lmui-badge lmui-badge_secondary lmui-badge_s lmui-badge_${statusInfo.color}`}>{statusInfo.label}</span>
+    <span
+      className={`lmui-badge lmui-badge_secondary lmui-badge_s lmui-badge_${statusInfo.color}`}
+    >
+      {statusInfo.label}
+    </span>
   );
 };

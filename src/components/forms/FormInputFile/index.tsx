@@ -1,9 +1,9 @@
-import { FieldSet } from "../Fieldset";
-import { FormLabel } from "../FormLabel";
-import { FormInput, type FormInputProps } from "../FormInput";
-import { FormFieldError } from "../FormFieldError";
+import { FieldSet } from '../Fieldset';
+import { FormLabel } from '../FormLabel';
+import { FormInput, type FormInputProps } from '../FormInput';
+import { FormFieldError } from '../FormFieldError';
 
-import './style.css'
+import './style.css';
 
 export type FormInputFileProps = {
   className?: string;
@@ -12,9 +12,15 @@ export type FormInputFileProps = {
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   error?: FormInputProps['error'];
   inputProps: FormInputProps['inputProps'];
-}
+};
 
-export const FormInputFile = ({ label, labelProps, className, inputProps, error }: FormInputFileProps) => {
+export const FormInputFile = ({
+  label,
+  labelProps,
+  className,
+  inputProps,
+  error,
+}: FormInputFileProps) => {
   return (
     <FieldSet
       className={`form-input-file ${className || ''} ${error ? 'form-input-file_error' : ''}`}
@@ -23,13 +29,13 @@ export const FormInputFile = ({ label, labelProps, className, inputProps, error 
     >
       <FormInput
         inputProps={{
-          type: "file",
-          accept: "image/*",
+          type: 'file',
+          accept: 'image/*',
           multiple: false,
-          ...inputProps
+          ...inputProps,
         }}
       />
       <FormFieldError error={error} />
     </FieldSet>
   );
-}
+};

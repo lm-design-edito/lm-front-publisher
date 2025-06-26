@@ -1,45 +1,51 @@
-import { api } from "../../..";
-import type { APIREsponseErrorType, APIREsponseSuccessType } from "../../../query";
-import API_ROUTES from "../../../routes";
+import { api } from '../../..';
+import type {
+  APIREsponseErrorType,
+  APIREsponseSuccessType,
+} from '../../../query';
+import API_ROUTES from '../../../routes';
 
 type AdminUser = {
-    _id: string,
-    role: 'root' | 'admin' | 'user',
-    status: 'active' | 'suspended' | 'banned',
-    verified: boolean,
-    email: string,
-    username: string,
-    badges: string[],
-    googleId?: string
-}
-
-type AdminUsersUpdate = {
-    _id: string,
-    role?: 'root' | 'admin' | 'user',
-    status?: 'active' | 'suspended' | 'banned',
-    verified?: boolean,
-    email?: string
-    password?: string
-    googleId?: string
-    badges: string[]
+  _id: string;
+  role: 'root' | 'admin' | 'user';
+  status: 'active' | 'suspended' | 'banned';
+  verified: boolean;
+  email: string;
+  username: string;
+  badges: string[];
+  googleId?: string;
 };
 
+type AdminUsersUpdate = {
+  _id: string;
+  role?: 'root' | 'admin' | 'user';
+  status?: 'active' | 'suspended' | 'banned';
+  verified?: boolean;
+  email?: string;
+  password?: string;
+  googleId?: string;
+  badges: string[];
+};
 
-export const adminUsersUpdate = async (params: AdminUsersUpdate) => api.query(API_ROUTES.ADMIN_USERS_UPDATE, {
+export const adminUsersUpdate = async (params: AdminUsersUpdate) =>
+  api.query(API_ROUTES.ADMIN_USERS_UPDATE, {
     method: 'POST',
     body: JSON.stringify(params),
-});
-
-
+  });
 
 type AdminUsersListRequestParams = unknown;
-type AdminUsersListResponse =  ( APIREsponseSuccessType & {
-    payload: {
-        list: AdminUser[]
-    }
-} | APIREsponseErrorType) 
+type AdminUsersListResponse =
+  | (APIREsponseSuccessType & {
+      payload: {
+        list: AdminUser[];
+      };
+    })
+  | APIREsponseErrorType;
 
-export const adminUsersList = async (params: AdminUsersListRequestParams): Promise<AdminUsersListResponse> => api.query(API_ROUTES.ADMIN_USERS_LIST, {
+export const adminUsersList = async (
+  params: AdminUsersListRequestParams,
+): Promise<AdminUsersListResponse> =>
+  api.query(API_ROUTES.ADMIN_USERS_LIST, {
     method: 'POST',
     body: JSON.stringify(params),
-});
+  });
