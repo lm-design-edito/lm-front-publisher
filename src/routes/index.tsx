@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useWhoAmI } from '../features/authentification/api/use-who-am-i';
-import { ServiceList } from '@features/services/services-list';
+import { ServiceList } from '@features/services';
 
 import './style.css';
 import { AuthActions } from '../features/authentification';
