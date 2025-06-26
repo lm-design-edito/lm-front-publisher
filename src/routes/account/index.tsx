@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { MyUserProfile } from '../../features/account/components/my-user-profile';
-import { Headline } from '../../common-components/headline-';
+import { Headline } from '../../common-components/headline';
 
 const AccountPage = () => {
   return (
