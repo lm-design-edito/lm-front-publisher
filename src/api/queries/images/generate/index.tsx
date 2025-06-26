@@ -34,6 +34,9 @@ export const imagesGenerate = async (params: ImagesGenerate): Promise<ImageGener
         }
     }
 
+    console.log('API.QUERIES.IMAGES.GENERATE, with params', 
+        params
+    );
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const isSuccess = Math.random() > 0.1; // Simulate success or failure randomly

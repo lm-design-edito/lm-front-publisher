@@ -1,10 +1,26 @@
 .dev-bar {
-    --dev-bar-accent-color: var(--lmui-c-red-medium);
-    --dev-bar-border-color: var(--lmui-c-red-light);
+
+    --dev-bar-accent-color: #3b05aa;
+    --dev-bar-border-color: #6646ff;
+    --dev-bar-bg-color: #d1d2ff;
+    --dev-bar-text-color: #000;
+    --dev-bar-link-color: #6646ff;
 
     position: relative;
-    border-bottom: 3px solid var(--dev-bar-border-color);
-    padding: var(--lm-publisher-grid-margins);
+    border-bottom: 1px solid var(--dev-bar-border-color);
+    padding: 8px;
+    background-color: var(--dev-bar-bg-color);
+
+    color: var(--dev-bar-text-color);
+    font-size: 0.8rem;
+}
+
+:root[data-color-mode=dark] .dev-bar {
+    --dev-bar-accent-color: #3b05aa;
+    --dev-bar-border-color: #3b05aa;
+    --dev-bar-bg-color: #180240;
+    --dev-bar-text-color: #ffffff;
+    --dev-bar-link-color: #d1d2ff;
 }
 
 .dev-bar__title {
@@ -31,16 +47,17 @@
     gap: 8px;
 }
 
+
 .dev-bar__actions button,
 .dev-bar__actions a {
     display: flex;
     align-items: center;
     padding: 0;
     background: none;
-    color: var(--lm-publisher-text-color);
+    color: var(--dev-bar-link-color);
     border: none;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .dev-bar__actions button:hover,
