@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import './style.css';
 import { ThemeSwitch } from '@features/theme';
 import { AuthActions } from '@features/authentification';
-import { HeaderLocation } from './HeaderLocation';
+import { HeaderLocation } from './header-location';
 
 const LMLogo = () => (
   <svg
