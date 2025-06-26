@@ -1,7 +1,3 @@
-export { useImageGenerate } from './api';
-export {
-  ImageGeneratorInfos,
-  ImageGeneratorTemplates,
-  ImageGeneratorTemplatesConfig,
-} from './config';
-export { ImageGeneratorForm } from './components/image-generator-form';
+export * from './api';
+export * from './config';
+export * from './components/image-generator-form';

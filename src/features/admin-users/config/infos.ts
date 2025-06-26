@@ -1,4 +1,4 @@
-const AdminUserToolsInfo = [
+export const AdminUserInfos = [
   {
     name: 'User Management',
     description: 'Gestion des utilisateurs',
@@ -7,5 +7,3 @@ const AdminUserToolsInfo = [
     icon: 'icon1.png',
   },
 ];
-
-export { AdminUserToolsInfo };

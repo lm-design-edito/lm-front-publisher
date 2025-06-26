@@ -1,18 +1,18 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { UsersList } from '../../../features/admin-users/components/UsersList';
+import { UserList } from '@features/admin-users';
 import { Headline } from '../../../components/Headline';
 
-const AdminUsersListPage = () => {
+const AdminUserListPage = () => {
   return (
     <div className="admin-users-list-page">
       <Headline title="Gestion des utilisateurs" />
-      <UsersList />
+      <UserList />
     </div>
   );
 };
 
 export const Route = createFileRoute('/admin/users/')({
-  component: AdminUsersListPage,
+  component: AdminUserListPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {
       throw redirect({

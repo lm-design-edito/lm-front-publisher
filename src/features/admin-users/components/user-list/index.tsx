@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Loader } from '../../../../components/Loader';
 import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
-import { useUsersList } from '../../api/use-users-list';
+import { useUserList } from '../../api/use-user-list';
 import './style.css';
 import {
   Table,
@@ -25,22 +25,23 @@ export type UserListRow = {
   actions?: React.ReactNode;
 };
 
-export const UsersList = () => {
+export const UserList = () => {
   const { user } = useWhoAmI();
-  const { list, isLoading } = useUsersList();
+  const { list, isLoading } = useUserList();
 
   const userList = useMemo(() => {
     const adminUser = user && user.role === 'admin' ? user : null;
+    // Sort badges alphabetically
     return [adminUser, ...list]
       .map(user =>
         user
           ? {
-              ...user,
-              badges:
-                user && 'badges' in user && user.badges
-                  ? user.badges.sort((a, b) => (a > b ? 1 : -1))
-                  : [], // Sort badges alphabetically
-            }
+            ...user,
+            badges:
+              user && 'badges' in user && user.badges
+                ? user.badges.sort((a, b) => (a > b ? 1 : -1))
+                : [],
+          }
           : null,
       )
       .filter(user => user !== null);
