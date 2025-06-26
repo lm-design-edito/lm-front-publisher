@@ -1,7 +1,7 @@
-import { FieldSet } from '../Fieldset';
-import { FormLabel } from '../FormLabel';
-import { FormInput, type FormInputProps } from '../FormInput';
-import { FormFieldError } from '../FormFieldError';
+import { FieldSet } from '../fieldset';
+import { FormLabel } from '../form-label';
+import { FormInput, type FormInputProps } from '../form-input';
+import { FormFieldError } from '../form-field-error';
 
 import './style.css';
 

@@ -1,7 +1,7 @@
 import type { FieldError } from 'react-hook-form';
 import './style.css';
-import { FormLabel } from '../FormLabel';
-import { FormFieldError } from '../FormFieldError';
+import { FormLabel } from '../form-label';
+import { FormFieldError } from '../form-field-error';
 
 export type FormInputProps = {
   className?: string;

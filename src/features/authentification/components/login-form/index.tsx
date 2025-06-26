@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
-import { FormInput } from '../../../../common-components/forms/FormInput';
-import { Form } from '../../../../common-components/forms/Form';
+import { FormInput } from '../../../../common-components/forms-/form-input';
+import { Form } from '../../../../common-components/forms-/form';
 import { useLogin } from '../../api/use-login';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { QueriesStatus } from '../../../../common-components/QueriesStatus';
-import { FormSubmit } from '../../../../common-components/forms/FormSubmit';
-import { FormFooter } from '../../../../common-components/forms/FormFooter';
+import { FormSubmit } from '../../../../common-components/forms-/form-submit';
+import { FormFooter } from '../../../../common-components/forms-/form-footer';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),

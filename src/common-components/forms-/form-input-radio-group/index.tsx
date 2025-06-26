@@ -1,6 +1,6 @@
-import { FieldSet } from '../Fieldset';
-import { FormFieldError } from '../FormFieldError';
-import { FormInputRadio, type FormInputRadioProps } from '../FormInputRadio';
+import { FieldSet } from '../fieldset';
+import { FormFieldError } from '../form-field-error';
+import { FormInputRadio, type FormInputRadioProps } from '../form-input-radio';
 
 import './style.css';
 
