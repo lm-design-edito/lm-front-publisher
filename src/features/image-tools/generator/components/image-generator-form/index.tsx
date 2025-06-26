@@ -1,18 +1,18 @@
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Form } from '../../../../components/forms/Form';
-import { FormInputFile } from '../../../../components/forms/FormInputFile';
+import { Form } from '../../../../../components/forms/Form';
+import { FormInputFile } from '../../../../../components/forms/FormInputFile';
 import {
-  ImageGeneratorConfigTemplates,
+  ImageGeneratorTemplatesConfig,
   ImageGeneratorTemplates,
-} from '../../config/image-generator';
-import { FormInputRadioGroup } from '../../../../components/forms/FormInputRadioGroup';
-import { FormSubmit } from '../../../../components/forms/FormSubmit';
-import { FormFooter } from '../../../../components/forms/FormFooter';
+} from '../../config/templates';
 import { useImageGenerate } from '../../api/use-image-generate';
+import { FormInputRadioGroup } from '../../../../../components/forms/FormInputRadioGroup';
+import { FormSubmit } from '../../../../../components/forms/FormSubmit';
+import { FormFooter } from '../../../../../components/forms/FormFooter';
+import { QueriesStatus } from '../../../../../components/QueriesStatus';
 import { useState } from 'react';
-import { QueriesStatus } from '../../../../components/QueriesStatus';
 
 const templateNames = ImageGeneratorTemplates.map(
   template => template.name,
@@ -66,7 +66,7 @@ export const ImageGeneratorForm = () => {
       file: values.imageUpload[0], // Access the first file from FileList
       properties: {
         template: values.template, // Use the selected template,
-        ...(ImageGeneratorConfigTemplates[values.template] || {}), // Get the template configuration
+        ...(ImageGeneratorTemplatesConfig[values.template] || {}), // Get the template configuration
       },
     });
     // Handle form submission logic here

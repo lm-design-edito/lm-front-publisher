@@ -7,7 +7,7 @@ const ImageGeneratorTemplates = [
   { name: 'logo-LM', label: 'Logo LeMonde centré' },
 ];
 
-const ImageGeneratorConfigTemplates: Record<string, unknown> = {
+const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
   lines: {
     inputOperations: [
       {
@@ -190,4 +190,4 @@ const ImageGeneratorConfigTemplates: Record<string, unknown> = {
   },
 };
 
-export { ImageGeneratorTemplates, ImageGeneratorConfigTemplates };
+export { ImageGeneratorTemplates, ImageGeneratorTemplatesConfig };

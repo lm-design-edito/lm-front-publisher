@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { api } from '../../../../api';
+import { api } from '../../../../../api';
 import formatAPIError, {
   type FormattedAPIErrorType,
-} from '../../../../api/format-api-error';
+} from '../../../../../api/format-api-error';
 
 type UseImageFormatToWidthParams = Parameters<
   typeof api.queries.images.formatToWidth

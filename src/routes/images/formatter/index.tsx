@@ -1,14 +1,16 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { ImageFormatterForm } from '../../../features/image-tools/components/ImageFormatterForm';
 import { Headline } from '../../../components/Headline';
-import { ImageFormatterToolInfos } from '../../../features/image-tools/config/image-tools-infos';
+import {
+  ImageFormatterForm,
+  ImageFormatInfos,
+} from '@features/image-tools/format';
 
 const ImageFormatterPage = () => {
   return (
     <div className="image-formatter-page">
       <Headline
-        title={ImageFormatterToolInfos.name}
-        description={ImageFormatterToolInfos.description}
+        title={ImageFormatInfos.name}
+        description={ImageFormatInfos.description}
       />
       <ImageFormatterForm />
     </div>

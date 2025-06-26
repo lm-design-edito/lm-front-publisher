@@ -1,21 +1,8 @@
-const ImageGeneratorToolInfos = {
-  name: "Générateur de média d'appels",
-  description: "Générer des médias d'appels à partir d'une image",
-  badge: 'all',
-  url: '/images/generator',
-  icon: 'icon5.png',
-};
-
-const ImageFormatterToolInfos = {
-  name: 'Image Formatter',
-  description: 'Formatter les images dans différents formats',
-  badge: 'image.format',
-  url: '/images/formatter',
-  icon: 'icon6.png',
-};
+import { ImageGeneratorInfos } from '@features/image-tools/generator/config/infos';
+import { ImageFormatInfos } from '@features/image-tools/format/config/infos';
 
 const ImageToolsInfos = [
-  ImageFormatterToolInfos,
+  ImageFormatInfos,
   {
     name: 'Image Resizer',
     description: 'Redimensionner les images selon les besoins',
@@ -43,9 +30,7 @@ const ImageToolsInfos = [
     icon: 'icon4.png',
     disabled: true,
   },
-  ImageGeneratorToolInfos,
+  ImageGeneratorInfos,
 ];
 
-console.log('ImageToolsInfos', ImageToolsInfos);
-
-export { ImageFormatterToolInfos, ImageGeneratorToolInfos, ImageToolsInfos };
+export { ImageToolsInfos };
