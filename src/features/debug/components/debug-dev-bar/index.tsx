@@ -8,7 +8,7 @@ import { Loader } from '../../../../components/Loader';
 
 const devMode = import.meta.env.VITE_DEV_MODE === 'true';
 
-export const DevBar = () => {
+export const DebugDevBar = () => {
   const { mutate: login, isPending: isPendingLoading } = useLogin();
   const { mutate: logout, isPending: isPendingLogout } = useLogout();
   // const { mutate: requestEmailVerificationToken, isPending: isPendingRequestEmailVerification } = useMutation({
