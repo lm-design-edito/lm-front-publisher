@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { ImageGeneratorForm } from '../../../features/images/components/ImageGeneratorForm';
-import { ImageGeneratorToolInfos } from '../../../features/images/config/image-tools-infos';
+import { ImageGeneratorForm } from '../../../features/image-tools/components/ImageGeneratorForm';
+import { ImageGeneratorToolInfos } from '../../../features/image-tools/config/image-tools-infos';
 import { Headline } from '../../../components/Headline';
 
 const ImageGeneratorPage = () => {

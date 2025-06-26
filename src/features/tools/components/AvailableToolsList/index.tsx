@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { AdminUserToolsInfo } from '../../../admin-users/config/admin-users-tools-info';
-import { ImageToolsInfos } from '../../../images/config/image-tools-infos';
+import { ImageToolsInfos } from '../../../image-tools/config/image-tools-infos';
 import { AccountToolsInfo } from '../../../account/config/account-tools-info';
 
 import { useAvailableToolList } from '../../api/use-available-tool-list';
