@@ -1,17 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../../../../api';
+import { api } from '../../../../../api';
 import { useMemo } from 'react';
 
-export function useAvailableToolList(toolBadges: string[]) {
+export const useAvailableServiceList = (toolBadges: string[]) => {
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['who-am-i'],
     queryFn: () => {
-      console.log('useAvailableToolList.who-am-i');
+      console.log('useAvailableServiceList.who-am-i');
       return api.queries.auth.whoAmI();
     },
   });
 
-  const availableTools = useMemo(() => {
+  const availableServices = useMemo(() => {
     if (isLoading) {
       return [];
     }
@@ -26,5 +26,5 @@ export function useAvailableToolList(toolBadges: string[]) {
     }
   }, [isSuccess, isLoading, data, toolBadges]);
 
-  return availableTools;
-}
+  return availableServices;
+};

@@ -1,0 +1,21 @@
+.available-service-list__elements {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--lm-publisher-grid-gap);
+}
+
+.available-service-list__header {
+  margin-bottom: var(--lm-publisher-spacer-4);
+}
+
+@media screen and (max-width: 768px) and (min-width: 401px) {
+  .available-service-list__elements {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .available-service-list__elements {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

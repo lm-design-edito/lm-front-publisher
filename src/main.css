@@ -12,7 +12,7 @@
 
   --lm-publisher-form-error-color: var(--lmui-c-form-border-error);
 
-  --lm-publisher-tool-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgba(0, 91, 133, 0.04) 94.37%);
+  --lm-publisher-service-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgba(0, 91, 133, 0.04) 94.37%);
 
   --lm-publisher-width: 1200px;
 
@@ -35,7 +35,7 @@
   --lm-publisher-accent-color: var(--lmui-c-sea-light);
   --lm-publisher-border-color: var(--lmui-c-slate-lighter);
 
-  --lm-publisher-tool-bg: linear-gradient(232deg, rgb(129, 199, 231, 0.09) 0%, rgba(129, 199, 231, 0.04) 94.37%);
+  --lm-publisher-service-bg: linear-gradient(232deg, rgb(129, 199, 231, 0.09) 0%, rgba(129, 199, 231, 0.04) 94.37%);
 }
 
 body {

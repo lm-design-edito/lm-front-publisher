@@ -1,4 +1,4 @@
-.tool {
+.service {
     padding: var(--lm-publisher-spacer-3);
     aspect-ratio: 1 / 1;
     display: flex;
@@ -6,24 +6,24 @@
     flex-direction: column;
     justify-content: flex-end;
     border-radius: 8px;
-    background: var(--lm-publisher-tool-bg);
+    background: var(--lm-publisher-service-bg);
 
     text-decoration: none;
 }
 
-.tool_disabled {
+.service_disabled {
     opacity: 0.5;
     pointer-events: none;
 }
 
-.tool__title {
+.service__title {
     transition: color 0.3s ease;
 }
 
-.tool:hover .tool__title {
+.service:hover .service__title {
     color: var(--lm-publisher-link-color);
 }
 
-.tool__description {
+.service__description {
     color: var(--lm-publisher-text-color);
 }

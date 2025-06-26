@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useWhoAmI } from '../features/authentification/api/use-who-am-i';
-import AvailableToolsList from '../features/tools/components/AvailableToolsList';
+import { ServiceList } from '@features/services/services-list';
+
 import './style.css';
 import { AuthActions } from '../features/authentification';
 
@@ -25,7 +26,7 @@ const IndexPage = () => {
       </div>
       {isAuthenticated ? (
         <div className="index-page__content">
-          <AvailableToolsList className="lm-publisher-m-spacer-8" />
+          <ServiceList className="lm-publisher-m-spacer-8" />
         </div>
       ) : (
         <AuthActions className="lm-publisher-m-spacer-8" size="l" />
