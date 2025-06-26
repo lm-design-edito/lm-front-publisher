@@ -1,5 +1,5 @@
-import { Button } from '../../../../../components/buttons/Button';
-import { useTheme } from '../../hooks/use-theme';
+import { Button } from '../../../components/buttons/Button';
+import { useTheme } from './use-theme';
 
 import './style.css';
 

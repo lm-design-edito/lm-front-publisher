@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ThemeContext, type Theme } from '..';
+import { ThemeContext, type Theme } from './use-theme';
 
 const THEME_KEY = 'lm-publisher-theme';
 const getWantedTheme = (): Theme => {
