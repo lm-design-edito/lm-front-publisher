@@ -1,17 +1,17 @@
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Form } from '../../../../../components/forms/Form';
-import { FormInputFile } from '../../../../../components/forms/FormInputFile';
+import { Form } from '../../../../../common-components/forms/Form';
+import { FormInputFile } from '../../../../../common-components/forms/FormInputFile';
 import {
   ImageGeneratorTemplatesConfig,
   ImageGeneratorTemplates,
 } from '../../config/templates';
 import { useImageGenerate } from '../../api/use-image-generate';
-import { FormInputRadioGroup } from '../../../../../components/forms/FormInputRadioGroup';
-import { FormSubmit } from '../../../../../components/forms/FormSubmit';
-import { FormFooter } from '../../../../../components/forms/FormFooter';
-import { QueriesStatus } from '../../../../../components/QueriesStatus';
+import { FormInputRadioGroup } from '../../../../../common-components/forms/FormInputRadioGroup';
+import { FormSubmit } from '../../../../../common-components/forms/FormSubmit';
+import { FormFooter } from '../../../../../common-components/forms/FormFooter';
+import { QueriesStatus } from '../../../../../common-components/QueriesStatus';
 import { useState } from 'react';
 
 const templateNames = ImageGeneratorTemplates.map(

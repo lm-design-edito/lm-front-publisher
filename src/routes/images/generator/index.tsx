@@ -3,7 +3,7 @@ import {
   ImageGeneratorForm,
   ImageGeneratorInfos,
 } from '@features/image-tools/generator';
-import { Headline } from '../../../components/Headline';
+import { Headline } from '../../../common-components/Headline';
 
 const ImageGeneratorPage = () => {
   return (

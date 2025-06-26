@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { ButtonLink } from '../../../../components/buttons/ButtonLink';
+import { ButtonLink } from '../../../../common-components/buttons/ButtonLink';
 import { useWhoAmI } from '../../api/use-who-am-i';
 
 import './style.css';

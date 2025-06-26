@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Loader } from '../../../../components/Loader';
+import { Loader } from '../../../../common-components/Loader';
 import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
 import { useUserList } from '../../api/use-user-list';
 import './style.css';
@@ -7,12 +7,12 @@ import {
   Table,
   type Column,
   type Row,
-} from '../../../../components/tables/Table';
-import { Button } from '../../../../components/buttons/Button';
-import { UserBadge } from '../../../../components/user/UserBadge';
-import { UserStatus } from '../../../../components/user/UserStatus';
-import { UserVerified } from '../../../../components/user/UserVerified';
-import { UserRole } from '../../../../components/user/UserRole';
+} from '../../../../common-components/tables/Table';
+import { Button } from '../../../../common-components/buttons/Button';
+import { UserBadge } from '../../../../common-components/user/UserBadge';
+import { UserStatus } from '../../../../common-components/user/UserStatus';
+import { UserVerified } from '../../../../common-components/user/UserVerified';
+import { UserRole } from '../../../../common-components/user/UserRole';
 
 export type UserListRow = {
   _id: string;

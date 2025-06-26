@@ -1,9 +1,9 @@
-import { Loader } from '../../../../components/Loader';
-import { UserBadge } from '../../../../components/user/UserBadge';
-import { FieldSet } from '../../../../components/forms/Fieldset';
-import { UserStatus } from '../../../../components/user/UserStatus';
-import { UserVerified } from '../../../../components/user/UserVerified';
-import { UserRole } from '../../../../components/user/UserRole';
+import { Loader } from '../../../../common-components/Loader';
+import { UserBadge } from '../../../../common-components/user/UserBadge';
+import { FieldSet } from '../../../../common-components/forms/Fieldset';
+import { UserStatus } from '../../../../common-components/user/UserStatus';
+import { UserVerified } from '../../../../common-components/user/UserVerified';
+import { UserRole } from '../../../../common-components/user/UserRole';
 import {
   useWhoAmI,
   LogoutButton,

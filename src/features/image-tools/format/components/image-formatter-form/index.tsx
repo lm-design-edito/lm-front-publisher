@@ -2,14 +2,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 
-import { Form } from '../../../../../components/forms/Form';
-import { FormSubmit } from '../../../../../components/forms/FormSubmit';
-import { FormFooter } from '../../../../../components/forms/FormFooter';
-import { FormInput } from '../../../../../components/forms/FormInput';
+import { Form } from '../../../../../common-components/forms/Form';
+import { FormSubmit } from '../../../../../common-components/forms/FormSubmit';
+import { FormFooter } from '../../../../../common-components/forms/FormFooter';
+import { FormInput } from '../../../../../common-components/forms/FormInput';
 import { useImageFormatToWidth } from '../../api/use-image-format-to-width';
-import { QueriesStatus } from '../../../../../components/QueriesStatus';
+import { QueriesStatus } from '../../../../../common-components/QueriesStatus';
 import { useState } from 'react';
-import { FormInputFile } from '../../../../../components/forms/FormInputFile';
+import { FormInputFile } from '../../../../../common-components/forms/FormInputFile';
 
 const imageFormatterFormSchema = zod.object({
   width: zod.coerce.number().min(1, 'La largeur doit être supérieure à 0'),

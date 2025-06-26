@@ -2,12 +2,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import './style.css';
-import { FormInput } from '../../../../components/forms/FormInput';
-import { Form } from '../../../../components/forms/Form';
-import { FormSubmit } from '../../../../components/forms/FormSubmit';
+import { FormInput } from '../../../../common-components/forms/FormInput';
+import { Form } from '../../../../common-components/forms/Form';
+import { FormSubmit } from '../../../../common-components/forms/FormSubmit';
 import { useSignup } from '../../api/use-signup';
-import { FormFooter } from '../../../../components/forms/FormFooter';
-import { QueriesStatus } from '../../../../components/QueriesStatus';
+import { FormFooter } from '../../../../common-components/forms/FormFooter';
+import { QueriesStatus } from '../../../../common-components/QueriesStatus';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 

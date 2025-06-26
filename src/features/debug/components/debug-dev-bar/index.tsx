@@ -4,7 +4,7 @@ import { useLogout } from '../../../authentification/api/use-logout';
 import './style.css';
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
-import { Loader } from '../../../../components/Loader';
+import { Loader } from '../../../../common-components/Loader';
 
 const devMode = import.meta.env.VITE_DEV_MODE === 'true';
 
