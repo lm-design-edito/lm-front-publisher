@@ -1,7 +1,7 @@
 import { ImageGeneratorInfos } from '@features/image-tools/generator/config/infos';
 import { ImageFormatInfos } from '@features/image-tools/format/config/infos';
 
-const ImageToolsInfos = [
+export const ImageToolsInfos = [
   ImageFormatInfos,
   {
     name: 'Image Resizer',
@@ -32,5 +32,3 @@ const ImageToolsInfos = [
   },
   ImageGeneratorInfos,
 ];
-
-export { ImageToolsInfos };

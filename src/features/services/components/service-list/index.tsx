@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { AdminUserToolsInfo } from '../../../../admin-users/config/admin-users-tools-info';
-import { ImageToolsInfos } from '../../../../image-tools/config/image-tools-infos';
-import { AccountToolsInfo } from '../../../../account/config/account-tools-info';
+import { AdminUserInfos } from '@features/admin-users';
+import { ImageToolsInfos } from '@features/image-tools';
+import { AccountInfo } from '@features/account';
 
 import { useAvailableServiceList } from '../../api/use-available-service-list';
 
@@ -20,9 +20,9 @@ export type ServiceInfo = {
 
 const toolsServices: ServiceInfo[] = [...ImageToolsInfos];
 
-const adminServices: ServiceInfo[] = [...AdminUserToolsInfo];
+const adminServices: ServiceInfo[] = [...AdminUserInfos];
 
-const otherServices: ServiceInfo[] = [...AccountToolsInfo];
+const otherServices: ServiceInfo[] = [...AccountInfo];
 
 const getServicesBadges = (servicesInfos: ServiceInfo[]): string[] => {
   return [

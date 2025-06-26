@@ -4,10 +4,12 @@ import { FieldSet } from '../../../../components/forms/Fieldset';
 import { UserStatus } from '../../../../components/user/UserStatus';
 import { UserVerified } from '../../../../components/user/UserVerified';
 import { UserRole } from '../../../../components/user/UserRole';
-import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
-import { LogoutButton } from '../../../authentification/components/logout-button';
-import { LogoutEverywhereButton } from '../../../authentification/components/logout-everywhere-button';
-import { ThemeSwitch } from '@features/ui/theme-switch';
+import {
+  useWhoAmI,
+  LogoutButton,
+  LogoutEverywhereButton,
+} from '@features/authentification';
+import { ThemeSwitch } from '@features/theme';
 
 export const MyUserProfile = () => {
   const { user, isLoading } = useWhoAmI();

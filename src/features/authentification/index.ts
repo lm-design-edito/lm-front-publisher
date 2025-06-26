@@ -1,7 +1,7 @@
-export { LoginForm } from './components/login-form';
-export { AuthActions } from './components/auth-actions';
-export { LogoutEverywhereButton } from './components/logout-everywhere-button';
-export { LogoutButton } from './components/logout-button';
-export { SignupForm } from './components/signup-form';
+export * from './components/login-form';
+export * from './components/auth-actions';
+export * from './components/logout-everywhere-button';
+export * from './components/logout-button';
+export * from './components/signup-form';
 
 export * from './api';

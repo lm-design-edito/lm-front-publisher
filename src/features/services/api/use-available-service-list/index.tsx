@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../../../../../api';
+import { api } from '../../../../api';
 import { useMemo } from 'react';
 
 export const useAvailableServiceList = (toolBadges: string[]) => {
