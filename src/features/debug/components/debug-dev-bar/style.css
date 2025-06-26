@@ -1,0 +1,66 @@
+.dev-bar {
+
+    --dev-bar-accent-color: #3b05aa;
+    --dev-bar-border-color: #6646ff;
+    --dev-bar-bg-color: #d1d2ff;
+    --dev-bar-text-color: #000;
+    --dev-bar-link-color: #6646ff;
+
+    position: relative;
+    border-bottom: 1px solid var(--dev-bar-border-color);
+    padding: 8px;
+    background-color: var(--dev-bar-bg-color);
+
+    color: var(--dev-bar-text-color);
+    font-size: 0.8rem;
+}
+
+:root[data-color-mode=dark] .dev-bar {
+    --dev-bar-accent-color: #3b05aa;
+    --dev-bar-border-color: #3b05aa;
+    --dev-bar-bg-color: #180240;
+    --dev-bar-text-color: #ffffff;
+    --dev-bar-link-color: #d1d2ff;
+}
+
+.dev-bar__title {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    margin: 0;
+    padding: 0 24px;
+    background: var(--dev-bar-accent-color);
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    color: white;
+}
+
+.dev-bar__content {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dev-bar__actions {
+    display: flex;
+    gap: 8px;
+}
+
+
+.dev-bar__actions button,
+.dev-bar__actions a {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    color: var(--dev-bar-link-color);
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+
+.dev-bar__actions button:hover,
+.dev-bar__actions a:hover {
+    color: var(--lm-publisher-accent-color);
+}
