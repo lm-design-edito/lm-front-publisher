@@ -7,7 +7,7 @@ import { FormSubmit } from '../../../../../common-components/forms/form-submit';
 import { FormFooter } from '../../../../../common-components/forms/form-footer';
 import { FormInput } from '../../../../../common-components/forms/form-input';
 import { useImageFormatToWidth } from '../../api/use-image-format-to-width';
-import { QueriesStatus } from '../../../../../common-components/QueriesStatus';
+import { QueriesStatus } from '../../../../../common-components/queries-status';
 import { useState } from 'react';
 import { FormInputFile } from '../../../../../common-components/forms/form-input-file';
 

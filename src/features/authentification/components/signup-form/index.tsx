@@ -7,7 +7,7 @@ import { Form } from '../../../../common-components/forms/form';
 import { FormSubmit } from '../../../../common-components/forms/form-submit';
 import { useSignup } from '../../api/use-signup';
 import { FormFooter } from '../../../../common-components/forms/form-footer';
-import { QueriesStatus } from '../../../../common-components/QueriesStatus';
+import { QueriesStatus } from '../../../../common-components/queries-status';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 

@@ -11,7 +11,7 @@ import { useImageGenerate } from '../../api/use-image-generate';
 import { FormInputRadioGroup } from '../../../../../common-components/forms/form-input-radio-group';
 import { FormSubmit } from '../../../../../common-components/forms/form-submit';
 import { FormFooter } from '../../../../../common-components/forms/form-footer';
-import { QueriesStatus } from '../../../../../common-components/QueriesStatus';
+import { QueriesStatus } from '../../../../../common-components/queries-status';
 import { useState } from 'react';
 
 const templateNames = ImageGeneratorTemplates.map(
