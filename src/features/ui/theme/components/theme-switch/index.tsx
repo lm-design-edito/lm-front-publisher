@@ -1,4 +1,4 @@
-import { Button } from '../../../../components/buttons/Button';
+import { Button } from '../../../../../components/buttons/Button';
 import { useTheme } from '../../hooks/use-theme';
 
 import './style.css';

@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import './style.css';
-import { ThemeSwitch } from '../../features/ui/components/ThemeSwitch';
+import { ThemeSwitch } from '@features/ui/theme';
 import { AuthActions } from '../../features/authentification/components/AuthActions';
 import { HeaderLocation } from './HeaderLocation';
 

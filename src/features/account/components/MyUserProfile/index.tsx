@@ -7,7 +7,7 @@ import { UserRole } from '../../../../components/user/UserRole';
 import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
 import { LogoutButton } from '../../../authentification/components/LogoutButton';
 import { LogoutEverywhereButton } from '../../../authentification/components/LogoutEverywhereButton';
-import { ThemeSwitch } from '../../../ui';
+import { ThemeSwitch } from '@features/ui/theme';
 
 export const MyUserProfile = () => {
   const { user, isLoading } = useWhoAmI();
