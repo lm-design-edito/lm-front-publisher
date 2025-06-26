@@ -1,6 +1,6 @@
 import { Loader } from '../../../../common-components/Loader';
 import { UserBadge } from '../../../../common-components/user/UserBadge';
-import { FieldSet } from '../../../../common-components/forms-/fieldset';
+import { FieldSet } from '../../../../common-components/forms/fieldset';
 import { UserStatus } from '../../../../common-components/user/UserStatus';
 import { UserVerified } from '../../../../common-components/user/UserVerified';
 import { UserRole } from '../../../../common-components/user/UserRole';
