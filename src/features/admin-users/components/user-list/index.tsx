@@ -7,7 +7,7 @@ import {
   Table,
   type Column,
   type Row,
-} from '../../../../common-components/tables/Table';
+} from '../../../../common-components/tables/table';
 import { Button } from '../../../../common-components/buttons/button';
 import { UserBadge } from '../../../../common-components/user/UserBadge';
 import { UserStatus } from '../../../../common-components/user/UserStatus';
