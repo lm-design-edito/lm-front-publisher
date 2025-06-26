@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { Headline } from '../../../common-components/Headline';
+import { Headline } from '../../../common-components/headline-';
 import {
   ImageFormatterForm,
   ImageFormatInfos,
