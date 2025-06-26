@@ -1,6 +1,6 @@
-import { TableCell } from '../TableCell';
-import { TableHeaderColumn } from '../TableHeaderColumn';
-import { TableRow } from '../TableRow';
+import { TableCell } from '../table-cell';
+import { TableHeaderColumn } from '../table-header-column';
+import { TableRow } from '../table-row';
 
 export type Column<T> = {
   id: keyof T; // Unique identifier for the column
