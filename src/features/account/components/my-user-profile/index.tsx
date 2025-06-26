@@ -1,4 +1,4 @@
-import { Loader } from '../../../../common-components/loader-';
+import { Loader } from '../../../../common-components/loader';
 import { UserBadge } from '../../../../common-components/user/UserBadge';
 import { FieldSet } from '../../../../common-components/forms/fieldset';
 import { UserStatus } from '../../../../common-components/user/UserStatus';

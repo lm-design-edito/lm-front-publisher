@@ -1,6 +1,6 @@
 import { Link, type LinkProps } from '@tanstack/react-router';
 import './style.css';
-import { Loader } from '../../loader-';
+import { Loader } from '../../loader';
 
 export type ButtonLinkProps = {
   children?: React.ReactNode;

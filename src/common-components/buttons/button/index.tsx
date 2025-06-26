@@ -1,4 +1,4 @@
-import { Loader } from '../../loader-';
+import { Loader } from '../../loader';
 import './style.css';
 
 export type ButtonProps = {
