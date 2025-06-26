@@ -1,6 +1,6 @@
 import {  createRootRouteWithContext, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ThemeProvider } from '../features/ui/hooks/useTheme/ThemeProvider'
+import { ThemeProvider } from '../features/ui/hooks/use-theme/ThemeProvider'
 import { Header }from '../components/Header'
 import { DevBar }from '../features/dev/components/DevBar'
 
