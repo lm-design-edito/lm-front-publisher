@@ -8,4 +8,9 @@ export default defineConfig({
     TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
     react(),
   ],
+  resolve: {
+    alias: {
+      '@features': '/src/features',
+    },
+  },
 });
