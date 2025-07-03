@@ -10,7 +10,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@api': '/src/api',
       '@features': '/src/features',
+      '@common-components': '/src/common-components',
     },
   },
 });

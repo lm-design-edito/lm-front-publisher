@@ -1,0 +1,19 @@
+.form-input-checkbox-group__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-input-checkbox-group .form-input-checkbox-group__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lm-publisher-spacer-05);
+}
+
+.form-input-checkbox-group .form-label {
+  color: var(--lmui-c-form-placeholder);
+}
+
+.form-input-checkbox-group_error {
+  border: 1px solid var(--lm-publisher-form-error-color);
+}

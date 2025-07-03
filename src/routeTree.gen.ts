@@ -17,6 +17,7 @@ import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as CheckEmailIndexImport } from './routes/check-email/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AccountIndexImport } from './routes/account/index'
+import { Route as ImagesTinyLmgIndexImport } from './routes/images/tiny-lmg/index'
 import { Route as ImagesGeneratorIndexImport } from './routes/images/generator/index'
 import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
@@ -56,6 +57,12 @@ const AdminIndexRoute = AdminIndexImport.update({
 const AccountIndexRoute = AccountIndexImport.update({
   id: '/account/',
   path: '/account/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ImagesTinyLmgIndexRoute = ImagesTinyLmgIndexImport.update({
+  id: '/images/tiny-lmg/',
+  path: '/images/tiny-lmg/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -144,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImagesGeneratorIndexImport
       parentRoute: typeof rootRoute
     }
+    '/images/tiny-lmg/': {
+      id: '/images/tiny-lmg/'
+      path: '/images/tiny-lmg'
+      fullPath: '/images/tiny-lmg'
+      preLoaderRoute: typeof ImagesTinyLmgIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -159,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
   '/images/generator': typeof ImagesGeneratorIndexRoute
+  '/images/tiny-lmg': typeof ImagesTinyLmgIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -171,6 +186,7 @@ export interface FileRoutesByTo {
   '/admin/users': typeof AdminUsersIndexRoute
   '/images/formatter': typeof ImagesFormatterIndexRoute
   '/images/generator': typeof ImagesGeneratorIndexRoute
+  '/images/tiny-lmg': typeof ImagesTinyLmgIndexRoute
 }
 
 export interface FileRoutesById {
@@ -184,6 +200,7 @@ export interface FileRoutesById {
   '/admin/users/': typeof AdminUsersIndexRoute
   '/images/formatter/': typeof ImagesFormatterIndexRoute
   '/images/generator/': typeof ImagesGeneratorIndexRoute
+  '/images/tiny-lmg/': typeof ImagesTinyLmgIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -198,6 +215,7 @@ export interface FileRouteTypes {
     | '/admin/users'
     | '/images/formatter'
     | '/images/generator'
+    | '/images/tiny-lmg'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -209,6 +227,7 @@ export interface FileRouteTypes {
     | '/admin/users'
     | '/images/formatter'
     | '/images/generator'
+    | '/images/tiny-lmg'
   id:
     | '__root__'
     | '/'
@@ -220,6 +239,7 @@ export interface FileRouteTypes {
     | '/admin/users/'
     | '/images/formatter/'
     | '/images/generator/'
+    | '/images/tiny-lmg/'
   fileRoutesById: FileRoutesById
 }
 
@@ -233,6 +253,7 @@ export interface RootRouteChildren {
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
   ImagesFormatterIndexRoute: typeof ImagesFormatterIndexRoute
   ImagesGeneratorIndexRoute: typeof ImagesGeneratorIndexRoute
+  ImagesTinyLmgIndexRoute: typeof ImagesTinyLmgIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -245,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminUsersIndexRoute: AdminUsersIndexRoute,
   ImagesFormatterIndexRoute: ImagesFormatterIndexRoute,
   ImagesGeneratorIndexRoute: ImagesGeneratorIndexRoute,
+  ImagesTinyLmgIndexRoute: ImagesTinyLmgIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -265,7 +287,8 @@ export const routeTree = rootRoute
         "/signup/",
         "/admin/users/",
         "/images/formatter/",
-        "/images/generator/"
+        "/images/generator/",
+        "/images/tiny-lmg/"
       ]
     },
     "/": {
@@ -294,6 +317,9 @@ export const routeTree = rootRoute
     },
     "/images/generator/": {
       "filePath": "images/generator/index.tsx"
+    },
+    "/images/tiny-lmg/": {
+      "filePath": "images/tiny-lmg/index.tsx"
     }
   }
 }

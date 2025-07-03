@@ -26,7 +26,7 @@ const FormInputRadio = ({
         className={`lmui-radio__fake ${labelProps?.className || ''}`}
         {...labelProps}
       >
-        {label || 'Label optionnel'}
+        {label}
       </FormLabel>
       <FormFieldError error={error} />
     </div>

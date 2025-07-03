@@ -1,29 +1,30 @@
 .service {
-    padding: var(--lm-publisher-spacer-3);
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-end;
-    border-radius: 8px;
-    background: var(--lm-publisher-service-bg);
+  padding: var(--lm-publisher-spacer-3);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 8px;
+  background: var(--lm-publisher-service-bg);
 
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .service_disabled {
-    opacity: 0.5;
-    pointer-events: none;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .service__title {
-    transition: color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .service:hover .service__title {
-    color: var(--lm-publisher-link-color);
+  color: var(--lm-publisher-link-color);
 }
 
 .service__description {
-    color: var(--lm-publisher-text-color);
+  color: var(--lm-publisher-text-color);
+  font-size: 0.9rem;
 }

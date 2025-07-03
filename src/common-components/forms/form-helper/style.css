@@ -1,0 +1,100 @@
+.form-helper {
+  --size: 24px;
+  --position-left: auto;
+  --position-right: auto;
+  --position-top: auto;
+  --position-bottom: auto;
+  --position-translate-x: 0;
+  --position-translate-y: 0;
+
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.form-helper__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid var(--lm-publisher-border-color);
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.form-helper__text {
+  position: absolute;
+  left: var(--position-left);
+  right: var(--position-right);
+  top: var(--position-top);
+  bottom: var(--position-bottom);
+  transform: translate(
+    var(--position-translate-x),
+    var(--position-translate-y)
+  );
+
+  opacity: 0;
+  display: flex;
+  width: 300px;
+  max-width: 40vw;
+  border-radius: 8px;
+  padding: 16px 24px;
+  background-color: var(--lm-publisher-dialog-bg-color);
+  color: var(--lm-publisher-dialog-text-color);
+  box-shadow: var(--lm-publisher-dialog-shadow);
+  pointer-events: none;
+
+  transition: opacity 0.2s ease-in-out;
+}
+
+.form-helper:hover .form-helper__text {
+  opacity: 1;
+}
+
+.form-helper--top-left {
+  --position-right: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-bottom: 0;
+}
+
+.form-helper--top-right {
+  --position-left: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-bottom: 0;
+}
+
+.form-helper--bottom-left {
+  --position-right: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-top: 0;
+}
+
+.form-helper--bottom-right {
+  --position-left: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-top: 0;
+}
+
+.form-helper--left {
+  --position-top: 50%;
+  --position-translate-y: -50%;
+  --position-right: calc(var(--size) + var(--lm-publisher-spacer));
+}
+
+.form-helper--right {
+  --position-top: 50%;
+  --position-translate-y: -50%;
+  --position-left: calc(var(--size) + var(--lm-publisher-spacer));
+}
+
+.form-helper--top {
+  --position-bottom: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-left: 50%;
+  --position-translate-x: -50%;
+}
+
+.form-helper--bottom {
+  --position-top: calc(var(--size) + var(--lm-publisher-spacer));
+  --position-left: 50%;
+  --position-translate-x: -50%;
+}

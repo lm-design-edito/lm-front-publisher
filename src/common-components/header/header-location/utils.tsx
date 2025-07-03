@@ -1,37 +1,60 @@
+export const relativeRoutes = [
+  {
+    path: 'login',
+    name: 'Login',
+  },
+  {
+    path: 'signup',
+    name: 'Inscription',
+  },
+  {
+    path: 'account',
+    name: 'Mon compte',
+  },
+  {
+    path: 'check-email',
+    name: "Valider l'inscription",
+  },
+  {
+    path: 'admin/users',
+    name: 'Liste des utilisateurs',
+  },
+  {
+    path: 'images/formatter',
+    name: 'Image Formatter',
+  },
+  {
+    path: 'images/resize',
+    name: 'Image Resizer',
+  },
+  {
+    path: 'images/convert',
+    name: 'Image Converter',
+  },
+  {
+    path: 'images/optimize',
+    name: 'Image Optimizer',
+  },
+  {
+    path: 'images/generator',
+    name: "Générateur de média d'appels",
+  },
+  {
+    path: 'images/tiny-lmg',
+    name: 'Tiny LMG',
+  },
+];
+
 export const getLocationName = (pathname: string) => {
   if (!pathname) {
     return null;
   }
 
-  if (pathname.includes('login')) {
-    return 'Login';
-  }
-  if (pathname.includes('signup')) {
-    return 'Inscription';
-  }
-  if (pathname.includes('account')) {
-    return 'Mon compte';
-  }
-  if (pathname.includes('check-email')) {
-    return "Valider l'inscription";
-  }
-  if (pathname.includes('admin/users')) {
-    return 'Liste des utilisateurs';
-  }
-  if (pathname.includes('images/formatter')) {
-    return 'Image Formatter';
-  }
-  if (pathname.includes('images/resize')) {
-    return 'Image Resizer';
-  }
-  if (pathname.includes('images/convert')) {
-    return 'Image Converter';
-  }
-  if (pathname.includes('images/optimize')) {
-    return 'Image Optimizer';
-  }
-  if (pathname.includes('images/generator')) {
-    return "Générateur de média d'appels";
+  const foundRoute = relativeRoutes.find(route =>
+    pathname.includes(route.path),
+  );
+  if (foundRoute) {
+    return foundRoute.name;
   }
   return pathname.replace('/', '');
 };

@@ -1,6 +1,13 @@
 import { createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.ts';
 
+export type CustomRouteContext = {
+  auth: {
+    isAuthenticated: boolean;
+    isLoading: boolean;
+  };
+};
+
 // Create a new router instance
 export const router = createRouter({
   routeTree,

@@ -12,7 +12,15 @@
 
   --lm-publisher-form-error-color: var(--lmui-c-form-border-error);
 
-  --lm-publisher-service-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgba(0, 91, 133, 0.04) 94.37%);
+  --lm-publisher-dialog-bg-color: var(--lmui-c-dialog-box-bg);
+  --lm-publisher-dialog-text-color: var(--lmui-c-dialog-box-text);
+  --lm-publisher-dialog-shadow: var(--lmui-c-dialog-box-shadow);
+
+  --lm-publisher-service-bg: linear-gradient(
+    232deg,
+    rgb(0, 91, 133, 0.09) 0%,
+    rgba(0, 91, 133, 0.04) 94.37%
+  );
 
   --lm-publisher-width: 1200px;
 
@@ -28,14 +36,18 @@
   --lm-publisher-spacer-8: 64px;
 }
 
-:root[data-color-mode=dark] {
+:root[data-color-mode='dark'] {
   --lm-publisher-bg-color: var(--lmui-c-charcoal-dark);
   --lm-publisher-title-color: var(--lmui-c-snow-lighter);
   --lm-publisher-text-color: var(--lmui-c-smoke-dark);
   --lm-publisher-accent-color: var(--lmui-c-sea-light);
   --lm-publisher-border-color: var(--lmui-c-slate-lighter);
 
-  --lm-publisher-service-bg: linear-gradient(232deg, rgb(129, 199, 231, 0.09) 0%, rgba(129, 199, 231, 0.04) 94.37%);
+  --lm-publisher-service-bg: linear-gradient(
+    232deg,
+    rgb(129, 199, 231, 0.09) 0%,
+    rgba(129, 199, 231, 0.04) 94.37%
+  );
 }
 
 body {
@@ -44,7 +56,9 @@ body {
   color: var(--lm-publisher-text-color);
   padding: 0;
   margin: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .app-content {
@@ -64,10 +78,15 @@ a:hover {
   color: var(--lm-publisher-accent-color);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   color: var(--lm-publisher-title-color);
   font-weight: 500;
 }
@@ -90,6 +109,9 @@ p {
 }
 .lm-publisher-m-t-spacer {
   margin-top: var(--lm-publisher-spacer);
+}
+.lm-publisher-m-t-spacer-2 {
+  margin-top: var(--lm-publisher-spacer-2);
 }
 .lm-publisher-m-spacer-3 {
   margin: var(--lm-publisher-spacer-3) 0;
@@ -138,9 +160,9 @@ th {
 }
 
 .lm-publisher-flex-spacer {
-  gap: var(--lm-publisher-spacer)
+  gap: var(--lm-publisher-spacer);
 }
 
 .lm-publisher-flex-spacer-2 {
-  gap: var(--lm-publisher-spacer-2)
+  gap: var(--lm-publisher-spacer-2);
 }
