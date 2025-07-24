@@ -81,7 +81,7 @@ export const TinyLMGForm = () => {
 
   const [imgPreviewUrl, setImgPreviewUrl] = useState<string | null>(null);
 
-  const { mutate: imageFormat, isPending } = useImageFormat({
+  const { mutate: imageFormat } = useImageFormat({
     onSuccess: data => {
       console.log('Image formatted successfully:', data);
     },
@@ -183,6 +183,7 @@ export const TinyLMGForm = () => {
             label="Image"
             labelProps={{ htmlFor: 'imageValue' }}
             previewUrl={imgPreviewUrl}
+            droppable
             inputProps={{
               id: 'imageValue',
               type: 'file',

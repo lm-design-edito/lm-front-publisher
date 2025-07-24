@@ -6,6 +6,10 @@
   height: auto;
 }
 
+.form-input-file {
+  transition: background-color 0.3s ease;
+}
+
 .form-input-file .form-input-file__content {
   display: flex;
   flex-direction: column;
@@ -27,4 +31,8 @@
   object-fit: contain;
   border: 1px solid var(--lm-publisher-border-color);
   border-radius: 2px;
+}
+
+.form-input-file_dragging-over {
+  background-color: var(--lm-publisher-form-highlight-bg);;
 }

@@ -5,6 +5,7 @@ import { FormFieldError } from '../form-field-error';
 import { Display } from '@common-components/display';
 
 import './style.css';
+import React, { useMemo, useState } from 'react';
 
 export type FormInputFileProps = {
   className?: string;
@@ -14,6 +15,7 @@ export type FormInputFileProps = {
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   error?: FormInputProps['error'];
   inputProps: FormInputProps['inputProps'];
+  droppable?: boolean;
 };
 
 export const FormInputFile = ({
@@ -23,12 +25,54 @@ export const FormInputFile = ({
   className,
   inputProps,
   error,
+  ...props
 }: FormInputFileProps) => {
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+  const dragProps = useMemo(
+    () =>
+      props.droppable
+        ? {
+            droppable: 'true',
+            onDragEnd: (e: React.DragEvent<HTMLFieldSetElement>) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsDraggingOver(false);
+            },
+            onDragOver: (e: React.DragEvent<HTMLFieldSetElement>) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsDraggingOver(true);
+            },
+            onDragLeave: (e: React.DragEvent<HTMLFieldSetElement>) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsDraggingOver(false);
+            },
+            onDrop: (e: React.DragEvent<HTMLFieldSetElement>) => {
+              if (e.dataTransfer.files.length > 0) {
+                e.preventDefault();
+                const file = e.dataTransfer.files[0];
+                if (inputProps.onChange) {
+                  inputProps.onChange({
+                    target: { files: [file] },
+                  } as unknown as React.ChangeEvent<HTMLInputElement>);
+                }
+              }
+              setIsDraggingOver(false);
+            },
+          }
+        : {},
+    [props.droppable, inputProps],
+  );
+
   return (
     <FieldSet
-      className={`form-input-file ${className || ''} ${error ? 'form-input-file_error' : ''}`}
+      className={`form-input-file ${className || ''} ${isDraggingOver ? 'form-input-file_dragging-over' : ''} ${error ? 'form-input-file_error' : ''}`}
       contentClassName="form-input-file__content"
       legend={<FormLabel {...labelProps}>{label}</FormLabel>}
+      {...props}
+      {...dragProps}
     >
       <Display type="flex" direction="row" align="center">
         <FormInput
@@ -38,7 +82,9 @@ export const FormInputFile = ({
             multiple: false,
             ...inputProps,
           }}
-        />
+        >
+          {props.droppable ? <span>Ou drag & drop un fichier</span> : null}
+        </FormInput>
         {previewUrl && (
           <a
             href={previewUrl}
@@ -55,6 +101,6 @@ export const FormInputFile = ({
         )}
       </Display>
       <FormFieldError error={error} />
-    </FieldSet >
+    </FieldSet>
   );
 };

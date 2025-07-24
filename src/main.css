@@ -11,10 +11,12 @@
   --lm-publisher-text-success-color: var(--lmui-c-form-border-valid-dark);
 
   --lm-publisher-form-error-color: var(--lmui-c-form-border-error);
+  --lm-publisher-form-highlight-bg: #82c8e81f;
 
   --lm-publisher-dialog-bg-color: var(--lmui-c-dialog-box-bg);
   --lm-publisher-dialog-text-color: var(--lmui-c-dialog-box-text);
   --lm-publisher-dialog-shadow: var(--lmui-c-dialog-box-shadow);
+  
 
   --lm-publisher-service-bg: linear-gradient(
     232deg,

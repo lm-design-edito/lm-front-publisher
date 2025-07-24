@@ -10,6 +10,7 @@ export type FormInputProps = {
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   inputProps: React.InputHTMLAttributes<HTMLInputElement>;
+  children?: React.ReactNode;
 };
 
 export const FormInput = ({
@@ -19,6 +20,7 @@ export const FormInput = ({
   isValid,
   labelProps = {},
   inputProps,
+  children,
 }: FormInputProps) => {
   return (
     <div
@@ -31,6 +33,7 @@ export const FormInput = ({
         />
         <FormLabel {...labelProps}>{label}</FormLabel>
       </div>
+      {children}
       <FormFieldError error={error} />
     </div>
   );

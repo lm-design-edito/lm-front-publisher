@@ -36,12 +36,12 @@ export const UserList = () => {
       .map(user =>
         user
           ? {
-            ...user,
-            badges:
-              user && 'badges' in user && user.badges
-                ? user.badges.sort((a, b) => (a > b ? 1 : -1))
-                : [],
-          }
+              ...user,
+              badges:
+                user && 'badges' in user && user.badges
+                  ? user.badges.sort((a, b) => (a > b ? 1 : -1))
+                  : [],
+            }
           : null,
       )
       .filter(user => user !== null);
