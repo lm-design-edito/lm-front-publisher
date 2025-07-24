@@ -12,6 +12,7 @@ const API_ROUTES = {
   ADMIN_USERS_UPDATE: 'admin/users/update',
   ADMIN_USERS_LIST: 'admin/users/list',
 
+  IMAGES_FORMAT: 'images/format',
   IMAGES_FORMAT_TO_WIDTH: 'images/format/to-width',
   IMAGES_GENERATE: 'images/generate',
 };

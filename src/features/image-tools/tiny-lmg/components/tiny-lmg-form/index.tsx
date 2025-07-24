@@ -15,6 +15,8 @@ import { FieldSet } from '@common-components/forms/fieldset';
 import { Display } from '@common-components/display';
 import { FormSelect } from '@common-components/forms/form-select';
 
+import { useImageFormat } from '../../api';
+
 import './style.css';
 
 const TinyLMGFormatsValues = TinyLMGFormats.map(format => format.value) as [
@@ -77,13 +79,35 @@ export const TinyLMGForm = () => {
     resolver: zodResolver(tinyLMGFormSchema),
   });
 
-  const onSubmit = (data: TinyLMGFormSchemaValues) => {
-    // Handle form submission logic here
+  const [imgPreviewUrl, setImgPreviewUrl] = useState<string | null>(null);
+
+  const { mutate: imageFormat, isPending } = useImageFormat({
+    onSuccess: data => {
+      console.log('Image formatted successfully:', data);
+    },
+    onError: error => {
+      console.error('Error formatting image:', error);
+    },
+  });
+
+  const onSubmit = async (data: TinyLMGFormSchemaValues) => {
     console.log('Form submitted with data:', data);
+    for await (const format of data.formats) {
+      const res = imageFormat({
+        width: data.width,
+        height: data.height,
+        format: format,
+        fit: data.fit,
+        quality: data.quality ?? 100,
+        compressionLevel: data.compressionLevel ?? 90,
+        file: data.image,
+      });
+      console.log({ res });
+    }
+    // Handle form submission logic here
   };
 
   const fit = watch('fit');
-  console.log('Current fit value:', fit);
   const [inputImageDimensions, setInputImageDimensions] = useState({
     width: 0,
     height: 0,
@@ -136,8 +160,10 @@ export const TinyLMGForm = () => {
       const dimensions = await getFormImageDimensions(files);
       setInputImageDimensions(dimensions);
       applyDimensionsFormValues(dimensions.width, dimensions.height);
+      setImgPreviewUrl(URL.createObjectURL(file));
       return;
     }
+    setImgPreviewUrl(null);
   };
 
   const onClickKeepImageDimensions = async () => {
@@ -156,6 +182,7 @@ export const TinyLMGForm = () => {
           <FormInputFile
             label="Image"
             labelProps={{ htmlFor: 'imageValue' }}
+            previewUrl={imgPreviewUrl}
             inputProps={{
               id: 'imageValue',
               type: 'file',
