@@ -4,6 +4,11 @@
   padding: 0;
   margin: 0;
   height: auto;
+  box-shadow: none;
+}
+
+.form-input-file__input {
+  display: none;
 }
 
 .form-input-file {

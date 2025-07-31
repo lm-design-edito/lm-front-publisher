@@ -6,12 +6,17 @@ import { Display } from '@common-components/display';
 
 import './style.css';
 import React, { useMemo, useState } from 'react';
+import { FakeButton } from '@common-components/buttons/button';
 
 export type FormInputFileProps = {
   className?: string;
   isValid?: boolean;
   label?: string;
-  previewUrl?: string | null;
+  selectLabel?: string;
+  preview?: {
+    url?: string | null;
+    name?: string;
+  };
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   error?: FormInputProps['error'];
   inputProps: FormInputProps['inputProps'];
@@ -21,10 +26,11 @@ export type FormInputFileProps = {
 export const FormInputFile = ({
   label,
   labelProps,
-  previewUrl,
+  selectLabel,
   className,
   inputProps,
   error,
+  preview,
   ...props
 }: FormInputFileProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -55,7 +61,8 @@ export const FormInputFile = ({
                 const file = e.dataTransfer.files[0];
                 if (inputProps.onChange) {
                   inputProps.onChange({
-                    target: { files: [file] },
+                    ...e,
+                    target: { ...e.target, files: [file], value: file.name },
                   } as unknown as React.ChangeEvent<HTMLInputElement>);
                 }
               }
@@ -75,29 +82,36 @@ export const FormInputFile = ({
       {...dragProps}
     >
       <Display type="flex" direction="row" align="center">
-        <FormInput
-          inputProps={{
-            type: 'file',
-            accept: 'image/*',
-            multiple: false,
-            ...inputProps,
-          }}
-        >
-          {props.droppable ? <span>Ou drag & drop un fichier</span> : null}
-        </FormInput>
-        {previewUrl && (
+        <label htmlFor="imageValue">
+          <FakeButton variant="secondary" size="s">
+            {selectLabel || 'Sélectionner une image'}
+          </FakeButton>
+          <FormInput
+            className="form-input-file__input"
+            inputProps={{
+              ...inputProps,
+              id: 'imageValue',
+              type: 'file',
+              accept: 'image/*',
+            }}
+          />
+        </label>
+        {preview && preview.url && (
           <a
-            href={previewUrl}
+            href={preview.url}
             target="_blank"
             rel="noopener noreferrer"
             className="form-input-file__preview-link"
           >
             <img
-              src={previewUrl}
+              src={preview.url}
               alt="Preview"
               className="form-input-file__preview"
             />
           </a>
+        )}
+        {preview && preview.name && (
+          <span className="form-input-file__file-name">{preview.name}</span>
         )}
       </Display>
       <FormFieldError error={error} />

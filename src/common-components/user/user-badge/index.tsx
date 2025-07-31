@@ -1,3 +1,4 @@
+import { Badge } from '@common-components/badge';
 import { useMemo } from 'react';
 
 export type UserBadgeProps = {
@@ -16,11 +17,5 @@ export const UserBadge = ({ badge }: UserBadgeProps) => {
     }
   }, [badge]);
 
-  return (
-    <span
-      className={`lmui-badge lmui-badge_secondary lmui-badge_s lmui-badge_${color}`}
-    >
-      {badge}
-    </span>
-  );
+  return <Badge color={color}>{badge}</Badge>;
 };

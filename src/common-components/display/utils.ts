@@ -20,6 +20,7 @@ export const createDisplayClassNames = (props: DisplayProps) => {
         props.align ? `display-flex--align-${props.align || 'start'}` : '',
         props.flex ? `display-flex--flex-${props.flex || 1}` : '',
         props.gap ? `display-flex--gap-${props.gap || 0}` : '',
+        props.wrap ? 'display-flex--wrap' : '',
       ].join(' ');
     default:
       return '';

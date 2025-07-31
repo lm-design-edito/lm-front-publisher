@@ -1,4 +1,4 @@
-import type { APIREsponseErrorType } from '../query';
+import type { APIREsponseErrorType } from '../query/responses';
 
 export type FormattedAPIErrorType = {
   code: number;

@@ -15,9 +15,9 @@ import { FieldSet } from '@common-components/forms/fieldset';
 import { Display } from '@common-components/display';
 import { FormSelect } from '@common-components/forms/form-select';
 
-import { useImageFormat } from '../../api';
-
 import './style.css';
+import { useImageMultiFormat } from '../../api/use-image-multi-format';
+import { QueriesStatus } from '@common-components/queries-status';
 
 const TinyLMGFormatsValues = TinyLMGFormats.map(format => format.value) as [
   string,
@@ -31,9 +31,7 @@ const tinyLMGFormSchema = zod.object({
   image: zod.instanceof(File, {
     message: 'Veuillez sélectionner une image (une seule à la fois).',
   }),
-  imageValue: zod.string().min(1, {
-    message: 'Veuillez sélectionner une image.',
-  }),
+  imageValue: zod.string().optional(),
   formats: zod.array(
     zod.enum(TinyLMGFormatsValues, {
       message: 'Veuillez sélectionner au moins un format.',
@@ -66,7 +64,21 @@ const tinyLMGFormSchema = zod.object({
 });
 type TinyLMGFormSchemaValues = zod.infer<typeof tinyLMGFormSchema>;
 
-export const TinyLMGForm = () => {
+interface TinyLMGFormProps {
+  onDownloadReady: (
+    downloads: {
+      name: string;
+      url: string;
+      sourceName: string;
+      mimeType: string;
+      date: Date;
+      quality: number;
+      dimensions: { width: number; height: number };
+    }[],
+  ) => void;
+}
+
+export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
   const {
     control,
     register,
@@ -79,31 +91,55 @@ export const TinyLMGForm = () => {
     resolver: zodResolver(tinyLMGFormSchema),
   });
 
-  const [imgPreviewUrl, setImgPreviewUrl] = useState<string | null>(null);
+  const [imgPreview, setImgPreview] = useState<{
+    name: string | null;
+    url: string | null;
+  }>({
+    name: null,
+    url: null,
+  });
 
-  const { mutate: imageFormat } = useImageFormat({
+  const [APIStatus, setAPIStatus] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
+
+  const { mutate: imageMultiFormat } = useImageMultiFormat({
     onSuccess: data => {
-      console.log('Image formatted successfully:', data);
+      setAPIStatus({
+        success: true,
+        message: 'Image(s) formatée(s) avec succès.',
+      });
+      onDownloadReady(
+        data.list.map(item => ({
+          name: item.name,
+          url: item.url,
+          mimeType: item.mimeType,
+          sourceName: item.source.name,
+          dimensions: item.dimensions,
+          quality: item.quality,
+          date: item.date,
+        })),
+      );
     },
     onError: error => {
-      console.error('Error formatting image:', error);
+      setAPIStatus({
+        success: false,
+        message: error.message || '',
+      });
     },
   });
 
   const onSubmit = async (data: TinyLMGFormSchemaValues) => {
-    console.log('Form submitted with data:', data);
-    for await (const format of data.formats) {
-      const res = imageFormat({
-        width: data.width,
-        height: data.height,
-        format: format,
-        fit: data.fit,
-        quality: data.quality ?? 100,
-        compressionLevel: data.compressionLevel ?? 90,
-        file: data.image,
-      });
-      console.log({ res });
-    }
+    imageMultiFormat({
+      width: data.width,
+      height: data.height,
+      formats: data.formats,
+      fit: data.fit,
+      quality: data.quality ?? 100,
+      compressionLevel: data.compressionLevel ?? 90,
+      file: data.image,
+    });
     // Handle form submission logic here
   };
 
@@ -160,10 +196,14 @@ export const TinyLMGForm = () => {
       const dimensions = await getFormImageDimensions(files);
       setInputImageDimensions(dimensions);
       applyDimensionsFormValues(dimensions.width, dimensions.height);
-      setImgPreviewUrl(URL.createObjectURL(file));
+      setImgPreview({
+        url: URL.createObjectURL(file),
+        name: file.name,
+      });
       return;
     }
-    setImgPreviewUrl(null);
+    setImgPreview({ url: null, name: null });
+    setAPIStatus(null);
   };
 
   const onClickKeepImageDimensions = async () => {
@@ -182,7 +222,10 @@ export const TinyLMGForm = () => {
           <FormInputFile
             label="Image"
             labelProps={{ htmlFor: 'imageValue' }}
-            previewUrl={imgPreviewUrl}
+            preview={{
+              url: imgPreview.url,
+              name: imgPreview.name || 'Aucune image sélectionnée',
+            }}
             droppable
             inputProps={{
               id: 'imageValue',
@@ -193,7 +236,7 @@ export const TinyLMGForm = () => {
               },
               accept: '.png,.jpg,.jpeg',
             }}
-            error={errors['imageValue']}
+            error={errors['image']}
           />
         )}
       />
@@ -233,7 +276,7 @@ export const TinyLMGForm = () => {
             size="s"
             onClick={onClickKeepImageDimensions}
           >
-            Garder les dimensions de l'image d'origine
+            Garder les dimensions d'origine
           </Button>
         </Display>
         <FormSelect
@@ -305,6 +348,11 @@ export const TinyLMGForm = () => {
       />
       <FormFooter>
         <FormSubmit>Compresser</FormSubmit>
+        {APIStatus && (
+          <QueriesStatus status={APIStatus.success ? 'success' : 'error'}>
+            {APIStatus.message}
+          </QueriesStatus>
+        )}
       </FormFooter>
     </Form>
   );

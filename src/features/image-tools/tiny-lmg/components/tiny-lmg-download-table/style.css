@@ -1,0 +1,12 @@
+.tiny-lmg-download-table__preview {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  object-position: center
+}
+
+.tiny-lmg-download-table__preview-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,14 +1,23 @@
 import { Loader } from '../../loader';
 import './style.css';
 
-export type ButtonProps = {
+export type DefaultProps = {
   children?: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'tertiary';
   color?: 'danger' | 'success' | 'warning' | 'info' | 'default';
   size?: 's' | 'm' | 'l';
   className?: string;
   isLoading?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+};
+
+export type ButtonProps = DefaultProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const getVariantClass = (variant?: string) =>
+  variant ? `lmui-button_${variant}` : 'lmui-button_primary';
+const getSizeClass = (size?: string) =>
+  size ? `lmui-button_${size}` : 'lmui-button_m';
+const getColorClass = (color?: string) => (color ? `lmui-button_${color}` : '');
 
 export const Button = ({
   size,
@@ -19,11 +28,9 @@ export const Button = ({
   isLoading,
   ...props
 }: ButtonProps) => {
-  const variantClass = variant
-    ? `lmui-button_${variant}`
-    : 'lmui-button_primary';
-  const sizeClass = size ? `lmui-button_${size}` : 'lmui-button_m';
-  const colorClass = color ? `lmui-button_${color}` : '';
+  const variantClass = getVariantClass(variant);
+  const sizeClass = getSizeClass(size);
+  const colorClass = getColorClass(color);
 
   return (
     <button
@@ -33,5 +40,25 @@ export const Button = ({
       {children}
       {isLoading && <Loader />}
     </button>
+  );
+};
+
+export const FakeButton = ({
+  variant,
+  size,
+  color,
+  className = '',
+  children,
+}: DefaultProps) => {
+  const variantClass = getVariantClass(variant);
+  const sizeClass = getSizeClass(size);
+  const colorClass = getColorClass(color);
+
+  return (
+    <span
+      className={`lmui-button lmui-button-span ${variantClass} ${sizeClass} ${colorClass} ${className}`}
+    >
+      {children}
+    </span>
   );
 };

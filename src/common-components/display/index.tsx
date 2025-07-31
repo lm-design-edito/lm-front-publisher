@@ -14,6 +14,7 @@ export type DisplayFlexProps = {
   direction?: 'row' | 'column';
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
   align?: 'start' | 'end' | 'center' | 'stretch';
+  wrap?: boolean;
 };
 
 export type DisplayProps = {
