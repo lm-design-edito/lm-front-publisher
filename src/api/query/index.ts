@@ -30,7 +30,8 @@ export type APIREsponseSuccessType = {
 };
 
 export type QueryOptions = {
-  ignoreToken?: boolean;
+  _ignoreToken?: boolean;
+  _removeContentType?: boolean;
 } & RequestInit;
 
 const responseMiddleware = (response: Response) => {
@@ -125,17 +126,18 @@ export const authQuery = async (request: string, options?: QueryOptions) => {
 
 /* C'est assez explicite je pense comme nom de fonction héhé */
 export const getAuthedOptions = async (options?: QueryOptions) => {
-  const { ignoreToken, ...fetchOptions } = options || {};
+  const { _ignoreToken, _removeContentType, ...fetchOptions } = options || {};
   const csrfToken = await getCsrfToken();
   const token = getToken();
+
 
   return (options = {
     ...(fetchOptions ? fetchOptions : {}),
     headers: {
+      ...(_removeContentType ? {} : { 'Content-Type': 'application/json' }),
       ...(fetchOptions && fetchOptions.headers ? fetchOptions.headers : {}),
-      'Content-Type': 'application/json',
       'X-CSRF-Token': csrfToken || '',
-      ...(token && !ignoreToken ? { Authorization: `Bearer ${token}` } : {}),
+      ...(token && !_ignoreToken ? { Authorization: `Bearer ${token}` } : {}),
     },
     credentials: 'include',
   });
@@ -143,7 +145,6 @@ export const getAuthedOptions = async (options?: QueryOptions) => {
 
 /* @todo */
 export const authQueryOnError = async (errorCode: string) => {
-  console.log('AuthQueryOnError:switch', { errorCode });
   const authedOptions = await getAuthedOptions();
   switch (errorCode) {
     case HANDLED_AUTH_ERRORS.CSRF_TOKEN:

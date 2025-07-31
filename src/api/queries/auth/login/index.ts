@@ -23,5 +23,5 @@ export const login = async (
   api.query(API_ROUTES.AUTH_POST_LOGIN, {
     method: 'POST',
     body: JSON.stringify(params),
-    ignoreToken: true,
+    _ignoreToken: true,
   });

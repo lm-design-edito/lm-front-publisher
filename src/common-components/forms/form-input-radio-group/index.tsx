@@ -22,13 +22,6 @@ export const FormInputRadioGroup = ({
   inputGroupProps,
   error,
 }: FormInputRadioGroupProps) => {
-  console.log('FormInputRadioGroup', {
-    label,
-    labelClassName,
-    className,
-    inputGroupProps,
-    error,
-  });
   return (
     <FieldSet
       className={`form-input-radio-group ${className || ''} ${error ? 'form-input-radio-group_error' : ''}`}
