@@ -14,6 +14,15 @@ type ImagesFormat = {
   file: File;
 };
 
+const supportedProperties = [
+  'width',
+  'height',
+  'format',
+  'fit',
+  'quality',
+  'compressionLevel',
+  'file',
+];
 export const imagesFormat = async (params: ImagesFormat) => {
   const formData = new FormData();
   const jsonData: Record<string, unknown> = {};
@@ -21,13 +30,15 @@ export const imagesFormat = async (params: ImagesFormat) => {
   for (const key in params) {
     const _key = key as keyof typeof params;
     if (Object.prototype.hasOwnProperty.call(params, _key)) {
-      const value = params[_key];
+      if (supportedProperties.includes(_key)) {
+        const value = params[_key];
 
-      if (typeof value === 'object' && value instanceof File) {
-        formData.append('image', params.file);
-      } else {
-        jsonData[_key] = value;
-        formData.append(_key, value.toString());
+        if (typeof value === 'object' && value instanceof File) {
+          formData.append('image', params.file);
+        } else {
+          jsonData[_key] = value;
+          formData.append(_key, value.toString());
+        }
       }
     }
   }

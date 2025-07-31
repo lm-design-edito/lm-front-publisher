@@ -108,7 +108,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
     onSuccess: data => {
       setAPIStatus({
         success: true,
-        message: 'Image(s) formatée(s) avec succès.',
+        message: 'Image(s) générée(s) avec succès.',
       });
       onDownloadReady(
         data.list.map(item => ({
