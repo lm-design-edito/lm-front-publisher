@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as zod from 'zod';
 import { useImageTransform } from '../../api/use-image-transform';
+import { TransformerFormOperationSelector } from './transformer-form-operation-selector';
+// import { TransformerFormOperationField } from './transformer-form-operation-field';
 
 const transformerFormSchema = zod.object({
   image: zod.instanceof(File, {
@@ -20,11 +22,29 @@ const transformerFormSchema = zod.object({
     sigma: zod.coerce.number().min(0).max(100).optional(),
     // Add any other properties you need for the blur effect
   }),
+  // operations: zod
+  //   .array(
+  //     zod.object({
+  //       name: zod.string().min(2).max(100),
+  //       sigma: zod.coerce.number().min(0).max(100).optional(),
+  //     }),
+  //   )
+  //   .optional(), /* WIP */
 });
 
 type TransformerFormSchemaValues = zod.infer<typeof transformerFormSchema>;
 
-export const TransformerForm = () => {
+interface TransformerFormProps {
+  onDownloadReady: (download: {
+    name: string;
+    url: string;
+    sourceName: string;
+    mimeType: string;
+    date: Date;
+  }) => void;
+}
+
+export const TransformerForm = ({ onDownloadReady }: TransformerFormProps) => {
   const {
     control,
     register,
@@ -37,11 +57,18 @@ export const TransformerForm = () => {
   // Form implementation goes here
 
   const { mutate: imageTransform } = useImageTransform({
-    onSuccess: (data) => {
+    onSuccess: data => {
       Logger.success('image-tools.transformer.useImageTransformer', { data });
+      onDownloadReady({
+        sourceName: data.source.name,
+        url: data.url,
+        mimeType: data.mimeType,
+        date: data.date,
+        name: data.name,
+      });
       // Handle success
     },
-    onError: (error) => {
+    onError: error => {
       // Handle error
       Logger.error('image-tools.transformer.useImageTransformer', { error });
     },
@@ -125,6 +152,32 @@ export const TransformerForm = () => {
         }}
         error={errors['blur']?.sigma}
       />
+      {/* {['blur', 'sharpen', 'brightness'].map((name, index) => (
+        <Controller
+          key={name}
+          name={`operations.${index}.sigma`}
+          control={control}
+          render={({ field }) => (
+            <TransformerFormOperationField
+              fieldProps={field}
+              name={name}
+              error={errors.operations?.[index]?.sigma}
+            />
+          )}
+        />
+      ))} */}
+      <TransformerFormOperationSelector
+        options={[
+          { value: 'blur', label: 'Flou' },
+          { value: 'sharpen', label: 'Affiner' },
+          { value: 'brightness', label: 'Luminosité' },
+        ]}
+        onSelect={operation => {
+          /* TODO */
+          // setValue('operations', [...getValues('operations'), operation]);
+        }}
+      />
+
       <FormFooter>
         <FormSubmit>Transformer</FormSubmit>
       </FormFooter>

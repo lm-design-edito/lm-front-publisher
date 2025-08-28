@@ -1,0 +1,22 @@
+.lmui-divider {
+  border: none;
+  border-top: 1px solid var(--lm-publisher-border-color);
+  margin: var(--lm-publisher-spacer-3) auto;
+  align-self: center;
+}
+
+.lmui-divider_dashed {
+  border-top: 1px dashed var(--lm-publisher-border-color);
+}
+
+.lmui-divider_s {
+  width: 40%;
+}
+
+.lmui-divider_m {
+  width: 80%;
+}
+
+.lmui-divider_l {
+  width: 100%;
+}

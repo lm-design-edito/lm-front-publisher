@@ -1,0 +1,10 @@
+.lmui-block {
+  padding: var(--lm-publisher-spacer-2) var(--lm-publisher-spacer-3);
+  border-radius: 8px;
+  background-color: var(--lmui-c-block-bg);
+  box-shadow: var(--lmui-c-block-box-shadow);
+}
+
+.lmui-block_s {
+  width: 40%;
+}

@@ -7,9 +7,16 @@ import formatAPIError, {
 type UseImageTransformParams = Parameters<
   typeof api.queries.image.transform
 >[0];
-type UseImageTransformReturn = Awaited<
-  ReturnType<typeof api.queries.image.transform>
->;
+type UseImageTransformReturn = {
+  source: {
+    name: string;
+  };
+  url: string;
+  size: number;
+  name: string;
+  mimeType: string;
+  date: Date;
+};
 
 export function useImageTransform(clbs?: {
   onSuccess?: (data: UseImageTransformReturn) => void;
@@ -18,12 +25,21 @@ export function useImageTransform(clbs?: {
   return useMutation({
     mutationFn: (params: UseImageTransformParams) =>
       api.queries.image.transform(params),
-    onSuccess: data => {
+    onSuccess: (data, variables) => {
       if (!data.success) {
         clbs?.onError?.(formatAPIError(data));
         return;
       }
-      clbs?.onSuccess?.(data);
+      clbs?.onSuccess?.({
+        source: {
+          name: variables.image.name,
+        },
+        date: new Date(),
+        url: data.payload.url,
+        size: data.payload.size,
+        name: data.payload.name,
+        mimeType: data.payload.mimeType,
+      });
     },
     onError: err => {
       clbs?.onError?.(formatAPIError(err));
