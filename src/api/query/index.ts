@@ -17,7 +17,6 @@ export type QueryOptions = {
 
 export const handleQuery = async (request: string, options?: QueryOptions) => {
   const response = await authQuery(request, options);
-  console.log('handleQuery', response);
   return handleResponse(response);
 };
 
@@ -26,7 +25,16 @@ export const query = async <T>(
   request: string,
   options?: QueryOptions,
 ): Promise<APIREsponseErrorType | APIREsponseSuccessType<T>> => {
+  console.log('----RequestToAPI', {
+    request,
+    options,
+  });
+
   const handledResponse = await handleQuery(request, options);
+
+   console.log('------->ResponseFromAPI', {
+    handledResponse
+  });
   const authError = isAuthError(handledResponse);
 
   if (!authError) {
@@ -40,6 +48,10 @@ export const query = async <T>(
 /* Ca c'est la fonction qui ajoute les auths */
 export const authQuery = async (request: string, options?: QueryOptions) => {
   const authedOptions = await getAuthedOptions(options);
+  console.log('------->AuthedQuery', {
+    request,
+    authedOptions,
+  });
   return fetch(getAPIUrl(request), authedOptions);
 };
 
@@ -54,7 +66,7 @@ export const getAuthedOptions = async (options?: QueryOptions) => {
     headers: {
       ...(_removeContentType ? {} : { 'Content-Type': 'application/json' }),
       ...(fetchOptions && fetchOptions.headers ? fetchOptions.headers : {}),
-      'X-CSRF-Token': csrfToken || '',
+      'x-csrf-token': csrfToken || '',
       ...(token && !_ignoreToken ? { Authorization: `Bearer ${token}` } : {}),
     },
     credentials: 'include',
@@ -66,10 +78,10 @@ export const authQueryOnError = async (errorCode: string) => {
   const authedOptions = await getAuthedOptions();
   switch (errorCode) {
     case HANDLED_AUTH_ERRORS.CSRF_TOKEN:
-      console.log('CSRF token error, fetching new token');
+      console.warn('CSRF token error, fetching new token');
       return getCsrfToken();
     case HANDLED_AUTH_ERRORS.JWT_TOKEN:
-      console.log('JWT token error, refreshing token');
+      console.warn('JWT token error, refreshing token');
       alert(
         'AUTH.ERROR JWT: Votre session a expiré, nous allons vous reconnecter.',
       );
