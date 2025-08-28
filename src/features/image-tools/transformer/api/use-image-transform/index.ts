@@ -4,22 +4,24 @@ import formatAPIError, {
   type FormattedAPIErrorType,
 } from '../../../../../api/format-api-error';
 
-type UseImageGenerateParams = Parameters<typeof api.queries.image.generate>[0];
-type UseImageGenerateReturn = Awaited<
-  ReturnType<typeof api.queries.image.generate>
+type UseImageTransformParams = Parameters<
+  typeof api.queries.image.transform
+>[0];
+type UseImageTransformReturn = Awaited<
+  ReturnType<typeof api.queries.image.transform>
 >;
 
-export function useImageGenerate(clbs?: {
-  onSuccess?: (data: UseImageGenerateReturn) => void;
+export function useImageTransform(clbs?: {
+  onSuccess?: (data: UseImageTransformReturn) => void;
   onError?: (error: FormattedAPIErrorType) => void;
 }) {
   return useMutation({
-    mutationFn: (params: UseImageGenerateParams) =>
-      api.queries.image.generate(params),
+    mutationFn: (params: UseImageTransformParams) =>
+      api.queries.image.transform(params),
     onSuccess: data => {
       if (!data.success) {
         clbs?.onError?.(formatAPIError(data));
-        console.log('data success is false', data);
+        return;
       }
       clbs?.onSuccess?.(data);
     },

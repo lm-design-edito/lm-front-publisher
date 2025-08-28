@@ -14,7 +14,7 @@ const API_ROUTES = {
 
   IMAGE_FORMAT: 'image/format',
   IMAGE_FORMAT_TO_WIDTH: 'image/format/to-width',
-  IMAGE_GENERATE: 'image/generate',
+  IMAGE_TRANSFORM: 'image/transform',
 };
 
 export default API_ROUTES;

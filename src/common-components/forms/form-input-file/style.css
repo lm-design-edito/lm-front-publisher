@@ -21,6 +21,10 @@
   gap: var(--lm-publisher-spacer-05);
 }
 
+.form-input-file .form-input-file__preview-link {
+  display: flex;
+}
+
 .form-input-file .form-label {
   color: var(--lmui-c-form-placeholder);
 }

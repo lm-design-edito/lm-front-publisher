@@ -43,6 +43,10 @@ export const relativeRoutes = [
     path: 'image/tiny-lmg',
     name: 'Tiny LMG',
   },
+  {
+    path: 'image/transformer',
+    name: 'Image Transformer',
+  },
 ];
 
 export const getLocationName = (pathname: string) => {

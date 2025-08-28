@@ -4,20 +4,20 @@ import formatAPIError, {
   type FormattedAPIErrorType,
 } from '../../../../../api/format-api-error';
 
-type UseImageFormatToWidthParams = Parameters<
-  typeof api.queries.image.formatToWidth
+type UseImageTransformParams = Parameters<
+  typeof api.queries.image.transform
 >[0];
-type UseImageFormatToWidthReturn = Awaited<
-  ReturnType<typeof api.queries.image.formatToWidth>
+type UseImageTransformReturn = Awaited<
+  ReturnType<typeof api.queries.image.transform>
 >;
 
-export function useImageFormatToWidth(clbs?: {
-  onSuccess?: (data: UseImageFormatToWidthReturn) => void;
+export function useImageTransform(clbs?: {
+  onSuccess?: (data: UseImageTransformReturn) => void;
   onError?: (error: FormattedAPIErrorType) => void;
 }) {
   return useMutation({
-    mutationFn: (params: UseImageFormatToWidthParams) =>
-      api.queries.image.formatToWidth(params),
+    mutationFn: (params: UseImageTransformParams) =>
+      api.queries.image.transform(params),
     onSuccess: data => {
       if (!data.success) {
         clbs?.onError?.(formatAPIError(data));

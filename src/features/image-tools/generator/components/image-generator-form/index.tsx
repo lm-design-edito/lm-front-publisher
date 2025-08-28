@@ -7,12 +7,13 @@ import {
   ImageGeneratorTemplatesConfig,
   ImageGeneratorTemplates,
 } from '../../config/templates';
-import { useImageGenerate } from '../../api/use-image-generate';
+ import { useImageTransform } from '../../api/use-image-transform';
 import { FormInputRadioGroup } from '@common-components/forms/form-input-radio-group';
 import { FormSubmit } from '@common-components/forms/form-submit';
 import { FormFooter } from '@common-components/forms/form-footer';
 import { QueriesStatus } from '@common-components/queries-status';
 import { useState } from 'react';
+import { Logger } from '@utils/logger';
 
 const templateNames = ImageGeneratorTemplates.map(
   template => template.name,
@@ -45,7 +46,7 @@ export const ImageGeneratorForm = () => {
     message: string;
   } | null>(null);
 
-  const { mutate: imageGenerate, isPending } = useImageGenerate({
+  const { mutate: imageGenerate, isPending } = useImageTransform({
     onSuccess: data => {
       if (data.success) {
         setAPIStatus({
@@ -53,9 +54,15 @@ export const ImageGeneratorForm = () => {
           message: `${data.payload.message} : ${data.payload.images.length} images`,
         });
       }
+      Logger.success('image-tools.image-generator-form.useImageTransform', {
+        data,
+      });
       // Handle success logic here, e.g., show a success message or redirect
     },
     onError: error => {
+      Logger.error('image-tools.image-generator-form.useImageTransform', {
+        error,
+      });
       setAPIStatus({ success: false, message: error.message });
       // Handle error logic here, e.g., show an error message
     },
@@ -64,10 +71,19 @@ export const ImageGeneratorForm = () => {
   const onSubmit = (values: ImageGeneratorFormSchemaValues) => {
     imageGenerate({
       file: values.imageUpload[0], // Access the first file from FileList
-      properties: {
-        template: values.template, // Use the selected template,
-        ...(ImageGeneratorTemplatesConfig[values.template] || {}), // Get the template configuration
-      },
+      operations:
+        ImageGeneratorTemplatesConfig[values.template] &&
+        'operations' in
+          (ImageGeneratorTemplatesConfig[values.template] as Record<
+            string,
+            unknown
+          >)
+          ? (
+              ImageGeneratorTemplatesConfig[values.template] as {
+                operations?: unknown[];
+              }
+            ).operations || []
+          : [], // Get the template configuration
     });
     // Handle form submission logic here
   };

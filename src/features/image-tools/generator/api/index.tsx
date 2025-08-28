@@ -1,1 +1,1 @@
-export { useImageGenerate } from './use-image-generate';
+export { useImageTransform } from './use-image-transform';

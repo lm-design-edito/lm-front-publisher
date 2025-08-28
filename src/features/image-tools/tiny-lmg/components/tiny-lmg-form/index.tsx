@@ -18,6 +18,7 @@ import { FormSelect } from '@common-components/forms/form-select';
 import './style.css';
 import { useImageMultiFormat } from '../../api/use-image-multi-format';
 import { QueriesStatus } from '@common-components/queries-status';
+import { Logger } from '@utils/logger';
 
 const TinyLMGFormatsValues = TinyLMGFormats.map(format => format.value) as [
   string,
@@ -106,6 +107,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
 
   const { mutate: imageMultiFormat } = useImageMultiFormat({
     onSuccess: data => {
+      Logger.success('image-tools.tiny-lmg-form.useImageMultiFormat', { data });
       setAPIStatus({
         success: true,
         message: 'Image(s) générée(s) avec succès.',
@@ -123,6 +125,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
       );
     },
     onError: error => {
+      Logger.error('image-tools.tiny-lmg-form.useImageMultiFormat', { error });
       setAPIStatus({
         success: false,
         message: error.message || '',

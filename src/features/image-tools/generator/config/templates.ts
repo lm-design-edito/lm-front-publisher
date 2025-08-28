@@ -9,7 +9,7 @@ const ImageGeneratorTemplates = [
 
 const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
   lines: {
-    inputOperations: [
+    operations: [
       {
         name: 'frame',
         params: {
@@ -66,14 +66,9 @@ const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
         },
       },
     ],
-    checkValidOperations: true,
-    qualities: [100],
-    widths: [920],
-    heights: [640],
-    formats: ['png'],
   },
   tiles: {
-    inputOperations: [
+    operations: [
       {
         name: 'frame',
         params: {
@@ -119,14 +114,9 @@ const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
         },
       },
     ],
-    checkValidOperations: true,
-    qualities: [100],
-    widths: [920],
-    heights: [640],
-    formats: ['png'],
   },
   'white-filter': {
-    inputOperations: [
+    operations: [
       {
         name: 'compose',
         params: {
@@ -146,14 +136,9 @@ const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
         },
       },
     ],
-    checkValidOperations: true,
-    qualities: [100],
-    widths: [920],
-    heights: [640],
-    formats: ['png'],
   },
   'gradient-pink-filter': {
-    inputOperations: [
+    operations: [
       {
         name: 'compose',
         params: {
@@ -181,12 +166,7 @@ const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
           ],
         },
       },
-    ],
-    checkValidOperations: true,
-    qualities: [100],
-    widths: [920],
-    heights: [640],
-    formats: ['png'],
+    ]
   },
 };
 

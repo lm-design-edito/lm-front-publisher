@@ -9,6 +9,7 @@ import {
   type APIREsponseErrorType,
   type APIREsponseSuccessType,
 } from './responses';
+import { Logger } from '@utils/logger';
 
 export type QueryOptions = {
   _ignoreToken?: boolean;
@@ -20,21 +21,17 @@ export const handleQuery = async (request: string, options?: QueryOptions) => {
   return handleResponse(response);
 };
 
-/* @todo: c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
+/* c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
 export const query = async <T>(
   request: string,
   options?: QueryOptions,
 ): Promise<APIREsponseErrorType | APIREsponseSuccessType<T>> => {
-  console.log('----RequestToAPI', {
-    request,
-    options,
-  });
+  Logger.query('api.query', { request, options });
 
   const handledResponse = await handleQuery(request, options);
 
-   console.log('------->ResponseFromAPI', {
-    handledResponse
-  });
+  Logger.query('api.query', { handledResponse });
+
   const authError = isAuthError(handledResponse);
 
   if (!authError) {
@@ -48,10 +45,8 @@ export const query = async <T>(
 /* Ca c'est la fonction qui ajoute les auths */
 export const authQuery = async (request: string, options?: QueryOptions) => {
   const authedOptions = await getAuthedOptions(options);
-  console.log('------->AuthedQuery', {
-    request,
-    authedOptions,
-  });
+  Logger.query('api.query.authQuery', { request, authedOptions });
+
   return fetch(getAPIUrl(request), authedOptions);
 };
 
@@ -94,4 +89,10 @@ export const authQueryOnError = async (errorCode: string) => {
         return resolve(true);
       });
   }
+};
+
+export {
+  handleResponse,
+  type APIREsponseErrorType,
+  type APIREsponseSuccessType,
 };

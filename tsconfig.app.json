@@ -28,7 +28,8 @@
     "paths": {
       "@common-components/*": ["src/common-components/*"],
       "@features/*": ["src/features/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@utils/*": ["src/utils/*"],
     }
   },
   "include": ["src"]
