@@ -17,7 +17,7 @@ const ImageFormatterPage = () => {
   );
 };
 
-export const Route = createFileRoute('/images/formatter/')({
+export const Route = createFileRoute('/image/formatter/')({
   component: ImageFormatterPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {

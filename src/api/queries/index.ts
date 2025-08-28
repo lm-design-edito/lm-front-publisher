@@ -1,9 +1,9 @@
 import { admin } from './admin';
 import { auth } from './auth';
-import { images } from './images';
+import { image } from './image';
 
 export const queries = {
   auth,
   admin,
-  images,
+  image,
 };

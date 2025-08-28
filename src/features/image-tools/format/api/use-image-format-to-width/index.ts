@@ -5,10 +5,10 @@ import formatAPIError, {
 } from '../../../../../api/format-api-error';
 
 type UseImageFormatToWidthParams = Parameters<
-  typeof api.queries.images.formatToWidth
+  typeof api.queries.image.formatToWidth
 >[0];
 type UseImageFormatToWidthReturn = Awaited<
-  ReturnType<typeof api.queries.images.formatToWidth>
+  ReturnType<typeof api.queries.image.formatToWidth>
 >;
 
 export function useImageFormatToWidth(clbs?: {
@@ -17,7 +17,7 @@ export function useImageFormatToWidth(clbs?: {
 }) {
   return useMutation({
     mutationFn: (params: UseImageFormatToWidthParams) =>
-      api.queries.images.formatToWidth(params),
+      api.queries.image.formatToWidth(params),
     onSuccess: data => {
       if (!data.success) {
         clbs?.onError?.(formatAPIError(data));

@@ -4,7 +4,7 @@ import type { ImageResponseSuccessPayload } from '@api/query/responses';
 import { api } from '../../..';
 import API_ROUTES from '../../../routes';
 
-type ImagesFormat = {
+type ImageFormat = {
   width: number;
   height: number;
   format: string;
@@ -23,7 +23,7 @@ const supportedProperties = [
   'compressionLevel',
   'file',
 ];
-export const imagesFormat = async (params: ImagesFormat) => {
+export const imageFormat = async (params: ImageFormat) => {
   const formData = new FormData();
   const jsonData: Record<string, unknown> = {};
 
@@ -50,7 +50,7 @@ export const imagesFormat = async (params: ImagesFormat) => {
     console.log(`FormData: ${key} = ${value}`);
   }
   return await api.query<ImageResponseSuccessPayload>(
-    API_ROUTES.IMAGES_FORMAT,
+    API_ROUTES.IMAGE_FORMAT,
     {
       method: 'POST',
       body: formData,

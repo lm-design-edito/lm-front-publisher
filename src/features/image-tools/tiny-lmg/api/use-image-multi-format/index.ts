@@ -6,7 +6,7 @@ import formatAPIError, {
 import type { APIREsponseErrorType } from '@api/query/responses';
 
 type UseImageFormatParams = Omit<
-  Parameters<typeof api.queries.images.format>[0],
+  Parameters<typeof api.queries.image.format>[0],
   'format'
 > & {
   formats: string[];
@@ -38,7 +38,7 @@ export function useImageMultiFormat(clbs?: {
     mutationFn: (params: UseImageFormatParams) => {
       return Promise.all(
         params.formats.map(format =>
-          api.queries.images.format({ ...params, format }),
+          api.queries.image.format({ ...params, format }),
         ),
       );
     },

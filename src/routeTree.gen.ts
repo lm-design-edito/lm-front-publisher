@@ -17,9 +17,9 @@ import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as CheckEmailIndexImport } from './routes/check-email/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AccountIndexImport } from './routes/account/index'
-import { Route as ImagesTinyLmgIndexImport } from './routes/images/tiny-lmg/index'
-import { Route as ImagesGeneratorIndexImport } from './routes/images/generator/index'
-import { Route as ImagesFormatterIndexImport } from './routes/images/formatter/index'
+import { Route as ImageTinyLmgIndexImport } from './routes/image/tiny-lmg/index'
+import { Route as ImageGeneratorIndexImport } from './routes/image/generator/index'
+import { Route as ImageFormatterIndexImport } from './routes/image/formatter/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
 // Create/Update Routes
@@ -60,21 +60,21 @@ const AccountIndexRoute = AccountIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ImagesTinyLmgIndexRoute = ImagesTinyLmgIndexImport.update({
-  id: '/images/tiny-lmg/',
-  path: '/images/tiny-lmg/',
+const ImageTinyLmgIndexRoute = ImageTinyLmgIndexImport.update({
+  id: '/image/tiny-lmg/',
+  path: '/image/tiny-lmg/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const ImagesGeneratorIndexRoute = ImagesGeneratorIndexImport.update({
-  id: '/images/generator/',
-  path: '/images/generator/',
+const ImageGeneratorIndexRoute = ImageGeneratorIndexImport.update({
+  id: '/image/generator/',
+  path: '/image/generator/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const ImagesFormatterIndexRoute = ImagesFormatterIndexImport.update({
-  id: '/images/formatter/',
-  path: '/images/formatter/',
+const ImageFormatterIndexRoute = ImageFormatterIndexImport.update({
+  id: '/image/formatter/',
+  path: '/image/formatter/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -137,25 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersIndexImport
       parentRoute: typeof rootRoute
     }
-    '/images/formatter/': {
-      id: '/images/formatter/'
-      path: '/images/formatter'
-      fullPath: '/images/formatter'
-      preLoaderRoute: typeof ImagesFormatterIndexImport
+    '/image/formatter/': {
+      id: '/image/formatter/'
+      path: '/image/formatter'
+      fullPath: '/image/formatter'
+      preLoaderRoute: typeof ImageFormatterIndexImport
       parentRoute: typeof rootRoute
     }
-    '/images/generator/': {
-      id: '/images/generator/'
-      path: '/images/generator'
-      fullPath: '/images/generator'
-      preLoaderRoute: typeof ImagesGeneratorIndexImport
+    '/image/generator/': {
+      id: '/image/generator/'
+      path: '/image/generator'
+      fullPath: '/image/generator'
+      preLoaderRoute: typeof ImageGeneratorIndexImport
       parentRoute: typeof rootRoute
     }
-    '/images/tiny-lmg/': {
-      id: '/images/tiny-lmg/'
-      path: '/images/tiny-lmg'
-      fullPath: '/images/tiny-lmg'
-      preLoaderRoute: typeof ImagesTinyLmgIndexImport
+    '/image/tiny-lmg/': {
+      id: '/image/tiny-lmg/'
+      path: '/image/tiny-lmg'
+      fullPath: '/image/tiny-lmg'
+      preLoaderRoute: typeof ImageTinyLmgIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -171,9 +171,9 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginIndexRoute
   '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
-  '/images/formatter': typeof ImagesFormatterIndexRoute
-  '/images/generator': typeof ImagesGeneratorIndexRoute
-  '/images/tiny-lmg': typeof ImagesTinyLmgIndexRoute
+  '/image/formatter': typeof ImageFormatterIndexRoute
+  '/image/generator': typeof ImageGeneratorIndexRoute
+  '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -184,9 +184,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
   '/signup': typeof SignupIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
-  '/images/formatter': typeof ImagesFormatterIndexRoute
-  '/images/generator': typeof ImagesGeneratorIndexRoute
-  '/images/tiny-lmg': typeof ImagesTinyLmgIndexRoute
+  '/image/formatter': typeof ImageFormatterIndexRoute
+  '/image/generator': typeof ImageGeneratorIndexRoute
+  '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
 }
 
 export interface FileRoutesById {
@@ -198,9 +198,9 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/signup/': typeof SignupIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
-  '/images/formatter/': typeof ImagesFormatterIndexRoute
-  '/images/generator/': typeof ImagesGeneratorIndexRoute
-  '/images/tiny-lmg/': typeof ImagesTinyLmgIndexRoute
+  '/image/formatter/': typeof ImageFormatterIndexRoute
+  '/image/generator/': typeof ImageGeneratorIndexRoute
+  '/image/tiny-lmg/': typeof ImageTinyLmgIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -213,9 +213,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/admin/users'
-    | '/images/formatter'
-    | '/images/generator'
-    | '/images/tiny-lmg'
+    | '/image/formatter'
+    | '/image/generator'
+    | '/image/tiny-lmg'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -225,9 +225,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/admin/users'
-    | '/images/formatter'
-    | '/images/generator'
-    | '/images/tiny-lmg'
+    | '/image/formatter'
+    | '/image/generator'
+    | '/image/tiny-lmg'
   id:
     | '__root__'
     | '/'
@@ -237,9 +237,9 @@ export interface FileRouteTypes {
     | '/login/'
     | '/signup/'
     | '/admin/users/'
-    | '/images/formatter/'
-    | '/images/generator/'
-    | '/images/tiny-lmg/'
+    | '/image/formatter/'
+    | '/image/generator/'
+    | '/image/tiny-lmg/'
   fileRoutesById: FileRoutesById
 }
 
@@ -251,9 +251,9 @@ export interface RootRouteChildren {
   LoginIndexRoute: typeof LoginIndexRoute
   SignupIndexRoute: typeof SignupIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
-  ImagesFormatterIndexRoute: typeof ImagesFormatterIndexRoute
-  ImagesGeneratorIndexRoute: typeof ImagesGeneratorIndexRoute
-  ImagesTinyLmgIndexRoute: typeof ImagesTinyLmgIndexRoute
+  ImageFormatterIndexRoute: typeof ImageFormatterIndexRoute
+  ImageGeneratorIndexRoute: typeof ImageGeneratorIndexRoute
+  ImageTinyLmgIndexRoute: typeof ImageTinyLmgIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -264,9 +264,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoginIndexRoute: LoginIndexRoute,
   SignupIndexRoute: SignupIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
-  ImagesFormatterIndexRoute: ImagesFormatterIndexRoute,
-  ImagesGeneratorIndexRoute: ImagesGeneratorIndexRoute,
-  ImagesTinyLmgIndexRoute: ImagesTinyLmgIndexRoute,
+  ImageFormatterIndexRoute: ImageFormatterIndexRoute,
+  ImageGeneratorIndexRoute: ImageGeneratorIndexRoute,
+  ImageTinyLmgIndexRoute: ImageTinyLmgIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -286,9 +286,9 @@ export const routeTree = rootRoute
         "/login/",
         "/signup/",
         "/admin/users/",
-        "/images/formatter/",
-        "/images/generator/",
-        "/images/tiny-lmg/"
+        "/image/formatter/",
+        "/image/generator/",
+        "/image/tiny-lmg/"
       ]
     },
     "/": {
@@ -312,14 +312,14 @@ export const routeTree = rootRoute
     "/admin/users/": {
       "filePath": "admin/users/index.tsx"
     },
-    "/images/formatter/": {
-      "filePath": "images/formatter/index.tsx"
+    "/image/formatter/": {
+      "filePath": "image/formatter/index.tsx"
     },
-    "/images/generator/": {
-      "filePath": "images/generator/index.tsx"
+    "/image/generator/": {
+      "filePath": "image/generator/index.tsx"
     },
-    "/images/tiny-lmg/": {
-      "filePath": "images/tiny-lmg/index.tsx"
+    "/image/tiny-lmg/": {
+      "filePath": "image/tiny-lmg/index.tsx"
     }
   }
 }

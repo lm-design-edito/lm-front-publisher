@@ -37,7 +37,7 @@ const TinyLMGPage = () => {
   );
 };
 
-export const Route = createFileRoute('/images/tiny-lmg/')({
+export const Route = createFileRoute('/image/tiny-lmg/')({
   component: TinyLMGPage,
   beforeLoad: async ({ context }: { context: CustomRouteContext }) => {
     checkForAuthentifacted({ context });

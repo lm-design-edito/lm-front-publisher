@@ -1,9 +1,12 @@
-export type ImagesFormatToWith = {
+import { api } from '@api/index';
+import API_ROUTES from '@api/routes';
+
+export type ImageFormatToWith = {
   width: number;
   file: File;
 };
 
-export const imagesFormatToWidth = async (params: ImagesFormatToWith) => {
+export const imageFormatToWidth = async (params: ImageFormatToWith) => {
   const formData = new FormData();
 
   for (const key in params) {
@@ -17,7 +20,7 @@ export const imagesFormatToWidth = async (params: ImagesFormatToWith) => {
     }
   }
 
-  return api.query(API_ROUTES.IMAGES_FORMAT_TO_WIDTH, {
+  return api.query(API_ROUTES.IMAGESFORMAT_TO_WIDTH, {
     method: 'POST',
     body: formData,
   });

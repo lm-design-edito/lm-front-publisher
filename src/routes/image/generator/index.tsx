@@ -19,7 +19,7 @@ const ImageGeneratorPage = () => {
   );
 };
 
-export const Route = createFileRoute('/images/generator/')({
+export const Route = createFileRoute('/image/generator/')({
   component: ImageGeneratorPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {

@@ -4,7 +4,7 @@ import formatAPIError, {
   type FormattedAPIErrorType,
 } from '../../../../../api/format-api-error';
 
-type UseImageFormatParams = Parameters<typeof api.queries.images.format>[0];
+type UseImageFormatParams = Parameters<typeof api.queries.image.format>[0];
 type UseImageFormatSuccessReturns = {
   url: string;
   size: number;
@@ -18,7 +18,7 @@ export function useImageFormat(clbs?: {
 }) {
   return useMutation({
     mutationFn: (params: UseImageFormatParams) =>
-      api.queries.images.format(params),
+      api.queries.image.format(params),
     onSuccess: data => {
       if (data.success) {
         clbs?.onSuccess?.(data.payload);

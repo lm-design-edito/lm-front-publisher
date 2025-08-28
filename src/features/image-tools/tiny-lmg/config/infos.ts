@@ -3,6 +3,6 @@ export const ImageTinyLMGInfos = {
   description:
     'Optimiser ses images sous différents formats avec ou sans compression',
   badge: 'all',
-  url: '/images/tiny-lmg',
+  url: '/image/tiny-lmg',
   icon: 'icon5.png',
 };

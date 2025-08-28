@@ -20,27 +20,27 @@ export const relativeRoutes = [
     name: 'Liste des utilisateurs',
   },
   {
-    path: 'images/formatter',
+    path: 'image/formatter',
     name: 'Image Formatter',
   },
   {
-    path: 'images/resize',
+    path: 'image/resize',
     name: 'Image Resizer',
   },
   {
-    path: 'images/convert',
+    path: 'image/convert',
     name: 'Image Converter',
   },
   {
-    path: 'images/optimize',
+    path: 'image/optimize',
     name: 'Image Optimizer',
   },
   {
-    path: 'images/generator',
+    path: 'image/generator',
     name: "Générateur de média d'appels",
   },
   {
-    path: 'images/tiny-lmg',
+    path: 'image/tiny-lmg',
     name: 'Tiny LMG',
   },
 ];

@@ -4,9 +4,9 @@ import formatAPIError, {
   type FormattedAPIErrorType,
 } from '../../../../../api/format-api-error';
 
-type UseImageGenerateParams = Parameters<typeof api.queries.images.generate>[0];
+type UseImageGenerateParams = Parameters<typeof api.queries.image.generate>[0];
 type UseImageGenerateReturn = Awaited<
-  ReturnType<typeof api.queries.images.generate>
+  ReturnType<typeof api.queries.image.generate>
 >;
 
 export function useImageGenerate(clbs?: {
@@ -15,7 +15,7 @@ export function useImageGenerate(clbs?: {
 }) {
   return useMutation({
     mutationFn: (params: UseImageGenerateParams) =>
-      api.queries.images.generate(params),
+      api.queries.image.generate(params),
     onSuccess: data => {
       if (!data.success) {
         clbs?.onError?.(formatAPIError(data));

@@ -6,7 +6,7 @@ import type {
   APIREsponseSuccessType,
 } from '../../../query';
 
-type ImagesGenerate = {
+type ImageGenerate = {
   properties: object; // Replace with actual type if known
   file: File;
 };
@@ -25,8 +25,8 @@ type ImageGenerateResponse =
       };
     });
 
-export const imagesGenerate = async (
-  params: ImagesGenerate,
+export const imageGenerate = async (
+  params: ImageGenerate,
 ): Promise<ImageGenerateResponse> => {
   const formData = new FormData();
 
@@ -41,7 +41,7 @@ export const imagesGenerate = async (
     }
   }
 
-  console.log('API.QUERIES.IMAGES.GENERATE, with params', params);
+  console.log('API.QUERIES.IMAGE.GENERATE, with params', params);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const isSuccess = Math.random() > 0.1; // Simulate success or failure randomly
@@ -75,7 +75,7 @@ export const imagesGenerate = async (
   });
 
   /* @todo */
-  // return api.query(API_ROUTES.IMAGES_GENERATE, {
+  // return api.query(API_ROUTES.IMAGEGENERATE, {
   //     method: 'POST',
   //     body: formData
   // });
