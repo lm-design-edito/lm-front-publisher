@@ -8,6 +8,7 @@ export default defineConfig({
     TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
     react(),
   ],
+  base: '/lm-front-publisher/',
   resolve: {
     alias: {
       '@api': '/src/api',
