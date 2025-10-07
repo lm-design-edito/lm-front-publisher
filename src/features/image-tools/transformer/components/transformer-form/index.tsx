@@ -172,7 +172,8 @@ export const TransformerForm = ({ onDownloadReady }: TransformerFormProps) => {
           { value: 'sharpen', label: 'Affiner' },
           { value: 'brightness', label: 'Luminosité' },
         ]}
-        onSelect={operation => {
+        onSelect={(operation: unknown) => {
+          console.log('On select operation', operation);
           /* TODO */
           // setValue('operations', [...getValues('operations'), operation]);
         }}

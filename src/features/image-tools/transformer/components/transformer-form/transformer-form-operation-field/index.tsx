@@ -1,20 +1,20 @@
 import { FormInput } from '@common-components/forms/form-input';
 import type { FieldError } from 'react-hook-form';
 
-const Operations = [
-  {
-    name: 'blur',
-    label: 'Flou',
-  },
-  {
-    name: 'sharpen',
-    label: 'Affiner',
-  },
-  {
-    name: 'brightness',
-    label: 'Luminosité',
-  },
-];
+// const Operations = [
+//   {
+//     name: 'blur',
+//     label: 'Flou',
+//   },
+//   {
+//     name: 'sharpen',
+//     label: 'Affiner',
+//   },
+//   {
+//     name: 'brightness',
+//     label: 'Luminosité',
+//   },
+// ];
 
 interface TransformerFormOperationFieldProps {
   name: string;

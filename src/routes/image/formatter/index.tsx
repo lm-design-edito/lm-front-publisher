@@ -1,18 +1,18 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { Headline } from '../../../common-components/headline';
-import {
-  ImageFormatterForm,
-  ImageFormatInfos,
-} from '@features/image-tools/format';
+// import { Headline } from '../../../common-components/headline';
+// import {
+//   ImageFormatterForm,
+//   ImageFormatInfos,
+// } from '@features/image-tools/format';
 
 const ImageFormatterPage = () => {
   return (
     <div className="image-formatter-page">
-      <Headline
+      {/* <Headline
         title={ImageFormatInfos.name}
         description={ImageFormatInfos.description}
       />
-      <ImageFormatterForm />
+      <ImageFormatterForm /> */}
     </div>
   );
 };

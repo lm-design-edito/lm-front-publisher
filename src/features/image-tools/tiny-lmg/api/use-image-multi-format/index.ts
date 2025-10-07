@@ -3,7 +3,7 @@ import { api } from '../../../../../api';
 import formatAPIError, {
   type FormattedAPIErrorType,
 } from '../../../../../api/format-api-error';
-import type { APIREsponseErrorType } from '@api/query/responses';
+import type { APIResponseErrorType } from '@api/query/responses';
 
 type UseImageFormatParams = Omit<
   Parameters<typeof api.queries.image.format>[0],
@@ -45,7 +45,7 @@ export function useImageMultiFormat(clbs?: {
     onSuccess: (allData, variables) => {
       const hasOneSuccess = allData.some(data => data.success);
       if (!hasOneSuccess) {
-        clbs?.onError?.(formatAPIError(allData[0] as APIREsponseErrorType)); // Assuming all responses have the same structure
+        clbs?.onError?.(formatAPIError(allData[0] as APIResponseErrorType)); // Assuming all responses have the same structure
         return;
       }
       const successfulData = allData.filter(data => data.success);

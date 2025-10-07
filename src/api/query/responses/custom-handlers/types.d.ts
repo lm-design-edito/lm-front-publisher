@@ -1,6 +1,6 @@
-import type { APIREsponseErrorType, APIREsponseSuccessType } from '../response';
+import type { APIResponseErrorType, APIResponseSuccessType } from '../response';
 
 type ClbHandlers<T> = {
-  onSuccess: (data: T) => APIREsponseSuccessType<T>;
-  onError: (error: Response) => APIREsponseErrorType;
+  onSuccess: (data: T) => APIResponseSuccessType<T>;
+  onError: (error: Response) => APIResponseErrorType;
 };

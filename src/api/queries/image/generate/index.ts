@@ -1,7 +1,4 @@
-import type {
-  APIREsponseErrorType,
-  APIREsponseSuccessType,
-} from '@api/query';
+import type { APIResponseErrorType, APIResponseSuccessType } from '@api/query';
 import { createFormDataForAPI, Logger } from '@utils/index';
 
 type ImageGenerate = {
@@ -9,24 +6,21 @@ type ImageGenerate = {
   file: File;
 };
 
-type ImageGenerateResponse =
-  | APIREsponseErrorType
-  | (APIREsponseSuccessType & {
-    payload: {
-      message: string;
-      images: {
-        url: string;
-        width: number;
-        height: number;
-        alt: string;
-      }[];
-    };
-  });
+type ImageGenerateSuccessPayload = {
+  message: string;
+  images: {
+    width: number;
+    height: number;
+    url: string;
+    alt: string;
+  }[];
+};
 
-const supportedProperties = [
-  'file',
-  'operations'
-];
+type ImageGenerateResponse =
+  | APIResponseErrorType
+  | APIResponseSuccessType<ImageGenerateSuccessPayload>;
+
+const supportedProperties = ['file', 'operations'];
 
 export const imageGenerate = async (
   params: ImageGenerate,
@@ -68,5 +62,4 @@ export const imageGenerate = async (
       });
     }, 1000); // Simulate a delay for the API call
   });
-
 };

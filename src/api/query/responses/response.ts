@@ -5,7 +5,7 @@ export type APIReponseType = {
   type: string;
 };
 
-export type APIREsponseErrorType = {
+export type APIResponseErrorType = {
   httpStatus: number;
   error: {
     code: string;
@@ -15,7 +15,7 @@ export type APIREsponseErrorType = {
   type: 'error';
 };
 
-export type APIREsponseSuccessType<T> = {
+export type APIResponseSuccessType<T> = {
   httpStatus: number;
   success: true;
   type: 'success';
@@ -25,7 +25,7 @@ export type APIREsponseSuccessType<T> = {
 export function createSuccessResponse<SuccessResponsePayload>(
   response: Response,
   payload: SuccessResponsePayload,
-): APIREsponseSuccessType<SuccessResponsePayload> {
+): APIResponseSuccessType<SuccessResponsePayload> {
   return {
     httpStatus: response.status,
     success: true,
@@ -36,7 +36,7 @@ export function createSuccessResponse<SuccessResponsePayload>(
 
 export const createErrorResponse = (
   response: Response,
-): APIREsponseErrorType => {
+): APIResponseErrorType => {
   return {
     httpStatus: response.status,
     success: false,

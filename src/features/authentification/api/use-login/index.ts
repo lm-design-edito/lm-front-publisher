@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import type { APIREsponseErrorType } from '../../../../api/query';
+import type { APIResponseErrorType } from '../../../../api/query';
 import formatAPIError from '../../../../api/format-api-error';
 
 type UseLoginParams = Parameters<typeof api.queries.auth.login>[0];
@@ -24,7 +24,7 @@ export function useLogin(clbs?: {
       if (!data.success) {
         clbs?.onError?.(
           formatAPIError(
-            data as APIREsponseErrorType,
+            data as APIResponseErrorType,
             {
               'invalid-credentials':
                 'Identifiants invalides. Veuillez réessayer.',

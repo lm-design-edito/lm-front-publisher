@@ -1,7 +1,7 @@
 import { api } from '../../..';
 import type {
-  APIREsponseErrorType,
-  APIREsponseSuccessType,
+  APIResponseErrorType,
+  APIResponseSuccessType,
 } from '../../../query';
 import API_ROUTES from '../../../routes';
 
@@ -35,12 +35,12 @@ export const adminUsersUpdate = async (params: AdminUsersUpdate) =>
 
 type AdminUsersListRequestParams = unknown;
 type AdminUsersListResponse =
-  | (APIREsponseSuccessType & {
+  | (APIResponseSuccessType<{ list: AdminUser[] }> & {
       payload: {
         list: AdminUser[];
       };
     })
-  | APIREsponseErrorType;
+  | APIResponseErrorType;
 
 export const adminUsersList = async (
   params: AdminUsersListRequestParams,

@@ -6,8 +6,8 @@ import { HANDLED_AUTH_ERRORS } from '../auth/handled-auth-errors';
 import { getToken } from '../auth/token';
 import {
   handleResponse,
-  type APIREsponseErrorType,
-  type APIREsponseSuccessType,
+  type APIResponseErrorType,
+  type APIResponseSuccessType,
 } from './responses';
 import { Logger } from '@utils/logger';
 
@@ -25,7 +25,7 @@ export const handleQuery = async (request: string, options?: QueryOptions) => {
 export const query = async <T>(
   request: string,
   options?: QueryOptions,
-): Promise<APIREsponseErrorType | APIREsponseSuccessType<T>> => {
+): Promise<APIResponseErrorType | APIResponseSuccessType<T>> => {
   Logger.query('api.query', { request, options });
 
   const handledResponse = await handleQuery(request, options);
@@ -93,6 +93,6 @@ export const authQueryOnError = async (errorCode: string) => {
 
 export {
   handleResponse,
-  type APIREsponseErrorType,
-  type APIREsponseSuccessType,
+  type APIResponseErrorType,
+  type APIResponseSuccessType,
 };

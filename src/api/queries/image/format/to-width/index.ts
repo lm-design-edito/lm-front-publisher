@@ -20,7 +20,7 @@ export const imageFormatToWidth = async (params: ImageFormatToWith) => {
     }
   }
 
-  return api.query(API_ROUTES.IMAGESFORMAT_TO_WIDTH, {
+  return api.query(API_ROUTES.IMAGE_FORMAT_TO_WIDTH, {
     method: 'POST',
     body: formData,
   });

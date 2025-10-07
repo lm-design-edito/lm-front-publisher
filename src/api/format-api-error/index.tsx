@@ -1,4 +1,4 @@
-import type { APIREsponseErrorType } from '../query/responses';
+import type { APIResponseErrorType } from '../query/responses';
 
 export type FormattedAPIErrorType = {
   code: number;
@@ -9,7 +9,7 @@ export type FormattedAPIErrorType = {
 const DEFAULT_ERROR_MESSAGE =
   'Une erreur est survenue. Veuillez réessayer plus tard.';
 const formatAPIError = (
-  error: APIREsponseErrorType | Error,
+  error: APIResponseErrorType | Error,
   messages?: Record<string, string>,
   fallbackMessage?: string,
 ): FormattedAPIErrorType => {

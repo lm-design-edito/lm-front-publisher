@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import type { APIREsponseErrorType } from '../../../../api/query';
+import type { APIResponseErrorType } from '../../../../api/query';
 import formatAPIError from '../../../../api/format-api-error';
 
 type UseSignupParams = Parameters<typeof api.queries.auth.signup>[0];
@@ -24,7 +24,7 @@ export function useSignup(clbs?: {
       if (!data.success) {
         clbs?.onError?.(
           formatAPIError(
-            data as APIREsponseErrorType,
+            data as APIResponseErrorType,
             {},
             DEFAULT_ERROR_MESSAGE,
           ),

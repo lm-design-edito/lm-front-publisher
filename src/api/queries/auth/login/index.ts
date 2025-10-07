@@ -1,7 +1,7 @@
 import { api } from '../../..';
 import type {
-  APIREsponseErrorType,
-  APIREsponseSuccessType,
+  APIResponseErrorType,
+  APIResponseSuccessType,
 } from '../../../query';
 import API_ROUTES from '../../../routes';
 
@@ -15,7 +15,18 @@ type AuthLoginParams =
       password: string;
     };
 
-type AuthLoginResponse = APIREsponseSuccessType | APIREsponseErrorType;
+type LoginUser = {
+  _id: string;
+  username: string;
+  badges: string[];
+  role: string;
+  email: string;
+  verified: boolean;
+};
+
+type AuthLoginResponse =
+  | APIResponseSuccessType<LoginUser>
+  | APIResponseErrorType;
 
 export const login = async (
   params: AuthLoginParams,

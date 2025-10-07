@@ -3,8 +3,8 @@ import { queries } from './queries';
 import { auth } from './auth';
 
 export {
-  type APIREsponseErrorType,
-  type APIREsponseSuccessType,
+  type APIResponseErrorType,
+  type APIResponseSuccessType,
 } from './query/responses';
 
 export const api = {

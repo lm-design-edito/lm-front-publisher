@@ -7,7 +7,7 @@ import {
   ImageGeneratorTemplatesConfig,
   ImageGeneratorTemplates,
 } from '../../config/templates';
- import { useImageTransform } from '../../api/use-image-transform';
+import { useImageTransform } from '../../api/use-image-transform';
 import { FormInputRadioGroup } from '@common-components/forms/form-input-radio-group';
 import { FormSubmit } from '@common-components/forms/form-submit';
 import { FormFooter } from '@common-components/forms/form-footer';
@@ -48,12 +48,12 @@ export const ImageGeneratorForm = () => {
 
   const { mutate: imageGenerate, isPending } = useImageTransform({
     onSuccess: data => {
-      if (data.success) {
-        setAPIStatus({
-          success: true,
-          message: `${data.payload.message} : ${data.payload.images.length} images`,
-        });
-      }
+      // if (data.success) {
+      //   setAPIStatus({
+      //     success: true,
+      //     message: `${data.payload.message} : ${data.payload.images.length} images`,
+      //   });
+      // }
       Logger.success('image-tools.image-generator-form.useImageTransform', {
         data,
       });
@@ -71,6 +71,7 @@ export const ImageGeneratorForm = () => {
   const onSubmit = (values: ImageGeneratorFormSchemaValues) => {
     imageGenerate({
       file: values.imageUpload[0], // Access the first file from FileList
+      /* @ts-expect-error: @todo define operations types */
       operations:
         ImageGeneratorTemplatesConfig[values.template] &&
         'operations' in
