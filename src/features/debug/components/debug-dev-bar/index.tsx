@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { useLogin } from '../../../authentification/api/use-login';
 import { useLogout } from '../../../authentification/api/use-logout';
 import './style.css';
 import { api } from '../../../../api';
@@ -9,7 +8,6 @@ import { Loader } from '../../../../common-components/loader';
 const devMode = import.meta.env.VITE_DEV_MODE === 'true';
 
 export const DebugDevBar = () => {
-  const { mutate: login, isPending: isPendingLoading } = useLogin();
   const { mutate: logout, isPending: isPendingLogout } = useLogout();
   // const { mutate: requestEmailVerificationToken, isPending: isPendingRequestEmailVerification } = useMutation({
   //   mutationFn: api.queries.admin.usersUpdate
@@ -35,19 +33,9 @@ export const DebugDevBar = () => {
         <div className="dev-bar__category">
           <span className="dev-bar__subtitle">Short cut actions</span>
           <div className="dev-bar__actions">
-            <button
-              onClick={() =>
-                login({ email: 'fabas@lemonde.fr', password: 'admin' })
-              }
-            >
-              Login to MAIN_ADMIN {isPendingLoading && <Loader />}
-            </button>{' '}
-            |
             <button onClick={() => logout()}>
               Log out {isPendingLogout && <Loader />}
             </button>{' '}
-            |
-            {/* <button onClick={() => requestEmailVerificationToken({ _id: '684046820cafdeda64c90716', verified: true  })}>Verify user lea {isPendingRequestEmailVerification && <Loader />}</button> | */}
             <button onClick={() => debugRefreshToken()}>
               Refresh tokens {isPendingDebugRefreshToken && <Loader />}
             </button>
