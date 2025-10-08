@@ -36,7 +36,7 @@ export const MyUserProfile = () => {
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
             >
-              {user?.email || 'Aucun email défini'}
+              {user && 'email' in user ? user?.email : 'Aucun email défini'}
             </FieldSet>
           </div>
           <div className="lm-publisher-flex lm-publisher-flex-wrap lm-publisher-flex-spacer">
