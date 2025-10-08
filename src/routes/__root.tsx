@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ThemeProvider } from '@features/theme';
 import { DebugDevBar } from '@features/debug';
 import { Header } from '../common-components/header';
+import { UnverifiedUserBanner } from '@features/auth/components/unverified-user-banner';
 
 // Create a client
 
@@ -20,6 +21,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       <ThemeProvider>
         <DebugDevBar />
         <Header />
+        <UnverifiedUserBanner />
         <div className="app-content">
           <Outlet />
         </div>

@@ -1,30 +1,15 @@
+import type { PublisherApi } from '@api/publisher';
 import { api } from '../../..';
-import type {
-  APIResponseErrorType,
-  APIResponseSuccessType,
-} from '../../../query';
 import API_ROUTES from '../../../routes';
 
-export type WhoAmIParams = unknown;
+export type WhoAmIParams =
+  PublisherApi.BodyOf<PublisherApi.ENDPOINT.AUTH_WHOAMI_GET>;
 
-type WhoAmIUser = {
-  badges: string[];
-  _id: string;
-  verified: boolean;
-  role: string;
-  status: string;
-  email: string;
-  username: string;
-  isEmailVerified: boolean;
-  isAdmin: boolean;
-};
+export type WhoAmISuccessPayload =
+  PublisherApi.SuccessResponseOf<PublisherApi.ENDPOINT.AUTH_WHOAMI_GET>['payload'];
 
-export type WhoAmIResponse =
-  | APIResponseSuccessType<WhoAmIUser>
-  | APIResponseErrorType;
-
-export const whoAmI = async (params?: WhoAmIParams): Promise<WhoAmIResponse> =>
-  api.query(API_ROUTES.AUTH_POST_WHOAMI, {
+export const whoAmI = async (params?: WhoAmIParams) =>
+  api.query<WhoAmISuccessPayload>(API_ROUTES.AUTH_POST_WHOAMI, {
     method: 'POST',
     body: JSON.stringify(params),
 });

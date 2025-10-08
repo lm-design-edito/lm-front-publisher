@@ -36,7 +36,7 @@ export const VerifyEmailForm = () => {
     },
   });
 
-  const { isAuthenticated } = useWhoAmI();
+  const { user } = useWhoAmI();
   const [APIError, setAPIError] = useState<string | null>(null);
 
   const { mutate: verifyEmail, isPending } = useVerifyEmail({
@@ -61,11 +61,11 @@ export const VerifyEmailForm = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      console.log('User is already logged in, redirecting to /');
+    if (user?.verified) {
+      console.log('User is already verified, redirecting to /');
       navigate({ to: appRoutes.index });
     }
-  }, [isAuthenticated, navigate]);
+  }, [user?.verified, navigate]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

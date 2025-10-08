@@ -13,6 +13,7 @@
     "start": "npx http-server ./dist --cors --port 5001 -c-1"
   },
   "dependencies": {
+    "@design-edito/publisher": "^0.0.4",
     "@hookform/resolvers": "^5.1.1",
     "@tanstack/react-query": "^5.80.3",
     "@tanstack/react-query-devtools": "^5.81.2",

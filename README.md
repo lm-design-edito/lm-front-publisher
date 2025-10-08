@@ -4,11 +4,17 @@ This repository provides a front app for the LM Publisher API.
 It is based on the [React + Typescript + Vite template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
 
 # Pre-requisites
-- Node 20x
+- Node 20x (you nvm or installed locally)
 - npm (included with Node.js)
 - Git
 
 ## To run the project:
+- If you have nvm, make sure you use the right node version needed for this project : 
+```
+nvm install
+nvm use
+```
+
 
 - Make you sure to copy your .env.example to your local .env with the variables you need.
 ```

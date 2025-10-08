@@ -19,7 +19,10 @@ export const useAvailableServiceList = (toolBadges: string[]) => {
     if (isSuccess && data.success) {
       const user = data.payload;
       return toolBadges.filter(
-        badge => user.isAdmin || user.badges.includes(badge) || badge === 'all',
+        badge =>
+          user.role === 'admin' ||
+          (user.badges as string[]).includes(badge) ||
+          badge === 'all',
       );
     } else {
       return [];

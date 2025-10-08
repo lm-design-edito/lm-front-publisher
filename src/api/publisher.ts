@@ -1,0 +1,1 @@
+export type { Api as PublisherApi } from '@design-edito/publisher';

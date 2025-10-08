@@ -17,7 +17,7 @@ import { UserRole } from '../../../../common-components/user/user-role';
 export type UserListRow = {
   _id: string;
   username: string;
-  email: string;
+  email?: string;
   role: string;
   verified: boolean;
   status?: string; // Optional status field

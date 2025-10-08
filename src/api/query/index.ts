@@ -6,6 +6,7 @@ import { HANDLED_AUTH_ERRORS } from '../auth/handled-auth-errors';
 import { getToken } from '../auth/token';
 import {
   handleResponse,
+  type APIResponse,
   type APIResponseErrorType,
   type APIResponseSuccessType,
 } from './responses';
@@ -21,14 +22,33 @@ export const handleQuery = async (request: string, options?: QueryOptions) => {
   return handleResponse(response);
 };
 
+const formatQuery = (request: string, options?: QueryOptions) => {
+  const splittedEndpoint = request.split(':/');
+  const method =
+    splittedEndpoint.length > 1
+      ? splittedEndpoint[0]
+      : options?.method
+        ? options.method
+        : 'GET';
+  return {
+    request: splittedEndpoint[0],
+    options: {
+      method: method,
+      ...options,
+    },
+  };
+};
+
 /* c'est la fonction magique à qui on fait une requête et si erreur en cas de 403 hop on fait le nécessaire puis on retry */
 export const query = async <T>(
   request: string,
   options?: QueryOptions,
-): Promise<APIResponseErrorType | APIResponseSuccessType<T>> => {
-  Logger.query('api.query', { request, options });
-
-  const handledResponse = await handleQuery(request, options);
+): Promise<APIResponse<T>> => {
+  const formattedQuery = formatQuery(request, options);
+  const handledResponse = await handleQuery(
+    formattedQuery.request,
+    formattedQuery.options,
+  );
 
   Logger.query('api.query', { handledResponse });
 
@@ -95,4 +115,5 @@ export {
   handleResponse,
   type APIResponseErrorType,
   type APIResponseSuccessType,
+  type APIResponse,
 };

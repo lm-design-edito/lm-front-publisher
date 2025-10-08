@@ -1,30 +1,25 @@
+import * as Publisher from '@design-edito/publisher';
 import { api } from '../../..';
+
 import type {
   APIResponseErrorType,
   APIResponseSuccessType,
 } from '../../../query';
 import API_ROUTES from '../../../routes';
 
-type VerifyEmailParams = { email: string; token: string };
+type VerifyEmailParams =
+  Publisher.Api.BodyOf<Publisher.Api.ENDPOINT.AUTH_VERIFY_EMAIL>;
 
-type LoginUser = {
-  _id: string;
-  username: string;
-  badges: string[];
-  role: string;
-  email: string;
-  verified: boolean;
-};
+type UserSuccessPayload =
+  Publisher.Api.SuccessResponseOf<Publisher.Api.ENDPOINT.AUTH_VERIFY_EMAIL>['payload'];
 
 type VerifyEmailResponse =
-  | APIResponseSuccessType<LoginUser>
+  | APIResponseSuccessType<UserSuccessPayload>
   | APIResponseErrorType;
 
 export const verifyEmail = async (
   params: VerifyEmailParams,
 ): Promise<VerifyEmailResponse> =>
   api.query(API_ROUTES.AUTH_POST_VERIFY_EMAIL, {
-    method: 'POST',
     body: JSON.stringify(params),
-    _ignoreToken: true,
   });

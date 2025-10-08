@@ -45,7 +45,9 @@ export function useVerifyEmail(clbs?: {
       clbs?.onSuccess?.(data);
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      clbs?.onError?.(
+        formatAPIError(err, HANDLED_ERRORS, DEFAULT_ERROR_MESSAGE),
+      );
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });
