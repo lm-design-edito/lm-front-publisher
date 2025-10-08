@@ -8,9 +8,12 @@ export type CustomRouteContext = {
   };
 };
 
+const isProd = import.meta.env.MODE === 'production';
+
 // Create a new router instance
 export const router = createRouter({
   routeTree,
+  basepath: isProd ? '/lm-front-publisher/' : '',
   context: {
     auth: {
       isAuthenticated: false,
