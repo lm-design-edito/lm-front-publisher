@@ -49,16 +49,19 @@ export const relativeRoutes = [
   },
 ];
 
+const BASE_URL = import.meta.env.BASE_URL; // Récupère automatiquement la base de Vite
+
 export const getLocationName = (pathname: string) => {
   if (!pathname) {
     return null;
   }
 
+  const cleanedPathName = pathname.replace(BASE_URL, '');
   const foundRoute = relativeRoutes.find(route =>
-    pathname.includes(route.path),
+    cleanedPathName.includes(route.path),
   );
   if (foundRoute) {
     return foundRoute.name;
   }
-  return pathname.replace('/', '');
+  return cleanedPathName.replace('/', '');
 };
