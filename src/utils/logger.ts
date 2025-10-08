@@ -5,8 +5,15 @@ const LOG_TYPES = {
   QUERY: 'QUERY',
 };
 
+const canLog =
+  Boolean(import.meta.env.MODE === 'development') ||
+  Boolean(import.meta.env.VITE_CAN_LOG !== 'false');
 export class Logger {
   static _consoleLog(level: string, key: string, message?: unknown) {
+    if (!canLog) {
+      return;
+    }
+
     const logHeader = this.getLogHeader(level, key);
     console.log(
       logHeader.head,

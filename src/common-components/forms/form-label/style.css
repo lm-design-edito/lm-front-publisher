@@ -1,0 +1,24 @@
+.form-label {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lm-publisher-spacer);
+}
+
+/* .lmui-form input.lmui-form__input:focus ~ .lmui-form__placeholder, .lmui-form input.lmui-form__input:valid ~ .lmui-form__placeholder {
+    top: var(--lmui-len-padding-top-placeholder-focus);
+    font-size: var(--lmui-len-font-size-placeholder-focus);
+    width: 100%;
+}
+
+.lmui-form .lmui-form__placeholder {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: var(--lmui-len-padding-form);
+    font-family: var(--ff-marr-sans);
+    font-size: var(--lmui-len-font-size-form);
+    font-weight: 400;
+    color: var(--lmui-c-form-placeholder);
+    transition: top 0.2s var(--ease-out-quint); */

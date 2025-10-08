@@ -80,6 +80,15 @@ a:hover {
   color: var(--lm-publisher-accent-color);
 }
 
+.accent-link {
+  color: var(--lm-publisher-link-color);
+  text-decoration: underline;
+  transition: opacity .3s;
+  cursor: pointer;
+}
+.accent-link:hover {
+  color: var(--lm-publisher-link-hover-color);
+}
 h1,
 h2,
 h3,

@@ -8,7 +8,7 @@ export function useWhoAmI(
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['who-am-i'],
     queryFn: () => {
-      Logger.log('features.authentifications.api.useWhoAmI');
+      Logger.log('features.auth.api.useWhoAmI');
       return api.queries.auth.whoAmI(params);
     },
   });

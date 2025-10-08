@@ -1,11 +1,12 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
+import { appRoutes } from '@src/appRoutes';
 
 export const Route = createFileRoute('/admin/')({
   component: RouteComponent,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {
       throw redirect({
-        to: '/login',
+        to: appRoutes.login,
         search: {
           redirect: location.href,
         },

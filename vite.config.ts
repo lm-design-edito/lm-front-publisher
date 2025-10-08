@@ -12,6 +12,7 @@ export default defineConfig(({ command }) => {
     base: command === 'serve' ? '' : '/lm-front-publisher/',
     resolve: {
       alias: {
+        '@src': '/src',
         '@api': '/src/api',
         '@utils': '/src/utils',
         '@features': '/src/features',

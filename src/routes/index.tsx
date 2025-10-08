@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useWhoAmI } from '@features/authentification';
+import { useWhoAmI } from '@features/auth';
 import { ServiceList } from '@features/services';
 
 import './style.css';
-import { AuthActions } from '../features/authentification';
+import { AuthActions } from '../features/auth';
 
 const IndexPage = () => {
   const { isAuthenticated } = useWhoAmI();

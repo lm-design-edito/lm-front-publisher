@@ -1,4 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
+import { appRoutes } from '@src/appRoutes';
 // import { Headline } from '../../../common-components/headline';
 // import {
 //   ImageFormatterForm,
@@ -22,7 +23,7 @@ export const Route = createFileRoute('/image/formatter/')({
   beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
-        to: '/login',
+        to: appRoutes.login,
         search: {
           redirect: location.href,
         },

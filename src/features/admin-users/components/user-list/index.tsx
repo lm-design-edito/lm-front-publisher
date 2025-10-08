@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Loader } from '../../../../common-components/loader';
-import { useWhoAmI } from '../../../authentification/api/use-who-am-i';
+import { useWhoAmI } from '../../../auth/api/use-who-am-i';
 import { useUserList } from '../../api/use-user-list';
 import './style.css';
 import {

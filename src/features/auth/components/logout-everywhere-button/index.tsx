@@ -1,17 +1,20 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Button } from '../../../../common-components/buttons/button';
-import { useLogout } from '../../api/use-logout';
+import { useLogoutEverywhere } from '../../api/use-logout-everywhere';
+import { appRoutes } from '@src/appRoutes';
 
-type LogoutButtonProps = {
+type LogoutEverywhereButtonProps = {
   size?: 's' | 'm' | 'l';
 };
 
-export const LogoutButton = ({ size }: LogoutButtonProps) => {
+export const LogoutEverywhereButton = ({
+  size,
+}: LogoutEverywhereButtonProps) => {
   const navigate = useNavigate();
-  const { mutate: logout, isPending: isPendingLogout } = useLogout({
+  const { mutate: logout, isPending: isPendingLogout } = useLogoutEverywhere({
     onSuccess: () => {
       console.warn('Logout successful, user logged out.');
-      navigate({ to: '/' });
+      navigate({ to: appRoutes.index });
     },
     onError: error => {
       console.error('Logout failed:', error);
@@ -25,7 +28,7 @@ export const LogoutButton = ({ size }: LogoutButtonProps) => {
       variant="secondary"
       isLoading={isPendingLogout}
     >
-      Se déconnecter
+      Se déconnecter de tous les appareils
     </Button>
   );
 };

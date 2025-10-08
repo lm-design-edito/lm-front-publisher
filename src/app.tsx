@@ -1,5 +1,5 @@
 import { RouterProvider } from '@tanstack/react-router';
-import { useWhoAmI } from './features/authentification/api/use-who-am-i';
+import { useWhoAmI } from './features/auth/api/use-who-am-i';
 import { router } from './router';
 import { Headline } from '@common-components/headline';
 

@@ -4,6 +4,7 @@ import {
   ImageGeneratorInfos,
 } from '@features/image-tools/generator';
 import { Headline } from '@common-components/headline';
+import { appRoutes } from '@src/appRoutes';
 
 const ImageGeneratorPage = () => {
   return (
@@ -24,7 +25,7 @@ export const Route = createFileRoute('/image/generator/')({
   beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {
       throw redirect({
-        to: '/login',
+        to: appRoutes.login,
         search: {
           redirect: location.href,
         },

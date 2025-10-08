@@ -12,6 +12,8 @@ export const UserBadge = ({ badge }: UserBadgeProps) => {
         return 'red';
       case 'storage':
         return 'purple';
+      case 'system':
+        return 'red';
       default:
         return 'blue';
     }

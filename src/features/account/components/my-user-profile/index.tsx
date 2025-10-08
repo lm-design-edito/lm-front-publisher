@@ -8,7 +8,7 @@ import {
   useWhoAmI,
   LogoutButton,
   LogoutEverywhereButton,
-} from '@features/authentification';
+} from '@features/auth';
 import { ThemeSwitch } from '@features/theme';
 
 export const MyUserProfile = () => {

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { QueriesStatus } from '../../../../common-components/queries-status';
 import { FormSubmit } from '../../../../common-components/forms/form-submit';
 import { FormFooter } from '../../../../common-components/forms/form-footer';
+import { appRoutes } from '@src/appRoutes';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -54,7 +55,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (isAuthenticated) {
       console.log('User is already logged in, redirecting to /');
-      navigate({ to: '/' });
+      navigate({ to: appRoutes.index });
     }
   }, [isAuthenticated, navigate]);
 

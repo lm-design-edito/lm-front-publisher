@@ -4,6 +4,7 @@ import { useWhoAmI } from '../../api/use-who-am-i';
 
 import './style.css';
 import { LogoutButton } from '../logout-button';
+import { appRoutes } from '@src/appRoutes';
 
 type AuthActionsProps = {
   className?: string;
@@ -20,10 +21,10 @@ export const AuthActions = ({
       <div
         className={`auth-actions lm-publisher-center-flex lm-publisher-flex-spacer ${className}`}
       >
-        <ButtonLink size={size} to="/login" variant="secondary">
+        <ButtonLink size={size} to={appRoutes.login} variant="secondary">
           Connexion
         </ButtonLink>
-        <ButtonLink size={size} to="/signup" variant="secondary">
+        <ButtonLink size={size} to={appRoutes.signup} variant="secondary">
           Inscription
         </ButtonLink>
       </div>

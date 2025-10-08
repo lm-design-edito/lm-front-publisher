@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { MyUserProfile } from '../../features/account/components/my-user-profile';
 import { Headline } from '../../common-components/headline';
+import { appRoutes } from '@src/appRoutes';
 
 const AccountPage = () => {
   return (
@@ -16,7 +17,7 @@ export const Route = createFileRoute('/account/')({
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {
       throw redirect({
-        to: '/login',
+        to: appRoutes.login,
         search: {
           redirect: location.href,
         },

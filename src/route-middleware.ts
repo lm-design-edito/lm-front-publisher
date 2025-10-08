@@ -1,3 +1,4 @@
+import { appRoutes } from '@src/appRoutes';
 import type { CustomRouteContext } from './router';
 import { redirect } from '@tanstack/react-router';
 
@@ -8,7 +9,7 @@ export const checkForAuthentifacted = ({
 }) => {
   if (!context.auth.isLoading && !context.auth.isAuthenticated) {
     throw redirect({
-      to: '/login',
+      to: appRoutes.login,
       search: {
         redirect: location.href,
       },

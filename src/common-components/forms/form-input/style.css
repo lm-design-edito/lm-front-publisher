@@ -1,0 +1,5 @@
+.form-input input.lmui-form__input:disabled ~ .form-label:not(:empty) {
+  top: var(--lmui-len-padding-top-placeholder-focus);
+  font-size: var(--lmui-len-font-size-placeholder-focus);
+  width: 100%;
+}

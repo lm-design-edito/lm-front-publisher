@@ -12,7 +12,7 @@ export const relativeRoutes = [
     name: 'Mon compte',
   },
   {
-    path: 'check-email',
+    path: 'verify-email',
     name: "Valider l'inscription",
   },
   {

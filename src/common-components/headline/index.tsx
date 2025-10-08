@@ -1,4 +1,5 @@
 import type React from 'react';
+import { Text } from '@common-components/text';
 import './style.css';
 
 type HeadlineProps = {
@@ -13,7 +14,7 @@ const Headline = ({ title, description }: HeadlineProps) => {
       {description && (
         <>
           {typeof description === 'string' ? (
-            <p className="headline__description">{description}</p>
+            <Text className="headline__description">{description}</Text>
           ) : (
             description
           )}

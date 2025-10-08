@@ -12,15 +12,16 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as SignupIndexImport } from './routes/signup/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as CheckEmailIndexImport } from './routes/check-email/index'
+import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AccountIndexImport } from './routes/account/index'
 import { Route as ImageTransformerIndexImport } from './routes/image/transformer/index'
 import { Route as ImageTinyLmgIndexImport } from './routes/image/tiny-lmg/index'
 import { Route as ImageGeneratorIndexImport } from './routes/image/generator/index'
 import { Route as ImageFormatterIndexImport } from './routes/image/formatter/index'
+import { Route as AuthVerifyEmailIndexImport } from './routes/auth/verify-email/index'
+import { Route as AuthSignupIndexImport } from './routes/auth/signup/index'
+import { Route as AuthLoginIndexImport } from './routes/auth/login/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 
 // Create/Update Routes
@@ -31,21 +32,9 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SignupIndexRoute = SignupIndexImport.update({
-  id: '/signup/',
-  path: '/signup/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginIndexRoute = LoginIndexImport.update({
-  id: '/login/',
-  path: '/login/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CheckEmailIndexRoute = CheckEmailIndexImport.update({
-  id: '/check-email/',
-  path: '/check-email/',
+const AuthIndexRoute = AuthIndexImport.update({
+  id: '/auth/',
+  path: '/auth/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -85,6 +74,24 @@ const ImageFormatterIndexRoute = ImageFormatterIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthVerifyEmailIndexRoute = AuthVerifyEmailIndexImport.update({
+  id: '/auth/verify-email/',
+  path: '/auth/verify-email/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignupIndexRoute = AuthSignupIndexImport.update({
+  id: '/auth/signup/',
+  path: '/auth/signup/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthLoginIndexRoute = AuthLoginIndexImport.update({
+  id: '/auth/login/',
+  path: '/auth/login/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AdminUsersIndexRoute = AdminUsersIndexImport.update({
   id: '/admin/users/',
   path: '/admin/users/',
@@ -116,25 +123,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof rootRoute
     }
-    '/check-email/': {
-      id: '/check-email/'
-      path: '/check-email'
-      fullPath: '/check-email'
-      preLoaderRoute: typeof CheckEmailIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup/': {
-      id: '/signup/'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupIndexImport
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthIndexImport
       parentRoute: typeof rootRoute
     }
     '/admin/users/': {
@@ -142,6 +135,27 @@ declare module '@tanstack/react-router' {
       path: '/admin/users'
       fullPath: '/admin/users'
       preLoaderRoute: typeof AdminUsersIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/login/': {
+      id: '/auth/login/'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/signup/': {
+      id: '/auth/signup/'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/verify-email/': {
+      id: '/auth/verify-email/'
+      path: '/auth/verify-email'
+      fullPath: '/auth/verify-email'
+      preLoaderRoute: typeof AuthVerifyEmailIndexImport
       parentRoute: typeof rootRoute
     }
     '/image/formatter/': {
@@ -181,10 +195,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
-  '/check-email': typeof CheckEmailIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/signup': typeof SignupIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
+  '/auth/login': typeof AuthLoginIndexRoute
+  '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/verify-email': typeof AuthVerifyEmailIndexRoute
   '/image/formatter': typeof ImageFormatterIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
@@ -195,10 +210,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountIndexRoute
   '/admin': typeof AdminIndexRoute
-  '/check-email': typeof CheckEmailIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/signup': typeof SignupIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
+  '/auth/login': typeof AuthLoginIndexRoute
+  '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/verify-email': typeof AuthVerifyEmailIndexRoute
   '/image/formatter': typeof ImageFormatterIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
@@ -210,10 +226,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account/': typeof AccountIndexRoute
   '/admin/': typeof AdminIndexRoute
-  '/check-email/': typeof CheckEmailIndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/signup/': typeof SignupIndexRoute
+  '/auth/': typeof AuthIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
+  '/auth/login/': typeof AuthLoginIndexRoute
+  '/auth/signup/': typeof AuthSignupIndexRoute
+  '/auth/verify-email/': typeof AuthVerifyEmailIndexRoute
   '/image/formatter/': typeof ImageFormatterIndexRoute
   '/image/generator/': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg/': typeof ImageTinyLmgIndexRoute
@@ -226,10 +243,11 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/admin'
-    | '/check-email'
-    | '/login'
-    | '/signup'
+    | '/auth'
     | '/admin/users'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/auth/verify-email'
     | '/image/formatter'
     | '/image/generator'
     | '/image/tiny-lmg'
@@ -239,10 +257,11 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/admin'
-    | '/check-email'
-    | '/login'
-    | '/signup'
+    | '/auth'
     | '/admin/users'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/auth/verify-email'
     | '/image/formatter'
     | '/image/generator'
     | '/image/tiny-lmg'
@@ -252,10 +271,11 @@ export interface FileRouteTypes {
     | '/'
     | '/account/'
     | '/admin/'
-    | '/check-email/'
-    | '/login/'
-    | '/signup/'
+    | '/auth/'
     | '/admin/users/'
+    | '/auth/login/'
+    | '/auth/signup/'
+    | '/auth/verify-email/'
     | '/image/formatter/'
     | '/image/generator/'
     | '/image/tiny-lmg/'
@@ -267,10 +287,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountIndexRoute: typeof AccountIndexRoute
   AdminIndexRoute: typeof AdminIndexRoute
-  CheckEmailIndexRoute: typeof CheckEmailIndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
-  SignupIndexRoute: typeof SignupIndexRoute
+  AuthIndexRoute: typeof AuthIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute
+  AuthSignupIndexRoute: typeof AuthSignupIndexRoute
+  AuthVerifyEmailIndexRoute: typeof AuthVerifyEmailIndexRoute
   ImageFormatterIndexRoute: typeof ImageFormatterIndexRoute
   ImageGeneratorIndexRoute: typeof ImageGeneratorIndexRoute
   ImageTinyLmgIndexRoute: typeof ImageTinyLmgIndexRoute
@@ -281,10 +302,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountIndexRoute: AccountIndexRoute,
   AdminIndexRoute: AdminIndexRoute,
-  CheckEmailIndexRoute: CheckEmailIndexRoute,
-  LoginIndexRoute: LoginIndexRoute,
-  SignupIndexRoute: SignupIndexRoute,
+  AuthIndexRoute: AuthIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
+  AuthSignupIndexRoute: AuthSignupIndexRoute,
+  AuthVerifyEmailIndexRoute: AuthVerifyEmailIndexRoute,
   ImageFormatterIndexRoute: ImageFormatterIndexRoute,
   ImageGeneratorIndexRoute: ImageGeneratorIndexRoute,
   ImageTinyLmgIndexRoute: ImageTinyLmgIndexRoute,
@@ -304,10 +326,11 @@ export const routeTree = rootRoute
         "/",
         "/account/",
         "/admin/",
-        "/check-email/",
-        "/login/",
-        "/signup/",
+        "/auth/",
         "/admin/users/",
+        "/auth/login/",
+        "/auth/signup/",
+        "/auth/verify-email/",
         "/image/formatter/",
         "/image/generator/",
         "/image/tiny-lmg/",
@@ -323,17 +346,20 @@ export const routeTree = rootRoute
     "/admin/": {
       "filePath": "admin/index.tsx"
     },
-    "/check-email/": {
-      "filePath": "check-email/index.tsx"
-    },
-    "/login/": {
-      "filePath": "login/index.tsx"
-    },
-    "/signup/": {
-      "filePath": "signup/index.tsx"
+    "/auth/": {
+      "filePath": "auth/index.tsx"
     },
     "/admin/users/": {
       "filePath": "admin/users/index.tsx"
+    },
+    "/auth/login/": {
+      "filePath": "auth/login/index.tsx"
+    },
+    "/auth/signup/": {
+      "filePath": "auth/signup/index.tsx"
+    },
+    "/auth/verify-email/": {
+      "filePath": "auth/verify-email/index.tsx"
     },
     "/image/formatter/": {
       "filePath": "image/formatter/index.tsx"

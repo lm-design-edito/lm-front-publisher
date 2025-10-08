@@ -38,6 +38,7 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_CAN_LOG: ${{ secrets.VITE_CAN_LOG }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

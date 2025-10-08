@@ -30,6 +30,7 @@
       "@features/*": ["src/features/*"],
       "@api/*": ["src/api/*"],
       "@utils/*": ["src/utils/*"],
+      "@src/*": ["src/*"],
     }
   },
   "include": ["src"]

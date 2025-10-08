@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { useLogout } from '../../../authentification/api/use-logout';
+import { useLogout } from '../../../auth/api/use-logout';
 import './style.css';
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
 import { Loader } from '../../../../common-components/loader';
 
-const devMode = import.meta.env.VITE_DEV_MODE === 'true';
+const isDevMode = import.meta.env.MODE === 'development';
 
 export const DebugDevBar = () => {
   const { mutate: logout, isPending: isPendingLogout } = useLogout();
@@ -21,7 +21,7 @@ export const DebugDevBar = () => {
         );
       },
     });
-  if (devMode) {
+  if (!isDevMode) {
     return <></>;
   }
 

@@ -10,6 +10,7 @@ import { FormFooter } from '../../../../common-components/forms/form-footer';
 import { QueriesStatus } from '../../../../common-components/queries-status';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
+import { appRoutes } from '@src/appRoutes';
 
 const signupFormSchema = zod.object({
   username: zod
@@ -29,6 +30,7 @@ export const SignupForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useForm<SignupFormSchemaValues>({
     resolver: zodResolver(signupFormSchema),
@@ -39,7 +41,10 @@ export const SignupForm = () => {
     onSuccess: data => {
       console.log('on success signup', data);
       navigate({
-        to: '/check-email',
+        to: appRoutes.verifyEmail,
+        search: {
+          email: getValues('email'),
+        },
       });
       // Handle successful signup, e.g., redirect to login page or show success message
     },
