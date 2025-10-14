@@ -1,0 +1,97 @@
+.image-selector {
+  position: relative;
+  --image-fields-width: 80px;
+  --image-selector-padding: var(--lm-publisher-spacer-2);
+  --image-fields-offset: calc(var(--image-fields-width) + var(--image-selector-padding));
+  width: 100%;
+  padding-bottom: var(--image-selector-padding);
+  padding-right: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-inline-size: auto;
+}
+
+.image-selector__legend {
+  position: relative;
+  padding-right: 20px;
+}
+
+.image-selector__count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  aspect-ratio: 1 / 1;
+  width: 16px;
+  background-color: var(--lm-publisher-accent-color);
+  color: var(--lm-publisher-bg-color);
+  font-weight: bold;
+  font-size: smaller;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.image-selector__content {
+  display: flex;
+  align-items: stretch;
+  gap: var(--image-selector-padding);
+  overflow: hidden;
+  width: 100%;
+}
+
+.image-selector__input {
+  position: relative;
+  display: flex;
+  z-index: 3;
+
+  background-color: var(--lm-publisher-bg-color);
+  width: 100%;
+}
+
+.image-selector__sticky {
+  position: relative;
+  width: var(--image-fields-width);
+  margin-right: calc(-1 * (var(--image-fields-offset)));
+  flex-shrink: 0;
+}
+
+.image-selector__sticky:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  display: block;
+  width: var(--image-fields-offset);
+  background: linear-gradient(90deg, var(--lm-publisher-bg-color) 70%, transparent);
+  z-index: 2;
+}
+
+.image-selector .image-selector__input,
+.image-selector .image-selector__preview {
+  aspect-ratio: 3 / 4;
+}
+
+.image-selector__preview-list {
+  overflow: auto;
+  padding-left: var(--image-fields-offset);
+  padding-right: var(--image-selector-padding);
+  z-index: 1;
+}
+
+.image-selector .image-selector__preview {
+  width: var(--image-fields-width);
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 768px)  {
+  .image-selector {
+    --image-fields-width: 120px;
+  }
+  .image-selector .image-selector__input,
+  .image-selector .image-selector__preview {
+    aspect-ratio: 3 / 4;
+    width: 120px;
+  }
+}

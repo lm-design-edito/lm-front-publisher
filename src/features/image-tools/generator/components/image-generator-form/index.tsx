@@ -1,8 +1,7 @@
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Form } from '@common/components/forms/form';
-import { FormInputFile } from '@common/components/forms/form-input-file';
 import {
   ImageGeneratorTemplatesConfig,
   ImageGeneratorTemplates,
@@ -14,12 +13,40 @@ import { FormFooter } from '@common/components/forms/form-footer';
 import { QueriesStatus } from '@common/components/queries-status';
 import { useState } from 'react';
 import { Logger } from '@utils/logger';
+import { ImageSelector } from '../image-selector';
 
+const MAX_IMAGES = 6;
 const templateNames = ImageGeneratorTemplates.map(
   template => template.name,
 ) as [string, ...string[]];
 
+const TEMP_IMAGE_LIST = [
+  {
+    id: 'trees',
+    src: 'https://plus.unsplash.com/premium_photo-1759354756760-b4416a802588?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1064',
+  },
+  {
+    id: 'test',
+    src: 'https://images.unsplash.com/photo-1760141090872-58109ce746bd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMTl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&q=60&w=500',
+  },
+  {
+    id: 'test2',
+    src: 'https://images.unsplash.com/photo-1760301269447-fbc82b5a8d14?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=60&w=500',
+  },
+  {
+    id: 'matcha',
+    src: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWF0Y2hhfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+  },
+];
+
 const imageGeneratorFormSchema = zod.object({
+  imageList: zod
+    .array(zod.string())
+    .min(1)
+    .max(MAX_IMAGES)
+    .refine(val => val.length <= MAX_IMAGES, {
+      message: `Veuillez sélectionner jusqu'à ${MAX_IMAGES} images.`,
+    }),
   imageUpload: zod.instanceof(FileList).refine(files => files.length > 0, {
     message: 'Veuillez sélectionner une image.',
   }),
@@ -32,13 +59,31 @@ type ImageGeneratorFormSchemaValues = zod.infer<
   typeof imageGeneratorFormSchema
 >;
 
+const imageGeneratorUploadFormSchema = zod.object({
+  imageUpload: zod.instanceof(FileList).refine(files => files.length > 0, {
+    message: 'Veuillez sélectionner une image.',
+  }),
+});
+type ImageGeneratorUploadFormSchemaValues = zod.infer<
+  typeof imageGeneratorUploadFormSchema
+>;
+
 export const ImageGeneratorForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<ImageGeneratorFormSchemaValues>({
     resolver: zodResolver(imageGeneratorFormSchema),
+  });
+
+  const {
+    register: registerUpload,
+    // handleSubmit: handleSubmitUpload,
+    // formState: { errors: errorsUpload },
+  } = useForm<ImageGeneratorUploadFormSchemaValues>({
+    resolver: zodResolver(imageGeneratorUploadFormSchema),
   });
 
   const [APIStatus, setAPIStatus] = useState<{
@@ -91,15 +136,19 @@ export const ImageGeneratorForm = () => {
 
   return (
     <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
-      <FormInputFile
-        label="Image"
-        labelProps={{ htmlFor: 'image-upload' }}
-        inputProps={{
-          id: 'image-upload',
-          ...register('imageUpload'),
-        }}
-        error={errors['imageUpload']} // Replace 'imageUpload' with your actual field name
-      />
+      <Controller
+        name="imageList"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <ImageSelector
+            inputProps={registerUpload('imageUpload')}
+            droppable={true}
+            onSelectionChange={onChange}
+            imageList={TEMP_IMAGE_LIST}
+            selection={value}
+          />
+        )}
+      ></Controller>
 
       <FormInputRadioGroup
         label="Template"

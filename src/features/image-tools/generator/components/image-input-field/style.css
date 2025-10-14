@@ -1,0 +1,36 @@
+.image-input-field {
+  border: 1px dashed var(--lm-publisher-border-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.image-input-field_dragging-over .image-input-field__content,
+.image-input-field:hover {
+  border-color: var(--lm-publisher-accent-color);
+  background-color: var(--lm-publisher-form-highlight-bg);
+}
+
+.image-input-field__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  padding: var(--lm-publisher-spacer-2) var(--lm-publisher-spacer);
+  gap: var(--lm-publisher-spacer);
+  box-sizing: border-box;
+}
+
+.form-input-file .form-input .lmui-form__input {
+  border: none !important;
+  outline: none !important;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  box-shadow: none;
+}
+
+.form-input-file__input {
+  display: none;
+}
+

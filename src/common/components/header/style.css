@@ -1,10 +1,18 @@
 .header {
     border-bottom: 1px solid var(--lm-publisher-border-color);
-    padding: var(--lm-publisher-grid-margins);
+    padding: var(--lm-publisher-grid-margins) var(--lm-publisher-spacer);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+ .header__location {
+    display: none;
+}
+
+.theme-switch {
+    display: none;
+}
+
 
 .header__left, 
 .header__title {
@@ -36,5 +44,28 @@
 
 .header__left h1 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: smaller;
+}
+
+
+.header .logo {
+    max-width: 24px;
+}
+
+
+@media screen and (min-width: 768px)  {
+    .header {
+        padding: var(--lm-publisher-grid-margins);
+    }
+    .header__location {
+        display: inline;
+    }
+    .theme-switch {
+        display: flex;
+    }
+
+    .header__left h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
 }

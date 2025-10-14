@@ -5,8 +5,9 @@ import { FormFieldError } from '../form-field-error';
 import { Display } from '@common/components/display';
 
 import './style.css';
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { FakeButton } from '@common/components/buttons/button';
+import useFileDragDrop from '@common/hooks/useFileDragDrop';
 
 export type FormInputFileProps = {
   className?: string;
@@ -33,45 +34,57 @@ export const FormInputFile = ({
   preview,
   ...props
 }: FormInputFileProps) => {
-  const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const { isDraggingOver, dragProps } = useFileDragDrop({
+    droppable: props.droppable,
+    onDrop: (files: FileList) => {
+      const file = files[0];
+      if (inputProps.onChange) {
+        inputProps.onChange({
+          target: { ...inputProps, files: [file], value: file.name },
+        } as unknown as React.ChangeEvent<HTMLInputElement>);
+      }
+    },
+  });
 
-  const dragProps = useMemo(
-    () =>
-      props.droppable
-        ? {
-            droppable: 'true',
-            onDragEnd: (e: React.DragEvent<HTMLFieldSetElement>) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsDraggingOver(false);
-            },
-            onDragOver: (e: React.DragEvent<HTMLFieldSetElement>) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsDraggingOver(true);
-            },
-            onDragLeave: (e: React.DragEvent<HTMLFieldSetElement>) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsDraggingOver(false);
-            },
-            onDrop: (e: React.DragEvent<HTMLFieldSetElement>) => {
-              if (e.dataTransfer.files.length > 0) {
-                e.preventDefault();
-                const file = e.dataTransfer.files[0];
-                if (inputProps.onChange) {
-                  inputProps.onChange({
-                    ...e,
-                    target: { ...e.target, files: [file], value: file.name },
-                  } as unknown as React.ChangeEvent<HTMLInputElement>);
-                }
-              }
-              setIsDraggingOver(false);
-            },
-          }
-        : {},
-    [props.droppable, inputProps],
-  );
+  // const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+  // const dragProps = useMemo(
+  //   () =>
+  //     props.droppable
+  //       ? {
+  //           droppable: 'true',
+  //           onDragEnd: (e: React.DragEvent<HTMLFieldSetElement>) => {
+  //             e.preventDefault();
+  //             e.stopPropagation();
+  //             setIsDraggingOver(false);
+  //           },
+  //           onDragOver: (e: React.DragEvent<HTMLFieldSetElement>) => {
+  //             e.preventDefault();
+  //             e.stopPropagation();
+  //             setIsDraggingOver(true);
+  //           },
+  //           onDragLeave: (e: React.DragEvent<HTMLFieldSetElement>) => {
+  //             e.preventDefault();
+  //             e.stopPropagation();
+  //             setIsDraggingOver(false);
+  //           },
+  //           onDrop: (e: React.DragEvent<HTMLFieldSetElement>) => {
+  //             if (e.dataTransfer.files.length > 0) {
+  //               e.preventDefault();
+  //               const file = e.dataTransfer.files[0];
+  //               if (inputProps.onChange) {
+  //                 inputProps.onChange({
+  //                   ...e,
+  //                   target: { ...e.target, files: [file], value: file.name },
+  //                 } as unknown as React.ChangeEvent<HTMLInputElement>);
+  //               }
+  //             }
+  //             setIsDraggingOver(false);
+  //           },
+  //         }
+  //       : {},
+  //   [props.droppable, inputProps],
+  // );
 
   return (
     <FieldSet

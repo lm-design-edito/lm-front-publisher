@@ -30,12 +30,13 @@
   --lm-publisher-grid-margins: 24px;
   --lm-publisher-spacer-05: 4px;
   --lm-publisher-spacer: 8px;
-  --lm-publisher-spacer-2: 16px;
-  --lm-publisher-spacer-3: 24px;
-  --lm-publisher-spacer-4: 32px;
-  --lm-publisher-spacer-5: 40px;
-  --lm-publisher-spacer-6: 68px;
-  --lm-publisher-spacer-8: 64px;
+  --lm-publisher-spacer-1: var(--lm-publisher-spacer);
+  --lm-publisher-spacer-2: calc(var(--lm-publisher-spacer) * 2);
+  --lm-publisher-spacer-3: calc(var(--lm-publisher-spacer) * 3);
+  --lm-publisher-spacer-4: calc(var(--lm-publisher-spacer) * 4);
+  --lm-publisher-spacer-5: calc(var(--lm-publisher-spacer) * 5);
+  --lm-publisher-spacer-6: calc(var(--lm-publisher-spacer) * 6);
+  --lm-publisher-spacer-8: calc(var(--lm-publisher-spacer) * 8);
 }
 
 :root[data-color-mode='dark'] {
@@ -61,6 +62,8 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--lm-publisher-border-color) transparent;
 }
 
 .app-content {
