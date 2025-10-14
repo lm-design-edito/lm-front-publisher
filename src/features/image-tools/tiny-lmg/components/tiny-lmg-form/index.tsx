@@ -3,21 +3,21 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form } from '@common-components/forms/form';
-import { FormInputFile } from '@common-components/forms/form-input-file';
-import { FormInputCheckboxGroup } from '@common-components/forms/form-input-checkbox-group';
+import { Form } from '@common/components/forms/form';
+import { FormInputFile } from '@common/components/forms/form-input-file';
+import { FormInputCheckboxGroup } from '@common/components/forms/form-input-checkbox-group';
 import { TinyLMGFitOptions, TinyLMGFormats } from '../../config';
-import { FormFooter } from '@common-components/forms/form-footer';
-import { FormSubmit } from '@common-components/forms/form-submit';
-import { Button } from '@common-components/buttons/button';
-import { FormInput } from '@common-components/forms/form-input';
-import { FieldSet } from '@common-components/forms/fieldset';
-import { Display } from '@common-components/display';
-import { FormSelect } from '@common-components/forms/form-select';
+import { FormFooter } from '@common/components/forms/form-footer';
+import { FormSubmit } from '@common/components/forms/form-submit';
+import { Button } from '@common/components/buttons/button';
+import { FormInput } from '@common/components/forms/form-input';
+import { FieldSet } from '@common/components/forms/fieldset';
+import { Display } from '@common/components/display';
+import { FormSelect } from '@common/components/forms/form-select';
 
 import './style.css';
 import { useImageMultiFormat } from '../../api/use-image-multi-format';
-import { QueriesStatus } from '@common-components/queries-status';
+import { QueriesStatus } from '@common/components/queries-status';
 import { Logger } from '@utils/logger';
 
 const TinyLMGFormatsValues = TinyLMGFormats.map(format => format.value) as [

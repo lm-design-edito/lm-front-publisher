@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
-import { Button } from '../../../../common-components/buttons/button';
+import { Button } from '@common/components/buttons/button';
 import { useLogoutEverywhere } from '../../api/use-logout-everywhere';
 import { appRoutes } from '@src/appRoutes';
 

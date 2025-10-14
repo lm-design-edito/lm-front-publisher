@@ -1,6 +1,6 @@
-import { Block } from '@common-components/block';
-import { Button } from '@common-components/buttons/button';
-import { FormSelect } from '@common-components/forms/form-select';
+import { Block } from '@common/components/block';
+import { Button } from '@common/components/buttons/button';
+import { FormSelect } from '@common/components/forms/form-select';
 import { useCallback, useState } from 'react';
 
 export type TransformerFormOperationSelectorProps = {
@@ -33,7 +33,7 @@ export const TransformerFormOperationSelector = ({
       />
       <Button type="button" variant="secondary" onClick={handleSelectOperation}>
         Ajouter une opération (todo)
-      </Button> 
+      </Button>
     </Block>
   );
 };

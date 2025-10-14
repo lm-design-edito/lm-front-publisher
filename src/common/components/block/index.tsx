@@ -1,4 +1,4 @@
-import { Display, type DisplayProps } from '@common-components/display';
+import { Display, type DisplayProps } from '@common/components/display';
 import './style.css';
 
 type BlockProps = DisplayProps & {

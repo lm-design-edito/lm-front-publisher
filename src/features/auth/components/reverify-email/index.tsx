@@ -1,7 +1,7 @@
-import { Display } from '@common-components/display';
-import { Loader } from '@common-components/loader';
-import { QueriesStatus } from '@common-components/queries-status';
-import { Text } from '@common-components/text';
+import { Display } from '@common/components/display';
+import { Loader } from '@common/components/loader';
+import { QueriesStatus } from '@common/components/queries-status';
+import { Text } from '@common/components/text';
 import { useRequestEmailVerificationToken } from '@features/auth/api/use-request-email-verification-token';
 import { Logger } from '@utils/logger';
 import { useState } from 'react';

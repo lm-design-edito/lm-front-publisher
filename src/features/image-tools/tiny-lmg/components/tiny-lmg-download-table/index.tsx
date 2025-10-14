@@ -1,7 +1,7 @@
-import { Table, type Column, type Row } from '@common-components/tables/table';
+import { Table, type Column, type Row } from '@common/components/tables/table';
 import './style.css';
-import { Badge } from '@common-components/badge';
-import { Display } from '@common-components/display';
+import { Badge } from '@common/components/badge';
+import { Display } from '@common/components/display';
 
 export type TinyLMGDownload = {
   name: string;

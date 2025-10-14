@@ -49,12 +49,9 @@ export const imageFormat = async (params: ImageFormat) => {
   for (const [key, value] of formData.entries()) {
     console.log(`FormData: ${key} = ${value}`);
   }
-  return await api.query<ImageResponseSuccessPayload>(
-    API_ROUTES.IMAGE_FORMAT,
-    {
-      method: 'POST',
-      body: formData,
-      _removeContentType: true,
-    },
-  );
+  return await api.query<ImageResponseSuccessPayload>(API_ROUTES.IMAGE_FORMAT, {
+    method: 'POST',
+    body: formData,
+    _removeContentType: true,
+  });
 };

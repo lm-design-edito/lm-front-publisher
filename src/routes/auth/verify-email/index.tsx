@@ -1,6 +1,6 @@
-import { Display } from '@common-components/display';
-import { Divider } from '@common-components/divider';
-import { Headline } from '@common-components/headline';
+import { Display } from '@common/components/display';
+import { Divider } from '@common/components/divider';
+import { Headline } from '@common/components/headline';
 import { ReverifyEmail } from '@features/auth/components/reverify-email';
 import { VerifyEmailForm } from '@features/auth/components/verify-email-form';
 import { createFileRoute, redirect, useSearch } from '@tanstack/react-router';

@@ -166,7 +166,7 @@ const ImageGeneratorTemplatesConfig: Record<string, unknown> = {
           ],
         },
       },
-    ]
+    ],
   },
 };
 

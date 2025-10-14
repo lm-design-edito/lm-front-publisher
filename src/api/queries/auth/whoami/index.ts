@@ -12,4 +12,4 @@ export const whoAmI = async (params?: WhoAmIParams) =>
   api.query<WhoAmISuccessPayload>(API_ROUTES.AUTH_POST_WHOAMI, {
     method: 'POST',
     body: JSON.stringify(params),
-});
+  });

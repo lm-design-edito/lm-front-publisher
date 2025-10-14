@@ -1,4 +1,4 @@
-import { Badge } from '@common-components/badge';
+import { Badge } from '@common/components/badge';
 import { useMemo } from 'react';
 
 export type UserBadgeProps = {

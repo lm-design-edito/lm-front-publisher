@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { SignupForm } from '@features/auth/components/signup-form';
-import { Headline } from '@common-components/headline';
+import { Headline } from '@common/components/headline';
 
 const SignupPage = () => {
   return (

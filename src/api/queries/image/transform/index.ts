@@ -8,7 +8,7 @@ type ImageTransform = {
   image: File;
   operations: [
     {
-      name: 'blur',
+      name: 'blur';
       sigma: number;
     },
   ];

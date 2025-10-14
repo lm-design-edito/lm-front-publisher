@@ -1,4 +1,4 @@
-import { Display } from '@common-components/display';
+import { Display } from '@common/components/display';
 import { FormFieldError, type FormFieldErrorProps } from '../form-field-error';
 import { FormHelper, type FormHelperProps } from '../form-helper';
 import './style.css';

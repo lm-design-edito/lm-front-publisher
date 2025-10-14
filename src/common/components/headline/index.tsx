@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Text } from '@common-components/text';
+import { Text } from '@common/components/text';
 import './style.css';
 
 type HeadlineProps = {

@@ -1,18 +1,14 @@
 import { useMemo } from 'react';
-import { Loader } from '../../../../common-components/loader';
+import { Loader } from '@common/components/loader';
 import { useWhoAmI } from '../../../auth/api/use-who-am-i';
 import { useUserList } from '../../api/use-user-list';
 import './style.css';
-import {
-  Table,
-  type Column,
-  type Row,
-} from '../../../../common-components/tables/table';
-import { Button } from '../../../../common-components/buttons/button';
-import { UserBadge } from '../../../../common-components/user/user-badge';
-import { UserStatus } from '../../../../common-components/user/user-status';
-import { UserVerified } from '../../../../common-components/user/user-verified';
-import { UserRole } from '../../../../common-components/user/user-role';
+import { Table, type Column, type Row } from '@common/components/tables/table';
+import { Button } from '@common/components/buttons/button';
+import { UserBadge } from '@common/components/user/user-badge';
+import { UserStatus } from '@common/components/user/user-status';
+import { UserVerified } from '@common/components/user/user-verified';
+import { UserRole } from '@common/components/user/user-role';
 
 export type UserListRow = {
   _id: string;

@@ -3,7 +3,7 @@ import { useLogout } from '../../../auth/api/use-logout';
 import './style.css';
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
-import { Loader } from '../../../../common-components/loader';
+import { Loader } from '@common/components/loader';
 
 const isDevMode = import.meta.env.MODE === 'development';
 

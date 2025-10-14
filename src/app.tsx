@@ -1,7 +1,7 @@
 import { RouterProvider } from '@tanstack/react-router';
-import { useWhoAmI } from './features/auth/api/use-who-am-i';
+import { useWhoAmI } from '@features/auth';
 import { router } from './router';
-import { Headline } from '@common-components/headline';
+import { Headline } from '@common/components/headline';
 
 export default function App() {
   const { isAuthenticated, isLoading } = useWhoAmI();

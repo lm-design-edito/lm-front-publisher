@@ -16,8 +16,8 @@ export default defineConfig(({ command }) => {
         '@api': '/src/api',
         '@utils': '/src/utils',
         '@features': '/src/features',
-        '@common-components': '/src/common-components',
+        '@common': '/src/common',
       },
     },
-  }
+  };
 });

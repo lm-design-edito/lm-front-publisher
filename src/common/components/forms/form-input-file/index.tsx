@@ -2,11 +2,11 @@ import { FieldSet } from '../fieldset';
 import { FormLabel } from '../form-label';
 import { FormInput, type FormInputProps } from '../form-input';
 import { FormFieldError } from '../form-field-error';
-import { Display } from '@common-components/display';
+import { Display } from '@common/components/display';
 
 import './style.css';
 import React, { useMemo, useState } from 'react';
-import { FakeButton } from '@common-components/buttons/button';
+import { FakeButton } from '@common/components/buttons/button';
 
 export type FormInputFileProps = {
   className?: string;

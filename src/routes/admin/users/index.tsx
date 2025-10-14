@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { UserList } from '@features/admin-users';
-import { Headline } from '../../../common-components/headline';
+import { Headline } from '@common/components/headline';
 import { appRoutes } from '@src/appRoutes';
 
 const AdminUserListPage = () => {

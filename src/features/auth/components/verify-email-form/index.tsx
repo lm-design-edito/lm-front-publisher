@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
-import { FormInput } from '../../../../common-components/forms/form-input';
-import { Form } from '../../../../common-components/forms/form';
+import { FormInput } from '@common/components/forms/form-input';
+import { Form } from '@common/components/forms/form';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { QueriesStatus } from '../../../../common-components/queries-status';
-import { FormSubmit } from '../../../../common-components/forms/form-submit';
-import { FormFooter } from '../../../../common-components/forms/form-footer';
+import { QueriesStatus } from '@common/components/queries-status';
+import { FormSubmit } from '@common/components/forms/form-submit';
+import { FormFooter } from '@common/components/forms/form-footer';
 import { useVerifyEmail } from '@features/auth/api/use-verify-email';
 import { appRoutes } from '@src/appRoutes';
 

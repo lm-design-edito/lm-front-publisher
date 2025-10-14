@@ -3,13 +3,13 @@ import { createFileRoute } from '@tanstack/react-router';
 import type { CustomRouteContext } from '../../../router';
 import { checkForAuthentifacted } from '../../../route-middleware';
 
-import { Headline } from '@common-components/headline';
+import { Headline } from '@common/components/headline';
 import { useState } from 'react';
 import {
   TinyLMGDownloadTable,
   type TinyLMGDownloadTableProps,
 } from '@features/image-tools/tiny-lmg/components/tiny-lmg-download-table';
-import { Display } from '@common-components/display';
+import { Display } from '@common/components/display';
 
 type Download = TinyLMGDownloadTableProps['downloads'][0];
 

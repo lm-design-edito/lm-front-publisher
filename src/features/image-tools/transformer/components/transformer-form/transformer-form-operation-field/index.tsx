@@ -1,4 +1,4 @@
-import { FormInput } from '@common-components/forms/form-input';
+import { FormInput } from '@common/components/forms/form-input';
 import type { FieldError } from 'react-hook-form';
 
 // const Operations = [
@@ -45,5 +45,5 @@ export const TransformerFormOperationField = ({
         />
       );
   }
-  return <></>
+  return <></>;
 };

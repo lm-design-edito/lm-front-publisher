@@ -2,7 +2,7 @@ import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ThemeProvider } from '@features/theme';
 import { DebugDevBar } from '@features/debug';
-import { Header } from '../common-components/header';
+import { Header } from '@common/components/header';
 import { UnverifiedUserBanner } from '@features/auth/components/unverified-user-banner';
 
 // Create a client

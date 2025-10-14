@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
-import { FormInput } from '../../../../common-components/forms/form-input';
-import { Form } from '../../../../common-components/forms/form';
+import { FormInput } from '@common/components/forms/form-input';
+import { Form } from '@common/components/forms/form';
 import { useLogin } from '../../api/use-login';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { QueriesStatus } from '../../../../common-components/queries-status';
-import { FormSubmit } from '../../../../common-components/forms/form-submit';
-import { FormFooter } from '../../../../common-components/forms/form-footer';
+import { QueriesStatus } from '@common/components/queries-status';
+import { FormSubmit } from '@common/components/forms/form-submit';
+import { FormFooter } from '@common/components/forms/form-footer';
 import { appRoutes } from '@src/appRoutes';
 
 const loginFormSchema = zod.object({

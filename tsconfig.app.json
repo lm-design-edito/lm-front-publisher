@@ -26,7 +26,7 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@common-components/*": ["src/common-components/*"],
+      "@common/*": ["src/common/*"],
       "@features/*": ["src/features/*"],
       "@api/*": ["src/api/*"],
       "@utils/*": ["src/utils/*"],

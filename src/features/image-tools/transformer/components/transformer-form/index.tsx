@@ -1,8 +1,8 @@
-import { Form } from '@common-components/forms/form';
-import { FormFooter } from '@common-components/forms/form-footer';
-import { FormInput } from '@common-components/forms/form-input';
-import { FormInputFile } from '@common-components/forms/form-input-file';
-import { FormSubmit } from '@common-components/forms/form-submit';
+import { Form } from '@common/components/forms/form';
+import { FormFooter } from '@common/components/forms/form-footer';
+import { FormInput } from '@common/components/forms/form-input';
+import { FormInputFile } from '@common/components/forms/form-input-file';
+import { FormSubmit } from '@common/components/forms/form-submit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Logger } from '@utils/logger';
 import { useState } from 'react';

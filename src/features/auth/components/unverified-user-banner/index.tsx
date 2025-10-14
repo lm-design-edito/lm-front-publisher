@@ -1,4 +1,4 @@
-import { Text } from '@common-components/text';
+import { Text } from '@common/components/text';
 import { useWhoAmI } from '@features/auth/api';
 import { appRoutes } from '@src/appRoutes';
 import { Link, useLocation } from '@tanstack/react-router';
