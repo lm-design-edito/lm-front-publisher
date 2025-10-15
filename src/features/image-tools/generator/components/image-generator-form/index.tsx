@@ -139,6 +139,7 @@ export const ImageGeneratorForm = () => {
             onSelectionChange={onChange}
             imageList={tempImageList}
             selection={value}
+            error={errors['imageList']}
           />
         )}
       />

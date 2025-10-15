@@ -13,7 +13,3 @@
 .form-input-radio-group .form-label {
     color: var(--lmui-c-form-placeholder);
 }
-
-.form-input-radio-group_error {
-    border: 1px solid var(--lm-publisher-form-error-color);
-}

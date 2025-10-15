@@ -9,6 +9,8 @@
 
   --lm-publisher-text-error-color: var(--lmui-c-red-light);
   --lm-publisher-text-success-color: var(--lmui-c-form-border-valid-dark);
+  --lm-publisher-bg-success-color: var(--lmui-c-form-border-valid-dark);
+  
 
   --lm-publisher-form-error-color: var(--lmui-c-form-border-error);
   --lm-publisher-form-error-text-color: var(--lmui-c-form-border-error);
@@ -181,4 +183,16 @@ th {
 
 .lm-publisher-flex-spacer-2 {
   gap: var(--lm-publisher-spacer-2);
+}
+
+
+.toast-container {
+  position: fixed;
+  z-index: 1000;
+  padding: var(--lm-publisher-grid-margins);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--lm-publisher-spacer);
+  align-items: flex-end;
 }

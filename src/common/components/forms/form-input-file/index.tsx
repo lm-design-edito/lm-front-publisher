@@ -46,46 +46,6 @@ export const FormInputFile = ({
     },
   });
 
-  // const [isDraggingOver, setIsDraggingOver] = useState(false);
-
-  // const dragProps = useMemo(
-  //   () =>
-  //     props.droppable
-  //       ? {
-  //           droppable: 'true',
-  //           onDragEnd: (e: React.DragEvent<HTMLFieldSetElement>) => {
-  //             e.preventDefault();
-  //             e.stopPropagation();
-  //             setIsDraggingOver(false);
-  //           },
-  //           onDragOver: (e: React.DragEvent<HTMLFieldSetElement>) => {
-  //             e.preventDefault();
-  //             e.stopPropagation();
-  //             setIsDraggingOver(true);
-  //           },
-  //           onDragLeave: (e: React.DragEvent<HTMLFieldSetElement>) => {
-  //             e.preventDefault();
-  //             e.stopPropagation();
-  //             setIsDraggingOver(false);
-  //           },
-  //           onDrop: (e: React.DragEvent<HTMLFieldSetElement>) => {
-  //             if (e.dataTransfer.files.length > 0) {
-  //               e.preventDefault();
-  //               const file = e.dataTransfer.files[0];
-  //               if (inputProps.onChange) {
-  //                 inputProps.onChange({
-  //                   ...e,
-  //                   target: { ...e.target, files: [file], value: file.name },
-  //                 } as unknown as React.ChangeEvent<HTMLInputElement>);
-  //               }
-  //             }
-  //             setIsDraggingOver(false);
-  //           },
-  //         }
-  //       : {},
-  //   [props.droppable, inputProps],
-  // );
-
   return (
     <FieldSet
       className={`form-input-file ${className || ''} ${isDraggingOver ? 'form-input-file_dragging-over' : ''} ${error ? 'form-input-file_error' : ''}`}

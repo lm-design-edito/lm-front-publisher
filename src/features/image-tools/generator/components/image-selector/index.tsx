@@ -1,4 +1,7 @@
-import { FieldSet } from '@common/components/forms/fieldset';
+import {
+  FieldSet,
+  type FieldsetProps,
+} from '@common/components/forms/fieldset';
 
 import './style.css';
 import {
@@ -14,6 +17,7 @@ export type ImageSelectorProps = {
     alt?: string;
     id: string;
   }[];
+  error?: FieldsetProps['error'];
   uploadDroppable?: boolean;
   uploadInputProps?: ImageInputFieldProps['inputProps'];
   selection?: string[]; // list of selected image ids
