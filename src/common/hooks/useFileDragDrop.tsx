@@ -1,12 +1,43 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 type Props = {
   droppable?: boolean;
   onDrop?: (files: FileList) => void;
+  acceptFormats?: string[]; // e.g., ['image/png', 'image/jpeg']
 };
 
-const useFileDragDrop = ({ droppable, onDrop }: Props) => {
+const useFileDragDrop = ({ droppable, onDrop, acceptFormats }: Props) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const [isDraggingInvalidOver, setIsDraggingInvalidOver] = useState(false);
+  const [draggedFilesCount, setDraggedFilesCount] = useState(0);
+
+  const isValidFormat = useCallback(
+    (item: DataTransferItem) => {
+      if (!acceptFormats || acceptFormats.length === 0) {
+        return true; // No format restrictions
+      }
+
+      if (acceptFormats.includes(item.type)) {
+        return true; // Exact match found
+      }
+
+      if (acceptFormats[0].endsWith('/*')) {
+        const baseType = acceptFormats[0].split('/')[0];
+        if (item.type.startsWith(baseType + '/')) {
+          return true; // Matches the base type
+        }
+      }
+
+      return false;
+    },
+    [acceptFormats],
+  );
+
+  const resetDrag = useCallback(() => {
+    setDraggedFilesCount(0);
+    setIsDraggingOver(false);
+    setIsDraggingInvalidOver(false);
+  }, []);
 
   const dragProps = useMemo(
     () =>
@@ -16,17 +47,32 @@ const useFileDragDrop = ({ droppable, onDrop }: Props) => {
             onDragEnd: (e: React.DragEvent<HTMLElement>) => {
               e.preventDefault();
               e.stopPropagation();
-              setIsDraggingOver(false);
+              resetDrag();
             },
             onDragOver: (e: React.DragEvent<HTMLElement>) => {
               e.preventDefault();
               e.stopPropagation();
+              /* Check if format is accepted */
+              if (e.dataTransfer.items) {
+                const items = Array.from(e.dataTransfer.items);
+                const hasValidFormat = items.every(item => isValidFormat(item));
+                if (!hasValidFormat) {
+                  e.dataTransfer.dropEffect = 'none';
+                  setIsDraggingInvalidOver(true);
+                  setDraggedFilesCount(0);
+                  return;
+                }
+              }
+
+              setDraggedFilesCount(e.dataTransfer.items.length);
+
+              setIsDraggingInvalidOver(false);
               setIsDraggingOver(true);
             },
             onDragLeave: (e: React.DragEvent<HTMLElement>) => {
               e.preventDefault();
               e.stopPropagation();
-              setIsDraggingOver(false);
+              resetDrag();
             },
             onDrop: (e: React.DragEvent<HTMLElement>) => {
               if (e.dataTransfer.files.length > 0) {
@@ -35,17 +81,18 @@ const useFileDragDrop = ({ droppable, onDrop }: Props) => {
                   onDrop(e.dataTransfer.files);
                 }
               }
-              setIsDraggingOver(false);
+              resetDrag();
             },
           }
         : {},
-    [droppable, onDrop],
+    [droppable, onDrop, isValidFormat, resetDrag],
   );
-  // Placeholder for drag and drop logic
 
   return {
     dragProps,
+    draggedFilesCount,
     isDraggingOver,
+    isDraggingInvalidOver,
   };
 };
 

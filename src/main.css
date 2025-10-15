@@ -11,6 +11,8 @@
   --lm-publisher-text-success-color: var(--lmui-c-form-border-valid-dark);
 
   --lm-publisher-form-error-color: var(--lmui-c-form-border-error);
+  --lm-publisher-form-error-text-color: var(--lmui-c-form-border-error);
+  --lm-publisher-form-error-bg-color: #fab4b41f;
   --lm-publisher-form-highlight-bg: #82c8e81f;
 
   --lm-publisher-dialog-bg-color: var(--lmui-c-dialog-box-bg);

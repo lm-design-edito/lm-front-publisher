@@ -22,7 +22,7 @@ export const ImageSelectablePreview = ({
       onClick={() => onChange(!selected)}
     >
       <span className="image-selectable-preview__badge">
-        <Icon name={'check'} />
+        <Icon name={'check'} color="forced-white" />
       </span>
       <img src={src} alt={alt} />
     </div>

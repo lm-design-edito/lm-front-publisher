@@ -1,0 +1,26 @@
+.lmui-icon--forced-white {
+  filter: brightness(0%) grayscale(100%) invert(1)
+}
+
+.lmui-icon--error {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(98%) saturate(3887%) hue-rotate(291deg) brightness(109%) contrast(97%);
+}
+
+.lmui-icon--accent {
+  filter: brightness(0) saturate(100%) invert(93%) sepia(11%) saturate(6569%) hue-rotate(170deg) brightness(97%) contrast(86%);
+}
+
+.lmui-icon--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.lmui-icon--md {
+  width: 24px;
+  height: 24px;
+}
+
+.lmui-icon--lg {
+  width: 32px;
+  height: 32px;
+}

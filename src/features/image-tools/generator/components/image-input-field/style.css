@@ -2,12 +2,33 @@
   border: 1px dashed var(--lm-publisher-border-color);
   border-radius: 8px;
   cursor: pointer;
+  transition: background .3s;
 }
 
-.image-input-field_dragging-over .image-input-field__content,
+.image-input-field .lmui-icon--close {
+  display: none;
+}
+
+.image-input-field_dragging-over,
 .image-input-field:hover {
   border-color: var(--lm-publisher-accent-color);
   background-color: var(--lm-publisher-form-highlight-bg);
+}
+
+.image-input-field_dragging-invalid-over:hover,
+.image-input-field_dragging-invalid-over {
+  border-color: var(--lm-publisher-form-error-color);
+  background-color: var(--lm-publisher-form-error-bg-color);
+  color: var(--lm-publisher-form-error-text-color);
+}
+
+.image-input-field_dragging-invalid-over .lmui-icon--close {
+  display: block;
+  color: var(--lm-publisher-form-error-color);
+}
+
+.image-input-field_dragging-invalid-over .lmui-icon--plus {
+  display: none;
 }
 
 .image-input-field__content {
@@ -19,6 +40,7 @@
   padding: var(--lm-publisher-spacer-2) var(--lm-publisher-spacer);
   gap: var(--lm-publisher-spacer);
   box-sizing: border-box;
+  width: 100%;
 }
 
 .form-input-file .form-input .lmui-form__input {
@@ -30,7 +52,7 @@
   box-shadow: none;
 }
 
-.form-input-file__input {
+.image-input-field__input {
   display: none;
 }
 

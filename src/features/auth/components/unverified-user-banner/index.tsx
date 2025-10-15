@@ -17,7 +17,7 @@ export const UnverifiedUserBanner = () => {
       <div className="unverified-user-banner">
         <Text size="sm">
           Attention, votre compte n'est pas vérifié, il est possible que
-          certainnes fonctionnalités soient desactivés.{' '}
+          certaines fonctionnalités soient desactivés.{' '}
           <Link
             to={appRoutes.verifyEmail}
             search={{

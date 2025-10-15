@@ -13,31 +13,12 @@ import { FormFooter } from '@common/components/forms/form-footer';
 import { QueriesStatus } from '@common/components/queries-status';
 import { useState } from 'react';
 import { Logger } from '@utils/logger';
-import { ImageSelector } from '../image-selector';
+import { ImageSelector, type ImageSelectorProps } from '../image-selector';
 
 const MAX_IMAGES = 6;
 const templateNames = ImageGeneratorTemplates.map(
   template => template.name,
 ) as [string, ...string[]];
-
-const TEMP_IMAGE_LIST = [
-  {
-    id: 'trees',
-    src: 'https://plus.unsplash.com/premium_photo-1759354756760-b4416a802588?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1064',
-  },
-  {
-    id: 'test',
-    src: 'https://images.unsplash.com/photo-1760141090872-58109ce746bd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMTl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&q=60&w=500',
-  },
-  {
-    id: 'test2',
-    src: 'https://images.unsplash.com/photo-1760301269447-fbc82b5a8d14?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=60&w=500',
-  },
-  {
-    id: 'matcha',
-    src: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWF0Y2hhfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
-  },
-];
 
 const imageGeneratorFormSchema = zod.object({
   imageList: zod
@@ -59,37 +40,26 @@ type ImageGeneratorFormSchemaValues = zod.infer<
   typeof imageGeneratorFormSchema
 >;
 
-const imageGeneratorUploadFormSchema = zod.object({
-  imageUpload: zod.instanceof(FileList).refine(files => files.length > 0, {
-    message: 'Veuillez sélectionner une image.',
-  }),
-});
-type ImageGeneratorUploadFormSchemaValues = zod.infer<
-  typeof imageGeneratorUploadFormSchema
->;
-
 export const ImageGeneratorForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     control,
     formState: { errors },
+    setValue,
   } = useForm<ImageGeneratorFormSchemaValues>({
     resolver: zodResolver(imageGeneratorFormSchema),
-  });
-
-  const {
-    register: registerUpload,
-    // handleSubmit: handleSubmitUpload,
-    // formState: { errors: errorsUpload },
-  } = useForm<ImageGeneratorUploadFormSchemaValues>({
-    resolver: zodResolver(imageGeneratorUploadFormSchema),
   });
 
   const [APIStatus, setAPIStatus] = useState<{
     success: boolean;
     message: string;
   } | null>(null);
+
+  const [tempImageList, setTempImageList] = useState<
+    ImageSelectorProps['imageList']
+  >([]);
 
   const { mutate: imageGenerate, isPending } = useImageTransform({
     onSuccess: data => {
@@ -134,6 +104,26 @@ export const ImageGeneratorForm = () => {
     // Handle form submission logic here
   };
 
+  const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {
+    /* @todo: call api here */
+    const imageIds = e.target.files
+      ? Array.from(e.target.files).map(file => file.name)
+      : [];
+
+    setTempImageList((currentImageList: ImageSelectorProps['imageList']) => [
+      ...(e.target.files
+        ? Array.from(e.target.files).map(file => ({
+            id: file.name,
+            src: URL.createObjectURL(file),
+          }))
+        : []),
+      ...(currentImageList || []),
+    ]);
+
+    const currentValues = getValues('imageList');
+
+    setValue('imageList', [...(currentValues || []), ...imageIds]);
+  };
   return (
     <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -141,14 +131,17 @@ export const ImageGeneratorForm = () => {
         control={control}
         render={({ field: { onChange, value } }) => (
           <ImageSelector
-            inputProps={registerUpload('imageUpload')}
-            droppable={true}
+            uploadInputProps={{
+              id: 'image-upload',
+              onChange: onChangeUpload,
+            }}
+            uploadDroppable={true}
             onSelectionChange={onChange}
-            imageList={TEMP_IMAGE_LIST}
+            imageList={tempImageList}
             selection={value}
           />
         )}
-      ></Controller>
+      />
 
       <FormInputRadioGroup
         label="Template"

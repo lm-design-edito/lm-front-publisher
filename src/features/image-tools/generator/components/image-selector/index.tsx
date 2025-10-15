@@ -8,31 +8,31 @@ import {
 import { ImageSelectablePreview } from '../image-selectable-preview';
 import { Display } from '@common/components/display';
 
-export type Props = {
+export type ImageSelectorProps = {
   imageList?: {
     src: string;
     alt?: string;
     id: string;
   }[];
-  droppable?: boolean;
-  inputProps: ImageInputFieldProps['inputProps'];
+  uploadDroppable?: boolean;
+  uploadInputProps?: ImageInputFieldProps['inputProps'];
   selection?: string[]; // list of selected image ids
   onSelectionChange?: (selection: string[]) => void;
 };
 
 export const ImageSelector = ({
-  droppable,
   imageList,
   selection,
-  inputProps,
+  uploadDroppable,
+  uploadInputProps,
   onSelectionChange,
   ...otherProps
-}: Props) => {
+}: ImageSelectorProps) => {
   return (
     <FieldSet
       legend={
         <span className="image-selector__legend">
-          Sélectionner une image{' '}
+          Sélectionner une ou plusieurs images{' '}
           <span className="image-selector__count">
             {selection?.length || 0}
           </span>
@@ -44,8 +44,11 @@ export const ImageSelector = ({
     >
       <div className="image-selector__sticky">
         <ImageInputField
-          droppable={droppable}
-          inputProps={inputProps}
+          inputProps={{
+            id: 'image-selector-upload',
+            ...uploadInputProps,
+          }}
+          droppable={uploadDroppable}
           className="image-selector__input"
         />
       </div>
