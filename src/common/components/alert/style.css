@@ -1,0 +1,71 @@
+.alert {
+  --alert-icon-filter: none;
+  position: relative;
+  padding: var(--lm-publisher-spacer) var(--lm-publisher-spacer-2);
+  max-width: min(100%, 300px);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--lm-publisher-spacer);
+
+  pointer-events: all;
+}
+
+.alert_with-close {
+  padding-right: 2.5em;
+}
+
+.alert_success {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(100%) sepia(23%) saturate(345%) hue-rotate(56deg) brightness(98%) contrast(94%);
+  background-color: var(--lmui-c-secondary-green-font);
+  color: var(--lmui-c-secondary-green-bg);
+}
+
+:root[data-color-mode='dark'] .alert_success {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(29%) sepia(55%) saturate(448%) hue-rotate(96deg) brightness(91%) contrast(96%);
+}
+
+.alert_error {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(98%) sepia(17%) saturate(1576%) hue-rotate(292deg) brightness(104%) contrast(99%);
+  background-color: var(--lmui-c-secondary-red-font);
+  color: var(--lmui-c-secondary-red-bg);
+}
+
+:root[data-color-mode='dark'] .alert_error {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(8%) sepia(46%) saturate(5408%) hue-rotate(345deg) brightness(100%) contrast(90%);
+}
+
+.alert_warning {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(86%) sepia(11%) saturate(572%) hue-rotate(351deg) brightness(108%) contrast(105%);
+  background-color: var(--lmui-c-secondary-yellow-font);
+  color: var(--lmui-c-secondary-yellow-bg);
+}
+
+:root[data-color-mode='dark'] .alert_warning {
+  --alert-icon-filter: brightness(0) saturate(100%) invert(19%) sepia(11%) saturate(7222%) hue-rotate(24deg) brightness(97%) contrast(94%);
+}
+
+.alert_info {
+   --alert-icon-filter: brightness(0) saturate(100%) invert(84%) sepia(4%) saturate(2187%) hue-rotate(189deg) brightness(105%) contrast(106%);
+  background-color: var(--lmui-c-secondary-blue-font);
+  color: var(--lmui-c-secondary-blue-bg);
+}
+
+:root[data-color-mode='dark'] .alert_info {
+  --alert-icon-filter:  brightness(0) saturate(100%) invert(13%) sepia(63%) saturate(2788%) hue-rotate(190deg) brightness(101%) contrast(104%);
+}
+
+.alert__close {
+  position: absolute;
+  top: var(--lm-publisher-spacer);
+  right: var(--lm-publisher-spacer);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.alert .lmui-icon {
+  filter: var(--alert-icon-filter);
+}

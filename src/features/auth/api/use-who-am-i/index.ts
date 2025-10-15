@@ -12,6 +12,7 @@ export function useWhoAmI(
       return api.queries.auth.whoAmI(params);
     },
   });
+  console.log({isLoading, data, isSuccess})
 
   if (isLoading) {
     return {

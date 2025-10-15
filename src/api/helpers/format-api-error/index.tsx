@@ -1,4 +1,4 @@
-import type { APIResponseErrorType } from '../query/responses';
+import type { APIResponseErrorType } from '../../query/responses';
 
 export type FormattedAPIErrorType = {
   code: number;
@@ -21,7 +21,7 @@ const isAPIResponseErrorType = (
   );
 };
 
-const formatAPIError = (
+export const formatAPIError = (
   error: APIResponseErrorType | Error,
   messages?: Record<string, string>,
   fallbackMessage?: string,

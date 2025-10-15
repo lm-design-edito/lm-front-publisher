@@ -10,6 +10,11 @@
   filter: brightness(0) saturate(100%) invert(93%) sepia(11%) saturate(6569%) hue-rotate(170deg) brightness(97%) contrast(86%);
 }
 
+.lmui-icon--xs {
+  width: 12px;
+  height: 12px;
+}
+
 .lmui-icon--sm {
   width: 16px;
   height: 16px;

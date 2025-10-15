@@ -7,10 +7,10 @@ import { Form } from '@common/components/forms/form';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { useSignup } from '../../api/use-signup';
 import { FormFooter } from '@common/components/forms/form-footer';
-import { QueriesStatus } from '@common/components/queries-status';
 import { useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { appRoutes } from '@src/appRoutes';
+import { ToastContext } from '@common/providers/toast/toastContext';
 
 const signupFormSchema = zod.object({
   username: zod
@@ -26,6 +26,7 @@ type SignupFormSchemaValues = zod.infer<typeof signupFormSchema>;
 
 export const SignupForm = () => {
   const navigate = useNavigate();
+  const { showToast } = useContext(ToastContext);
 
   const {
     register,
@@ -35,10 +36,13 @@ export const SignupForm = () => {
   } = useForm<SignupFormSchemaValues>({
     resolver: zodResolver(signupFormSchema),
   });
-  const [APIError, setAPIError] = useState<string | null>(null);
 
   const { mutate: signup } = useSignup({
     onSuccess: data => {
+      showToast({
+        type: 'success',
+        message: 'Inscription réussie !',
+      });
       console.log('on success signup', data);
       navigate({
         to: appRoutes.verifyEmail,
@@ -49,14 +53,16 @@ export const SignupForm = () => {
       // Handle successful signup, e.g., redirect to login page or show success message
     },
     onError: error => {
-      setAPIError(error.message); // Reset API error on new attempt
+      showToast({
+        type: 'error',
+        message: error.message,
+      });
       console.error('Signup failed:', error);
       // Handle signup error, e.g., show error message
     },
   }); // Assuming you have a useSignup hook for handling signup logic
 
   const onSubmit = (values: SignupFormSchemaValues) => {
-    setAPIError('');
     signup({
       username: values.username,
       email: values.email,
@@ -109,7 +115,6 @@ export const SignupForm = () => {
         />
         <FormFooter>
           <FormSubmit>S'inscrire</FormSubmit>
-          {APIError && <QueriesStatus status="error">{APIError}</QueriesStatus>}
         </FormFooter>
       </Form>
     </div>

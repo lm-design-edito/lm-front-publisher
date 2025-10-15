@@ -1,4 +1,7 @@
-import type { ImageResponseSuccessPayload } from '@api/query/responses';
+import type {
+  APIResponseSuccessType,
+  ImageResponseSuccessPayload,
+} from '@api/query/responses';
 import { api } from '../../..';
 import API_ROUTES from '../../../routes';
 import { createFormDataForAPI } from '@utils/create-form-data-for-api';
@@ -13,6 +16,9 @@ type ImageTransform = {
     },
   ];
 };
+
+export type ImageTransformResponseSuccessType =
+  APIResponseSuccessType<ImageResponseSuccessPayload>;
 
 const supportedProperties = ['image', 'operations'];
 export const imageTransform = async (params: ImageTransform) => {

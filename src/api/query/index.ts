@@ -1,4 +1,4 @@
-import getAPIUrl from '../get-api-url';
+import getAPIUrl from '../helpers/get-api-url';
 import { getCsrfToken } from '../auth/get-csrf-token';
 import { refreshJWT } from '../auth/refresh-jwt';
 import { isAuthError } from '../auth/is-auth-error';
@@ -50,9 +50,12 @@ export const query = async <T>(
     formattedQuery.options,
   );
 
+  console.log({handledResponse});
+  
   Logger.query('api.query', { handledResponse });
-
+  
   const authError = isAuthError(handledResponse);
+  console.log({authError});
 
   if (!authError) {
     return handledResponse;

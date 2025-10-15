@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import formatAPIError from '../../../../api/format-api-error';
-import type { APIResponseErrorType } from '../../../../api/query';
 
 type useLogoutEverywhereReturn = Awaited<
   ReturnType<typeof api.queries.auth.logout>
@@ -16,7 +14,7 @@ export function useLogoutEverywhere(clbs?: {
     mutationFn: () => api.queries.auth.logoutEverywhere(),
     onSuccess: data => {
       if (!data.success) {
-        clbs?.onError?.(formatAPIError(data as APIResponseErrorType));
+        clbs?.onError?.(api.helpers.formatAPIError(data));
         return;
       }
 

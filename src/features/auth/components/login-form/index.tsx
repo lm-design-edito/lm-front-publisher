@@ -6,11 +6,11 @@ import { Form } from '@common/components/forms/form';
 import { useLogin } from '../../api/use-login';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { QueriesStatus } from '@common/components/queries-status';
+import { useContext, useEffect } from 'react';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
 import { appRoutes } from '@src/appRoutes';
+import { ToastContext } from '@common/providers/toast/toastContext';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -31,21 +31,29 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
+  const { showToast, hideAllToasts } = useContext(ToastContext);
+
   const { isAuthenticated } = useWhoAmI();
-  const [APIError, setAPIError] = useState<string | null>(null);
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
-      console.log('on success navigate to homepage');
+      hideAllToasts('login-form');
+      showToast({
+        type: 'success',
+        message: 'Vous êtes connecté',
+      });
     },
     onError: error => {
-      setAPIError(error.message); // Reset API error on new attempt
-      console.error('Login failed:', error);
+      hideAllToasts('login-form');
+      showToast({
+        groupId: 'login-form',
+        type: 'error',
+        message: error.message,
+      });
     },
   });
 
   const onSubmit = (values: LoginFormSchemaValues) => {
-    setAPIError('');
     login({
       email: values.email,
       password: values.password,
@@ -89,7 +97,6 @@ export const LoginForm = () => {
       />
       <FormFooter>
         <FormSubmit isLoading={isPending}>Se connecter</FormSubmit>
-        {APIError && <QueriesStatus status="error">{APIError}</QueriesStatus>}
       </FormFooter>
     </Form>
   );

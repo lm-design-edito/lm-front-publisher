@@ -1,4 +1,4 @@
-import getAPIUrl from '../../get-api-url';
+import getAPIUrl from '../../helpers/get-api-url';
 import API_ROUTES from '../../routes';
 
 export const refreshJWT = async (authedOptions: RequestInit) => {

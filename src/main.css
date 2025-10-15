@@ -188,11 +188,31 @@ th {
 
 .toast-container {
   position: fixed;
-  z-index: 1000;
+  z-index: 99999999;
   padding: var(--lm-publisher-grid-margins);
+  bottom: 0;
+  right: 0;
 
   display: flex;
   flex-direction: column;
   gap: var(--lm-publisher-spacer);
   align-items: flex-end;
+  justify-content: flex-end;
+  font-size: small;
+
+  pointer-events: none;
+}
+
+.toast-container .toast {
+  animation: slide-in 0.6s ease forwards;
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -1,26 +1,33 @@
 import { Display } from '@common/components/display';
 import { Loader } from '@common/components/loader';
-import { QueriesStatus } from '@common/components/queries-status';
 import { Text } from '@common/components/text';
+import { ToastContext } from '@common/providers/toast/toastContext';
 import { useRequestEmailVerificationToken } from '@features/auth/api/use-request-email-verification-token';
 import { Logger } from '@utils/logger';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 type ReverifyEmailProps = {
   email: string;
 };
 
 export const ReverifyEmail = ({ email }: ReverifyEmailProps) => {
-  const [apiError, setAPIError] = useState('');
+  const { showToast } = useContext(ToastContext);
   const { mutate: requestEmailVerificationToken, isPending } =
     useRequestEmailVerificationToken({
       onSuccess: () => {
-        setAPIError('');
+        showToast({
+          type: 'success',
+          message: `Un nouveau code de vérification a été envoyé à ${email}.`,
+          withCloseBtn: true,
+        });
         Logger.success('useRequestEmailVerificationToken');
       },
       onError: error => {
         Logger.error('useRequestEmailVerificationToken', error);
-        setAPIError(error.message);
+        showToast({
+          type: 'error',
+          message: error.message,
+        });
       },
     });
   return (
@@ -41,7 +48,6 @@ export const ReverifyEmail = ({ email }: ReverifyEmailProps) => {
         </span>
       </Text>
       {isPending && <Loader />}
-      {apiError && <QueriesStatus status={'error'}>{apiError}</QueriesStatus>}
     </Display>
   );
 };

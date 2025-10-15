@@ -29,16 +29,49 @@ export function createSuccessResponse<T>(
   };
 }
 
-export const createErrorResponse = (
+export const createDefaultResponse = (
   response: Response,
-): APIResponseErrorType => {
-  return {
-    httpStatus: response.status,
-    success: false,
-    type: 'error',
-    error: {
-      code: response.statusText,
-      message: response.statusText,
-    },
-  };
+): APIResponseErrorType => ({
+  httpStatus: 200,
+  success: false,
+  type: 'error',
+  error: {
+    code: response.statusText,
+    message: response.statusText,
+  },
+});
+
+export const createErrorResponse = async (
+  response: Response,
+): Promise<APIResponseErrorType> => {
+  if (
+    response.headers &&
+    response.headers.get('content-type') &&
+    response.headers.get('content-type')?.includes('json')
+  ) {
+    try {
+      const data = await response.json();
+      if (
+        data &&
+        typeof data === 'object' &&
+        'error' in data &&
+        data.error &&
+        typeof data.error === 'object' &&
+        'code' in data.error
+      ) {
+        return {
+          httpStatus: response.status,
+          success: false,
+          type: 'error',
+          error: {
+            code: data.error.code,
+            message: data.error.message || response.statusText,
+          },
+        };
+      }
+    } catch {
+      return createDefaultResponse(response);
+    }
+  }
+  return createDefaultResponse(response);
 };

@@ -10,10 +10,10 @@ import { useImageTransform } from '../../api/use-image-transform';
 import { FormInputRadioGroup } from '@common/components/forms/form-input-radio-group';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
-import { QueriesStatus } from '@common/components/queries-status';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Logger } from '@utils/logger';
 import { ImageSelector, type ImageSelectorProps } from '../image-selector';
+import { useToastContext } from '@common/hooks/useToastContext';
 
 const MAX_IMAGES = 6;
 const templateNames = ImageGeneratorTemplates.map(
@@ -52,10 +52,7 @@ export const ImageGeneratorForm = () => {
     resolver: zodResolver(imageGeneratorFormSchema),
   });
 
-  const [APIStatus, setAPIStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
+  const { showToast } = useToastContext();
 
   const [tempImageList, setTempImageList] = useState<
     ImageSelectorProps['imageList']
@@ -63,12 +60,10 @@ export const ImageGeneratorForm = () => {
 
   const { mutate: imageGenerate, isPending } = useImageTransform({
     onSuccess: data => {
-      // if (data.success) {
-      //   setAPIStatus({
-      //     success: true,
-      //     message: `${data.payload.message} : ${data.payload.images.length} images`,
-      //   });
-      // }
+      showToast({
+        type: 'success',
+        message: 'Image générée avec succès',
+      });
       Logger.success('image-tools.image-generator-form.useImageTransform', {
         data,
       });
@@ -78,7 +73,10 @@ export const ImageGeneratorForm = () => {
       Logger.error('image-tools.image-generator-form.useImageTransform', {
         error,
       });
-      setAPIStatus({ success: false, message: error.message });
+      showToast({
+        type: 'error',
+        message: error.message,
+      });
       // Handle error logic here, e.g., show an error message
     },
   });
@@ -124,6 +122,17 @@ export const ImageGeneratorForm = () => {
 
     setValue('imageList', [...(currentValues || []), ...imageIds]);
   };
+
+
+  useEffect(() => {
+    showToast({
+      groupId: 'image-generator-form',
+      id: 'info-image-generator-beta',
+      type: 'info',
+      message: `Le générateur d'images est en version bêta. Les résultats peuvent varier.`,
+    });
+  }, [showToast]);
+
   return (
     <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -163,11 +172,6 @@ export const ImageGeneratorForm = () => {
       />
       <FormFooter>
         <FormSubmit isLoading={isPending}>Génerer</FormSubmit>
-        {APIStatus && (
-          <QueriesStatus status={APIStatus.success ? 'success' : 'error'}>
-            {APIStatus.message}
-          </QueriesStatus>
-        )}
       </FormFooter>
     </Form>
   );

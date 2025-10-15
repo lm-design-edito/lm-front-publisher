@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import type { APIResponseErrorType } from '../../../../api/query';
-import formatAPIError from '../../../../api/format-api-error';
 
 type UseRequestEmailVerificationTokenParams = Parameters<
   typeof api.queries.auth.requestEmailVerificationToken
@@ -34,8 +32,8 @@ export function useRequestEmailVerificationToken(clbs?: {
 
       if (!data.success) {
         clbs?.onError?.(
-          formatAPIError(
-            data as APIResponseErrorType,
+          api.helpers.formatAPIError(
+            data,
             HANDLED_ERRORS,
             DEFAULT_ERROR_MESSAGE,
           ),
@@ -45,7 +43,7 @@ export function useRequestEmailVerificationToken(clbs?: {
       clbs?.onSuccess?.(data);
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      clbs?.onError?.(api.helpers.formatAPIError(err));
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });

@@ -16,15 +16,18 @@ type ImageGenerateSuccessPayload = {
   }[];
 };
 
-type ImageGenerateResponse =
+export type ImageGenerateResponseSuccessType =
+  APIResponseSuccessType<ImageGenerateSuccessPayload>;
+
+type ImageGenerateResponseType =
   | APIResponseErrorType
-  | APIResponseSuccessType<ImageGenerateSuccessPayload>;
+  | ImageGenerateResponseSuccessType;
 
 const supportedProperties = ['file', 'operations'];
 
 export const imageGenerate = async (
   params: ImageGenerate,
-): Promise<ImageGenerateResponse> => {
+): Promise<ImageGenerateResponseType> => {
   Logger.log('api.queries.imageGenerate.params', params);
   const formData = createFormDataForAPI(params, supportedProperties, {
     file: 'image',

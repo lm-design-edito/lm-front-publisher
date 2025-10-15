@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import type { APIResponseErrorType } from '../../../../api/query';
-import formatAPIError from '../../../../api/format-api-error';
 
 type UseSignupParams = Parameters<typeof api.queries.auth.signup>[0];
 type UseSignupReturn = Awaited<ReturnType<typeof api.queries.auth.signup>>;
@@ -23,18 +21,14 @@ export function useSignup(clbs?: {
 
       if (!data.success) {
         clbs?.onError?.(
-          formatAPIError(
-            data as APIResponseErrorType,
-            {},
-            DEFAULT_ERROR_MESSAGE,
-          ),
+          api.helpers.formatAPIError(data, {}, DEFAULT_ERROR_MESSAGE),
         );
         return;
       }
       clbs?.onSuccess?.(data);
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      clbs?.onError?.(api.helpers.formatAPIError(err));
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });

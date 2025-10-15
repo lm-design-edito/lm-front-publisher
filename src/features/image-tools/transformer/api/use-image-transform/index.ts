@@ -1,9 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { api } from '../../../../../api';
-import formatAPIError, {
-  type FormattedAPIErrorType,
-} from '../../../../../api/format-api-error';
-
+import type { FormattedAPIErrorType } from '@api/helpers';
 type UseImageTransformParams = Parameters<
   typeof api.queries.image.transform
 >[0];
@@ -27,7 +24,7 @@ export function useImageTransform(clbs?: {
       api.queries.image.transform(params),
     onSuccess: (data, variables) => {
       if (!data.success) {
-        clbs?.onError?.(formatAPIError(data));
+        clbs?.onError?.(api.helpers.formatAPIError(data));
         return;
       }
       clbs?.onSuccess?.({
@@ -42,7 +39,7 @@ export function useImageTransform(clbs?: {
       });
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      clbs?.onError?.(api.helpers.formatAPIError(err));
     },
   });
 }

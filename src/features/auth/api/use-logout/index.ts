@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import formatAPIError from '../../../../api/format-api-error';
-import type { APIResponseErrorType } from '../../../../api/query';
 
 type useLogoutReturn = Awaited<ReturnType<typeof api.queries.auth.logout>>;
 
@@ -14,7 +12,7 @@ export function useLogout(clbs?: {
     mutationFn: () => api.queries.auth.logout(),
     onSuccess: data => {
       if (!data.success) {
-        clbs?.onError?.(formatAPIError(data as APIResponseErrorType));
+        clbs?.onError?.(api.helpers.formatAPIError(data));
         return;
       }
 
@@ -25,7 +23,7 @@ export function useLogout(clbs?: {
       });
     },
     onError: data => {
-      clbs?.onError?.(data);
+      clbs?.onError?.(api.helpers.formatAPIError(data));
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });

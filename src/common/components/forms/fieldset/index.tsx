@@ -1,13 +1,12 @@
-import type { FieldError } from 'react-hook-form';
 import './style.css';
-import { FormFieldError } from '../form-field-error';
+import { FormFieldError, type FormFieldErrorProps } from '../form-field-error';
 
 export type FieldsetProps = {
   className?: string;
   legend?: string | React.ReactNode;
   contentClassName?: string;
   children?: React.ReactNode;
-  error?: FieldError;
+  error?: FormFieldErrorProps['error'];
 } & React.FieldsetHTMLAttributes<HTMLFieldSetElement>;
 
 export const FieldSet = ({

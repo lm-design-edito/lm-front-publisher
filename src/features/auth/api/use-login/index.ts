@@ -1,13 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../../../api';
 import type { APIResponseErrorType } from '../../../../api/query';
-import formatAPIError from '../../../../api/format-api-error';
 
 type UseLoginParams = Parameters<typeof api.queries.auth.login>[0];
 type UseLoginReturn = Awaited<ReturnType<typeof api.queries.auth.login>>;
 
 const DEFAULT_ERROR_MESSAGE =
   'Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard.';
+
+const HANDLED_ERROR_MESSAGES = {
+  'invalid-credentials': 'Identifiants invalides. Veuillez réessayer.',
+};
 
 export function useLogin(clbs?: {
   onSuccess?: (data: UseLoginReturn) => void;
@@ -20,15 +23,12 @@ export function useLogin(clbs?: {
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });
-
       if (!data.success) {
+        console.log('on error data success false', data);
         clbs?.onError?.(
-          formatAPIError(
+          api.helpers.formatAPIError(
             data as APIResponseErrorType,
-            {
-              'invalid-credentials':
-                'Identifiants invalides. Veuillez réessayer.',
-            },
+            HANDLED_ERROR_MESSAGES,
             DEFAULT_ERROR_MESSAGE,
           ),
         );
@@ -37,7 +37,14 @@ export function useLogin(clbs?: {
       clbs?.onSuccess?.(data);
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      console.log('on Error', err);
+      clbs?.onError?.(
+        api.helpers.formatAPIError(
+          err,
+          HANDLED_ERROR_MESSAGES,
+          DEFAULT_ERROR_MESSAGE,
+        ),
+      );
       client.invalidateQueries({
         queryKey: ['who-am-i'],
       });

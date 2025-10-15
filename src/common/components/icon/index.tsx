@@ -8,6 +8,12 @@ const getIcon = (iconName: string) => {
       return 'https://assets-decodeurs.lemonde.fr/redacweb/editorial-design-sys-assets/check.svg';
     case 'close':
       return 'https://assets-decodeurs.lemonde.fr/redacweb/editorial-design-sys-assets/close.svg';
+    case 'info':
+      return 'https://assets-decodeurs.lemonde.fr/redacweb/editorial-design-sys-assets/info.svg';
+    case 'danger':
+      return 'https://assets-decodeurs.lemonde.fr/redacweb/editorial-design-sys-assets/danger.svg';
+    case 'help':
+      return 'https://assets-decodeurs.lemonde.fr/redacweb/editorial-design-sys-assets/help.svg';
     default:
       return '';
   }
@@ -15,7 +21,7 @@ const getIcon = (iconName: string) => {
 
 type Props = {
   name: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   color?: 'forced-white' | 'error' | 'accent' | 'default' | string;
   className?: string;
 };

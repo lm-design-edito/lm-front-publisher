@@ -1,5 +1,5 @@
 import * as zod from 'zod';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -17,8 +17,8 @@ import { FormSelect } from '@common/components/forms/form-select';
 
 import './style.css';
 import { useImageMultiFormat } from '../../api/use-image-multi-format';
-import { QueriesStatus } from '@common/components/queries-status';
 import { Logger } from '@utils/logger';
+import { ToastContext } from '@common/providers/toast/toastContext';
 
 const TinyLMGFormatsValues = TinyLMGFormats.map(format => format.value) as [
   string,
@@ -100,16 +100,13 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
     url: null,
   });
 
-  const [APIStatus, setAPIStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
+  const { showToast } = useContext(ToastContext);
 
-  const { mutate: imageMultiFormat } = useImageMultiFormat({
+  const { mutate: imageMultiFormat, isPending } = useImageMultiFormat({
     onSuccess: data => {
       Logger.success('image-tools.tiny-lmg-form.useImageMultiFormat', { data });
-      setAPIStatus({
-        success: true,
+      showToast({
+        type: 'success',
         message: 'Image(s) générée(s) avec succès.',
       });
       onDownloadReady(
@@ -126,9 +123,11 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
     },
     onError: error => {
       Logger.error('image-tools.tiny-lmg-form.useImageMultiFormat', { error });
-      setAPIStatus({
-        success: false,
-        message: error.message || '',
+      showToast({
+        type: 'error',
+        message:
+          error.message ||
+          "Une erreur est survenue lors de la génération de l'image.",
       });
     },
   });
@@ -206,7 +205,6 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
       return;
     }
     setImgPreview({ url: null, name: null });
-    setAPIStatus(null);
   };
 
   const onClickKeepImageDimensions = async () => {
@@ -350,12 +348,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         error={errors['compressionLevel']}
       />
       <FormFooter>
-        <FormSubmit>Compresser</FormSubmit>
-        {APIStatus && (
-          <QueriesStatus status={APIStatus.success ? 'success' : 'error'}>
-            {APIStatus.message}
-          </QueriesStatus>
-        )}
+        <FormSubmit isLoading={isPending}>Compresser</FormSubmit>
       </FormFooter>
     </Form>
   );

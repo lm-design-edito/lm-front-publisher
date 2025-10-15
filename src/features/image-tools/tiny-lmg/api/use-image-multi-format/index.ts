@@ -1,9 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import { api } from '../../../../../api';
-import formatAPIError, {
-  type FormattedAPIErrorType,
-} from '../../../../../api/format-api-error';
+import { api } from '@api/index';
 import type { APIResponseErrorType } from '@api/query/responses';
+import type { FormattedAPIErrorType } from '@api/helpers';
 
 type UseImageFormatParams = Omit<
   Parameters<typeof api.queries.image.format>[0],
@@ -45,7 +43,9 @@ export function useImageMultiFormat(clbs?: {
     onSuccess: (allData, variables) => {
       const hasOneSuccess = allData.some(data => data.success);
       if (!hasOneSuccess) {
-        clbs?.onError?.(formatAPIError(allData[0] as APIResponseErrorType)); // Assuming all responses have the same structure
+        clbs?.onError?.(
+          api.helpers.formatAPIError(allData[0] as APIResponseErrorType),
+        ); // Assuming all responses have the same structure
         return;
       }
       const successfulData = allData.filter(data => data.success);
@@ -70,7 +70,7 @@ export function useImageMultiFormat(clbs?: {
       }); // Return the first successful payload
     },
     onError: err => {
-      clbs?.onError?.(formatAPIError(err));
+      clbs?.onError?.(api.helpers.formatAPIError(err));
     },
   });
 }

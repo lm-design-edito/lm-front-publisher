@@ -8,3 +8,7 @@ export const image = {
   generate: imageGenerate,
   transform: imageTransform,
 };
+
+export type { ImageGenerateResponseSuccessType } from './generate';
+
+export type { ImageTransformResponseSuccessType } from './transform';
