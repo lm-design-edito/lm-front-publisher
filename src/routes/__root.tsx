@@ -3,6 +3,7 @@ import { ThemeProvider } from '@features/theme';
 import { DebugDevBar } from '@features/debug';
 import { Header } from '@common/components/header';
 import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster';
+import { ToastProvider } from '@common/providers/toast/toastProvider';
 
 // Create a client
 
@@ -30,5 +31,9 @@ export const RootPage = () => {
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  component: () => <RootPage />,
+  component: () => (
+    <ToastProvider>
+      <RootPage />,
+    </ToastProvider>
+  ),
 });

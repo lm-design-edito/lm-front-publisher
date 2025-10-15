@@ -84,3 +84,10 @@
 .alert .lmui-icon {
   filter: var(--alert-icon-filter);
 }
+.alert a {
+  color: currentColor;
+}
+.alert a:hover {
+  color: currentColor;
+  opacity: .6;
+}
