@@ -6,6 +6,7 @@ export type AlertProps = {
   icon?: string;
   className?: string;
   message: string | React.ReactNode;
+  description?: string | React.ReactNode;
   type: 'info' | 'success' | 'error' | 'warning' | 'default';
   onClose?: () => void;
 };
@@ -32,14 +33,18 @@ export const Alert = ({
   icon,
   className,
   onClose,
+  description,
 }: AlertProps) => {
   return (
     <div
       key={id}
-      className={`alert alert_${type} alert--${id} ${onClose ? 'alert_with-close' : ''} ${className || ''}`}
+      className={`alert alert_${type} alert--${id}  ${onClose ? 'alert_with-close' : ''} ${className || ''} ${description ? 'alert_with-description' : ''}`}
     >
-      <Icon name={getIcon(icon, type)} className="alert__icon" />
-      <span className="alert__message">{message}</span>
+      <div className="alert__header">
+        <Icon name={getIcon(icon, type)} className="alert__icon" />
+        <span className="alert__message">{message}</span>
+      </div>
+      {description && <div className="alert__description">{description}</div>}
       {onClose && (
         <button className="alert__close" onClick={onClose} aria-label="Fermer">
           <Icon name="close" size="xs" />

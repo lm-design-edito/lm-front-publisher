@@ -1,7 +1,0 @@
-.unverified-user-banner {
-  text-align: center;
-  padding: var(--lm-publisher-spacer);
-  color: var(--lm-publisher-text-error-color);
-  border-bottom: 1px solid var(--lm-publisher-form-error-color);
-  border-top: 1px solid var(--lm-publisher-form-error-color);
-}

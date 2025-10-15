@@ -6,10 +6,25 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: center;
-  gap: var(--lm-publisher-spacer);
+  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--lm-publisher-spacer-05);
 
   pointer-events: all;
+}
+
+.alert__header {
+  display: flex;
+  align-items: center;
+  gap: var(--lm-publisher-spacer);
+}
+
+.alert_with-description .alert__message {
+  font-weight: 600;
+}
+
+.alert_description {
+  font-size: smaller;
 }
 
 .alert_with-close {

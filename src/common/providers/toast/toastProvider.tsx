@@ -53,6 +53,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
             id={toast.id}
             type={toast.type || 'default'}
             message={toast.message}
+            description={toast.description}
             icon={toast.icon || undefined}
             {...(toast.withCloseBtn
               ? {
