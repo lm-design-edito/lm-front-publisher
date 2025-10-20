@@ -7,6 +7,7 @@ import {
   type FieldErrors,
 } from 'react-hook-form';
 import type { TemplateConfigField } from '../../config/template-config-fields';
+import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
 
 type ConfigFieldName = string;
 
@@ -65,6 +66,19 @@ export const ImageGeneratorTemplateFields = ({
                       id: field.name,
                       value: value || '',
                       onChange,
+                    }}
+                    error={errors[field.name] as FieldError}
+                  />
+                );
+              case 'checkbox':
+                return (
+                  <FormInputCheckbox
+                    {...field.properties}
+                    inputProps={{
+                      ...field.properties.inputProps,
+                      id: field.name,
+                      checked: Boolean(value),
+                      onChange: e => onChange(e.target.checked),
                     }}
                     error={errors[field.name] as FieldError}
                   />

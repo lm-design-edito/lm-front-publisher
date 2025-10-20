@@ -1,15 +1,28 @@
 import type { FormInputProps } from '@common/components/forms/form-input';
 import * as zod from 'zod';
 import { TemplateNames } from './templates';
+import type { FormInputCheckboxProps } from '@common/components/forms/form-input-checkbox';
 
-export type FormInputFieldText = FormInputProps;
+export type FormInputFieldText = FormInputProps | FormInputCheckboxProps;
 
-export type TemplateConfigField = {
+export type DefaultTemplateConfigField = {
   name: string;
-  type: string;
-  properties: FormInputFieldText;
   validation: zod.ZodTypeAny;
 };
+
+export type InputTemplateConfigField = {
+  type: 'input';
+  properties: FormInputProps;
+} & DefaultTemplateConfigField;
+
+export type CheckboxTemplateConfigField = {
+  type: 'checkbox';
+  properties: FormInputCheckboxProps;
+} & DefaultTemplateConfigField;
+
+export type TemplateConfigField =
+  | InputTemplateConfigField
+  | CheckboxTemplateConfigField;
 
 export type TemplateConfigFieldTypes = Record<
   string,
@@ -42,6 +55,17 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
           },
         },
         validation: zod.string().optional(),
+      },
+      {
+        name: 'autoCalcColors',
+        type: 'checkbox',
+        properties: {
+          label: 'Calcul automatiquement les couleurs',
+          inputProps: {
+            type: 'checkbox',
+          },
+        },
+        validation: zod.boolean().optional(),
       },
     ],
   },
