@@ -50,12 +50,9 @@ export const query = async <T>(
     formattedQuery.options,
   );
 
-  console.log({handledResponse});
-  
   Logger.query('api.query', { handledResponse });
-  
+
   const authError = isAuthError(handledResponse);
-  console.log({authError});
 
   if (!authError) {
     return handledResponse;

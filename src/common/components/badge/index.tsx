@@ -1,5 +1,14 @@
 export type BadgeProps = {
-  color?: string;
+  color?:
+    | 'blue'
+    | 'violet'
+    | 'yellow'
+    | 'sea'
+    | 'grey'
+    | 'green'
+    | 'red'
+    | 'orange'
+    | string;
   size?: 's' | 'm' | 'l';
   children: React.ReactNode;
 };

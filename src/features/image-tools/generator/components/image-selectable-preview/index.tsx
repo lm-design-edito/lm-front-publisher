@@ -1,5 +1,5 @@
-import { Icon } from '@common/components/icon';
 import './style.css';
+import { CheckBadge } from '@common/components/check-badge';
 
 export type ImageSelectablePreviewProps = {
   src: string;
@@ -21,9 +21,7 @@ export const ImageSelectablePreview = ({
       className={`image-selectable-preview ${selected ? ' image-selectable-preview_selected' : ''} ${className}`}
       onClick={() => onChange(!selected)}
     >
-      <span className="image-selectable-preview__badge">
-        <Icon name={'check'} color="forced-white" />
-      </span>
+      <CheckBadge className="image-selectable-preview__badge" />
       <img src={src} alt={alt} />
     </div>
   );

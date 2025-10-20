@@ -10,6 +10,7 @@ import {
 } from '../image-input-field';
 import { ImageSelectablePreview } from '../image-selectable-preview';
 import { Display } from '@common/components/display';
+import { Badge } from '@common/components/badge';
 
 export type ImageSelectorProps = {
   imageList?: {
@@ -17,6 +18,7 @@ export type ImageSelectorProps = {
     alt?: string;
     id: string;
   }[];
+  maxSelection: number;
   error?: FieldsetProps['error'];
   uploadDroppable?: boolean;
   uploadInputProps?: ImageInputFieldProps['inputProps'];
@@ -27,6 +29,7 @@ export type ImageSelectorProps = {
 export const ImageSelector = ({
   imageList,
   selection,
+  maxSelection,
   uploadDroppable,
   uploadInputProps,
   onSelectionChange,
@@ -38,7 +41,10 @@ export const ImageSelector = ({
         <span className="image-selector__legend">
           Sélectionner une ou plusieurs images{' '}
           <span className="image-selector__count">
-            {selection?.length || 0}
+            <Badge color="blue" size="s">
+              {selection?.length || 0} / {maxSelection} MAX)
+            </Badge>
+            {/* {selection?.length || 0} / {maxSelection} */}
           </span>
         </span>
       }

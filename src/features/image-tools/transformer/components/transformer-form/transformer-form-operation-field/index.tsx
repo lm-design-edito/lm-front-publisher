@@ -18,14 +18,13 @@ import type { FieldError } from 'react-hook-form';
 
 interface TransformerFormOperationFieldProps {
   name: string;
-  fieldProps: any; // TODO: type properly
+  fieldProps: unknown; // TODO: type properly
   error?: FieldError;
 }
 
 export const TransformerFormOperationField = ({
   name,
   error,
-  fieldProps,
 }: TransformerFormOperationFieldProps) => {
   switch (name) {
     case 'blur':
@@ -39,7 +38,6 @@ export const TransformerFormOperationField = ({
             min: 1,
             max: 100,
             defaultValue: 100,
-            ...fieldProps,
           }}
           error={error}
         />

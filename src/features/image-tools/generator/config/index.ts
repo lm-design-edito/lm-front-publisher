@@ -1,5 +1,3 @@
-export {
-  ImageGeneratorTemplates,
-  ImageGeneratorTemplatesConfig,
-} from './templates';
-export { ImageGeneratorInfos } from './infos';
+export * from './template-config-fields';
+export * from './templates';
+export * from './infos';
