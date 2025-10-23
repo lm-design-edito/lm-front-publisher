@@ -43,10 +43,6 @@ export const relativeRoutes = [
     path: 'image/tiny-lmg',
     name: 'Tiny LMG',
   },
-  {
-    path: 'image/transformer',
-    name: 'Image Transformer',
-  },
 ];
 
 const BASE_URL = import.meta.env.BASE_URL; // Récupère automatiquement la base de Vite

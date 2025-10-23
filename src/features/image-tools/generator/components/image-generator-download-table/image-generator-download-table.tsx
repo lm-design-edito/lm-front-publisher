@@ -3,7 +3,7 @@ import { Table, type Column, type Row } from '@common/components/tables/table';
 import { Badge } from '@common/components/badge';
 import { Display } from '@common/components/display';
 
-export type TransformerDownload = {
+export type GeneratorDownload = {
   name: string;
   url: string;
   mimeType: string;
@@ -12,11 +12,11 @@ export type TransformerDownload = {
   sourceName: string; // The name of the original file
 };
 
-export type TransformerDownloadTableProps = {
-  downloads: TransformerDownload[];
+export type GeneratorDownloadTableProps = {
+  downloads: GeneratorDownload[];
 };
 
-type TransformerDownloadTableRow = {
+type GeneratorDownloadTableRow = {
   name: string;
   url: string;
   new: boolean;
@@ -31,10 +31,10 @@ const getFormatForMimeType = (mimeType: string): string => {
   return parts.length > 1 ? parts[1] : 'unknown';
 };
 
-export const TransformerDownloadTable = ({
+export const GeneratorDownloadTable = ({
   downloads,
-}: TransformerDownloadTableProps) => {
-  const columns: Column<TransformerDownloadTableRow>[] = [
+}: GeneratorDownloadTableProps) => {
+  const columns: Column<GeneratorDownloadTableRow>[] = [
     {
       id: 'preview',
       label: 'Aperçu',
@@ -75,7 +75,7 @@ export const TransformerDownloadTable = ({
     { id: 'date', label: 'Heure de génération' },
   ];
 
-  const rows: Row<TransformerDownloadTableRow>[] = downloads.map(
+  const rows: Row<GeneratorDownloadTableRow>[] = downloads.map(
     (download, index) => ({
       rowId: index.toString(),
       name: download.name,

@@ -15,7 +15,6 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AccountIndexImport } from './routes/account/index'
-import { Route as ImageTransformerIndexImport } from './routes/image/transformer/index'
 import { Route as ImageTinyLmgIndexImport } from './routes/image/tiny-lmg/index'
 import { Route as ImageGeneratorIndexImport } from './routes/image/generator/index'
 import { Route as ImageFormatterIndexImport } from './routes/image/formatter/index'
@@ -47,12 +46,6 @@ const AdminIndexRoute = AdminIndexImport.update({
 const AccountIndexRoute = AccountIndexImport.update({
   id: '/account/',
   path: '/account/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ImageTransformerIndexRoute = ImageTransformerIndexImport.update({
-  id: '/image/transformer/',
-  path: '/image/transformer/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -179,13 +172,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageTinyLmgIndexImport
       parentRoute: typeof rootRoute
     }
-    '/image/transformer/': {
-      id: '/image/transformer/'
-      path: '/image/transformer'
-      fullPath: '/image/transformer'
-      preLoaderRoute: typeof ImageTransformerIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -203,7 +189,6 @@ export interface FileRoutesByFullPath {
   '/image/formatter': typeof ImageFormatterIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
-  '/image/transformer': typeof ImageTransformerIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -218,7 +203,6 @@ export interface FileRoutesByTo {
   '/image/formatter': typeof ImageFormatterIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
-  '/image/transformer': typeof ImageTransformerIndexRoute
 }
 
 export interface FileRoutesById {
@@ -234,7 +218,6 @@ export interface FileRoutesById {
   '/image/formatter/': typeof ImageFormatterIndexRoute
   '/image/generator/': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg/': typeof ImageTinyLmgIndexRoute
-  '/image/transformer/': typeof ImageTransformerIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -251,7 +234,6 @@ export interface FileRouteTypes {
     | '/image/formatter'
     | '/image/generator'
     | '/image/tiny-lmg'
-    | '/image/transformer'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -265,7 +247,6 @@ export interface FileRouteTypes {
     | '/image/formatter'
     | '/image/generator'
     | '/image/tiny-lmg'
-    | '/image/transformer'
   id:
     | '__root__'
     | '/'
@@ -279,7 +260,6 @@ export interface FileRouteTypes {
     | '/image/formatter/'
     | '/image/generator/'
     | '/image/tiny-lmg/'
-    | '/image/transformer/'
   fileRoutesById: FileRoutesById
 }
 
@@ -295,7 +275,6 @@ export interface RootRouteChildren {
   ImageFormatterIndexRoute: typeof ImageFormatterIndexRoute
   ImageGeneratorIndexRoute: typeof ImageGeneratorIndexRoute
   ImageTinyLmgIndexRoute: typeof ImageTinyLmgIndexRoute
-  ImageTransformerIndexRoute: typeof ImageTransformerIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -310,7 +289,6 @@ const rootRouteChildren: RootRouteChildren = {
   ImageFormatterIndexRoute: ImageFormatterIndexRoute,
   ImageGeneratorIndexRoute: ImageGeneratorIndexRoute,
   ImageTinyLmgIndexRoute: ImageTinyLmgIndexRoute,
-  ImageTransformerIndexRoute: ImageTransformerIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -333,8 +311,7 @@ export const routeTree = rootRoute
         "/auth/verify-email/",
         "/image/formatter/",
         "/image/generator/",
-        "/image/tiny-lmg/",
-        "/image/transformer/"
+        "/image/tiny-lmg/"
       ]
     },
     "/": {
@@ -369,9 +346,6 @@ export const routeTree = rootRoute
     },
     "/image/tiny-lmg/": {
       "filePath": "image/tiny-lmg/index.tsx"
-    },
-    "/image/transformer/": {
-      "filePath": "image/transformer/index.tsx"
     }
   }
 }

@@ -17,5 +17,4 @@ export const appRoutes: Record<string, AppRoutePaths> = {
   // imageOptimize: '/image/optimize',
   imageGenerator: '/image/generator',
   imageTinyLmg: '/image/tiny-lmg',
-  imageTransformer: '/image/transformer',
 } as const;
