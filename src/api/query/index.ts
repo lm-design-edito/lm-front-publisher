@@ -15,6 +15,7 @@ import { Logger } from '@utils/logger';
 export type QueryOptions = {
   _ignoreToken?: boolean;
   _removeContentType?: boolean;
+  _queryParams?: Record<string, string | number | boolean>;
 } & RequestInit;
 
 export const handleQuery = async (request: string, options?: QueryOptions) => {
@@ -30,11 +31,26 @@ const formatQuery = (request: string, options?: QueryOptions) => {
       : options?.method
         ? options.method
         : 'GET';
+
+  let cleanedEndpoint = splittedEndpoint[1] ? splittedEndpoint[1] : request;
+  let restOptions = options;
+  if (options) {
+    const { _queryParams, ..._restOptions } = options;
+    restOptions = _restOptions;
+    Object.keys(_queryParams || {}).forEach(key => {
+      const value = _queryParams ? _queryParams[key] : '';
+      cleanedEndpoint = cleanedEndpoint.replace(
+        `/:${key}`,
+        `/${encodeURIComponent(String(value))}`,
+      );
+    });
+  }
+
   return {
-    request: splittedEndpoint[0],
+    request: cleanedEndpoint,
     options: {
+      ...(restOptions ? restOptions : {}),
       method: method,
-      ...options,
     },
   };
 };

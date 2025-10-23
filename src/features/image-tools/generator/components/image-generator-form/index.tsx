@@ -7,7 +7,7 @@ import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
 import { useCallback, useEffect, useState, useMemo } from 'react';
 import { Logger } from '@utils/logger';
-import { ImageSelector, type ImageSelectorProps } from '../image-selector';
+import { ImageSelector } from '../image-selector';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { getTemplateConfigFields } from '../../utils/get-template-config-fields';
 import { ImageGeneratorTemplateFields } from '../image-generator-template-fields';
@@ -16,6 +16,8 @@ import { FieldSet } from '@common/components/forms/fieldset';
 
 import './style.css';
 import { TemplateSelector } from '../template-selector';
+import { useImageThumbsUpload } from '../../api/use-image-thumbs-upload';
+import { useImageThumbsDownload } from '../../api/use-image-thumbs-download';
 
 const MAX_SELECTION_IMG = 6;
 
@@ -51,7 +53,31 @@ const createDynamicImageGeneratorFormSchema = (templateName?: string) => {
 };
 
 export const ImageGeneratorForm = () => {
+  const [downloadPlaceholderCount, setDownloadPlaceholderCount] = useState(0);
+  const [uploadIds, setUploadIds] = useState<string[]>([]);
   const [currentTemplateName, setCurrentTemplateName] = useState<string>();
+
+  const imageUploads = useImageThumbsDownload({ idList: uploadIds });
+  const { mutate: imageThumbUpload } = useImageThumbsUpload({
+    onSuccess: data => {
+      setUploadIds(data.payload.ids);
+      setDownloadPlaceholderCount(0);
+      showToast({
+        type: 'success',
+        message: 'Upload Success',
+      });
+      console.warn('Logout successful, user logged out.');
+      // navigate({ to: appRoutes.index });
+    },
+    onError: error => {
+      setDownloadPlaceholderCount(0);
+      showToast({
+        type: 'error',
+        message: 'Erreur lors de la déconnexion',
+      });
+      console.error('Logout failed:', error);
+    },
+  });
 
   // Créer le schema dynamiquement
   const dynamicSchema = useMemo(
@@ -66,7 +92,6 @@ export const ImageGeneratorForm = () => {
     unregister,
     handleSubmit,
     watch,
-    setValue,
     getValues,
     reset,
     control,
@@ -113,13 +138,7 @@ export const ImageGeneratorForm = () => {
     }
   }, [templateName, currentTemplateName, getValues, reset, onUnregister]);
 
-  console.log({ templateConfigFields });
-
   const { showToast } = useToastContext();
-
-  const [tempImageList, setTempImageList] = useState<
-    ImageSelectorProps['imageList']
-  >([]);
 
   const { isPending } = useImageTransform({
     onSuccess: data => {
@@ -162,22 +181,15 @@ export const ImageGeneratorForm = () => {
   };
 
   const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {
-    const imageIds = e.target.files
-      ? Array.from(e.target.files).map(file => file.name)
-      : [];
-
-    setTempImageList((currentImageList: ImageSelectorProps['imageList']) => [
-      ...(e.target.files
-        ? Array.from(e.target.files).map(file => ({
-            id: file.name,
-            src: URL.createObjectURL(file),
-          }))
-        : []),
-      ...(currentImageList || []),
-    ]);
-
-    const currentValues = getValues('imageList');
-    setValue('imageList', [...(currentValues || []), ...imageIds]);
+    if (e.target.files) {
+      const uploadFiles = [...e.target.files]
+        .filter(file => file !== undefined)
+        .map(file => ({
+          image: file,
+        }));
+      imageThumbUpload(uploadFiles);
+      setDownloadPlaceholderCount(uploadFiles.length);
+    }
   };
 
   useEffect(() => {
@@ -202,10 +214,14 @@ export const ImageGeneratorForm = () => {
                 id: 'image-upload',
                 onChange: onChangeUpload,
               }}
+              downloadPlaceholderCount={downloadPlaceholderCount}
               maxSelection={MAX_SELECTION_IMG}
               uploadDroppable={true}
               onSelectionChange={onChange}
-              imageList={tempImageList}
+              imageList={imageUploads.map(imageUpload => ({
+                ...imageUpload,
+                src: imageUpload.url,
+              }))}
               selection={value}
               error={errors['imageList']}
             />

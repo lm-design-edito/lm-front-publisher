@@ -11,6 +11,7 @@ import {
 import { ImageSelectablePreview } from '../image-selectable-preview';
 import { Display } from '@common/components/display';
 import { Badge } from '@common/components/badge';
+import { useMemo } from 'react';
 
 export type ImageSelectorProps = {
   imageList?: {
@@ -18,6 +19,7 @@ export type ImageSelectorProps = {
     alt?: string;
     id: string;
   }[];
+  downloadPlaceholderCount: number;
   maxSelection: number;
   error?: FieldsetProps['error'];
   uploadDroppable?: boolean;
@@ -30,11 +32,20 @@ export const ImageSelector = ({
   imageList,
   selection,
   maxSelection,
+  downloadPlaceholderCount,
   uploadDroppable,
   uploadInputProps,
   onSelectionChange,
   ...otherProps
 }: ImageSelectorProps) => {
+  const placeholders = useMemo(() => {
+    const placeholder = [];
+    for (let i = 0; i < downloadPlaceholderCount; i++) {
+      placeholder.push(i);
+    }
+    return placeholder;
+  }, [downloadPlaceholderCount]);
+
   return (
     <FieldSet
       legend={
@@ -63,6 +74,13 @@ export const ImageSelector = ({
         />
       </div>
       <Display type="flex" className="image-selector__preview-list">
+        {placeholders.map(index => (
+          <ImageSelectablePreview
+            key={index}
+            isPlaceholder={true}
+            className="image-selector__preview"
+          />
+        ))}
         {imageList?.map(image => (
           <ImageSelectablePreview
             key={image.id}
@@ -74,6 +92,9 @@ export const ImageSelector = ({
                 const newSelection = selected
                   ? [...(selection || []), image.id]
                   : (selection || []).filter(id => id !== image.id);
+                if (newSelection.length > maxSelection) {
+                  return;
+                }
                 onSelectionChange(newSelection);
               }
             }}

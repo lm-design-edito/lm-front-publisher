@@ -40,13 +40,15 @@ export const VerifyEmailForm = () => {
   const { showToast } = useToastContext();
   const { mutate: verifyEmail, isPending } = useVerifyEmail({
     onSuccess: () => {
+      showToast({
+        type: 'success',
+        message: 'Votre e-mail a bien été vérifié.',
+      });
       navigate({
         to: appRoutes.index,
       });
-      console.log('On success navigate to login page');
     },
     onError: error => {
-      console.error('Verify Email failed:', error);
       showToast({
         type: 'error',
         message: error.message,
@@ -97,7 +99,7 @@ export const VerifyEmailForm = () => {
         }}
       />
       <FormFooter>
-        <FormSubmit isLoading={isPending}>Se connecter</FormSubmit>
+        <FormSubmit isLoading={isPending}>Valider</FormSubmit>
       </FormFooter>
     </Form>
   );

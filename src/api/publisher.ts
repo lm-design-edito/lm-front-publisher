@@ -1,1 +1,1 @@
-export type { Api as PublisherApi } from '@design-edito/publisher';
+export * as Publisher from '@design-edito/publisher';

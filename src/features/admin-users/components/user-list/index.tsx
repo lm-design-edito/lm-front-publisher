@@ -35,7 +35,7 @@ export const UserList = () => {
               ...user,
               badges:
                 user && 'badges' in user && user.badges
-                  ? user.badges.sort((a, b) => (a > b ? 1 : -1))
+                  ? user.badges.sort((a: string, b: string) => (a > b ? 1 : -1))
                   : [],
             }
           : null,

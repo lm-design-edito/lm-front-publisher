@@ -7,14 +7,13 @@ import type {
 } from '../../../query';
 import API_ROUTES from '../../../routes';
 
-type VerifyEmailParams =
-  Publisher.Api.BodyOf<Publisher.Api.ENDPOINT.AUTH_VERIFY_EMAIL>;
+type VerifyEmailParams = Publisher.BodyOf<'AUTH_VERIFY_EMAIL'>;
 
-type UserSuccessPayload =
-  Publisher.Api.SuccessResponseOf<Publisher.Api.ENDPOINT.AUTH_VERIFY_EMAIL>['payload'];
+type VerifyEmailSuccessPayload =
+  Publisher.SuccessResponseOf<'AUTH_VERIFY_EMAIL'>['payload'];
 
 type VerifyEmailResponse =
-  | APIResponseSuccessType<UserSuccessPayload>
+  | APIResponseSuccessType<VerifyEmailSuccessPayload>
   | APIResponseErrorType;
 
 export const verifyEmail = async (
