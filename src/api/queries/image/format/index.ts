@@ -7,7 +7,7 @@ import API_ROUTES from '../../../routes';
 type ImageFormat = {
   width: number;
   height: number;
-  format: string;
+  type: string;
   fit: string;
   quality: number;
   compressionLevel: number;
@@ -17,7 +17,7 @@ type ImageFormat = {
 const supportedProperties = [
   'width',
   'height',
-  'format',
+  'type',
   'fit',
   'quality',
   'compressionLevel',

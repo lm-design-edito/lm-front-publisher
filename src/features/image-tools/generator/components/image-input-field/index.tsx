@@ -63,7 +63,6 @@ export const ImageInputField = ({
           className="image-input-field__input"
           inputProps={{
             ...inputProps,
-            id: 'imageValue',
             type: 'file',
             accept: INPUT_ACCEPT,
           }}

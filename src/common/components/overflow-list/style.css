@@ -1,0 +1,35 @@
+.overflow-list {
+  --overflow-list-offset: 0;
+  --overflow-list-offset-r: 40px;
+  --overflow-list-spacing: var(--lm-publisher-spacer-2);
+  position: relative;
+  overflow: hidden;
+  padding-left: var(--overflow-list-offset);
+  
+  z-index: 1;
+}
+
+.overflow-list__content {
+  overflow: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--overflow-list-spacing);
+  padding-right: var(--overflow-list-offset-r);
+}
+
+
+.overflow-list:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: block;
+  width: var(--overflow-list-offset-r);
+  background: linear-gradient(90deg, var(--lm-publisher-bg-color) 70%, transparent);
+  z-index: 2;
+}
+
+.overflow-list > div {
+  flex-shrink: 0;
+}

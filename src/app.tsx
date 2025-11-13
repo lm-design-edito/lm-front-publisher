@@ -2,6 +2,8 @@ import { RouterProvider } from '@tanstack/react-router';
 import { useWhoAmI } from '@features/auth';
 import { router } from './router';
 import { Headline } from '@common/components/headline';
+import { Loader } from '@common/components/loader';
+import { Text } from '@common/components/text';
 
 export default function App() {
   const { isAuthenticated, isLoading } = useWhoAmI();
@@ -10,7 +12,15 @@ export default function App() {
       <div className="app-content">
         <Headline
           title="LM Publisher"
-          description="The app is loading, you should wait. If it loads undefinetly, please contact us."
+          description={
+            <div>
+              <Text>
+                The app is loading, you should wait. If it loads undefinetly,
+                please contact us.
+              </Text>
+              <Loader />
+            </div>
+          }
         />
       </div>
     ); /* You can replace this with a loading spinner or skeleton screen */

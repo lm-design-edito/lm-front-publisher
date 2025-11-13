@@ -2,11 +2,9 @@ import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Form } from '@common/components/forms/form';
-import { useImageTransform } from '../../api/use-image-transform';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
 import { useCallback, useEffect, useState, useMemo } from 'react';
-import { Logger } from '@utils/logger';
 import { ImageSelector } from '../image-selector';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { getTemplateConfigFields } from '../../utils/get-template-config-fields';
@@ -18,20 +16,12 @@ import './style.css';
 import { TemplateSelector } from '../template-selector';
 import { useImageThumbsUpload } from '../../api/use-image-thumbs-upload';
 import { useImageThumbsDownload } from '../../api/use-image-thumbs-download';
+import { useImageGenerate } from '../../api/use-image-generate';
 
-const MAX_SELECTION_IMG = 6;
+const MAX_SELECTION_IMG = 3;
 
 const baseImageGeneratorFormSchema = zod.object({
-  imageList: zod
-    .array(zod.string())
-    .min(1)
-    .max(MAX_SELECTION_IMG)
-    .refine(val => val.length <= MAX_SELECTION_IMG, {
-      message: `Veuillez sélectionner jusqu'à ${MAX_SELECTION_IMG} images.`,
-    }),
-  imageUpload: zod.instanceof(FileList).refine(files => files.length > 0, {
-    message: 'Veuillez sélectionner une image.',
-  }),
+  fileIds: zod.array(zod.string()),
   template: zod.enum(TemplateNameValues as [string, ...string[]], {
     message: 'Veuillez sélectionner un template.',
   }),
@@ -51,20 +41,25 @@ const createDynamicImageGeneratorFormSchema = (templateName?: string) => {
 
   return baseImageGeneratorFormSchema.extend(additionalSchema.shape);
 };
+type ImageGeneratorForm = {
+  onGenerated: (image: { url: string; mimeType: string }) => void;
+};
 
-export const ImageGeneratorForm = () => {
+export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const [downloadPlaceholderCount, setDownloadPlaceholderCount] = useState(0);
   const [uploadIds, setUploadIds] = useState<string[]>([]);
   const [currentTemplateName, setCurrentTemplateName] = useState<string>();
 
   const imageUploads = useImageThumbsDownload({ idList: uploadIds });
+
   const { mutate: imageThumbUpload } = useImageThumbsUpload({
     onSuccess: data => {
       setUploadIds(data.payload.ids);
       setDownloadPlaceholderCount(0);
       showToast({
         type: 'success',
-        message: 'Upload Success',
+        message:
+          'Vos fichiers ont bien été uploadés sur le serveur de LM Publisher.',
       });
       console.warn('Logout successful, user logged out.');
       // navigate({ to: appRoutes.index });
@@ -73,11 +68,32 @@ export const ImageGeneratorForm = () => {
       setDownloadPlaceholderCount(0);
       showToast({
         type: 'error',
-        message: 'Erreur lors de la déconnexion',
+        message:
+          error.message ||
+          "Une erreur a eu lieu lors de l'upload de vos fichiers.",
       });
-      console.error('Logout failed:', error);
+      console.error('Upload failed:', error);
     },
   });
+
+  const { mutate: imageGenerate, isPending: isPendingGenerate } =
+    useImageGenerate({
+      onSuccess: data => {
+        showToast({
+          type: 'success',
+          message: 'Votre image a été génerée',
+        });
+        onGenerated(data.payload);
+      },
+      onError: error => {
+        showToast({
+          type: 'error',
+          message:
+            error.message ||
+            'Une erreur a eu lieu lors de la génération de votre image.',
+        });
+      },
+    });
 
   // Créer le schema dynamiquement
   const dynamicSchema = useMemo(
@@ -131,56 +147,21 @@ export const ImageGeneratorForm = () => {
       // Reset partiel du form en gardant les champs de base
       reset({
         template: currentValues.template,
-        imageList: currentValues.imageList,
-        imageUpload: currentValues.imageUpload,
+        fileIds: currentValues.fileIds,
         // Les nouveaux champs dynamiques seront gérés par le nouveau schema
       });
     }
   }, [templateName, currentTemplateName, getValues, reset, onUnregister]);
 
-  const { showToast } = useToastContext();
+  const { showToast, hideToast } = useToastContext();
 
-  const { isPending } = useImageTransform({
-    onSuccess: data => {
-      showToast({
-        type: 'success',
-        message: 'Image générée avec succès',
-      });
-      Logger.success('image-tools.image-generator-form.useImageTransform', {
-        data,
-      });
-    },
-    onError: error => {
-      Logger.error('image-tools.image-generator-form.useImageTransform', {
-        error,
-      });
-      showToast({
-        type: 'error',
-        message: error.message,
-      });
-    },
-  });
-
-  const onSubmit = () => {
-    // imageGenerate({
-    //   file: values.imageUpload[0],
-    //   operations:
-    //     ImageGeneratorTemplatesConfig[values.template] &&
-    //     'operations' in
-    //       (ImageGeneratorTemplatesConfig[values.template] as Record<
-    //         string,
-    //         unknown
-    //       >)
-    //       ? (
-    //           ImageGeneratorTemplatesConfig[values.template] as {
-    //             operations?: unknown[];
-    //           }
-    //         ).operations || []
-    //       : [],
-    // });
+  const onSubmit = (values: zod.infer<typeof baseImageGeneratorFormSchema>) => {
+    /* @ts-expect-error: WIP @todo */
+    imageGenerate(values);
   };
 
   const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {
+    console.log({e});
     if (e.target.files) {
       const uploadFiles = [...e.target.files]
         .filter(file => file !== undefined)
@@ -200,13 +181,16 @@ export const ImageGeneratorForm = () => {
       duration: 0,
       message: `Le générateur d'images est en version bêta. Les résultats peuvent varier.`,
     });
-  }, [showToast]);
+    return () => {
+      hideToast('info-image-generator-beta');
+    };
+  }, [showToast, hideToast]);
 
   return (
     <FormProvider {...formMethods}>
       <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name="imageList"
+          name="fileIds"
           control={control}
           render={({ field: { onChange, value } }) => (
             <ImageSelector
@@ -223,7 +207,7 @@ export const ImageGeneratorForm = () => {
                 src: imageUpload.url,
               }))}
               selection={value}
-              error={errors['imageList']}
+              error={errors['fileIds']}
             />
           )}
         />
@@ -253,7 +237,7 @@ export const ImageGeneratorForm = () => {
         </FieldSet>
 
         <FormFooter>
-          <FormSubmit isLoading={isPending}>Génerer</FormSubmit>
+          <FormSubmit isLoading={isPendingGenerate}>Génerer</FormSubmit>
         </FormFooter>
       </Form>
     </FormProvider>

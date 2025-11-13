@@ -1,4 +1,5 @@
 :root {
+
   --lm-publisher-bg-color: var(--lmui-c-white);
   --lm-publisher-text-color: var(--lmui-c-slate-dark);
   --lm-publisher-title-color: var(--lmui-c-charcoal-dark);
@@ -20,7 +21,6 @@
   --lm-publisher-dialog-bg-color: var(--lmui-c-dialog-box-bg);
   --lm-publisher-dialog-text-color: var(--lmui-c-dialog-box-text);
   --lm-publisher-dialog-shadow: var(--lmui-c-dialog-box-shadow);
-  
 
   --lm-publisher-service-bg: linear-gradient(
     232deg,

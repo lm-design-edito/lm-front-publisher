@@ -32,41 +32,41 @@ export type TemplateConfigFieldTypes = Record<
 const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
   [TemplateNames.BOOK]: {
     formFields: [
-      {
-        name: 'backgroundColor',
-        type: 'input',
-        properties: {
-          label: 'Couleur de fond (Optionnel)',
-          inputProps: {
-            type: 'text',
-            value: '#FFFFFF',
-          },
-        },
-        validation: zod.string().optional(),
-      },
-      {
-        name: 'secondaryBackgroundColor',
-        type: 'input',
-        properties: {
-          label: 'Couleur de fond secondaire (Optionnel)',
-          inputProps: {
-            type: 'text',
-            value: '#FFFFFF',
-          },
-        },
-        validation: zod.string().optional(),
-      },
-      {
-        name: 'autoCalcColors',
-        type: 'checkbox',
-        properties: {
-          label: 'Calcul automatiquement les couleurs',
-          inputProps: {
-            type: 'checkbox',
-          },
-        },
-        validation: zod.boolean().optional(),
-      },
+      // {
+      //   name: 'backgroundColor',
+      //   type: 'input',
+      //   properties: {
+      //     label: 'Couleur de fond (Optionnel)',
+      //     inputProps: {
+      //       type: 'text',
+      //       value: '#FFFFFF',
+      //     },
+      //   },
+      //   validation: zod.string().optional(),
+      // },
+      // {
+      //   name: 'secondaryBackgroundColor',
+      //   type: 'input',
+      //   properties: {
+      //     label: 'Couleur de fond secondaire (Optionnel)',
+      //     inputProps: {
+      //       type: 'text',
+      //       value: '#FFFFFF',
+      //     },
+      //   },
+      //   validation: zod.string().optional(),
+      // },
+      // {
+      //   name: 'autoCalcColors',
+      //   type: 'checkbox',
+      //   properties: {
+      //     label: 'Calcul automatiquement les couleurs',
+      //     inputProps: {
+      //       type: 'checkbox',
+      //     },
+      //   },
+      //   validation: zod.boolean().optional(),
+      // },
     ],
   },
 };

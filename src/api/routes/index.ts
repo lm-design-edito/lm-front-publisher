@@ -20,7 +20,7 @@ const API_ROUTES = {
   DESIGN_EDITO_THUMB_UPLOAD_TEMP: 'POST:/design-edito/thumbs/upload',
   DESIGN_EDITO_THUMB_DOWNLOAD_TEMP: 'GET:/design-edito/thumbs/get/:id',
   DESIGN_EDITO_THUMB_TEMPLATE_GENERATE_BOOK:
-    'POST:design-edito/thumbs/template/book/generate',
+    'POST:/design-edito/thumbs/template/book/generate',
 };
 
 export default API_ROUTES;
