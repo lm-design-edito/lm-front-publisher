@@ -1,6 +1,5 @@
 import { Badge } from '@common/components/badge';
 import './style.css';
-import { ButtonLink } from '@common/components/buttons/button-link';
 import { Display } from '@common/components/display';
 
 export type ImageGeneratedPreviewProps = {

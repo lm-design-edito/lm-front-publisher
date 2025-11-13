@@ -161,7 +161,6 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   };
 
   const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {
-    console.log({e});
     if (e.target.files) {
       const uploadFiles = [...e.target.files]
         .filter(file => file !== undefined)
