@@ -24,7 +24,21 @@ export function useWhoAmI(
 
   if (isSuccess && data.success) {
     return {
-      user: data.payload,
+      user: {
+        ...data.payload,
+        status:
+          'status' in data.payload && typeof data.payload.status === 'string'
+            ? data.payload.status
+            : '',
+        role:
+          'role' in data.payload && typeof data.payload.role === 'string'
+            ? data.payload.role
+            : '',
+        badges:
+          'badges' in data.payload && Array.isArray(data.payload.badges)
+            ? data.payload.badges
+            : [],
+      },
       isAuthenticated: true,
       isLoading: false,
       isError: false,

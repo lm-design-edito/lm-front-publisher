@@ -46,7 +46,11 @@ export const MyUserProfile = () => {
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
             >
-              <UserStatus status={user?.status || 'Aucun statut défini'} />
+              <UserStatus
+                status={
+                  user && 'status' in user ? user.status : 'Aucun statut défini'
+                }
+              />
             </FieldSet>
             <FieldSet
               legend="État"

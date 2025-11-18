@@ -1,23 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import { api } from '../../../../api';
 import { useMemo } from 'react';
+import { useWhoAmI } from '@features/auth';
 
 export const useAvailableServiceList = (toolBadges: string[]) => {
-  const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['who-am-i'],
-    queryFn: () => {
-      console.log('useAvailableServiceList.who-am-i');
-      return api.queries.auth.whoAmI();
-    },
-  });
+  const { user, isLoading } = useWhoAmI();
 
   const availableServices = useMemo(() => {
     if (isLoading) {
       return [];
     }
 
-    if (isSuccess && data.success) {
-      const user = data.payload;
+    if (user) {
       return toolBadges.filter(
         badge =>
           user.role === 'admin' ||
@@ -27,7 +19,7 @@ export const useAvailableServiceList = (toolBadges: string[]) => {
     } else {
       return [];
     }
-  }, [isSuccess, isLoading, data, toolBadges]);
+  }, [user, isLoading, toolBadges]);
 
   return availableServices;
 };
