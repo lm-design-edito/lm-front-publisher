@@ -4,7 +4,7 @@ import * as zod from 'zod';
 import { FormInput } from '@common/components/forms/form-input';
 import { Form } from '@common/components/forms/form';
 import { useWhoAmI } from '../../api/use-who-am-i';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
@@ -42,7 +42,12 @@ export const VerifyEmailForm = () => {
     onSuccess: () => {
       showToast({
         type: 'success',
-        message: 'Votre e-mail a bien été vérifié.',
+        message: (
+          <>
+            Votre e-mail a bien été vérifié.{' '}
+            <Link to="/auth/login">Se connecter</Link>
+          </>
+        ),
       });
       navigate({
         to: appRoutes.index,
