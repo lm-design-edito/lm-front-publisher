@@ -5,17 +5,24 @@ import { Alert } from '@common/components/alert';
 const DEFAULT_TOAST_DURATION = 5000;
 
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  console.log('toast provider render');
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const hideToast = useCallback((toastId: string) => {
-    setToasts(prevToasts => prevToasts.filter(toast => toast.id !== toastId));
+    setToasts(prevToasts => {
+      if (!prevToasts.find(toast => toast.id === toastId)) {
+        return prevToasts;
+      }
+      return prevToasts.filter(toast => toast.id !== toastId);
+    });
   }, []);
 
   const hideAllToasts = useCallback((groupId: string) => {
     setToasts(prevToasts => {
       if (!groupId) {
         return [];
+      }
+      if (!prevToasts.find(toast => toast.groupId === groupId)) {
+        return prevToasts;
       }
       return prevToasts.filter(toast => toast.groupId !== groupId);
     });
