@@ -26,12 +26,6 @@ export const TemplateSelector = (props: TemplateSelectorProps) => {
             onClick={() => onSelectTemplate(template.name)}
           >
             <div className="template-selector__thumbnail">
-              <img
-                src={
-                  'https://assets-decodeurs.lemonde.fr/redacweb/231010-carbon-bombs-assets/footer_carbon_scrolly.jpg'
-                }
-                alt={template.label}
-              />
               {template.thumbnail && (
                 <img src={template.thumbnail} alt={template.label} />
               )}
