@@ -5,22 +5,26 @@ import {
 } from '@features/image-tools/generator';
 import { Headline } from '@common/components/headline';
 import { appRoutes } from '@src/appRoutes';
-import {
-  ImageGeneratedList,
-  type ImageGeneratedListProps,
-} from '@features/image-tools/generator/components/image-generated-list';
+import { ImageGeneratedList } from '@features/image-tools/generator/components/image-generated-list';
 import { useState } from 'react';
 import { Divider } from '@common/components/divider';
 
-type GeneratedImage = ImageGeneratedListProps['list'][0];
-type GeneratedImageList = GeneratedImage[];
+type GeneratedImage = {
+  name: string;
+  url: string;
+  isNew: boolean;
+};
 
 const ImageGeneratorPage = () => {
-  const [generatedList, setGeneratedList] = useState<GeneratedImageList>([]);
-  const handleOnGenerated = (generatedImage: GeneratedImage) => {
-    setGeneratedList((prev: GeneratedImageList) => [
+  const [generatedList, setGeneratedList] = useState<GeneratedImage[]>([]);
+  const handleOnGenerated = (generatedImage: { name: string; url: string }) => {
+    setGeneratedList((prev: GeneratedImage[]) => [
       { ...generatedImage, isNew: true },
-      ...prev.map(image => ({ ...image, isNew: false })),
+      ...prev.map(image => ({
+        name: image.name,
+        url: image.url,
+        isNew: false,
+      })),
     ]);
   };
   return (

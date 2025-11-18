@@ -42,7 +42,7 @@ const createDynamicImageGeneratorFormSchema = (templateName?: string) => {
   return baseImageGeneratorFormSchema.extend(additionalSchema.shape);
 };
 type ImageGeneratorForm = {
-  onGenerated: (image: { url: string; mimeType: string }) => void;
+  onGenerated: (image: { url: string; mimeType: string; name: string }) => void;
 };
 
 export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {

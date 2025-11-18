@@ -3,14 +3,14 @@ import './style.css';
 import { Display } from '@common/components/display';
 
 export type ImageGeneratedPreviewProps = {
-  isNew?: boolean;
-  url: string;
   name: string;
+  url: string;
+  isNew?: boolean;
 };
 
 export const ImageGeneratedPreview = ({
-  url,
   name,
+  url,
   isNew,
 }: ImageGeneratedPreviewProps) => {
   return (
