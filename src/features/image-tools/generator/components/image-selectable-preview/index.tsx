@@ -10,6 +10,7 @@ export type ImagePlaceholderSelectablePreviewProps = {
 export type ImageSelectablePreviewProps = {
   src: string;
   alt?: string;
+  id?: string;
   selected: boolean;
   onChange: (selected: boolean) => void;
   className?: string;
@@ -18,7 +19,7 @@ export type ImageSelectablePreviewProps = {
 export const ImageSelectablePreview = (
   props: ImageSelectablePreviewProps | ImagePlaceholderSelectablePreviewProps,
 ) => {
-  if ('isPlaceholder' in props) {
+  if ('isPlaceholder' in props || props.src === 'PLACEHOLDER') {
     return (
       <div
         className={`image-selectable-preview image-selectable-preview_placeholder ${props.className}`}

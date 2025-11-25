@@ -38,12 +38,11 @@ export const SignupForm = () => {
   });
 
   const { mutate: signup } = useSignup({
-    onSuccess: data => {
+    onSuccess: () => {
       showToast({
         type: 'success',
         message: 'Inscription réussie !',
       });
-      console.log('on success signup', data);
       navigate({
         to: appRoutes.verifyEmail,
         search: {
@@ -68,7 +67,6 @@ export const SignupForm = () => {
       email: values.email,
       password: values.password,
     });
-    console.log('on submit');
   };
 
   return (

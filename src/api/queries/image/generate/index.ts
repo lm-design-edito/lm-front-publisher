@@ -1,5 +1,5 @@
 import type { APIResponseErrorType, APIResponseSuccessType } from '@api/query';
-import { createFormDataForAPI, Logger } from '@utils/index';
+import { Logger } from '@utils/index';
 
 type ImageGenerate = {
   operations: object; // Replace with actual type if known
@@ -23,16 +23,10 @@ type ImageGenerateResponseType =
   | APIResponseErrorType
   | ImageGenerateResponseSuccessType;
 
-const supportedProperties = ['file', 'operations'];
-
 export const imageGenerate = async (
   params: ImageGenerate,
 ): Promise<ImageGenerateResponseType> => {
   Logger.log('api.queries.imageGenerate.params', params);
-  const formData = createFormDataForAPI(params, supportedProperties, {
-    file: 'image',
-  });
-  Logger.log('api.queries.imageGenerate.formData', formData);
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {

@@ -34,6 +34,19 @@ export function useImageThumbsDownload(params: { idList: string[] }) {
       return {
         queryKey: ['thumb-download', item.id],
         queryFn: () => api.queries.designEdito.thumbDownload({ id: item.id }),
+        placeholderData: {
+          httpStatus: 200,
+          success: true,
+          type: 'loading',
+          payload: {
+            url: 'PLACEHOLDER',
+            size: 0,
+            name: item.id,
+            id: item.id,
+            mimeType: 'png',
+            format: 'png',
+          },
+        },
       };
     }),
   });

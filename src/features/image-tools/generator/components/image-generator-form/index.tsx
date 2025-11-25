@@ -21,7 +21,18 @@ import { useImageGenerate } from '../../api/use-image-generate';
 const MAX_SELECTION_IMG = 3;
 
 const baseImageGeneratorFormSchema = zod.object({
-  fileIds: zod.array(zod.string()),
+  fileIds: zod
+    .array(
+      zod.string({
+        message: 'Veuillez sélectionner au moins une image',
+      }),
+      {
+        message: 'Veuillez sélectionner au moins une image',
+      },
+    )
+    .min(1, {
+      message: 'Veuillez sélectionner au moins une image',
+    }),
   template: zod.enum(TemplateNameValues as [string, ...string[]], {
     message: 'Veuillez sélectionner un template.',
   }),
@@ -196,6 +207,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
               uploadInputProps={{
                 id: 'image-upload',
                 onChange: onChangeUpload,
+                multiple: true,
               }}
               downloadPlaceholderCount={downloadPlaceholderCount}
               maxSelection={MAX_SELECTION_IMG}
@@ -236,7 +248,12 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
         </FieldSet>
 
         <FormFooter>
-          <FormSubmit isLoading={isPendingGenerate}>Génerer</FormSubmit>
+          <FormSubmit
+            isLoading={isPendingGenerate}
+            disabled={isPendingGenerate}
+          >
+            Génerer
+          </FormSubmit>
         </FormFooter>
       </Form>
     </FormProvider>

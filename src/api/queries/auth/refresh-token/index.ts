@@ -7,5 +7,5 @@ export const refreshToken = async () => {
     method: 'POST',
     body: JSON.stringify({}),
   });
-  console.log('refreshToken response', response);
+  return response;
 };

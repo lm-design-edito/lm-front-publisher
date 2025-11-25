@@ -14,7 +14,6 @@ export function useImageGenerate(clbs?: {
 }) {
   return useMutation({
     mutationFn: (params: UseImageGenerateParams) => {
-      console.log('useMutationGenerate', params);
       if (!params || !('template' in params)) {
         throw new Error('Paramètres invalides ou manquants');
       }

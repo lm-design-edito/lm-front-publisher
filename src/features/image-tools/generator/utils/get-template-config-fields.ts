@@ -6,7 +6,6 @@ export const getTemplateConfigFields = (
   templateName?: string,
 ): TemplateConfigField[] => {
   const fallbackFields: TemplateConfigField[] = [];
-  console.log('getTemplateConfigFields', templateName);
   if (!templateName) {
     return fallbackFields;
   }

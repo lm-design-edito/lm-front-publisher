@@ -24,7 +24,6 @@ export function useLogin(clbs?: {
         queryKey: ['who-am-i'],
       });
       if (!data.success) {
-        console.log('on error data success false', data);
         clbs?.onError?.(
           api.helpers.formatAPIError(
             data as APIResponseErrorType,
@@ -37,7 +36,6 @@ export function useLogin(clbs?: {
       clbs?.onSuccess?.(data);
     },
     onError: err => {
-      console.log('on Error', err);
       clbs?.onError?.(
         api.helpers.formatAPIError(
           err,

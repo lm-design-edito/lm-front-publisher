@@ -26,8 +26,6 @@ export const formatAPIError = (
   messages?: Record<string, string>,
   fallbackMessage?: string,
 ): FormattedAPIErrorType => {
-  console.log({ error, test: isAPIResponseErrorType(error) });
-
   if (isAPIResponseErrorType(error)) {
     return {
       code: error.httpStatus,

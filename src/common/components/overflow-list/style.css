@@ -26,7 +26,7 @@
   right: 0;
   display: block;
   width: var(--overflow-list-offset-r);
-  background: linear-gradient(90deg, var(--lm-publisher-bg-color) 70%, transparent);
+  background: linear-gradient(-90deg, var(--lm-publisher-bg-color) 70%, transparent);
   z-index: 2;
 }
 

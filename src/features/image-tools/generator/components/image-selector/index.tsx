@@ -36,6 +36,7 @@ export const ImageSelector = ({
   uploadDroppable,
   uploadInputProps,
   onSelectionChange,
+  error,
   ...otherProps
 }: ImageSelectorProps) => {
   const placeholders = useMemo(() => {
@@ -59,6 +60,7 @@ export const ImageSelector = ({
           </span>
         </span>
       }
+      error={error}
       className="image-selector"
       contentClassName="image-selector__content"
       {...otherProps}
@@ -77,6 +79,7 @@ export const ImageSelector = ({
         {placeholders.map(index => (
           <ImageSelectablePreview
             key={index}
+            id={index}
             isPlaceholder={true}
             className="image-selector__preview"
           />
@@ -84,6 +87,7 @@ export const ImageSelector = ({
         {imageList?.map(image => (
           <ImageSelectablePreview
             key={image.id}
+            id={image.id}
             src={image.src}
             alt={image.alt}
             selected={selection?.includes(image.id) || false}
