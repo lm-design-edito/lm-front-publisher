@@ -10,7 +10,6 @@ export type ImagePlaceholderSelectablePreviewProps = {
 export type ImageSelectablePreviewProps = {
   src: string;
   alt?: string;
-  id?: string;
   selected: boolean;
   onChange: (selected: boolean) => void;
   className?: string;

@@ -79,7 +79,6 @@ export const ImageSelector = ({
         {placeholders.map(index => (
           <ImageSelectablePreview
             key={index}
-            id={index}
             isPlaceholder={true}
             className="image-selector__preview"
           />
@@ -87,7 +86,6 @@ export const ImageSelector = ({
         {imageList?.map(image => (
           <ImageSelectablePreview
             key={image.id}
-            id={image.id}
             src={image.src}
             alt={image.alt}
             selected={selection?.includes(image.id) || false}
