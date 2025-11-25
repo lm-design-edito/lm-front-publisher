@@ -17,6 +17,7 @@ export type InputTemplateConfigField = {
 
 export type CheckboxTemplateConfigField = {
   type: 'checkbox';
+  defaultChecked?: boolean;
   properties: FormInputCheckboxProps;
 } & DefaultTemplateConfigField;
 
@@ -56,17 +57,31 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
       //   },
       //   validation: zod.string().optional(),
       // },
-      // {
-      //   name: 'autoCalcColors',
-      //   type: 'checkbox',
-      //   properties: {
-      //     label: 'Calcul automatiquement les couleurs',
-      //     inputProps: {
-      //       type: 'checkbox',
-      //     },
-      //   },
-      //   validation: zod.boolean().optional(),
-      // },
+      {
+        name: 'colors.auto',
+        type: 'checkbox',
+        defaultChecked: false,
+        properties: {
+          label: "Utiliser les couleurs de l'image principale comme fond",
+          inputProps: {
+            type: 'checkbox',
+          },
+        },
+        validation: zod.boolean().optional(),
+      },
+      {
+        name: 'colors.useComplementary',
+        type: 'checkbox',
+        defaultChecked: false,
+        properties: {
+          label:
+            "Utiliser la couleur complémentaire de l'image principale comme fond",
+          inputProps: {
+            type: 'checkbox',
+          },
+        },
+        validation: zod.boolean().optional(),
+      },
     ],
   },
 };

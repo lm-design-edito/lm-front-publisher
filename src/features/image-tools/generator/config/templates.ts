@@ -2,6 +2,7 @@ import templateBookPreview from '../assets/preview-template-book.jpg';
 
 export const TemplateNames = {
   BOOK: 'BOOK',
+  TEST: 'test',
 } as const;
 
 export const TemplateNameValues = Object.values(TemplateNames);

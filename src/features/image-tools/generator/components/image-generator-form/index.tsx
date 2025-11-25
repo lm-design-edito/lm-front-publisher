@@ -17,6 +17,9 @@ import { TemplateSelector } from '../template-selector';
 import { useImageThumbsUpload } from '../../api/use-image-thumbs-upload';
 import { useImageThumbsDownload } from '../../api/use-image-thumbs-download';
 import { useImageGenerate } from '../../api/use-image-generate';
+import { Display } from '@common/components/display';
+import { Text } from '@common/components/text';
+import type { TemplateConfigFieldTypes } from '../../config';
 
 const MAX_SELECTION_IMG = 3;
 
@@ -42,15 +45,34 @@ const createDynamicImageGeneratorFormSchema = (templateName?: string) => {
   if (!templateName) return baseImageGeneratorFormSchema;
 
   const templateConfigFields = getTemplateConfigFields(templateName);
-  let additionalSchema = zod.object({});
+
+  // Utiliser un Record pour gérer les types correctement
+  const additionalFields: Record<string, zod.ZodTypeAny> = {};
 
   templateConfigFields.forEach(field => {
-    additionalSchema = additionalSchema.extend({
-      [field.name]: field.validation,
-    });
+    const parts = field.name.split('.');
+
+    if (parts.length > 1) {
+      const [parentKey, childKey] = parts;
+
+      // Si l'objet parent n'existe pas encore, le créer
+      if (!additionalFields[parentKey]) {
+        additionalFields[parentKey] = zod.object({
+          [childKey]: field.validation,
+        });
+      } else {
+        // Si l'objet parent existe déjà, l'étendre
+        const existingSchema = additionalFields[parentKey] as zod.AnyZodObject;
+        additionalFields[parentKey] = existingSchema.extend({
+          [childKey]: field.validation,
+        });
+      }
+    } else {
+      additionalFields[field.name] = field.validation;
+    }
   });
 
-  return baseImageGeneratorFormSchema.extend(additionalSchema.shape);
+  return baseImageGeneratorFormSchema.extend(additionalFields);
 };
 type ImageGeneratorForm = {
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void;
@@ -133,7 +155,6 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const onUnregister = useCallback(
     (fieldNames: string[]) => {
       fieldNames.forEach(field => {
-        /* @ts-expect-error: field as templateConfigField */
         unregister(field);
       });
     },
@@ -166,8 +187,8 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
 
   const { showToast, hideToast } = useToastContext();
 
-  const onSubmit = (values: zod.infer<typeof baseImageGeneratorFormSchema>) => {
-    /* @ts-expect-error: WIP @todo */
+  const onSubmit = (values: zod.infer<typeof dynamicSchema>) => {
+    // @ts-expect-error: values to do
     imageGenerate(values);
   };
 
@@ -195,6 +216,13 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
       hideToast('info-image-generator-beta');
     };
   }, [showToast, hideToast]);
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      console.log('Form values changed:', { name, type, value });
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <FormProvider {...formMethods}>
@@ -238,13 +266,22 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
               />
             )}
           />
-          <ImageGeneratorTemplateFields
-            templateName={currentTemplateName}
-            configFields={templateConfigFields}
-            control={control}
-            /* @ts-expect-error: errors as templateConfigField @todo */
-            errors={errors}
-          />
+          <Display type="flex" direction="column">
+            <Text className="lmui-form__placeholder form-label">
+              Options du modèle
+            </Text>
+
+            {currentTemplateName ? (
+              <ImageGeneratorTemplateFields
+                templateName={currentTemplateName}
+                configFields={templateConfigFields}
+                control={control}
+                errors={errors}
+              />
+            ) : (
+              <Text>Sélectionnez un modèle pour choisir ses options.</Text>
+            )}
+          </Display>
         </FieldSet>
 
         <FormFooter>

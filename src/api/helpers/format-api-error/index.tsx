@@ -28,7 +28,7 @@ export const formatAPIError = (
 ): FormattedAPIErrorType => {
   if (isAPIResponseErrorType(error)) {
     return {
-      code: error.httpStatus,
+      code: error.httpStatus || 500,
       name: error.error.code || 'API Error',
       message:
         messages?.[error.error.code] ||

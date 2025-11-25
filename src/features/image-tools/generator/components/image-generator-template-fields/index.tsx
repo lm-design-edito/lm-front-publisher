@@ -1,13 +1,8 @@
 import { FormInput } from '@common/components/forms/form-input';
-import { useCallback, useEffect, useRef } from 'react';
-import {
-  Controller,
-  useFormContext,
-  type FieldError,
-  type FieldErrors,
-} from 'react-hook-form';
+import { Controller, type FieldError, type FieldErrors } from 'react-hook-form';
 import type { TemplateConfigField } from '../../config/template-config-fields';
 import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
+import { Text } from '@common/components/text';
 
 type ConfigFieldName = string;
 
@@ -26,69 +21,56 @@ export const ImageGeneratorTemplateFields = ({
   control,
   errors,
 }: Props) => {
-  const currentFieldNames = useRef<ConfigFieldName[]>([]);
-  const { unregister } = useFormContext();
-
-  const unregisterCurrentFields = useCallback(() => {
-    if (currentFieldNames.current.length) {
-      const fieldsToUnregister = currentFieldNames.current;
-      unregister(fieldsToUnregister as string[]);
-    }
-  }, [unregister]);
-
-  useEffect(() => {
-    unregisterCurrentFields();
-    currentFieldNames.current = configFields
-      ? configFields.map(field => field.name)
-      : [];
-
-    return () => {
-      unregisterCurrentFields();
-    };
-  }, [configFields, templateName, unregisterCurrentFields]);
-
   return (
     <>
-      {configFields.map(field => (
-        <Controller
-          key={`${templateName}-${field.name}`} // Key unique pour forcer le re-render
-          name={field.name}
-          control={control}
-          /* @ts-expect-error: dynamic fields */
-          render={({ field: { onChange, value } }) => {
-            switch (field.type) {
-              case 'input':
-                return (
-                  <FormInput
-                    {...field.properties}
-                    inputProps={{
-                      ...field.properties.inputProps,
-                      id: field.name,
-                      value: value || '',
-                      onChange,
-                    }}
-                    error={errors[field.name] as FieldError}
-                  />
-                );
-              case 'checkbox':
-                return (
-                  <FormInputCheckbox
-                    {...field.properties}
-                    inputProps={{
-                      ...field.properties.inputProps,
-                      id: field.name,
-                      checked: Boolean(value),
-                      onChange: e => onChange(e.target.checked),
-                    }}
-                    error={errors[field.name] as FieldError}
-                  />
-                );
-              default:
-                return null;
-            }
-          }}
-        />
-      ))}
+      {configFields.length === 0 ? (
+        <Text>Aucune option configurable avec ce modèle</Text>
+      ) : (
+        configFields.map(field => (
+          <Controller
+            key={`${templateName}-${field.name}`} // Key unique pour forcer le re-render
+            name={field.name}
+            control={control}
+            /* @ts-expect-error: dynamic fields */
+            render={({ field: { onChange, value } }) => {
+              switch (field.type) {
+                case 'input':
+                  return (
+                    <FormInput
+                      {...field.properties}
+                      inputProps={{
+                        ...field.properties.inputProps,
+                        id: field.name,
+                        value: value || '',
+                        onChange,
+                      }}
+                      error={errors[field.name] as FieldError}
+                    />
+                  );
+                case 'checkbox':
+                  return (
+                    <FormInputCheckbox
+                      {...field.properties}
+                      inputProps={{
+                        ...field.properties.inputProps,
+                        id: field.name,
+                        // defaultChecked: field.defaultChecked,
+                        checked: Boolean(value),
+                        onChange: e => onChange(e.target.checked),
+                      }}
+                      labelProps={{
+                        htmlFor: field.name,
+                      }}
+                      error={errors[field.name] as FieldError}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            }}
+          />
+        ))
+      )}
     </>
   );
 };
