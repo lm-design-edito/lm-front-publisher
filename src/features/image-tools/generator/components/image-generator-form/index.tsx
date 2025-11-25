@@ -19,7 +19,6 @@ import { useImageThumbsDownload } from '../../api/use-image-thumbs-download';
 import { useImageGenerate } from '../../api/use-image-generate';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
-import type { TemplateConfigFieldTypes } from '../../config';
 
 const MAX_SELECTION_IMG = 3;
 
