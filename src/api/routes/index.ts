@@ -1,4 +1,6 @@
 const API_ROUTES = {
+  SYSTEM_STATUS_CHECK: 'system/status-check',
+
   AUTH_GET_CSRF_TOKEN: 'csrf/get-token',
   AUTH_REFRESH_JWT_TOKEN: 'auth/refresh-token',
   AUTH_POST_WHOAMI: 'auth/whoami',

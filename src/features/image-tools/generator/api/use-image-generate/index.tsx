@@ -11,14 +11,22 @@ export type TemplateBookImageGenerate = {
 type UseImageGenerateParams = TemplateBookImageGenerate | undefined;
 
 export function useImageGenerate(clbs?: {
+  onServerDown?: () => void;
   onSuccess?: (data: ImageTransformResponseSuccessType) => void;
   onError?: (error: ReturnType<typeof api.helpers.formatAPIError>) => void;
 }) {
   return useMutation({
-    mutationFn: (params: UseImageGenerateParams) => {
+    mutationFn: async (params: UseImageGenerateParams) => {
       if (!params || !('template' in params)) {
         throw new Error('Paramètres invalides ou manquants');
       }
+      // Vérifier le statut du serveur
+      const statusCheck = await api.queries.system.statusCheck();
+      if (statusCheck.success && !statusCheck.payload.isHealthy) {
+        clbs?.onServerDown?.();
+        throw new Error('Server is down');
+      }
+
       switch (params.template) {
         case 'BOOK':
           return api.queries.designEdito.templateBookGenerate(params);

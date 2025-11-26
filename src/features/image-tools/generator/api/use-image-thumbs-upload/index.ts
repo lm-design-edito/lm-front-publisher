@@ -7,12 +7,25 @@ type UseImageThumbUpload = Parameters<
 >[0];
 
 export function useImageThumbsUpload(clbs?: {
+  onServerDown?: () => void;
   onSuccess?: (data: ThumbsUploadResponseSuccessType) => void;
   onError?: (error: ReturnType<typeof api.helpers.formatAPIError>) => void;
 }) {
   return useMutation({
-    mutationFn: (params: UseImageThumbUpload) =>
-      api.queries.designEdito.thumbsUpload(params),
+    retry: 3,
+    mutationFn: async (params: UseImageThumbUpload) => {
+      console.log('mutation FN');
+      // Vérifier le statut du serveur
+      const statusCheck = await api.queries.system.statusCheck();
+      if (statusCheck.success && !statusCheck.payload.isHealthy) {
+        clbs?.onServerDown?.();
+        throw new Error('Server is down');
+      }
+
+      // Uploader les thumbs
+      const response = await api.queries.designEdito.thumbsUpload(params);
+      return response;
+    },
     onSuccess: data => {
       if (!data.success) {
         clbs?.onError?.(api.helpers.formatAPIError(data));

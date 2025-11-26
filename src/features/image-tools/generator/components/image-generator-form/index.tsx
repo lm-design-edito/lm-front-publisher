@@ -85,6 +85,13 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const imageUploads = useImageThumbsDownload({ idList: uploadIds });
 
   const { mutate: imageThumbUpload } = useImageThumbsUpload({
+    onServerDown: () => {
+      showToast({
+        type: 'warning',
+        message:
+          'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
+      });
+    },
     onSuccess: data => {
       setUploadIds(data.payload.ids);
       setDownloadPlaceholderCount(0);
@@ -110,6 +117,13 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
 
   const { mutate: imageGenerate, isPending: isPendingGenerate } =
     useImageGenerate({
+      onServerDown: () => {
+        showToast({
+          type: 'warning',
+          message:
+            'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
+        });
+      },
       onSuccess: data => {
         showToast({
           type: 'success',
