@@ -22,7 +22,6 @@ export const RootPage = () => {
     <ThemeProvider>
       <DebugDevBar />
       <Header />
-      {/* <UnverifiedUserBanner /> */}
       <div className="app-content">
         <Outlet />
       </div>
@@ -33,7 +32,7 @@ export const RootPage = () => {
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => (
     <ToastProvider>
-      <RootPage />,
+      <RootPage />
     </ToastProvider>
   ),
 });

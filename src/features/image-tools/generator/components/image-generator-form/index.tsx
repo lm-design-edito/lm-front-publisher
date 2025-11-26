@@ -187,8 +187,12 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const { showToast, hideToast } = useToastContext();
 
   const onSubmit = (values: zod.infer<typeof dynamicSchema>) => {
-    // @ts-expect-error: values to do
-    imageGenerate(values);
+    const { fileIds, template, ...otherFields } = values;
+    imageGenerate({
+      fileIds,
+      template,
+      options: otherFields,
+    });
   };
 
   const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {

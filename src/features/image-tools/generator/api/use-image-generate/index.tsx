@@ -4,6 +4,8 @@ import type { ImageTransformResponseSuccessType } from '@api/queries/image/trans
 
 export type TemplateBookImageGenerate = {
   template: 'BOOK';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options?: any; // [WIP] TODO
 } & Parameters<typeof api.queries.designEdito.templateBookGenerate>[0];
 
 type UseImageGenerateParams = TemplateBookImageGenerate | undefined;

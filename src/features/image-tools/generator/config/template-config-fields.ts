@@ -2,6 +2,7 @@ import type { FormInputProps } from '@common/components/forms/form-input';
 import * as zod from 'zod';
 import { TemplateNames } from './templates';
 import type { FormInputCheckboxProps } from '@common/components/forms/form-input-checkbox';
+import type { FormInputRadioGroupProps } from '@common/components/forms/form-input-radio-group';
 
 export type FormInputFieldText = FormInputProps | FormInputCheckboxProps;
 
@@ -21,9 +22,16 @@ export type CheckboxTemplateConfigField = {
   properties: FormInputCheckboxProps;
 } & DefaultTemplateConfigField;
 
+export type RadioGroupTemplateConfigField = {
+  type: 'radio-group';
+  defaultValue?: string;
+  properties: FormInputRadioGroupProps;
+} & DefaultTemplateConfigField;
+
 export type TemplateConfigField =
   | InputTemplateConfigField
-  | CheckboxTemplateConfigField;
+  | CheckboxTemplateConfigField
+  | RadioGroupTemplateConfigField;
 
 export type TemplateConfigFieldTypes = Record<
   string,
@@ -57,6 +65,30 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
       //   },
       //   validation: zod.string().optional(),
       // },
+      // {
+      //   name: 'backgroundType',
+      //   type: 'radio-group',
+      //   properties: {
+      //     label: 'Type de fond',
+      //     inputGroupProps: [
+      //       {
+      //         label: 'Lignes',
+      //         id: 'line',
+      //         inputProps: {
+      //           type: 'radio',
+      //         },
+      //       },
+      //       {
+      //         label: 'Uni',
+      //         id: 'plain',
+      //         inputProps: {
+      //           type: 'radio',
+      //         },
+      //       },
+      //     ],
+      //   },
+      //   validation: zod.string().default('line'),
+      // },
       {
         name: 'colors.auto',
         type: 'checkbox',
@@ -67,7 +99,7 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
             type: 'checkbox',
           },
         },
-        validation: zod.boolean().optional(),
+        validation: zod.boolean().default(false),
       },
       {
         name: 'colors.useComplementary',
@@ -80,7 +112,7 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
             type: 'checkbox',
           },
         },
-        validation: zod.boolean().optional(),
+        validation: zod.boolean().default(false),
       },
     ],
   },

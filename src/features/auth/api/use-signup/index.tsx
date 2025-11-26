@@ -21,7 +21,16 @@ export function useSignup(clbs?: {
 
       if (!data.success) {
         clbs?.onError?.(
-          api.helpers.formatAPIError(data, {}, DEFAULT_ERROR_MESSAGE),
+          api.helpers.formatAPIError(
+            data,
+            {
+              'username-already-taken':
+                "Le nom d'utilisateur que vous avez choisi est déjà pris",
+              'email-address-already-taken':
+                "L'email que vous avez choisi correspond déjà un autre compte utilisateur",
+            },
+            DEFAULT_ERROR_MESSAGE,
+          ),
         );
         return;
       }
