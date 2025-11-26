@@ -22,6 +22,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+.image-selector__emptyContentButton {
+  margin-left: auto;
+  margin-right: var(--lm-publisher-spacer-2);
+}
+
 .image-selector__content {
   display: flex;
   align-items: stretch;

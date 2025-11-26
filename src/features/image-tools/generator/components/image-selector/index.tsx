@@ -12,6 +12,7 @@ import { ImageSelectablePreview } from '../image-selectable-preview';
 import { Display } from '@common/components/display';
 import { Badge } from '@common/components/badge';
 import { useMemo } from 'react';
+import { ImageUploadEmptyCacheButton } from '../image-upload-empty-cache-button';
 
 export type ImageSelectorProps = {
   imageList?: {
@@ -63,6 +64,18 @@ export const ImageSelector = ({
       error={error}
       className="image-selector"
       contentClassName="image-selector__content"
+      additionalContent={
+        imageList &&
+        imageList?.length > 0 && (
+          <ImageUploadEmptyCacheButton
+            buttonProps={{ size: 's' }}
+            helperProps={{
+              position: 'top-left',
+            }}
+            className="image-selector__emptyContentButton"
+          />
+        )
+      }
       {...otherProps}
     >
       <div className="image-selector__sticky">

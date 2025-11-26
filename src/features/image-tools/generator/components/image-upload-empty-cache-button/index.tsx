@@ -1,21 +1,30 @@
-import { Button } from '@common/components/buttons/button';
+import { Button, type ButtonProps } from '@common/components/buttons/button';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { useImageThumbsUploadEmptyCache } from '../../api/use-image-thumbs-upload-empty-cache';
-import { FormHelper } from '@common/components/forms/form-helper';
+import {
+  FormHelper,
+  type FormHelperProps,
+} from '@common/components/forms/form-helper';
 import { Display } from '@common/components/display';
 
-type LogoutButtonProps = {
-  size?: 's' | 'm' | 'l';
+type ImageUploadEmptyCacheButtonProps = {
+  className?: string;
+  buttonProps?: ButtonProps;
+  helperProps?: Omit<FormHelperProps, 'text'>;
 };
 
-export const ImageUploadEmptyCacheButton = ({ size }: LogoutButtonProps) => {
+export const ImageUploadEmptyCacheButton = ({
+  buttonProps,
+  helperProps,
+  className = '',
+}: ImageUploadEmptyCacheButtonProps) => {
   const { showToast } = useToastContext();
   const { emptyThumbsUploadCache } = useImageThumbsUploadEmptyCache();
 
   return (
-    <Display type="flex" align="center" gap={1}>
+    <Display type="flex" align="center" gap={1} className={className}>
       <Button
-        size={size}
+        {...buttonProps}
         onClick={() => {
           emptyThumbsUploadCache({
             onSuccess: () => {
@@ -34,6 +43,7 @@ export const ImageUploadEmptyCacheButton = ({ size }: LogoutButtonProps) => {
         text="Votre cache se vide automatiquement toutes les 15minutes mais vous
         pouvez choisir de le forcer manuellement."
         position="bottom-right"
+        {...helperProps}
       />
     </Display>
   );

@@ -7,6 +7,7 @@ export type FieldsetProps = {
   contentClassName?: string;
   children?: React.ReactNode;
   error?: FormFieldErrorProps['error'];
+  additionalContent?: React.ReactNode;
 } & React.FieldsetHTMLAttributes<HTMLFieldSetElement>;
 
 export const FieldSet = ({
@@ -14,6 +15,7 @@ export const FieldSet = ({
   legend: _legend,
   contentClassName,
   children,
+  additionalContent,
   error,
   ...props
 }: FieldsetProps) => {
@@ -25,6 +27,7 @@ export const FieldSet = ({
       {_legend && <legend>{_legend}</legend>}
       <div className={contentClassName}>{children}</div>
       <FormFieldError error={error} />
+      {additionalContent}
     </fieldset>
   );
 };
