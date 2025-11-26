@@ -1,12 +1,12 @@
 import { api } from '@api/index';
 import { useQueries } from '@tanstack/react-query';
+import { STORAGE_KEY } from '../config';
 
 type StorageItemType = {
   id: string;
   timeOut: number;
 };
 
-const STORAGE_KEY = 'image-thumbs-download';
 export function useImageThumbsDownload(params: { idList: string[] }) {
   const currentTime = Date.now();
   const downloadList = params.idList.map(id => ({

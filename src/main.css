@@ -1,12 +1,12 @@
 :root {
 
-  --lm-publisher-bg-color: var(--lmui-c-white);
+  --lm-publisher-bg-color: var(--lmui-c-snow-lighter);
   --lm-publisher-text-color: var(--lmui-c-slate-dark);
   --lm-publisher-title-color: var(--lmui-c-charcoal-dark);
-  --lm-publisher-accent-color: var(--lmui-c-sea-light);
-  --lm-publisher-link-color: var(--lmui-c-sea-light);
-  --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
-  --lm-publisher-border-color: var(--lmui-c-snow-dark);
+  --lm-publisher-accent-color: var(--lmui-c-sea-medium);
+  --lm-publisher-link-color: var(--lmui-c-sea-medium);
+  --lm-publisher-link-hover-color: var(--lmui-c-sea-darker);
+  --lm-publisher-border-color: var(--lmui-c-snow-darker);
 
   --lm-publisher-text-error-color: var(--lmui-c-red-light);
   --lm-publisher-text-success-color: var(--lmui-c-form-border-valid-dark);
@@ -48,7 +48,9 @@
   --lm-publisher-title-color: var(--lmui-c-snow-lighter);
   --lm-publisher-text-color: var(--lmui-c-smoke-dark);
   --lm-publisher-accent-color: var(--lmui-c-sea-light);
+  --lm-publisher-link-color: var(--lmui-c-sea-light);
   --lm-publisher-border-color: var(--lmui-c-slate-lighter);
+  --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
 
   --lm-publisher-service-bg: linear-gradient(
     232deg,
