@@ -9,6 +9,7 @@ export const createDisplayClassNames = (props: DisplayProps) => {
         props.gap ? `display-grid--gap-${props.gap || 0}` : '',
       ].join(' ');
     case 'flex':
+    case 'inline-flex':
       return [
         'display-flex',
         props.direction

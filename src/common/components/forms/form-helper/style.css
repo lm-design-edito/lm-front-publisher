@@ -1,5 +1,6 @@
 .form-helper {
   --size: 24px;
+  --font-size: 0.8rem;
   --position-left: auto;
   --position-right: auto;
   --position-top: auto;
@@ -12,13 +13,17 @@
   cursor: pointer;
 }
 
+.form-helper--sm {
+  --size: 16px;
+  --font-size: 0.6rem;
+}
+
 .form-helper__button {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-weight: bold;
-  font-size: 0.8rem;
+  font-size: var(--font-size);
   width: var(--size);
   height: var(--size);
   border: 1px solid var(--lm-publisher-border-color);

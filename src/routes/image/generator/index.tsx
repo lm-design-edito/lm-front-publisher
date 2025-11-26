@@ -8,7 +8,7 @@ import { appRoutes } from '@src/appRoutes';
 import { ImageGeneratedList } from '@features/image-tools/generator/components/image-generated-list';
 import { useState } from 'react';
 import { Divider } from '@common/components/divider';
-import { Text } from '@common/components/text';
+import { Badge } from '@common/components/badge';
 
 type GeneratedImage = {
   name: string;
@@ -34,9 +34,7 @@ const ImageGeneratorPage = () => {
         title={
           <>
             {ImageGeneratorInfos.name}{' '}
-            <Text tag="span" size="sm">
-              {ImageGeneratorInfos.version}
-            </Text>
+            <Badge size="s">{ImageGeneratorInfos.version}</Badge>
           </>
         }
         description={ImageGeneratorInfos.description}

@@ -21,7 +21,10 @@ export const ServiceItem = ({
   return (
     <Link className={`service ${disabled ? 'service_disabled' : ''}`} to={url}>
       {version && <Badge className="service__version">{version}</Badge>}
-      <h4 className="service__title">{name}</h4>
+      <h4
+        className="service__title"
+        dangerouslySetInnerHTML={{ __html: name }}
+      />
       <p className="service__description">{description}</p>
     </Link>
   );

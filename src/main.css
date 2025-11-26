@@ -18,7 +18,7 @@
   --lm-publisher-form-error-bg-color: #fab4b41f;
   --lm-publisher-form-highlight-bg: #82c8e81f;
 
-  --lm-publisher-dialog-bg-color: var(--lmui-c-dialog-box-bg);
+  --lm-publisher-dialog-bg-color: #fff;
   --lm-publisher-dialog-text-color: var(--lmui-c-dialog-box-text);
   --lm-publisher-dialog-shadow: var(--lmui-c-dialog-box-shadow);
 
@@ -48,6 +48,8 @@
   --lm-publisher-border-color: var(--lmui-c-slate-lighter);
   --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
 
+  --lm-publisher-dialog-bg-color: #000;
+  
   --lm-publisher-service-bg: linear-gradient(
     232deg,
     rgb(129, 199, 231, 0.09) 0%,

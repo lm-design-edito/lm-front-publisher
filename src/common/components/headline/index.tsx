@@ -10,7 +10,7 @@ type HeadlineProps = {
 const Headline = ({ title, description }: HeadlineProps) => {
   return (
     <div className={`headline ${description ? 'headline_description' : ''}`}>
-      <h2>{title}</h2>
+      <h2 className="headline__title">{title}</h2>
       {description && (
         <>
           {typeof description === 'string' ? (

@@ -1,3 +1,10 @@
 .headline {
     margin-bottom: var(--lm-publisher-spacer-5);
 }
+
+.headline__title {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--lm-publisher-spacer-1);
+}

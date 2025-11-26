@@ -26,7 +26,7 @@ export const ImageGeneratedPreview = ({
         rel="noopener noreferrer"
         className="image-generated-preview__image"
       >
-        {isNew && <Badge>New</Badge>}
+        {isNew && <Badge>Nouveau</Badge>}
         <img src={url} alt="" />
       </a>
       <Display type="flex" align="center" direction="column" gap="1">

@@ -11,6 +11,7 @@ import './style.css';
 
 export type ServiceInfo = {
   name: string;
+  formattedName?: string;
   url: string;
   icon?: string;
   version?: string;
@@ -62,7 +63,11 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
         return servicesData.map(toolData => (
           <ServiceItem
             key={'url' in toolData ? toolData.url : toolName}
-            name={toolData.name}
+            name={
+              'formattedName' in toolData && toolData.formattedName
+                ? toolData.formattedName
+                : toolData.name
+            }
             version={'version' in toolData ? toolData.version : ''}
             description={'description' in toolData ? toolData.description : ''}
             url={toolData.url}

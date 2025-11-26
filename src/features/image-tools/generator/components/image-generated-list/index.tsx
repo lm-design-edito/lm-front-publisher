@@ -1,4 +1,3 @@
-import { OverflowList } from '@common/components/overflow-list';
 import {
   ImageGeneratedPreview,
   type ImageGeneratedPreviewProps,
@@ -19,11 +18,11 @@ export const ImageGeneratedList = ({ list }: ImageGeneratedListProps) => {
           Générez une ou plusieurs images pour qu'elles apparaissent ici.
         </Text>
       ) : (
-        <OverflowList>
+        <Display type="flex" wrap>
           {list.map(image => (
             <ImageGeneratedPreview {...image} key={image.url} />
           ))}
-        </OverflowList>
+        </Display>
       )}
     </Display>
   );

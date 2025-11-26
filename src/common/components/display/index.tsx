@@ -8,7 +8,7 @@ export type DisplayGridProps = {
 };
 
 export type DisplayFlexProps = {
-  type: 'flex';
+  type: 'flex' | 'inline-flex';
   gap?: number | string;
   flex?: number | string;
   direction?: 'row' | 'column';

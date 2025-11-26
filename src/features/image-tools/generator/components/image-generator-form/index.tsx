@@ -236,13 +236,6 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
     };
   }, [showToast, hideToast]);
 
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      console.log('Form values changed:', { name, type, value });
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
-
   return (
     <FormProvider {...formMethods}>
       <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>

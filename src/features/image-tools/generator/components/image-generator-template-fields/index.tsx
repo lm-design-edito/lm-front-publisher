@@ -4,6 +4,7 @@ import type { TemplateConfigField } from '../../config/template-config-fields';
 import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
 import { Text } from '@common/components/text';
 import { FormInputRadioGroup } from '@common/components/forms/form-input-radio-group';
+import { useCallback } from 'react';
 
 type ConfigFieldName = string;
 
@@ -22,6 +23,22 @@ export const ImageGeneratorTemplateFields = ({
   control,
   errors,
 }: Props) => {
+  const getDefaultValue = useCallback((field: TemplateConfigField) => {
+    switch (field.type) {
+      case 'checkbox':
+        if ('defaultChecked' in field && field.defaultChecked) {
+          return field.defaultChecked;
+        }
+        break;
+      default:
+        if ('defaultValue' in field && field.defaultValue) {
+          return field.defaultValue;
+        }
+        break;
+    }
+    return undefined;
+  }, []);
+
   return (
     <>
       {configFields.length === 0 ? (
@@ -32,11 +49,9 @@ export const ImageGeneratorTemplateFields = ({
             key={`${templateName}-${field.name}`} // Key unique pour forcer le re-render
             name={field.name}
             control={control}
-            {...('defaultValue' in field
-              ? { defaultValue: field.defaultValue }
-              : undefined)}
             /* @ts-expect-error: dynamic fields */
             render={({ field: { onChange, value } }) => {
+              const currentValue = value ?? getDefaultValue(field);
               switch (field.type) {
                 case 'input':
                   return (
@@ -45,7 +60,7 @@ export const ImageGeneratorTemplateFields = ({
                       inputProps={{
                         ...field.properties.inputProps,
                         id: field.name,
-                        value: value || '',
+                        value: currentValue || '',
                         onChange,
                       }}
                       error={errors[field.name] as FieldError}
@@ -59,7 +74,7 @@ export const ImageGeneratorTemplateFields = ({
                         ...field.properties.inputProps,
                         id: field.name,
                         // defaultChecked: field.defaultChecked,
-                        checked: Boolean(value),
+                        checked: Boolean(currentValue),
                         onChange: e => onChange(e.target.checked),
                       }}
                       labelProps={{
@@ -85,7 +100,7 @@ export const ImageGeneratorTemplateFields = ({
                             id: inputProps.id,
                             name: field.name,
                             value: inputProps.id,
-                            checked: value === inputProps.id,
+                            checked: currentValue === inputProps.id,
                             onChange: () => onChange(inputProps.id), // Met à jour avec l'ID sélectionné
                           },
                         }),

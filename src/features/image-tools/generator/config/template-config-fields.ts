@@ -13,6 +13,7 @@ export type DefaultTemplateConfigField = {
 
 export type InputTemplateConfigField = {
   type: 'input';
+  defaultValue?: string;
   properties: FormInputProps;
 } & DefaultTemplateConfigField;
 
@@ -65,55 +66,84 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
       //   },
       //   validation: zod.string().optional(),
       // },
+      {
+        name: 'colors',
+        type: 'radio-group',
+        defaultValue: 'default',
+        properties: {
+          label: 'Couleur de fond',
+          inputGroupProps: [
+            {
+              label: 'Gris',
+              id: 'default',
+              inputProps: {
+                type: 'radio',
+              },
+            },
+            {
+              label: 'Couleur secondaire',
+              id: 'useMain',
+              inputProps: {
+                type: 'radio',
+              },
+              helperProps: {
+                text: "Cette Option permet de sélectionner la seconde couleur la plus utilisée dans l'image et de l'utiliser comme couleur de fond.",
+                position: 'top-right',
+              },
+            },
+            {
+              label: 'Couleur principale complémentaire',
+              id: 'useComplementary',
+              inputProps: {
+                type: 'radio',
+              },
+              helperProps: {
+                text: "Cette option permet de sélectionner la couleur la plus utilisée dans l'image et d'en obtenir sa couleur complémentaire.",
+                position: 'bottom-right',
+                size: 'sm',
+              },
+            },
+          ],
+        },
+        validation: zod
+          .string()
+          .default('default')
+          .transform(value => {
+            switch (value) {
+              case 'useMain':
+                return { useMain: true, useComplementary: false };
+              case 'useComplementary':
+                return { useMain: false, useComplementary: true };
+              default:
+                return { useMain: false, useComplementary: false };
+            }
+          }),
+      },
       // {
-      //   name: 'backgroundType',
-      //   type: 'radio-group',
+      //   name: 'colors.useMain',
+      //   type: 'checkbox',
+      //   defaultChecked: false,
       //   properties: {
-      //     label: 'Type de fond',
-      //     inputGroupProps: [
-      //       {
-      //         label: 'Lignes',
-      //         id: 'line',
-      //         inputProps: {
-      //           type: 'radio',
-      //         },
-      //       },
-      //       {
-      //         label: 'Uni',
-      //         id: 'plain',
-      //         inputProps: {
-      //           type: 'radio',
-      //         },
-      //       },
-      //     ],
+      //     label: "Utiliser la couleur principale de l'image comme fond",
+      //     inputProps: {
+      //       type: 'checkbox',
+      //     },
       //   },
-      //   validation: zod.string().default('line'),
+      //   validation: zod.boolean().default(false),
       // },
-      {
-        name: 'colors.auto',
-        type: 'checkbox',
-        defaultChecked: false,
-        properties: {
-          label: "Utiliser les couleurs de l'image principale comme fond",
-          inputProps: {
-            type: 'checkbox',
-          },
-        },
-        validation: zod.boolean().default(false),
-      },
-      {
-        name: 'colors.useComplementary',
-        type: 'checkbox',
-        defaultChecked: false,
-        properties: {
-          label:
-            "Utiliser la couleur complémentaire de l'image principale comme fond",
-          inputProps: {
-            type: 'checkbox',
-          },
-        },
-        validation: zod.boolean().default(false),
-      },
+      // {
+      //   name: 'colors.useComplementary',
+      //   type: 'checkbox',
+      //   defaultChecked: false,
+      //   properties: {
+      //     label:
+      //       "Utiliser la couleur complémentaire de l'image principale comme fond",
+      //     inputProps: {
+      //       type: 'checkbox',
+      //     },
+      //   },
+      //   validation: zod.boolean().default(false),
+      // },
     ],
   },
 };
