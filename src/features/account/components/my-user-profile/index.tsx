@@ -92,7 +92,7 @@ export const MyUserProfile = () => {
       >
         <ThemeSwitch />
       </FieldSet>
-      <FieldSet legend="Gestion du cache">
+      <FieldSet legend="Gestion du cache" className="lm-publisher-m-spacer-8">
         <ImageUploadEmptyCacheButton size="m" />
       </FieldSet>
       <FieldSet
