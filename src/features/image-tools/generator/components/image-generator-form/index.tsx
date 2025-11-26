@@ -88,6 +88,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
     onServerDown: () => {
       showToast({
         type: 'warning',
+        id: 'upload-server-error',
         message:
           'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
       });
@@ -120,6 +121,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
       onServerDown: () => {
         showToast({
           type: 'warning',
+          id: 'generate-server-error',
           message:
             'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
         });

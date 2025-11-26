@@ -11,12 +11,18 @@ export type BadgeProps = {
     | string;
   size?: 's' | 'm' | 'l';
   children: React.ReactNode;
+  className?: string;
 };
 
-export const Badge = ({ children, color = 'blue', size = 's' }: BadgeProps) => {
+export const Badge = ({
+  children,
+  color = 'blue',
+  size = 's',
+  className = '',
+}: BadgeProps) => {
   return (
     <span
-      className={`lmui-badge lmui-badge_secondary lmui-badge_${size} lmui-badge_${color}`}
+      className={`lmui-badge lmui-badge_secondary lmui-badge_${size} lmui-badge_${color} ${className}`}
     >
       {children}
     </span>

@@ -8,6 +8,7 @@ import { appRoutes } from '@src/appRoutes';
 import { ImageGeneratedList } from '@features/image-tools/generator/components/image-generated-list';
 import { useState } from 'react';
 import { Divider } from '@common/components/divider';
+import { Text } from '@common/components/text';
 
 type GeneratedImage = {
   name: string;
@@ -30,7 +31,14 @@ const ImageGeneratorPage = () => {
   return (
     <>
       <Headline
-        title={ImageGeneratorInfos.name}
+        title={
+          <>
+            {ImageGeneratorInfos.name}{' '}
+            <Text tag="span" size="sm">
+              {ImageGeneratorInfos.version}
+            </Text>
+          </>
+        }
         description={ImageGeneratorInfos.description}
       />
       <div className="lm-publisher-m-spacer-3">

@@ -13,6 +13,7 @@ export type ServiceInfo = {
   name: string;
   url: string;
   icon?: string;
+  version?: string;
   description?: string;
   disabled?: boolean; // Optional prop to disable the link
   badge?: string; // Optional role for admin tools
@@ -62,6 +63,7 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
           <ServiceItem
             key={'url' in toolData ? toolData.url : toolName}
             name={toolData.name}
+            version={'version' in toolData ? toolData.version : ''}
             description={'description' in toolData ? toolData.description : ''}
             url={toolData.url}
             disabled={toolData.disabled || false}

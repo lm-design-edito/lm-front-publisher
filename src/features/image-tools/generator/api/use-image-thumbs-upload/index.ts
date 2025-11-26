@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { api } from '@api/index';
 import type { ThumbsUploadResponseSuccessType } from '@api/queries';
+import { Logger } from '@utils/logger';
 
 type UseImageThumbUpload = Parameters<
   typeof api.queries.designEdito.thumbsUpload
@@ -14,15 +15,16 @@ export function useImageThumbsUpload(clbs?: {
   return useMutation({
     retry: 3,
     mutationFn: async (params: UseImageThumbUpload) => {
-      console.log('mutation FN');
       // Vérifier le statut du serveur
       const statusCheck = await api.queries.system.statusCheck();
       if (statusCheck.success && !statusCheck.payload.isHealthy) {
+        Logger.log('image-tools.api.useImageThumbsUpload', 'Server is down');
         clbs?.onServerDown?.();
         throw new Error('Server is down');
       }
 
       // Uploader les thumbs
+      Logger.log('image-tools.api.useImageThumbsUpload', 'Uploading');
       const response = await api.queries.designEdito.thumbsUpload(params);
       return response;
     },

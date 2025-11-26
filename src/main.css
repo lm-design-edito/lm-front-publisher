@@ -22,11 +22,7 @@
   --lm-publisher-dialog-text-color: var(--lmui-c-dialog-box-text);
   --lm-publisher-dialog-shadow: var(--lmui-c-dialog-box-shadow);
 
-  --lm-publisher-service-bg: linear-gradient(
-    232deg,
-    rgb(0, 91, 133, 0.09) 0%,
-    rgba(0, 91, 133, 0.04) 94.37%
-  );
+  --lm-publisher-service-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgb(28 116 157 / 37%) 94.37%);
 
   --lm-publisher-width: 1200px;
 

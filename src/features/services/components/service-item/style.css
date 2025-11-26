@@ -1,4 +1,5 @@
 .service {
+  position: relative;
   padding: var(--lm-publisher-spacer-3);
   aspect-ratio: 1 / 1;
   display: flex;
@@ -27,4 +28,11 @@
 .service__description {
   color: var(--lm-publisher-text-color);
   font-size: 0.9rem;
+}
+
+
+.service__version {
+  position: absolute;
+  right: var(--lm-publisher-spacer-2);
+  top: var(--lm-publisher-spacer-2);
 }

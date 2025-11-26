@@ -15,7 +15,7 @@ const Text = ({
   tag = 'p',
   size = 'md',
   align,
-  className,
+  className = '',
   ...otherProps
 }: TextProps) => {
   const Tag = tag;
