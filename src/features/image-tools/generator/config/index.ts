@@ -1,3 +1,3 @@
-export * from './template-config-fields';
-export * from './templates';
+export * from './model-config-fields';
+export * from './models';
 export * from './infos';

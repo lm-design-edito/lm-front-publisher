@@ -1,71 +1,47 @@
 import type { FormInputProps } from '@common/components/forms/form-input';
 import * as zod from 'zod';
-import { TemplateNames } from './templates';
+import { ModelNames } from './models';
 import type { FormInputCheckboxProps } from '@common/components/forms/form-input-checkbox';
 import type { FormInputRadioGroupProps } from '@common/components/forms/form-input-radio-group';
 
 export type FormInputFieldText = FormInputProps | FormInputCheckboxProps;
 
-export type DefaultTemplateConfigField = {
+export type DefaultModelConfigField = {
   name: string;
   validation: zod.ZodTypeAny;
 };
 
-export type InputTemplateConfigField = {
+export type InputModelConfigField = {
   type: 'input';
   defaultValue?: string;
   properties: FormInputProps;
-} & DefaultTemplateConfigField;
+} & DefaultModelConfigField;
 
-export type CheckboxTemplateConfigField = {
+export type CheckboxModelConfigField = {
   type: 'checkbox';
   defaultChecked?: boolean;
   properties: FormInputCheckboxProps;
-} & DefaultTemplateConfigField;
+} & DefaultModelConfigField;
 
-export type RadioGroupTemplateConfigField = {
+export type RadioGroupModelConfigField = {
   type: 'radio-group';
   defaultValue?: string;
   properties: FormInputRadioGroupProps;
-} & DefaultTemplateConfigField;
+} & DefaultModelConfigField;
 
-export type TemplateConfigField =
-  | InputTemplateConfigField
-  | CheckboxTemplateConfigField
-  | RadioGroupTemplateConfigField;
+export type ModelConfigField =
+  | InputModelConfigField
+  | CheckboxModelConfigField
+  | RadioGroupModelConfigField;
 
-export type TemplateConfigFieldTypes = Record<
+export type ModelConfigFieldTypes = Record<
   string,
-  { formFields: TemplateConfigField[] }
+  { formFields: ModelConfigField[] }
 >;
 
-const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
-  [TemplateNames.BOOK]: {
+const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
+  [ModelNames.BOOKCOVERPLAIN]: {
     formFields: [
-      // {
-      //   name: 'backgroundColor',
-      //   type: 'input',
-      //   properties: {
-      //     label: 'Couleur de fond (Optionnel)',
-      //     inputProps: {
-      //       type: 'text',
-      //       value: '#FFFFFF',
-      //     },
-      //   },
-      //   validation: zod.string().optional(),
-      // },
-      // {
-      //   name: 'secondaryBackgroundColor',
-      //   type: 'input',
-      //   properties: {
-      //     label: 'Couleur de fond secondaire (Optionnel)',
-      //     inputProps: {
-      //       type: 'text',
-      //       value: '#FFFFFF',
-      //     },
-      //   },
-      //   validation: zod.string().optional(),
-      // },
       {
         name: 'colors',
         type: 'radio-group',
@@ -119,33 +95,65 @@ const TEMPLATE_CONFIG_FIELDS: TemplateConfigFieldTypes = {
             }
           }),
       },
-      // {
-      //   name: 'colors.useMain',
-      //   type: 'checkbox',
-      //   defaultChecked: false,
-      //   properties: {
-      //     label: "Utiliser la couleur principale de l'image comme fond",
-      //     inputProps: {
-      //       type: 'checkbox',
-      //     },
-      //   },
-      //   validation: zod.boolean().default(false),
-      // },
-      // {
-      //   name: 'colors.useComplementary',
-      //   type: 'checkbox',
-      //   defaultChecked: false,
-      //   properties: {
-      //     label:
-      //       "Utiliser la couleur complémentaire de l'image principale comme fond",
-      //     inputProps: {
-      //       type: 'checkbox',
-      //     },
-      //   },
-      //   validation: zod.boolean().default(false),
-      // },
+    ],
+  },
+  [ModelNames.BOOKCOVERSTRIPES]: {
+    formFields: [
+      {
+        name: 'colors',
+        type: 'radio-group',
+        defaultValue: 'default',
+        properties: {
+          label: 'Couleur de fond',
+          inputGroupProps: [
+            {
+              label: 'Gris',
+              id: 'default',
+              inputProps: {
+                type: 'radio',
+              },
+            },
+            {
+              label: 'Couleur secondaire',
+              id: 'useMain',
+              inputProps: {
+                type: 'radio',
+              },
+              helperProps: {
+                text: "Cette Option permet de sélectionner la seconde couleur la plus utilisée dans l'image et de l'utiliser comme couleur de fond.",
+                position: 'top-right',
+              },
+            },
+            {
+              label: 'Couleur principale complémentaire',
+              id: 'useComplementary',
+              inputProps: {
+                type: 'radio',
+              },
+              helperProps: {
+                text: "Cette option permet de sélectionner la couleur la plus utilisée dans l'image et d'en obtenir sa couleur complémentaire.",
+                position: 'bottom-right',
+                size: 'sm',
+              },
+            },
+          ],
+        },
+        validation: zod
+          .string()
+          .default('default')
+          .transform(value => {
+            switch (value) {
+              case 'useMain':
+                return { useMain: true, useComplementary: false };
+              case 'useComplementary':
+                return { useMain: false, useComplementary: true };
+              default:
+                return { useMain: false, useComplementary: false };
+            }
+          }),
+      },
     ],
   },
 };
 
-export default TEMPLATE_CONFIG_FIELDS;
+export default MODEL_CONFIG_FIELDS;

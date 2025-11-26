@@ -1,6 +1,6 @@
 import { FormInput } from '@common/components/forms/form-input';
 import { Controller, type FieldError, type FieldErrors } from 'react-hook-form';
-import type { TemplateConfigField } from '../../config/template-config-fields';
+import type { ModelConfigField } from '../../config/model-config-fields';
 import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
 import { Text } from '@common/components/text';
 import { FormInputRadioGroup } from '@common/components/forms/form-input-radio-group';
@@ -9,21 +9,21 @@ import { useCallback } from 'react';
 type ConfigFieldName = string;
 
 export type Props = {
-  templateName?: string;
-  configFields: TemplateConfigField[];
+  modelName?: string;
+  configFields: ModelConfigField[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
 
   errors: FieldErrors<Record<ConfigFieldName, unknown>>;
 };
 
-export const ImageGeneratorTemplateFields = ({
-  templateName = '',
+export const ImageGeneratorModelFields = ({
+  modelName = '',
   configFields,
   control,
   errors,
 }: Props) => {
-  const getDefaultValue = useCallback((field: TemplateConfigField) => {
+  const getDefaultValue = useCallback((field: ModelConfigField) => {
     switch (field.type) {
       case 'checkbox':
         if ('defaultChecked' in field && field.defaultChecked) {
@@ -46,7 +46,7 @@ export const ImageGeneratorTemplateFields = ({
       ) : (
         configFields.map(field => (
           <Controller
-            key={`${templateName}-${field.name}`} // Key unique pour forcer le re-render
+            key={`${modelName}-${field.name}`} // Key unique pour forcer le re-render
             name={field.name}
             control={control}
             /* @ts-expect-error: dynamic fields */
