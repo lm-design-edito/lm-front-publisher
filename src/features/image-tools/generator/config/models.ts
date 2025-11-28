@@ -25,6 +25,9 @@ export const ModelList: {
     template: TemplateNames.BOOK,
     label: 'Couverture de livre',
     thumbnail: templateBookPreview,
+    defaultOptions: {
+      backgroundType: 'plain'
+    }
   },
   {
     name: ModelNames.BOOKCOVERSTRIPES,
