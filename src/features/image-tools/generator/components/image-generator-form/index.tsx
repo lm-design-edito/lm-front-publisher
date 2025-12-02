@@ -20,6 +20,7 @@ import { useImageGenerate } from '../../api/use-image-generate';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
 import { getModelConfigDefaultOptions } from '../../utils/get-model-config-default-options';
+import { FormInput } from '@common/components/forms/form-input';
 
 const MAX_SELECTION_IMG = 3;
 
@@ -47,6 +48,7 @@ const baseImageGeneratorFormSchema = zod.object({
       message: 'Veuillez sélectionner un modèle.',
     },
   ),
+  outputFileName: zod.string().optional(),
 });
 
 const createDynamicImageGeneratorFormSchema = (modelName?: string) => {
@@ -162,6 +164,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
     resolver: zodResolver(dynamicSchema),
   });
   const {
+    register,
     unregister,
     handleSubmit,
     watch,
@@ -203,6 +206,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
       reset({
         model: currentValues.model,
         fileIds: currentValues.fileIds,
+        outputFileName: currentValues.outputFileName,
         // Les nouveaux champs dynamiques seront gérés par le nouveau schema
       });
     }
@@ -213,11 +217,11 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const onSubmit = useCallback(
     (values: zod.infer<typeof dynamicSchema>) => {
       const defaultOptions = getModelConfigDefaultOptions(values.model.name);
-      const { fileIds, model, ...otherFields } = values;
-      console.log({defaultOptions});
+      const { fileIds, model, outputFileName, ...otherFields } = values;
       imageGenerate({
         fileIds,
         template: model.template,
+        outputFileName,
         options: {
           ...defaultOptions,
           ...otherFields,
@@ -313,6 +317,15 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
             )}
           </Display>
         </FieldSet>
+        <FormInput
+          label="Nom de sortie du fichier (Optionnel)"
+          labelProps={{ htmlFor: 'outputFileName' }}
+          inputProps={{
+            type: 'text',
+            placeholder: 'image_generee',
+            ...register('outputFileName'),
+          }}
+        />
 
         <FormFooter>
           <FormSubmit

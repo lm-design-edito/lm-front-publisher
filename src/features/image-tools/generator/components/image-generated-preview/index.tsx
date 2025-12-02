@@ -1,6 +1,7 @@
 import { Badge } from '@common/components/badge';
 import './style.css';
 import { Display } from '@common/components/display';
+import { Text } from '@common/components/text';
 
 export type ImageGeneratedPreviewProps = {
   name: string;
@@ -29,7 +30,16 @@ export const ImageGeneratedPreview = ({
         {isNew && <Badge>Nouveau</Badge>}
         <img src={url} alt="" />
       </a>
-      <Display type="flex" align="center" direction="column" gap="1">
+      <Display
+        type="flex"
+        align="center"
+        direction="column"
+        gap="1"
+        className="image-generated-preview__content"
+      >
+        <Text className="image-generated-preview__name" size="sm">
+          {name}
+        </Text>
         <a href={url} target="_blank" download={name}>
           Télécharger
         </a>

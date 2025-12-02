@@ -3,6 +3,7 @@ import { api } from '@api/index';
 import type { ImageTransformResponseSuccessType } from '@api/queries/image/transform';
 
 export type TemplateBookImageGenerate = {
+  outputFileName?: string;
   template: 'BOOK';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options?: any; // [WIP] TODO

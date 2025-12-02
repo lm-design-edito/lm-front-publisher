@@ -1,5 +1,6 @@
 .image-generated-preview {
   position: relative;
+  width: 180px;
 }
 
 .image-generated-preview .lmui-badge {
@@ -21,4 +22,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.image-generated-preview__name {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
