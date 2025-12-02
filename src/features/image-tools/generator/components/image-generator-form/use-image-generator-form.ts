@@ -17,6 +17,10 @@ export function useImageGeneratorForm(
 
   const { showToast } = useToastContext();
 
+  const clearUploadIds = useCallback(() => {
+    setUploadIds([]);
+  }, []);
+
   // Schema dynamique
   const dynamicSchema = useMemo(
     () => createDynamicImageGeneratorFormSchema(currentModelName),
@@ -117,6 +121,7 @@ export function useImageGeneratorForm(
     setCurrentModelName,
     downloadPlaceholderCount,
     uploadIds,
+    clearUploadIds,
     isPendingGenerate,
     onChangeUpload,
     onSubmit,

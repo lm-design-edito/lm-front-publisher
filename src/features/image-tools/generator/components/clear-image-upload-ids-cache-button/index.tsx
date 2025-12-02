@@ -11,11 +11,13 @@ type ClearImageUploadIdsCacheButtonProps = {
   className?: string;
   buttonProps?: ButtonProps;
   helperProps?: Omit<FormHelperProps, 'text'>;
+  onCleared?: () => void;
 };
 
 export const ClearImageUploadIdsCacheButton = ({
   buttonProps,
   helperProps,
+  onCleared,
   className = '',
 }: ClearImageUploadIdsCacheButtonProps) => {
   const { showToast } = useToastContext();
@@ -25,6 +27,7 @@ export const ClearImageUploadIdsCacheButton = ({
     <Display type="flex" align="center" gap={1} className={className}>
       <Button
         {...buttonProps}
+        role="button"
         onClick={() => {
           clearImageUploadIdsCache({
             onSuccess: () => {
@@ -32,6 +35,10 @@ export const ClearImageUploadIdsCacheButton = ({
                 type: 'success',
                 message: 'Le cache des uploads a bien été vidé',
               });
+
+              if (onCleared) {
+                onCleared();
+              }
             },
           });
         }}

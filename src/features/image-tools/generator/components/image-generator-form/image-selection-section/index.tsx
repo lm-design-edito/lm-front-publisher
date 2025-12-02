@@ -8,6 +8,7 @@ type Props = {
   uploadIds: string[];
   downloadPlaceholderCount: number;
   onChangeUpload: React.ChangeEventHandler<HTMLInputElement>;
+  onClearedCacheUploadIds: () => void;
   maxSelection: number;
 };
 
@@ -17,6 +18,7 @@ export const ImageSelectionSection = ({
   uploadIds,
   downloadPlaceholderCount,
   onChangeUpload,
+  onClearedCacheUploadIds,
   maxSelection,
 }: Props) => {
   const imageUploads = useImageThumbsDownload({ idList: uploadIds });
@@ -40,6 +42,7 @@ export const ImageSelectionSection = ({
             ...imageUpload,
             src: imageUpload.url,
           }))}
+          onClearedCacheUploadIds={onClearedCacheUploadIds}
           selection={value}
           error={errors['fileIds']}
         />

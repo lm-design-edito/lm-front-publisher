@@ -27,6 +27,7 @@ export type ImageSelectorProps = {
   uploadInputProps?: ImageInputFieldProps['inputProps'];
   selection?: string[]; // list of selected image ids
   onSelectionChange?: (selection: string[]) => void;
+  onClearedCacheUploadIds: () => void;
 };
 
 export const ImageSelector = ({
@@ -37,6 +38,7 @@ export const ImageSelector = ({
   uploadDroppable,
   uploadInputProps,
   onSelectionChange,
+  onClearedCacheUploadIds,
   error,
   ...otherProps
 }: ImageSelectorProps) => {
@@ -73,6 +75,7 @@ export const ImageSelector = ({
               position: 'top-left',
             }}
             className="image-selector__emptyContentButton"
+            onCleared={onClearedCacheUploadIds}
           />
         )
       }

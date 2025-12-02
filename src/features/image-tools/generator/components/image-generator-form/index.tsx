@@ -24,6 +24,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
     setCurrentModelName,
     downloadPlaceholderCount,
     uploadIds,
+    clearUploadIds,
     isPendingGenerate,
     onChangeUpload,
     onSubmit,
@@ -46,6 +47,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
           uploadIds={uploadIds}
           downloadPlaceholderCount={downloadPlaceholderCount}
           onChangeUpload={onChangeUpload}
+          onClearedCacheUploadIds={clearUploadIds}
           maxSelection={NB_MAX_IMAGE_SELECTION}
         />
         <ModelSelectionSection
