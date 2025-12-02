@@ -1,5 +1,5 @@
 import { Display } from '@common/components/display';
-import { CheckBadge } from '@common/components/check-badge';
+import { CircleBadge } from '@common/components/circle-badge';
 import { Form, type FormErrorType } from '@common/components/forms';
 import './style.css';
 
@@ -39,7 +39,7 @@ export const ModelSelector = (props: ModelSelectorProps) => {
               {model.thumbnail && (
                 <img src={model.thumbnail} alt={model.label} />
               )}
-              <CheckBadge className="model-selector__badge" />
+              <CircleBadge icon="check" className="model-selector__badge" />
             </div>
             <div className="model-selector__info">{model.label}</div>
           </div>

@@ -28,12 +28,13 @@
   border: 2px solid var(--lm-publisher-accent-color);
 }
 
-.image-selectable-preview__badge.check-badge {
+.image-selectable-preview__badge.circle-badge {
   display: none;
   position: absolute;
 
   top: 8px;
   right: 8px; 
+  font-weight: bold;
 }
 
 .image-selectable-preview_selected .image-selectable-preview__badge {

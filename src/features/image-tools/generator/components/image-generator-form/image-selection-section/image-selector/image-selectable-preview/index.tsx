@@ -1,5 +1,5 @@
 import { Loader } from '@common/components/loader';
-import { CheckBadge } from '@common/components/check-badge';
+import { CircleBadge } from '@common/components/circle-badge';
 
 import './style.css';
 
@@ -12,6 +12,7 @@ export type ImageSelectablePreviewProps = {
   src: string;
   alt?: string;
   selected: boolean;
+  selectionIndex?: number;
   onChange: (selected: boolean) => void;
   className?: string;
 };
@@ -28,13 +29,15 @@ export const ImageSelectablePreview = (
       </div>
     );
   }
-  const { selected, className, onChange, src, alt } = props;
+  const { selected, className, selectionIndex, onChange, src, alt } = props;
   return (
     <div
       className={`image-selectable-preview ${selected ? ' image-selectable-preview_selected' : ''} ${className}`}
       onClick={() => onChange(!selected)}
     >
-      <CheckBadge className="image-selectable-preview__badge" />
+      <CircleBadge className="image-selectable-preview__badge">
+        {(selectionIndex || 0) + 1}
+      </CircleBadge>
       <img src={src} alt={alt} />
     </div>
   );

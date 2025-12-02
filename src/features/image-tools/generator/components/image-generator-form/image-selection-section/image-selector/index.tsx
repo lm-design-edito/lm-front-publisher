@@ -102,6 +102,7 @@ export const ImageSelector = ({
             src={image.src}
             alt={image.alt}
             selected={selection?.includes(image.id) || false}
+            selectionIndex={selection?.indexOf(image.id)}
             onChange={selected => {
               if (onSelectionChange) {
                 const newSelection = selected

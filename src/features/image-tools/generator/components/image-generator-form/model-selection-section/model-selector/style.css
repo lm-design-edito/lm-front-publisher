@@ -60,7 +60,7 @@
   object-fit: cover;
 }
 
-.model-selector__badge.check-badge {
+.model-selector__badge.circle-badge {
   position: absolute;
   top: 8px;
   right: 8px;

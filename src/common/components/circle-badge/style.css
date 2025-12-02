@@ -1,4 +1,4 @@
-.check-badge {
+.circle-badge {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -6,9 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--lmui-c-snow-lighter);
 }
 
-.check-badge img {
+.circle-badge img {
   width: 12px;
   height: 12px;
 }
