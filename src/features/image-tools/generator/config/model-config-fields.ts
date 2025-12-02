@@ -40,7 +40,7 @@ export type ModelConfigFieldTypes = Record<
 >;
 
 const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
-  [ModelNames.BOOKCOVERPLAIN]: {
+  [ModelNames.BOOK_COVER_PLAIN]: {
     formFields: [
       {
         name: 'colors',
@@ -97,7 +97,7 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
       },
     ],
   },
-  [ModelNames.BOOKCOVERSTRIPES]: {
+  [ModelNames.BOOK_COVER_STRIPES]: {
     formFields: [
       {
         name: 'colors',

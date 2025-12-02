@@ -1,329 +1,74 @@
-import * as zod from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { Form } from '@common/components/forms/form';
-import { FormSubmit } from '@common/components/forms/form-submit';
-import { FormFooter } from '@common/components/forms/form-footer';
-import { useCallback, useEffect, useState, useMemo } from 'react';
-import { ImageSelector } from './image-selector';
-import { useToastContext } from '@common/hooks/useToastContext';
-import { getModelConfigFields } from '../../utils/get-model-config-fields';
-import { ModelFields } from './model-fields';
-import { ModelList, TemplateNameValues } from '../../config/models';
-import { FieldSet } from '@common/components/forms/fieldset';
-
+import { useImageGeneratorForm } from './use-image-generator-form';
+import { useSelectedModelForm } from './use-selected-model-form';
 import './style.css';
-import { ModelSelector } from './model-selector';
-import { useImageThumbsUpload } from '../../services/use-image-thumbs-upload';
-import { useImageThumbsDownload } from '../../services/use-image-thumbs-download';
-import { useImageGenerate } from '../../services/use-image-generate';
-import { Display } from '@common/components/display';
-import { Text } from '@common/components/text';
-import { getModelConfigDefaultOptions } from '../../utils/get-model-config-default-options';
+import { FormProvider } from 'react-hook-form';
+import { ModelSelectionSection } from './model-selection-section';
 import { FormInput } from '@common/components/forms/form-input';
+import { FormFooter } from '@common/components/forms/form-footer';
+import { FormSubmit } from '@common/components/forms/form-submit';
+import { Form } from '@common/components/forms/form';
+import { ImageSelectionSection } from './image-selection-section';
+import { Display } from '@common/components/display';
+import { FormHelper } from '@common/components/forms/form-helper';
 
-const MAX_SELECTION_IMG = 3;
-
-const baseImageGeneratorFormSchema = zod.object({
-  fileIds: zod
-    .array(
-      zod.string({
-        message: 'Veuillez sélectionner au moins une image',
-      }),
-      {
-        message: 'Veuillez sélectionner au moins une image',
-      },
-    )
-    .min(1, {
-      message: 'Veuillez sélectionner au moins une image',
-    }),
-  model: zod.object(
-    {
-      name: zod.string(),
-      template: zod.enum(TemplateNameValues as [string, ...string[]], {
-        message: 'Veuillez sélectionner un modèle.',
-      }),
-    },
-    {
-      message: 'Veuillez sélectionner un modèle.',
-    },
-  ),
-  outputFileName: zod.string().optional(),
-});
-
-const createDynamicImageGeneratorFormSchema = (modelName?: string) => {
-  if (!modelName) return baseImageGeneratorFormSchema;
-
-  const modelConfigFields = getModelConfigFields(modelName);
-
-  // Utiliser un Record pour gérer les types correctement
-  const additionalFields: Record<string, zod.ZodTypeAny> = {};
-
-  modelConfigFields.forEach(field => {
-    const parts = field.name.split('.');
-
-    if (parts.length > 1) {
-      const [parentKey, childKey] = parts;
-
-      // Si l'objet parent n'existe pas encore, le créer
-      if (!additionalFields[parentKey]) {
-        additionalFields[parentKey] = zod.object({
-          [childKey]: field.validation,
-        });
-      } else {
-        // Si l'objet parent existe déjà, l'étendre
-        const existingSchema = additionalFields[parentKey] as zod.AnyZodObject;
-        additionalFields[parentKey] = existingSchema.extend({
-          [childKey]: field.validation,
-        });
-      }
-    } else {
-      additionalFields[field.name] = field.validation;
-    }
-  });
-
-  return baseImageGeneratorFormSchema.extend(additionalFields);
-};
 type ImageGeneratorForm = {
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void;
 };
 
+const NB_MAX_IMAGE_SELECTION = 3;
+
 export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
-  const [downloadPlaceholderCount, setDownloadPlaceholderCount] = useState(0);
-  const [uploadIds, setUploadIds] = useState<string[]>([]);
-  const [currentModelName, setCurrentModelName] = useState<string>();
-
-  const imageUploads = useImageThumbsDownload({ idList: uploadIds });
-
-  const { mutate: imageThumbUpload } = useImageThumbsUpload({
-    onServerDown: () => {
-      showToast({
-        type: 'warning',
-        id: 'upload-server-error',
-        message:
-          'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
-      });
-    },
-    onSuccess: data => {
-      setUploadIds(data.payload.ids);
-      setDownloadPlaceholderCount(0);
-      showToast({
-        type: 'success',
-        message:
-          'Vos fichiers ont bien été uploadés sur le serveur de LM Publisher.',
-      });
-      console.warn('Logout successful, user logged out.');
-      // navigate({ to: appRoutes.index });
-    },
-    onError: error => {
-      setDownloadPlaceholderCount(0);
-      showToast({
-        type: 'error',
-        message:
-          error.message ||
-          "Une erreur a eu lieu lors de l'upload de vos fichiers.",
-      });
-      console.error('Upload failed:', error);
-    },
-  });
-
-  const { mutate: imageGenerate, isPending: isPendingGenerate } =
-    useImageGenerate({
-      onServerDown: () => {
-        showToast({
-          type: 'warning',
-          id: 'generate-server-error',
-          message:
-            'Le serveur ne répond pas. La requête va tenter de se relancer. Veuillez patienter',
-        });
-      },
-      onSuccess: data => {
-        showToast({
-          type: 'success',
-          message: 'Votre image a été génerée',
-        });
-        onGenerated(data.payload);
-      },
-      onError: error => {
-        showToast({
-          type: 'error',
-          message:
-            error.message ||
-            'Une erreur a eu lieu lors de la génération de votre image.',
-        });
-      },
-    });
-
-  // Créer le schema dynamiquement
-  const dynamicSchema = useMemo(
-    () => createDynamicImageGeneratorFormSchema(currentModelName),
-    [currentModelName],
-  );
-
-  const formMethods = useForm({
-    resolver: zodResolver(dynamicSchema),
-  });
   const {
-    register,
-    unregister,
-    handleSubmit,
-    watch,
-    getValues,
-    reset,
-    control,
-    formState: { errors },
-  } = formMethods;
+    formMethods,
+    currentModelName,
+    setCurrentModelName,
+    downloadPlaceholderCount,
+    uploadIds,
+    isPendingGenerate,
+    onChangeUpload,
+    onSubmit,
+  } = useImageGeneratorForm(onGenerated);
 
-  const model = watch('model');
-  const modelConfigFields = getModelConfigFields(currentModelName);
+  const { formState, register, handleSubmit, control } = formMethods;
 
-  // Callback pour désinscrire les anciens champs
-  const onUnregister = useCallback(
-    (fieldNames: string[]) => {
-      fieldNames.forEach(field => {
-        unregister(field);
-      });
-    },
-    [unregister],
-  );
-
-  // Gérer le changement de modèle
-  useEffect(() => {
-    if (model && model.name && model.name !== currentModelName) {
-      // Sauvegarder les valeurs de base
-      const currentValues = getValues();
-
-      // Désinscrire les anciens champs dynamiques
-      if (currentModelName) {
-        const oldFields = getModelConfigFields(currentModelName);
-        onUnregister(oldFields.map(field => field.name));
-      }
-
-      // Mettre à jour le modèle actuel
-      setCurrentModelName(model.name);
-
-      // Reset partiel du form en gardant les champs de base
-      reset({
-        model: currentValues.model,
-        fileIds: currentValues.fileIds,
-        outputFileName: currentValues.outputFileName,
-        // Les nouveaux champs dynamiques seront gérés par le nouveau schema
-      });
-    }
-  }, [model, currentModelName, getValues, reset, onUnregister]);
-
-  const { showToast, hideToast } = useToastContext();
-
-  const onSubmit = useCallback(
-    (values: zod.infer<typeof dynamicSchema>) => {
-      const defaultOptions = getModelConfigDefaultOptions(values.model.name);
-      const { fileIds, model, outputFileName, ...otherFields } = values;
-      imageGenerate({
-        fileIds,
-        template: model.template,
-        outputFileName,
-        options: {
-          ...defaultOptions,
-          ...otherFields,
-        },
-      });
-    },
-    [imageGenerate],
-  );
-
-  const onChangeUpload: React.ChangeEventHandler<HTMLInputElement> = e => {
-    if (e.target.files) {
-      const uploadFiles = [...e.target.files]
-        .filter(file => file !== undefined)
-        .map(file => ({
-          image: file,
-        }));
-      imageThumbUpload(uploadFiles);
-      setDownloadPlaceholderCount(uploadFiles.length);
-    }
-  };
-
-  useEffect(() => {
-    showToast({
-      groupId: 'image-generator-form',
-      id: 'info-image-generator-beta',
-      type: 'info',
-      duration: 0,
-      message: `Le générateur d'images est en version bêta. Les résultats peuvent varier.`,
-    });
-    return () => {
-      hideToast('info-image-generator-beta');
-    };
-  }, [showToast, hideToast]);
+  useSelectedModelForm({
+    formMethods,
+    currentModelName,
+    setCurrentModelName,
+  });
 
   return (
     <FormProvider {...formMethods}>
       <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="fileIds"
+        <ImageSelectionSection
+          control={formMethods.control}
+          errors={formState.errors}
+          uploadIds={uploadIds}
+          downloadPlaceholderCount={downloadPlaceholderCount}
+          onChangeUpload={onChangeUpload}
+          maxSelection={NB_MAX_IMAGE_SELECTION}
+        />
+        <ModelSelectionSection
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <ImageSelector
-              uploadInputProps={{
-                id: 'image-upload',
-                onChange: onChangeUpload,
-                multiple: true,
-              }}
-              downloadPlaceholderCount={downloadPlaceholderCount}
-              maxSelection={MAX_SELECTION_IMG}
-              uploadDroppable={true}
-              onSelectionChange={onChange}
-              imageList={imageUploads.map(imageUpload => ({
-                ...imageUpload,
-                src: imageUpload.url,
-              }))}
-              selection={value}
-              error={errors['fileIds']}
-            />
-          )}
+          errors={formState.errors}
+          currentModelName={currentModelName}
         />
-        <FieldSet
-          legend="Choix du modèle"
-          contentClassName="image-generator-form__model-fieldset"
-        >
-          <Controller
-            name="model"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <ModelSelector
-                modelList={ModelList}
-                selectedModel={value}
-                onSelectModel={onChange}
-                error={errors['model']}
-              />
-            )}
+        <Display type="flex" align="center">
+          <FormInput
+            label="Nom de sortie du fichier (Optionnel)"
+            labelProps={{ htmlFor: 'outputFileName' }}
+            inputProps={{
+              type: 'text',
+              placeholder: 'nom_image_generee',
+              ...register('outputFileName'),
+            }}
+            className="lm-publisher-w-100"
           />
-          <Display type="flex" direction="column">
-            <Text className="lmui-form__placeholder form-label">
-              Options du modèle
-            </Text>
-
-            {currentModelName ? (
-              <ModelFields
-                modelName={currentModelName}
-                configFields={modelConfigFields}
-                control={control}
-                errors={errors}
-              />
-            ) : (
-              <Text>Sélectionnez un modèle pour choisir ses options.</Text>
-            )}
-          </Display>
-        </FieldSet>
-        <FormInput
-          label="Nom de sortie du fichier (Optionnel)"
-          labelProps={{ htmlFor: 'outputFileName' }}
-          inputProps={{
-            type: 'text',
-            placeholder: 'image_generee',
-            ...register('outputFileName'),
-          }}
-        />
+          <FormHelper
+            text="Par défaut un nom est généré automatiquement. Le nom choisi ne peut pas contenir d'espaces ou de caractères spéciaux."
+            size="sm"
+          />
+        </Display>
 
         <FormFooter>
           <FormSubmit

@@ -185,6 +185,9 @@ th {
   gap: var(--lm-publisher-spacer-2);
 }
 
+.lm-publisher-w-100 {
+  width: 100%;
+}
 
 .toast-container {
   position: fixed;

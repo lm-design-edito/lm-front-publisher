@@ -1,36 +1,30 @@
 import templateBookPreview from '../assets/preview-template-book.jpg';
 import templateBookPreviewStripes from '../assets/preview-template-book-stripes.jpg';
+import type { Model } from '../types';
 
 export const TemplateNames = {
   BOOK: 'BOOK',
-  TEST: 'test',
 } as const;
 
 export const ModelNames = {
-  BOOKCOVERPLAIN: 'BOOKCOVERPLAIN',
-  BOOKCOVERSTRIPES: 'BOOKCOVERSTRIPES',
+  BOOK_COVER_PLAIN: 'book-cover-plain',
+  BOOK_COVER_STRIPES: 'book-cover-stripes',
 } as const;
 
 export const TemplateNameValues = Object.values(TemplateNames);
 
-export const ModelList: {
-  name: string;
-  template: string;
-  label: string;
-  thumbnail: string;
-  defaultOptions?: Record<string, unknown>;
-}[] = [
+export const ModelList: Model[] = [
   {
-    name: ModelNames.BOOKCOVERPLAIN,
+    name: ModelNames.BOOK_COVER_PLAIN,
     template: TemplateNames.BOOK,
     label: 'Couverture de livre',
     thumbnail: templateBookPreview,
     defaultOptions: {
-      backgroundType: 'plain'
-    }
+      backgroundType: 'plain',
+    },
   },
   {
-    name: ModelNames.BOOKCOVERSTRIPES,
+    name: ModelNames.BOOK_COVER_STRIPES,
     template: TemplateNames.BOOK,
     label: 'Couverture de livre (rayures)',
     thumbnail: templateBookPreviewStripes,

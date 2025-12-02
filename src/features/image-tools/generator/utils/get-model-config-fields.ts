@@ -5,16 +5,6 @@ import MODEL_CONFIG_FIELDS, {
 export const getModelConfigFields = (
   modelName?: string,
 ): ModelConfigField[] => {
-  const fallbackFields: ModelConfigField[] = [];
-  if (!modelName) {
-    return fallbackFields;
-  }
-
-  const modelConfig =
-    MODEL_CONFIG_FIELDS[modelName as keyof typeof MODEL_CONFIG_FIELDS];
-  if (modelConfig) {
-    return modelConfig.formFields || [];
-  }
-
-  return fallbackFields;
-};
+  if (!modelName) return [];
+  return MODEL_CONFIG_FIELDS[modelName]?.formFields ?? [];
+}
