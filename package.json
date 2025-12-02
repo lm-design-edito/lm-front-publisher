@@ -20,9 +20,11 @@
     "@tanstack/react-query-devtools": "^5.81.2",
     "@tanstack/react-router": "^1.120.15",
     "@tanstack/react-router-devtools": "^1.120.15",
+    "@types/validator": "^13.15.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.57.0",
+    "validator": "^13.15.23",
     "zod": "^3.25.61"
   },
   "devDependencies": {

@@ -11,11 +11,16 @@ import { useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
 import { appRoutes } from '@src/appRoutes';
 import { ToastContext } from '@common/providers/toast/toastContext';
+import validator from 'validator';
 
 const signupFormSchema = zod.object({
   username: zod
     .string()
-    .min(5, "Le nom d'utilisateur doit faire au moins 5 caractères"),
+    .min(5, "Le nom d'utilisateur doit faire au moins 5 caractères")
+    .refine(input => validator.isSlug(input.toLowerCase()), {
+      message:
+        "Le nom d'utilisateur ne peut pas contenir que des caractères alphanumériques et pas d'espaces.",
+    }),
   password: zod
     .string()
     .min(3, 'Le mot de passe doit faire au moins 3 caractères'),
