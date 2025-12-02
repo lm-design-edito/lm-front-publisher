@@ -30,7 +30,7 @@ export type FormSelectProps = {
   options: { value: string; label: string }[];
   error?: FormErrorProps['error'];
   selectProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
-  helper?: FormHelperProps;
+  helperProps?: FormHelperProps;
 };
 
 export const FormSelect = ({
@@ -38,7 +38,7 @@ export const FormSelect = ({
   options,
   error,
   selectProps,
-  helper,
+  helperProps,
   ...props
 }: FormSelectProps) => {
   if (label) {
@@ -47,7 +47,7 @@ export const FormSelect = ({
         {label && <FormLabel> {label}</FormLabel>}
         <Display type="flex" align="center" flex="1">
           <Select options={options} selectProps={selectProps} />
-          {helper && <FormHelper {...helper} />}
+          {helperProps && <FormHelper {...helperProps} />}
         </Display>
         <FormError error={error} />
       </Display>
@@ -56,7 +56,7 @@ export const FormSelect = ({
   return (
     <Display type="flex" align="center" flex="1" {...props}>
       <Select options={options} selectProps={selectProps} />
-      {helper && <FormHelper {...helper} />}
+      {helperProps && <FormHelper {...helperProps} />}
     </Display>
   );
 };

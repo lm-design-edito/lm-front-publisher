@@ -69,7 +69,7 @@ export const ImageSelector = ({
           <ClearImageUploadIdsCacheButton
             buttonProps={{ size: 's' }}
             helperProps={{
-              position: 'top-left',
+              position: 'left',
             }}
             className="image-selector__emptyContentButton"
             onCleared={onClearedCacheUploadIds}

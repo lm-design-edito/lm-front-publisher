@@ -52,23 +52,21 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
           errors={formState.errors}
           currentModelName={currentModelName}
         />
-        <Display type="flex" align="center">
-          <Form.Input
-            label="Nom de sortie du fichier (Optionnel)"
-            labelProps={{ htmlFor: 'outputFileName' }}
-            inputProps={{
-              type: 'text',
-              placeholder: 'nom_image_generee',
-              ...register('outputFileName'),
-            }}
-            className="lm-publisher-w-100"
-          />
-          <Form.Helper
-            text="Par défaut un nom est généré automatiquement. Le nom choisi ne peut pas contenir d'espaces ou de caractères spéciaux."
-            size="sm"
-          />
-        </Display>
-
+        <Form.Input
+          label="Nom de sortie du fichier (Optionnel)"
+          labelProps={{ htmlFor: 'outputFileName' }}
+          inputProps={{
+            type: 'text',
+            placeholder: 'nom_image_generee',
+            ...register('outputFileName'),
+          }}
+          helperProps={{
+            text: "Par défaut un nom est généré automatiquement. Le nom choisi ne peut pas contenir d'espaces ou de caractères spéciaux.",
+            size: 'sm',
+            position: 'left',
+          }}
+          className="lm-publisher-w-100"
+        />
         <Form.Footer>
           <Form.Submit
             isLoading={isPendingGenerate}

@@ -276,12 +276,12 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         <Form.Select
           label="Mode de redimensionnement"
           options={TinyLMGFitOptions}
-          helper={{
+          className="lm-publisher-m-t-spacer-3"
+          helperProps={{
             position: 'left',
             text: TinyLMGFitOptions.find(option => option.value === fit)
               ?.description,
           }}
-          className="lm-publisher-m-t-spacer-3"
           selectProps={{
             id: 'fit',
             ...register('fit'),

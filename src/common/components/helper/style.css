@@ -1,6 +1,7 @@
 .helper {
   --size: 24px;
   --font-size: 0.8rem;
+  --text-font-size: 1rem;
   --position-left: auto;
   --position-right: auto;
   --position-top: auto;
@@ -16,7 +17,9 @@
 .helper--sm {
   --size: 16px;
   --font-size: 0.6rem;
+  --text-font-size: 0.8rem;
 }
+
 
 .helper__button {
   display: flex;
@@ -52,6 +55,7 @@
   color: var(--lm-publisher-dialog-text-color);
   box-shadow: var(--lm-publisher-dialog-shadow);
   pointer-events: none;
+  font-size: var(--text-font-size);
 
   transition: opacity 0.2s ease-in-out;
 }
