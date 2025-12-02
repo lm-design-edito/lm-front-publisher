@@ -2,11 +2,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import './style.css';
-import { FormInput } from '@common/components/forms/form-input';
-import { Form } from '@common/components/forms/form';
-import { FormSubmit } from '@common/components/forms/form-submit';
+import { Form } from '@common/components/forms';
 import { useSignup } from '../../api/use-signup';
-import { FormFooter } from '@common/components/forms/form-footer';
 import { useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
 import { appRoutes } from '@src/appRoutes';
@@ -77,7 +74,7 @@ export const SignupForm = () => {
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput
+        <Form.Input
           isValid={isValid}
           error={errors.username}
           label="Nom d'utilisateur"
@@ -90,7 +87,7 @@ export const SignupForm = () => {
             required: true,
           }}
         />
-        <FormInput
+        <Form.Input
           isValid={isValid}
           error={errors.email}
           label="Adresse e-mail"
@@ -103,7 +100,7 @@ export const SignupForm = () => {
             required: true,
           }}
         />
-        <FormInput
+        <Form.Input
           isValid={isValid}
           error={errors.password}
           label="Mot de passe"
@@ -116,9 +113,9 @@ export const SignupForm = () => {
             required: true,
           }}
         />
-        <FormFooter>
-          <FormSubmit>S'inscrire</FormSubmit>
-        </FormFooter>
+        <Form.Footer>
+          <Form.Submit>S'inscrire</Form.Submit>
+        </Form.Footer>
       </Form>
     </div>
   );

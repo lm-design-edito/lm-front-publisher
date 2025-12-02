@@ -1,13 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
-import { FormInput } from '@common/components/forms/form-input';
-import { Form } from '@common/components/forms/form';
+import { Form } from '@common/components/forms';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { FormSubmit } from '@common/components/forms/form-submit';
-import { FormFooter } from '@common/components/forms/form-footer';
 import { useVerifyEmail } from '@features/auth/api/use-verify-email';
 import { appRoutes } from '@src/appRoutes';
 import { useToastContext } from '@common/hooks/useToastContext';
@@ -77,7 +74,7 @@ export const VerifyEmailForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
+      <Form.Input
         error={errors.email}
         label="Adresse e-mail"
         labelProps={{ htmlFor: 'email' }}
@@ -91,7 +88,7 @@ export const VerifyEmailForm = () => {
           required: true,
         }}
       />
-      <FormInput
+      <Form.Input
         error={errors.token}
         label="Code de vérification"
         labelProps={{ htmlFor: 'token' }}
@@ -103,9 +100,9 @@ export const VerifyEmailForm = () => {
           required: true,
         }}
       />
-      <FormFooter>
-        <FormSubmit isLoading={isPending}>Valider</FormSubmit>
-      </FormFooter>
+      <Form.Footer>
+        <Form.Submit isLoading={isPending}>Valider</Form.Submit>
+      </Form.Footer>
     </Form>
   );
 };

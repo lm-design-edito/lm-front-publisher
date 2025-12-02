@@ -1,6 +1,6 @@
 import { Display } from '@common/components/display';
 import { CheckBadge } from '@common/components/check-badge';
-import { Form, type FormFieldErrorType } from '@common/components/forms';
+import { Form, type FormErrorType } from '@common/components/forms';
 import './style.css';
 
 export type ModelSelectorProps = {
@@ -18,7 +18,7 @@ export type ModelSelectorProps = {
     name: string;
     template: string;
   }) => void;
-  error: FormFieldErrorType | undefined;
+  error: FormErrorType | undefined;
 };
 
 export const ModelSelector = (props: ModelSelectorProps) => {

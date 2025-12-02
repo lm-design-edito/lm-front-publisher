@@ -3,17 +3,10 @@ import { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form } from '@common/components/forms/form';
-import { FormInputFile } from '@common/components/forms/form-input-file';
-import { FormInputCheckboxGroup } from '@common/components/forms/form-input-checkbox-group';
+import { Form } from '@common/components/forms';
 import { TinyLMGFitOptions, TinyLMGFormats } from '../../config';
-import { FormFooter } from '@common/components/forms/form-footer';
-import { FormSubmit } from '@common/components/forms/form-submit';
 import { Button } from '@common/components/buttons/button';
-import { FormInput } from '@common/components/forms/form-input';
-import { FormFieldset } from '@common/components/forms/form-fieldset';
 import { Display } from '@common/components/display';
-import { FormSelect } from '@common/components/forms/form-select';
 
 import './style.css';
 import { useImageMultiFormat } from '../../api/use-image-multi-format';
@@ -220,7 +213,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         name="imageValue"
         control={control}
         render={({ field }) => (
-          <FormInputFile
+          <Form.InputFile
             label="Image"
             labelProps={{ htmlFor: 'imageValue' }}
             preview={{
@@ -241,14 +234,14 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
           />
         )}
       />
-      <FormFieldset legend="Dimensions">
+      <Form.Fieldset legend="Dimensions">
         <Display
           type="flex"
           direction="row"
           justify="space-between"
           align="center"
         >
-          <FormInput
+          <Form.Input
             label="Largeur"
             labelProps={{ htmlFor: 'width' }}
             inputProps={{
@@ -260,7 +253,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
             error={errors['width']}
           />
           x{' '}
-          <FormInput
+          <Form.Input
             label="Hauteur"
             labelProps={{ htmlFor: 'height' }}
             inputProps={{
@@ -280,7 +273,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
             Garder les dimensions d'origine
           </Button>
         </Display>
-        <FormSelect
+        <Form.Select
           label="Mode de redimensionnement"
           options={TinyLMGFitOptions}
           helper={{
@@ -294,8 +287,8 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
             ...register('fit'),
           }}
         />
-      </FormFieldset>
-      <FormInputCheckboxGroup
+      </Form.Fieldset>
+      <Form.CheckboxGroup
         label="Formats"
         inputGroupProps={TinyLMGFormats.map(format => ({
           id: `format-${format.value}`,
@@ -320,8 +313,8 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         >
           Tout sélectionner / désélectionner
         </Button>
-      </FormInputCheckboxGroup>
-      <FormInput
+      </Form.CheckboxGroup>
+      <Form.Input
         label="Qualité"
         labelProps={{ htmlFor: 'quality' }}
         inputProps={{
@@ -334,7 +327,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         }}
         error={errors['quality']}
       />
-      <FormInput
+      <Form.Input
         label="Niveau de compression (.png uniquement)"
         labelProps={{ htmlFor: 'compressionLevel' }}
         inputProps={{
@@ -347,9 +340,9 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         }}
         error={errors['compressionLevel']}
       />
-      <FormFooter>
-        <FormSubmit isLoading={isPending}>Compresser</FormSubmit>
-      </FormFooter>
+      <Form.Footer>
+        <Form.Submit isLoading={isPending}>Compresser</Form.Submit>
+      </Form.Footer>
     </Form>
   );
 };

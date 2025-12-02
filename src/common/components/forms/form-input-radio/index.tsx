@@ -1,6 +1,6 @@
 import type { FieldError } from 'react-hook-form';
 import { FormLabel } from '../form-label';
-import { FormFieldError } from '../form-field-error';
+import { FormError } from '../form-error';
 import { FormHelper, type FormHelperProps } from '../form-helper';
 
 import './style.css';
@@ -37,7 +37,7 @@ const FormInputRadio = ({
           {helperProps && <FormHelper {...helperProps} />}
         </Display>
       </FormLabel>
-      <FormFieldError error={error} />
+      <FormError error={error} />
     </div>
   );
 };

@@ -1,16 +1,13 @@
 import { Button, type ButtonProps } from '@common/components/buttons/button';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { useClearImageUploadIdsCache } from '../../services/use-clear-image-upload-ids-cache';
-import {
-  FormHelper,
-  type FormHelperProps,
-} from '@common/components/forms/form-helper';
 import { Display } from '@common/components/display';
+import { Helper, type HelperProps } from '@common/components/helper';
 
 type ClearImageUploadIdsCacheButtonProps = {
   className?: string;
   buttonProps?: ButtonProps;
-  helperProps?: Omit<FormHelperProps, 'text'>;
+  helperProps?: Omit<HelperProps, 'text'>;
   onCleared?: () => void;
 };
 
@@ -46,7 +43,7 @@ export const ClearImageUploadIdsCacheButton = ({
       >
         Vider le cache des uploads
       </Button>
-      <FormHelper
+      <Helper
         text="Votre cache se vide automatiquement toutes les 15minutes mais vous
         pouvez choisir de le forcer manuellement."
         position="bottom-right"

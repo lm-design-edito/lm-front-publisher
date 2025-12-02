@@ -1,7 +1,4 @@
-import {
-  FormFieldset,
-  type FieldsetProps,
-} from '@common/components/forms/form-fieldset';
+import { Form, type FormFieldsetProps } from '@common/components/forms';
 
 import './style.css';
 import {
@@ -22,7 +19,7 @@ export type ImageSelectorProps = {
   }[];
   downloadPlaceholderCount: number;
   maxSelection: number;
-  error?: FieldsetProps['error'];
+  error?: FormFieldsetProps['error'];
   uploadDroppable?: boolean;
   uploadInputProps?: ImageInputFieldProps['inputProps'];
   selection?: string[]; // list of selected image ids
@@ -51,7 +48,7 @@ export const ImageSelector = ({
   }, [downloadPlaceholderCount]);
 
   return (
-    <FormFieldset
+    <Form.Fieldset
       legend={
         <span className="image-selector__legend">
           Sélectionner une ou plusieurs images{' '}
@@ -120,6 +117,6 @@ export const ImageSelector = ({
           />
         ))}
       </Display>
-    </FormFieldset>
+    </Form.Fieldset>
   );
 };

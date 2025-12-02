@@ -1,14 +1,14 @@
 import './style.css';
 
-type FormFieldError = {
+export type FormErrorType = {
   message?: string;
   type?: string;
 };
-export type FormFieldErrorProps = {
-  error?: FormFieldError | FormFieldError[];
+export type FormErrorProps = {
+  error?: FormErrorType | FormErrorType[];
 };
 
-const FormFieldError = ({ error }: FormFieldErrorProps) => {
+export const FormError = ({ error }: FormErrorProps) => {
   const errors = (Array.isArray(error) ? error : [error]).filter(
     err => err !== undefined,
   );
@@ -22,5 +22,3 @@ const FormFieldError = ({ error }: FormFieldErrorProps) => {
     </span>
   );
 };
-
-export { FormFieldError };

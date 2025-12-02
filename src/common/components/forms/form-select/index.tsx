@@ -1,5 +1,5 @@
 import { Display } from '@common/components/display';
-import { FormFieldError, type FormFieldErrorProps } from '../form-field-error';
+import { FormError, type FormErrorProps } from '../form-error';
 import { FormHelper, type FormHelperProps } from '../form-helper';
 import './style.css';
 import { FormLabel } from '../form-label';
@@ -28,7 +28,7 @@ export type FormSelectProps = {
   className?: string;
   label?: string;
   options: { value: string; label: string }[];
-  error?: FormFieldErrorProps['error'];
+  error?: FormErrorProps['error'];
   selectProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
   helper?: FormHelperProps;
 };
@@ -49,7 +49,7 @@ export const FormSelect = ({
           <Select options={options} selectProps={selectProps} />
           {helper && <FormHelper {...helper} />}
         </Display>
-        <FormFieldError error={error} />
+        <FormError error={error} />
       </Display>
     );
   }

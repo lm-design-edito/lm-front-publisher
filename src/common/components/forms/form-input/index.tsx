@@ -1,6 +1,6 @@
 import type { FieldError } from 'react-hook-form';
 import { FormLabel } from '../form-label';
-import { FormFieldError } from '../form-field-error';
+import { FormError } from '../form-error';
 
 import './style.css';
 
@@ -35,7 +35,7 @@ export const FormInput = ({
         <FormLabel {...labelProps}>{label}</FormLabel>
       </div>
       {children}
-      <FormFieldError error={error} />
+      <FormError error={error} />
     </div>
   );
 };

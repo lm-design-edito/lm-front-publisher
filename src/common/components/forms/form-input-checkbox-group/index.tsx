@@ -1,5 +1,5 @@
 import { FormFieldset } from '../form-fieldset';
-import { FormFieldError } from '../form-field-error';
+import { FormError } from '../form-error';
 import {
   FormInputCheckbox,
   type FormInputCheckboxProps,
@@ -39,7 +39,7 @@ export const FormInputCheckboxGroup = ({
         ))}
       </div>
       {children}
-      <FormFieldError error={error} />
+      <FormError error={error} />
     </FormFieldset>
   );
 };

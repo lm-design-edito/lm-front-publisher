@@ -1,12 +1,12 @@
 import './style.css';
-import { FormFieldError, type FormFieldErrorProps } from '../form-field-error';
+import { FormError, type FormErrorProps } from '../form-error';
 
 export type FormFieldsetProps = {
   className?: string;
   legend?: string | React.ReactNode;
   contentClassName?: string;
   children?: React.ReactNode;
-  error?: FormFieldErrorProps['error'];
+  error?: FormErrorProps['error'];
   additionalContent?: React.ReactNode;
 } & React.FieldsetHTMLAttributes<HTMLFieldSetElement>;
 
@@ -26,7 +26,7 @@ export const FormFieldset = ({
     >
       {_legend && <legend>{_legend}</legend>}
       <div className={contentClassName}>{children}</div>
-      <FormFieldError error={error} />
+      <FormError error={error} />
       {additionalContent}
     </fieldset>
   );

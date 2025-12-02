@@ -1,7 +1,7 @@
 import { FormFieldset } from '../form-fieldset';
 import { FormLabel } from '../form-label';
 import { FormInput, type FormInputProps } from '../form-input';
-import { FormFieldError } from '../form-field-error';
+import { FormError } from '../form-error';
 import { Display } from '@common/components/display';
 
 import './style.css';
@@ -87,7 +87,7 @@ export const FormInputFile = ({
           <span className="form-input-file__file-name">{preview.name}</span>
         )}
       </Display>
-      <FormFieldError error={error} />
+      <FormError error={error} />
     </FormFieldset>
   );
 };

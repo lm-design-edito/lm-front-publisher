@@ -1,9 +1,10 @@
-import type { FormInputProps } from '@common/components/forms/form-input';
 import * as zod from 'zod';
 import { ModelNames } from './models';
-import type { FormInputCheckboxProps } from '@common/components/forms/form-input-checkbox';
-import type { FormInputRadioGroupProps } from '@common/components/forms/form-input-radio-group';
-
+import type {
+  FormInputProps,
+  FormInputCheckboxProps,
+  FormInputRadioGroupProps,
+} from '@common/components/forms';
 export type FormInputFieldText = FormInputProps | FormInputCheckboxProps;
 
 export type DefaultModelConfigField = {

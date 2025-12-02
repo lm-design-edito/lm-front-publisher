@@ -1,14 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
-import { FormInput } from '@common/components/forms/form-input';
-import { Form } from '@common/components/forms/form';
+import { Form } from '@common/components/forms';
 import { useLogin } from '../../api/use-login';
 import { useWhoAmI } from '../../api/use-who-am-i';
 import { useNavigate } from '@tanstack/react-router';
 import { useContext, useEffect } from 'react';
-import { FormSubmit } from '@common/components/forms/form-submit';
-import { FormFooter } from '@common/components/forms/form-footer';
 import { appRoutes } from '@src/appRoutes';
 import { ToastContext } from '@common/providers/toast/toastContext';
 
@@ -69,7 +66,7 @@ export const LoginForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
+      <Form.Input
         error={errors.email}
         label="Adresse e-mail"
         labelProps={{ htmlFor: 'email' }}
@@ -82,7 +79,7 @@ export const LoginForm = () => {
           required: true,
         }}
       />
-      <FormInput
+      <Form.Input
         error={errors.password}
         isValid={isValid}
         label="Mot de passe"
@@ -95,9 +92,9 @@ export const LoginForm = () => {
           required: true,
         }}
       />
-      <FormFooter>
-        <FormSubmit isLoading={isPending}>Se connecter</FormSubmit>
-      </FormFooter>
+      <Form.Footer>
+        <Form.Submit isLoading={isPending}>Se connecter</Form.Submit>
+      </Form.Footer>
     </Form>
   );
 };

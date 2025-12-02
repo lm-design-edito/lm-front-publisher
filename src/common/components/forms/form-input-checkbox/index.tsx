@@ -1,10 +1,10 @@
 import { FormLabel } from '../form-label';
-import { FormFieldError, type FormFieldErrorProps } from '../form-field-error';
+import { FormError, type FormErrorProps } from '../form-error';
 
 export type FormInputCheckboxProps = {
   className?: string;
   label: string;
-  error?: FormFieldErrorProps['error'];
+  error?: FormErrorProps['error'];
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   inputProps: React.InputHTMLAttributes<HTMLInputElement>;
 };
@@ -27,7 +27,7 @@ const FormInputCheckbox = ({
       >
         {label}
       </FormLabel>
-      <FormFieldError error={error} />
+      <FormError error={error} />
     </div>
   );
 };
