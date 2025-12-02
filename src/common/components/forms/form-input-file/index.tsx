@@ -1,4 +1,4 @@
-import { FieldSet } from '../fieldset';
+import { FormFieldset } from '../form-fieldset';
 import { FormLabel } from '../form-label';
 import { FormInput, type FormInputProps } from '../form-input';
 import { FormFieldError } from '../form-field-error';
@@ -47,7 +47,7 @@ export const FormInputFile = ({
   });
 
   return (
-    <FieldSet
+    <FormFieldset
       className={`form-input-file ${className || ''} ${isDraggingOver ? 'form-input-file_dragging-over' : ''} ${error ? 'form-input-file_error' : ''}`}
       contentClassName="form-input-file__content"
       legend={<FormLabel {...labelProps}>{label}</FormLabel>}
@@ -88,6 +88,6 @@ export const FormInputFile = ({
         )}
       </Display>
       <FormFieldError error={error} />
-    </FieldSet>
+    </FormFieldset>
   );
 };

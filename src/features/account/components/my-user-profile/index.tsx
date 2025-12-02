@@ -1,6 +1,6 @@
 import { Loader } from '@common/components/loader';
 import { UserBadge } from '@common/components/user/user-badge';
-import { FieldSet } from '@common/components/forms/fieldset';
+import { FormFieldset } from '@common/components/forms/form-fieldset';
 import { UserStatus } from '@common/components/user/user-status';
 import { UserVerified } from '@common/components/user/user-verified';
 import { UserRole } from '@common/components/user/user-role';
@@ -21,27 +21,27 @@ export const MyUserProfile = () => {
         <Loader />
       ) : (
         <div className="lm-publisher-flex lm-publisher-flex-column lm-publisher-flex-spacer-2">
-          <FieldSet legend="ID">{user?._id || 'Aucun ID défini'}</FieldSet>
+          <FormFieldset legend="ID">{user?._id || 'Aucun ID défini'}</FormFieldset>
           <div className="lm-publisher-flex lm-publisher-flex-wrap lm-publisher-flex-spacer">
-            <FieldSet
+            <FormFieldset
               legend="Nom utilisateur"
               className="lm-publisher-flex-1"
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                             lm-publisher-flex-spacer"
             >
               {user?.username || "Aucun nom d'utilisateur défini"}
-            </FieldSet>
-            <FieldSet
+            </FormFieldset>
+            <FormFieldset
               legend="Email"
               className="lm-publisher-flex-1"
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
             >
               {user && 'email' in user ? user?.email : 'Aucun email défini'}
-            </FieldSet>
+            </FormFieldset>
           </div>
           <div className="lm-publisher-flex lm-publisher-flex-wrap lm-publisher-flex-spacer">
-            <FieldSet
+            <FormFieldset
               legend="Statut"
               className="lm-publisher-flex-1"
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
@@ -52,25 +52,25 @@ export const MyUserProfile = () => {
                   user && 'status' in user ? user.status : 'Aucun statut défini'
                 }
               />
-            </FieldSet>
-            <FieldSet
+            </FormFieldset>
+            <FormFieldset
               legend="État"
               className="lm-publisher-flex-1"
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
             >
               <UserVerified verified={user?.verified || false} />
-            </FieldSet>
-            <FieldSet
+            </FormFieldset>
+            <FormFieldset
               legend="Rôle"
               className="lm-publisher-flex-1"
               contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
             >
               <UserRole role={user?.role || 'Aucun rôle défini'} />
-            </FieldSet>
+            </FormFieldset>
           </div>
-          <FieldSet
+          <FormFieldset
             legend="Badges"
             contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                         lm-publisher-flex-spacer"
@@ -80,22 +80,22 @@ export const MyUserProfile = () => {
             ) : (
               <span>Aucun badge</span>
             )}
-          </FieldSet>
+          </FormFieldset>
         </div>
       )}
       <div></div>
-      <FieldSet
+      <FormFieldset
         legend="Préférences"
         className="lm-publisher-m-spacer-3"
         contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
                 lm-publisher-flex-spacer"
       >
         <ThemeSwitch />
-      </FieldSet>
-      <FieldSet legend="Gestion du cache" className="lm-publisher-m-spacer-8">
+      </FormFieldset>
+      <FormFieldset legend="Gestion du cache" className="lm-publisher-m-spacer-8">
         <ClearImageUploadIdsCacheButton buttonProps={{ size: 'm' }} />
-      </FieldSet>
-      <FieldSet
+      </FormFieldset>
+      <FormFieldset
         legend="Déconnexion"
         className="lm-publisher-m-spacer-8"
         contentClassName="lm-publisher-flex lm-publisher-flex-wrap 
@@ -103,7 +103,7 @@ export const MyUserProfile = () => {
       >
         <LogoutButton size="m" />
         <LogoutEverywhereButton size="m" />
-      </FieldSet>
+      </FormFieldset>
     </div>
   );
 };

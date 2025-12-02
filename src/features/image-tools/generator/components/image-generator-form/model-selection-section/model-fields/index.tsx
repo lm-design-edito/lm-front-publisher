@@ -1,9 +1,7 @@
-import { FormInput } from '@common/components/forms/form-input';
 import { Controller, type FieldError, type FieldErrors } from 'react-hook-form';
 import type { ModelConfigField } from '../../../../config/model-config-fields';
-import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
 import { Text } from '@common/components/text';
-import { FormInputRadioGroup } from '@common/components/forms/form-input-radio-group';
+import { Form } from '@common/components/forms';
 import { useCallback } from 'react';
 
 type ConfigFieldName = string;
@@ -55,7 +53,7 @@ export const ModelFields = ({
               switch (field.type) {
                 case 'input':
                   return (
-                    <FormInput
+                    <Form.Input
                       {...field.properties}
                       inputProps={{
                         ...field.properties.inputProps,
@@ -68,7 +66,7 @@ export const ModelFields = ({
                   );
                 case 'checkbox':
                   return (
-                    <FormInputCheckbox
+                    <Form.Checkbox
                       {...field.properties}
                       inputProps={{
                         ...field.properties.inputProps,
@@ -85,7 +83,7 @@ export const ModelFields = ({
                   );
                 case 'radio-group':
                   return (
-                    <FormInputRadioGroup
+                    <Form.RadioGroup
                       {...field.properties}
                       label={field.properties.label}
                       inputGroupProps={field.properties.inputGroupProps.map(

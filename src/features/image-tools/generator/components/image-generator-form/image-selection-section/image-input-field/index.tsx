@@ -1,11 +1,8 @@
-import {
-  FormInput,
-  type FormInputProps,
-} from '@common/components/forms/form-input';
 import { Icon } from '@common/components/icon';
 import useFileDragDrop from '@common/hooks/useFileDragDrop';
 import './style.css';
 import { useMemo } from 'react';
+import { Form, type FormInputProps } from '@common/components/forms';
 
 export type ImageInputFieldProps = {
   className?: string;
@@ -59,7 +56,7 @@ export const ImageInputField = ({
         <Icon name="plus" />
         <Icon name="close" color="error" />
         <span dangerouslySetInnerHTML={{ __html: label }} />
-        <FormInput
+        <Form.Input
           className="image-input-field__input"
           inputProps={{
             ...inputProps,

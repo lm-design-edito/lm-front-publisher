@@ -1,4 +1,4 @@
-import { FieldSet } from '../fieldset';
+import { FormFieldset } from '../form-fieldset';
 import { FormInputRadio, type FormInputRadioProps } from '../form-input-radio';
 
 import './style.css';
@@ -22,7 +22,7 @@ export const FormInputRadioGroup = ({
   error,
 }: FormInputRadioGroupProps) => {
   return (
-    <FieldSet
+    <FormFieldset
       className={`form-input-radio-group ${className || ''}`}
       contentClassName="form-input-radio-group__content"
       legend={<span className={labelClassName}>{label}</span>}
@@ -33,6 +33,6 @@ export const FormInputRadioGroup = ({
           <FormInputRadio key={id || `input-${index}`} {...inputProps} />
         ))}
       </div>
-    </FieldSet>
+    </FormFieldset>
   );
 };

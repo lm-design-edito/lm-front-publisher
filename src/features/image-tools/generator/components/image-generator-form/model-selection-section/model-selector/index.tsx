@@ -1,9 +1,6 @@
-import {
-  FormFieldError,
-  type FormFieldError as FormFieldErrorType,
-} from '@common/components/forms/form-field-error';
 import { Display } from '@common/components/display';
 import { CheckBadge } from '@common/components/check-badge';
+import { Form, type FormFieldErrorType } from '@common/components/forms';
 import './style.css';
 
 export type ModelSelectorProps = {
@@ -48,7 +45,7 @@ export const ModelSelector = (props: ModelSelectorProps) => {
           </div>
         ))}
       </Display>
-      {error && <FormFieldError error={error} />}
+      {error && <Form.Error error={error} />}
     </div>
   );
 };

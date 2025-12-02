@@ -1,7 +1,7 @@
 import {
-  FieldSet,
+  FormFieldset,
   type FieldsetProps,
-} from '@common/components/forms/fieldset';
+} from '@common/components/forms/form-fieldset';
 
 import './style.css';
 import {
@@ -49,7 +49,7 @@ export const ImageSelector = ({
   }, [downloadPlaceholderCount]);
 
   return (
-    <FieldSet
+    <FormFieldset
       legend={
         <span className="image-selector__legend">
           Sélectionner une ou plusieurs images{' '}
@@ -117,6 +117,6 @@ export const ImageSelector = ({
           />
         ))}
       </Display>
-    </FieldSet>
+    </FormFieldset>
   );
 };

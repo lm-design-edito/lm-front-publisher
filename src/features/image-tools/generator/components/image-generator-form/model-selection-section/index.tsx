@@ -1,11 +1,11 @@
 import { Controller, type Control, type FieldErrors } from 'react-hook-form';
-import { FieldSet } from '@common/components/forms/fieldset';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
 import { ModelSelector } from './model-selector';
 import { ModelFields } from './model-fields';
 import { ModelList } from '../../../config/models';
 import { getModelConfigFields } from '../../../utils/get-model-config-fields';
+import { Form } from '@common/components/forms';
 
 type Props = {
   control: Control;
@@ -21,7 +21,7 @@ export const ModelSelectionSection = ({
   const modelConfigFields = getModelConfigFields(currentModelName);
 
   return (
-    <FieldSet
+    <Form.Fieldset
       legend="Choix du modèle"
       contentClassName="image-generator-form__model-fieldset"
     >
@@ -53,6 +53,6 @@ export const ModelSelectionSection = ({
           <Text>Sélectionnez un modèle pour choisir ses options.</Text>
         )}
       </Display>
-    </FieldSet>
+    </Form.Fieldset>
   );
 };

@@ -11,7 +11,7 @@ import { FormFooter } from '@common/components/forms/form-footer';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { Button } from '@common/components/buttons/button';
 import { FormInput } from '@common/components/forms/form-input';
-import { FieldSet } from '@common/components/forms/fieldset';
+import { FormFieldset } from '@common/components/forms/form-fieldset';
 import { Display } from '@common/components/display';
 import { FormSelect } from '@common/components/forms/form-select';
 
@@ -241,7 +241,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
           />
         )}
       />
-      <FieldSet legend="Dimensions">
+      <FormFieldset legend="Dimensions">
         <Display
           type="flex"
           direction="row"
@@ -294,7 +294,7 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
             ...register('fit'),
           }}
         />
-      </FieldSet>
+      </FormFieldset>
       <FormInputCheckboxGroup
         label="Formats"
         inputGroupProps={TinyLMGFormats.map(format => ({

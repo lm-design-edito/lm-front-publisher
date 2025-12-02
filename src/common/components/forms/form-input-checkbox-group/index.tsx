@@ -1,4 +1,4 @@
-import { FieldSet } from '../fieldset';
+import { FormFieldset } from '../form-fieldset';
 import { FormFieldError } from '../form-field-error';
 import {
   FormInputCheckbox,
@@ -28,7 +28,7 @@ export const FormInputCheckboxGroup = ({
   error,
 }: FormInputCheckboxGroupProps) => {
   return (
-    <FieldSet
+    <FormFieldset
       className={`form-input-checkbox-group ${className || ''} ${error ? 'form-input-checkbox-group_error' : ''}`}
       contentClassName="form-input-checkbox-group__content"
       legend={<span className={labelClassName}>{label}</span>}
@@ -40,6 +40,6 @@ export const FormInputCheckboxGroup = ({
       </div>
       {children}
       <FormFieldError error={error} />
-    </FieldSet>
+    </FormFieldset>
   );
 };

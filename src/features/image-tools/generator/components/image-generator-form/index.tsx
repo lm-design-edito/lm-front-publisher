@@ -1,15 +1,12 @@
 import { useImageGeneratorForm } from './use-image-generator-form';
 import { useSelectedModelForm } from './use-selected-model-form';
-import './style.css';
 import { FormProvider } from 'react-hook-form';
 import { ModelSelectionSection } from './model-selection-section';
-import { FormInput } from '@common/components/forms/form-input';
-import { FormFooter } from '@common/components/forms/form-footer';
-import { FormSubmit } from '@common/components/forms/form-submit';
-import { Form } from '@common/components/forms/form';
 import { ImageSelectionSection } from './image-selection-section';
 import { Display } from '@common/components/display';
-import { FormHelper } from '@common/components/forms/form-helper';
+import { Form } from '@common/components/forms';
+
+import './style.css';
 
 type ImageGeneratorForm = {
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void;
@@ -56,7 +53,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
           currentModelName={currentModelName}
         />
         <Display type="flex" align="center">
-          <FormInput
+          <Form.Input
             label="Nom de sortie du fichier (Optionnel)"
             labelProps={{ htmlFor: 'outputFileName' }}
             inputProps={{
@@ -66,20 +63,20 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
             }}
             className="lm-publisher-w-100"
           />
-          <FormHelper
+          <Form.Helper
             text="Par défaut un nom est généré automatiquement. Le nom choisi ne peut pas contenir d'espaces ou de caractères spéciaux."
             size="sm"
           />
         </Display>
 
-        <FormFooter>
-          <FormSubmit
+        <Form.Footer>
+          <Form.Submit
             isLoading={isPendingGenerate}
             disabled={isPendingGenerate}
           >
             Génerer
-          </FormSubmit>
-        </FormFooter>
+          </Form.Submit>
+        </Form.Footer>
       </Form>
     </FormProvider>
   );
