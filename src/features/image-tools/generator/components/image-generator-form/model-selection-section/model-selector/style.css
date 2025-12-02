@@ -1,5 +1,5 @@
 .model-selector {
-  --model-selector-offset-r: 20px;
+  --model-selector-offset-r: 16px;
   position: relative;
   width: 100%;
   overflow: hidden;

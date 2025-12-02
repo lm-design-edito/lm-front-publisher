@@ -23,7 +23,8 @@ export const ModelSelectionSection = ({
   return (
     <Form.Fieldset
       legend="Choix du modèle"
-      contentClassName="image-generator-form__model-fieldset"
+      className="model-selection-section"
+      contentClassName="model-selection-section__content"
     >
       <Controller
         name="model"

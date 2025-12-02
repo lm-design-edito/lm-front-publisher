@@ -1,6 +1,6 @@
 .overflow-list {
   --overflow-list-offset: 0;
-  --overflow-list-offset-r: 40px;
+  --overflow-list-offset-r: 16px;
   --overflow-list-spacing: var(--lm-publisher-spacer-2);
   position: relative;
   overflow: hidden;
@@ -32,4 +32,10 @@
 
 .overflow-list > div {
   flex-shrink: 0;
+}
+
+@media screen and (min-width: 768px)  {
+  .overflow-list {
+    --overflow-list-offset-r: 40px;
+  }
 }

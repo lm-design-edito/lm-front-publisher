@@ -1,7 +1,7 @@
-import { Display } from '@common/components/display';
 import { CircleBadge } from '@common/components/circle-badge';
 import { Form, type FormErrorType } from '@common/components/forms';
 import './style.css';
+import { OverflowList } from '@common/components/overflow-list';
 
 export type ModelSelectorProps = {
   modelList: {
@@ -26,7 +26,7 @@ export const ModelSelector = (props: ModelSelectorProps) => {
 
   return (
     <div className="model-selector">
-      <Display type="flex" className="model-selector__list">
+      <OverflowList>
         {modelList.map(model => (
           <div
             key={model.name}
@@ -44,7 +44,7 @@ export const ModelSelector = (props: ModelSelectorProps) => {
             <div className="model-selector__info">{model.label}</div>
           </div>
         ))}
-      </Display>
+      </OverflowList>
       {error && <Form.Error error={error} />}
     </div>
   );
