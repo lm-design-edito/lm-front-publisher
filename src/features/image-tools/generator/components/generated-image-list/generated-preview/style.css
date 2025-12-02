@@ -1,16 +1,16 @@
-.image-generated-preview {
+.generated-preview {
   position: relative;
   width: 180px;
 }
 
-.image-generated-preview .lmui-badge {
+.generated-preview .lmui-badge {
   position: absolute;
   top: 8px;
   right: 8px;
   z-index: 1;
 }
 
-.image-generated-preview__image {
+.generated-preview__image {
   position: relative;
   width: 180px;
   height: 120px;
@@ -18,13 +18,13 @@
   border-radius: 8px 8px;
 }
 
-.image-generated-preview img {
+.generated-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.image-generated-preview__name {
+.generated-preview__name {
   max-width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;

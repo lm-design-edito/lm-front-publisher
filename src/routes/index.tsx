@@ -14,9 +14,12 @@ const IndexPage = () => {
         <h1>
           Bienvenue sur <span className="accent">LM Publisher</span>.
         </h1>
-        <p>Ici ça publish fort !</p>
         <p>
-          Pour toute question, besoin de support 24/7 :{' '}
+          Outils utiles à la publicaiton de formats (création, optimisation
+          d'images...).
+        </p>
+        <p>
+          Pour toute question, besoin de support :{' '}
           <span className="accent">fabas@lemonde.fr</span>
         </p>
 

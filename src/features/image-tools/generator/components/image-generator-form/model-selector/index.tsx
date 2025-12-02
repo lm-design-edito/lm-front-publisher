@@ -2,9 +2,9 @@ import {
   FormFieldError,
   type FormFieldError as FormFieldErrorType,
 } from '@common/components/forms/form-field-error';
-import './style.css';
 import { Display } from '@common/components/display';
 import { CheckBadge } from '@common/components/check-badge';
+import './style.css';
 
 export type ModelSelectorProps = {
   modelList: {

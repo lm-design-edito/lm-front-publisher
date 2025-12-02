@@ -1,15 +1,15 @@
 import {
-  ImageGeneratedPreview,
-  type ImageGeneratedPreviewProps,
-} from '../image-generated-preview';
+  GeneratedPreview,
+  type GeneratedPreviewProps,
+} from './generated-preview';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
 
-export type ImageGeneratedListProps = {
-  list: ImageGeneratedPreviewProps[];
+export type GeneratedImageListProps = {
+  list: GeneratedPreviewProps[];
 };
 
-export const ImageGeneratedList = ({ list }: ImageGeneratedListProps) => {
+export const GeneratedImageList = ({ list }: GeneratedImageListProps) => {
   return (
     <Display type="flex" direction="column">
       <h3>Images générées</h3>
@@ -20,7 +20,7 @@ export const ImageGeneratedList = ({ list }: ImageGeneratedListProps) => {
       ) : (
         <Display type="flex" wrap>
           {list.map(image => (
-            <ImageGeneratedPreview {...image} key={image.url} />
+            <GeneratedPreview {...image} key={image.url} />
           ))}
         </Display>
       )}

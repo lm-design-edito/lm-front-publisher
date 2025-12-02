@@ -1,6 +1,7 @@
 import { Loader } from '@common/components/loader';
-import './style.css';
 import { CheckBadge } from '@common/components/check-badge';
+
+import './style.css';
 
 export type ImagePlaceholderSelectablePreviewProps = {
   isPlaceholder: true;

@@ -5,18 +5,18 @@ import { Form } from '@common/components/forms/form';
 import { FormSubmit } from '@common/components/forms/form-submit';
 import { FormFooter } from '@common/components/forms/form-footer';
 import { useCallback, useEffect, useState, useMemo } from 'react';
-import { ImageSelector } from '../image-selector';
+import { ImageSelector } from './image-selector';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { getModelConfigFields } from '../../utils/get-model-config-fields';
-import { ImageGeneratorModelFields } from '../image-generator-model-fields';
+import { ModelFields } from './model-fields';
 import { ModelList, TemplateNameValues } from '../../config/models';
 import { FieldSet } from '@common/components/forms/fieldset';
 
 import './style.css';
-import { ModelSelector } from '../model-selector';
-import { useImageThumbsUpload } from '../../api/use-image-thumbs-upload';
-import { useImageThumbsDownload } from '../../api/use-image-thumbs-download';
-import { useImageGenerate } from '../../api/use-image-generate';
+import { ModelSelector } from './model-selector';
+import { useImageThumbsUpload } from '../../services/use-image-thumbs-upload';
+import { useImageThumbsDownload } from '../../services/use-image-thumbs-download';
+import { useImageGenerate } from '../../services/use-image-generate';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
 import { getModelConfigDefaultOptions } from '../../utils/get-model-config-default-options';
@@ -256,8 +256,6 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
     };
   }, [showToast, hideToast]);
 
-  console.log({ model, currentModelName });
-
   return (
     <FormProvider {...formMethods}>
       <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
@@ -306,7 +304,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
             </Text>
 
             {currentModelName ? (
-              <ImageGeneratorModelFields
+              <ModelFields
                 modelName={currentModelName}
                 configFields={modelConfigFields}
                 control={control}

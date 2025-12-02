@@ -1,6 +1,6 @@
 import { FormInput } from '@common/components/forms/form-input';
 import { Controller, type FieldError, type FieldErrors } from 'react-hook-form';
-import type { ModelConfigField } from '../../config/model-config-fields';
+import type { ModelConfigField } from '../../../config/model-config-fields';
 import { FormInputCheckbox } from '@common/components/forms/form-input-checkbox';
 import { Text } from '@common/components/text';
 import { FormInputRadioGroup } from '@common/components/forms/form-input-radio-group';
@@ -17,7 +17,7 @@ export type Props = {
   errors: FieldErrors<Record<ConfigFieldName, unknown>>;
 };
 
-export const ImageGeneratorModelFields = ({
+export const ModelFields = ({
   modelName = '',
   configFields,
   control,

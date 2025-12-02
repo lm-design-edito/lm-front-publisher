@@ -1,31 +1,31 @@
 import { Badge } from '@common/components/badge';
-import './style.css';
 import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
+import './style.css';
 
-export type ImageGeneratedPreviewProps = {
+export type GeneratedPreviewProps = {
   name: string;
   url: string;
   isNew?: boolean;
 };
 
-export const ImageGeneratedPreview = ({
+export const GeneratedPreview = ({
   name,
   url,
   isNew,
-}: ImageGeneratedPreviewProps) => {
+}: GeneratedPreviewProps) => {
   return (
     <Display
       type="flex"
       direction="column"
-      className="image-generated-preview"
+      className="generated-preview"
       gap="1"
     >
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="image-generated-preview__image"
+        className="generated-preview__image"
       >
         {isNew && <Badge>Nouveau</Badge>}
         <img src={url} alt="" />
@@ -35,9 +35,9 @@ export const ImageGeneratedPreview = ({
         align="center"
         direction="column"
         gap="1"
-        className="image-generated-preview__content"
+        className="generated-preview__content"
       >
-        <Text className="image-generated-preview__name" size="sm">
+        <Text className="generated-preview__name" size="sm">
           {name}
         </Text>
         <a href={url} target="_blank" download={name}>

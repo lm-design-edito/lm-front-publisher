@@ -1,32 +1,32 @@
 import { Button, type ButtonProps } from '@common/components/buttons/button';
 import { useToastContext } from '@common/hooks/useToastContext';
-import { useImageThumbsUploadEmptyCache } from '../../api/use-image-thumbs-upload-empty-cache';
+import { useClearImageUploadIdsCache } from '../../services/use-clear-image-upload-ids-cache';
 import {
   FormHelper,
   type FormHelperProps,
 } from '@common/components/forms/form-helper';
 import { Display } from '@common/components/display';
 
-type ImageUploadEmptyCacheButtonProps = {
+type ClearImageUploadIdsCacheButtonProps = {
   className?: string;
   buttonProps?: ButtonProps;
   helperProps?: Omit<FormHelperProps, 'text'>;
 };
 
-export const ImageUploadEmptyCacheButton = ({
+export const ClearImageUploadIdsCacheButton = ({
   buttonProps,
   helperProps,
   className = '',
-}: ImageUploadEmptyCacheButtonProps) => {
+}: ClearImageUploadIdsCacheButtonProps) => {
   const { showToast } = useToastContext();
-  const { emptyThumbsUploadCache } = useImageThumbsUploadEmptyCache();
+  const { clearImageUploadIdsCache } = useClearImageUploadIdsCache();
 
   return (
     <Display type="flex" align="center" gap={1} className={className}>
       <Button
         {...buttonProps}
         onClick={() => {
-          emptyThumbsUploadCache({
+          clearImageUploadIdsCache({
             onSuccess: () => {
               showToast({
                 type: 'success',

@@ -10,7 +10,7 @@ import {
   LogoutEverywhereButton,
 } from '@features/auth';
 import { ThemeSwitch } from '@features/theme';
-import { ImageUploadEmptyCacheButton } from '@features/image-tools/generator/components/image-upload-empty-cache-button';
+import { ClearImageUploadIdsCacheButton } from '@features/image-tools/generator';
 
 export const MyUserProfile = () => {
   const { user, isLoading } = useWhoAmI();
@@ -93,7 +93,7 @@ export const MyUserProfile = () => {
         <ThemeSwitch />
       </FieldSet>
       <FieldSet legend="Gestion du cache" className="lm-publisher-m-spacer-8">
-        <ImageUploadEmptyCacheButton buttonProps={{ size: 'm' }} />
+        <ClearImageUploadIdsCacheButton buttonProps={{ size: 'm' }} />
       </FieldSet>
       <FieldSet
         legend="Déconnexion"

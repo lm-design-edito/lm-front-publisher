@@ -8,11 +8,11 @@ import {
   ImageInputField,
   type ImageInputFieldProps,
 } from '../image-input-field';
-import { ImageSelectablePreview } from '../image-selectable-preview';
+import { ImageSelectablePreview } from './image-selectable-preview';
 import { Display } from '@common/components/display';
 import { Badge } from '@common/components/badge';
 import { useMemo } from 'react';
-import { ImageUploadEmptyCacheButton } from '../image-upload-empty-cache-button';
+import { ClearImageUploadIdsCacheButton } from '../../clear-image-upload-ids-cache-button';
 
 export type ImageSelectorProps = {
   imageList?: {
@@ -67,7 +67,7 @@ export const ImageSelector = ({
       additionalContent={
         imageList &&
         imageList?.length > 0 && (
-          <ImageUploadEmptyCacheButton
+          <ClearImageUploadIdsCacheButton
             buttonProps={{ size: 's' }}
             helperProps={{
               position: 'top-left',

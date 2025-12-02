@@ -2,10 +2,10 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 import {
   ImageGeneratorForm,
   ImageGeneratorInfos,
+  GeneratedImageList,
 } from '@features/image-tools/generator';
 import { Headline } from '@common/components/headline';
 import { appRoutes } from '@src/appRoutes';
-import { ImageGeneratedList } from '@features/image-tools/generator/components/image-generated-list';
 import { useState } from 'react';
 import { Divider } from '@common/components/divider';
 import { Badge } from '@common/components/badge';
@@ -43,7 +43,7 @@ const ImageGeneratorPage = () => {
         <ImageGeneratorForm onGenerated={handleOnGenerated} />
       </div>
       <Divider variant="dashed" />
-      <ImageGeneratedList list={generatedList} />
+      <GeneratedImageList list={generatedList} />
     </>
   );
 };

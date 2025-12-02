@@ -1,6 +1,6 @@
 import { api } from '@api/index';
 import { useQueries } from '@tanstack/react-query';
-import { STORAGE_KEY } from '../config';
+import { IMAGE_UPLOAD_IDS_CACHE } from '../config';
 
 type StorageItemType = {
   id: string;
@@ -14,7 +14,7 @@ export function useImageThumbsDownload(params: { idList: string[] }) {
     timeOut: currentTime + 1000 * 60 * 15,
   })); // 15 minutes
 
-  const storedList = localStorage.getItem(STORAGE_KEY);
+  const storedList = localStorage.getItem(IMAGE_UPLOAD_IDS_CACHE);
   if (storedList) {
     const parsedStoredList: StorageItemType[] = JSON.parse(storedList);
     const filteredList = parsedStoredList.filter(
@@ -27,7 +27,7 @@ export function useImageThumbsDownload(params: { idList: string[] }) {
       }
     });
   }
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(downloadList));
+  localStorage.setItem(IMAGE_UPLOAD_IDS_CACHE, JSON.stringify(downloadList));
 
   const thumbsQueries = useQueries({
     queries: downloadList.map(item => {
