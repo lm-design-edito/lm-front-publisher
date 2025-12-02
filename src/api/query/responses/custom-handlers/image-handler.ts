@@ -25,7 +25,6 @@ const getFileInformations = (blob: Blob, response: Response) => {
     response.headers && response.headers.get('Content-Disposition');
   if (disposition) {
     const filenameMatch = disposition.match(/filename="?([^"]+)"?/);
-    console.group(filenameMatch);
     if (filenameMatch && filenameMatch[1]) {
       fileName = filenameMatch[1];
     }
