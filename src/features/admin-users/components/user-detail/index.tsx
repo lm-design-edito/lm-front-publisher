@@ -2,11 +2,11 @@ import { Loader } from '@common/components/loader';
 import { useUserGet } from '@features/admin-users/services/use-user-get';
 import { UserUpdateForm } from './user-update-form';
 
-type UserDetailsProps = {
+type UserDetailProps = {
   userId: string;
 };
 
-export const UserDetails = ({ userId }: UserDetailsProps) => {
+export const UserDetail = ({ userId }: UserDetailProps) => {
   const { user, uploadQuota, isLoading } = useUserGet({ _id: userId });
 
   if (isLoading) {

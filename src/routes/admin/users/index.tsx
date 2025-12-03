@@ -13,6 +13,9 @@ const AdminUserListPage = () => {
 };
 
 export const Route = createFileRoute('/admin/users/')({
+  staticData: {
+    title: 'Gestion des utilisateurs',
+  },
   component: AdminUserListPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {

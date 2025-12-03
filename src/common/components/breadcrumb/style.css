@@ -1,0 +1,23 @@
+
+.breadcrumb {
+  font-size: smaller;
+}
+.breadcrumb a {
+    text-decoration: none;
+    opacity: 0.6;
+}
+.breadcrumb a ~ a:before {
+    content: '/';
+    opacity: 0.6;
+    margin-right: var(--lm-publisher-spacer-1);
+    margin-left: var(--lm-publisher-spacer-1);
+    text-decoration: none;
+}
+
+.breadcrumb a:last-child {
+    /* font-weight: 500; */
+    opacity: 1;
+}
+.breadcrumb a:last-child:before {
+    opacity: 0.3;
+}

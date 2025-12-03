@@ -42,7 +42,7 @@ export const VerifyEmailForm = () => {
         message: (
           <>
             Votre e-mail a bien été vérifié.{' '}
-            <Link to="/auth/login">Se connecter</Link>
+            <Link to={appRoutes.login}>Se connecter</Link>
           </>
         ),
       });

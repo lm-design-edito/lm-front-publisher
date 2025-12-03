@@ -1,9 +1,11 @@
+import { appRoutes } from '@src/appRoutes';
+
 export const AdminUserInfos = [
   {
     name: 'User Management',
     description: 'Gestion des utilisateurs',
     badge: 'admin.users.can-list',
-    url: '/admin/users',
+    url: appRoutes.adminUsers,
     icon: 'icon1.png',
   },
 ];

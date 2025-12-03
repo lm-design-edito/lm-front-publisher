@@ -24,6 +24,8 @@
 
   --lm-publisher-service-bg: linear-gradient(232deg, rgb(0, 91, 133, 0.09) 0%, rgb(28 116 157 / 37%) 94.37%);
 
+  --lm-publisher-code-bg-color: var(--lmui-c-snow-medium);
+
   --lm-publisher-width: 1200px;
 
   --lm-publisher-grid-gap: 16px;
@@ -49,6 +51,7 @@
   --lm-publisher-link-hover-color: var(--lmui-c-sea-medium);
 
   --lm-publisher-dialog-bg-color: #000;
+  --lm-publisher-code-bg-color: var(--lmui-c-slate-darker);
   
   --lm-publisher-service-bg: linear-gradient(
     232deg,
@@ -70,6 +73,11 @@ body {
   scrollbar-color: var(--lm-publisher-border-color) transparent;
 }
 
+.app-breadcrumb {
+  padding: 0 var(--lm-publisher-grid-margins);
+  margin: var(--lm-publisher-spacer-2) auto;
+  max-width: var(--lm-publisher-width);
+}
 .app-content {
   margin: var(--lm-publisher-grid-margins) auto;
   padding: var(--lm-publisher-grid-margins);
@@ -78,6 +86,7 @@ body {
 
 a {
   color: var(--lm-publisher-link-color);
+  transition: color .3s;
 }
 a:hover {
   color: var(--lm-publisher-link-hover-color);
@@ -191,6 +200,13 @@ th {
 
 .lm-publisher-w-100 {
   width: 100%;
+}
+
+code {
+  background: var(--lmui-c-slate-dark);
+  padding: 2px 5px;
+  border-radius: 2px;
+  background: var(--lm-publisher-code-bg-color)
 }
 
 .toast-container {

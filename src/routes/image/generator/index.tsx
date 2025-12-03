@@ -68,6 +68,10 @@ const ImageGeneratorPage = () => {
 };
 
 export const Route = createFileRoute('/image/generator/')({
+  staticData: {
+    getBreadcrumb: () => "Générateur de médias d'appels",
+    title: "Générateur de médias d'appels",
+  },
   component: ImageGeneratorPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isAuthenticated) {

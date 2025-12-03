@@ -7,6 +7,7 @@ import { UserStatus } from '@common/components/user/user-status';
 import { UserVerified } from '@common/components/user/user-verified';
 import { UserRole } from '@common/components/user/user-role';
 import { ButtonLink } from '@common/components/buttons/button-link';
+import { appRoutes } from '@src/appRoutes';
 
 export type UserListRow = {
   _id: string;
@@ -104,7 +105,7 @@ export const UserList = () => {
               <ButtonLink
                 size="s"
                 variant="secondary"
-                to="/admin/users/$id"
+                to={appRoutes.adminUserDetail}
                 params={{ id: row._id }}
               >
                 Voir

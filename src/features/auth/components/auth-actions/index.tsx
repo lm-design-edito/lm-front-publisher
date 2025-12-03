@@ -35,7 +35,7 @@ export const AuthActions = ({
       className={`auth-actions lm-publisher-center-flex lm-publisher-flex-spacer ${className}`}
     >
       <span className="auth-actions__user">
-        Bonjour <Link to="/account">{user.username}</Link>,
+        Bonjour <Link to={appRoutes.account}>{user.username}</Link>,
       </span>
       <LogoutButton size={size} />
     </span>

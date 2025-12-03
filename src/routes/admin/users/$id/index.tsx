@@ -1,37 +1,29 @@
 import { api } from '@api/index';
 import { Headline } from '@common/components/headline';
 import { Loader } from '@common/components/loader';
-import { UserDetails } from '@features/admin-users/components/user-details';
-import { createFileRoute, Link, useParams } from '@tanstack/react-router';
+import { UserDetail } from '@features/admin-users/components/user-detail';
+import { createFileRoute, useParams } from '@tanstack/react-router';
 import { redirect } from '@tanstack/react-router';
 
-const UserDetailsPage = () => {
+const UserDetailPage = () => {
   const { id } = useParams({ strict: false });
   return (
     <div className="account-page">
-      <Headline
-        breadcrumbs={
-          /* @todo: make an auto comp for his */
-          <>
-            <Link to="/admin/users">Liste des utilisateurs</Link>
-            <Link
-              to="/admin/users/$id"
-              params={{
-                id: id || '',
-              }}
-            >
-              Profil utilisateur
-            </Link>
-          </>
-        }
-        title="Information utilisateur"
-      />
-      {id && <UserDetails userId={id} />}
+      <Headline title="Information utilisateur" />
+      {id && <UserDetail userId={id} />}
     </div>
   );
 };
 
 export const Route = createFileRoute('/admin/users/$id/')({
+  staticData: {
+    getBreadcrumb: ({ params }) => (
+      <>
+        Détails <code>#{params.id}</code>
+      </>
+    ),
+    title: 'Détails',
+  },
   component: RouteComponent,
   loader: async ({ context: { queryClient, toaster }, params: { id } }) => {
     const data = await queryClient?.ensureQueryData({
@@ -55,5 +47,5 @@ export const Route = createFileRoute('/admin/users/$id/')({
 });
 
 function RouteComponent() {
-  return <UserDetailsPage />;
+  return <UserDetailPage />;
 }

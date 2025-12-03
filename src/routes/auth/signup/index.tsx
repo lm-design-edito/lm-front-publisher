@@ -12,6 +12,10 @@ const SignupPage = () => {
 };
 
 export const Route = createFileRoute('/auth/signup/')({
+  staticData: {
+    getBreadcrumb: () => 'Inscription',
+    title: 'Inscription',
+  },
   component: SignupPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && context.auth.isAuthenticated) {

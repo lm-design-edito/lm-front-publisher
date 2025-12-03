@@ -2,6 +2,10 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 import { appRoutes } from '@src/appRoutes';
 
 export const Route = createFileRoute('/admin/')({
+  staticData: {
+    getBreadcrumb: () => 'Admin',
+    title: 'Administration',
+  },
   component: RouteComponent,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {

@@ -37,6 +37,10 @@ const TinyLMGPage = () => {
 };
 
 export const Route = createFileRoute('/image/tiny-lmg/')({
+  staticData: {
+    getBreadcrumb: () => 'Tiny LMG',
+    title: "Tiny LMG - Optimisation d'images",
+  },
   component: TinyLMGPage,
   beforeLoad: async ({ context }) => {
     checkForAuthentifacted({ context });

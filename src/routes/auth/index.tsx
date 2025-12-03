@@ -1,6 +1,10 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/auth/')({
+  staticData: {
+    // No breadcrumb for the /auth/ route
+    title: 'Authentification',
+  },
   component: RouteComponent,
   beforeLoad: async () => {
     throw redirect({

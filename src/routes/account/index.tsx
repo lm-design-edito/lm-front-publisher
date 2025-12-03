@@ -13,6 +13,9 @@ const AccountPage = () => {
 };
 
 export const Route = createFileRoute('/account/')({
+  staticData: {
+    getBreadcrumb: () => 'Mon compte',
+  },
   component: AccountPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && !context.auth.isAuthenticated) {

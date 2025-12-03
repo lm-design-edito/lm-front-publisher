@@ -4,6 +4,7 @@ import './style.css';
 import { api } from '../../../../api';
 import { Link } from '@tanstack/react-router';
 import { Loader } from '@common/components/loader';
+import { appRoutes } from '@src/appRoutes';
 
 const isDevMode = import.meta.env.MODE === 'development';
 
@@ -44,7 +45,7 @@ export const DebugDevBar = () => {
         <div className="dev-bar__category">
           <span className="dev-bar__subtitle">Routes</span>
           <div className="dev-bar__actions">
-            <Link to="/admin">Admin</Link>
+            <Link to={appRoutes.admin}>Admin</Link>
           </div>
         </div>
       </div>

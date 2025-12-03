@@ -39,5 +39,9 @@ const IndexPage = () => {
 };
 
 export const Route = createFileRoute('/')({
+  staticData: {
+    getBreadcrumb: () => 'Accueil',
+    title: 'LM Publisher',
+  },
   component: IndexPage,
 });

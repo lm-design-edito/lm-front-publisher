@@ -12,6 +12,10 @@ const LoginPage = () => {
 };
 
 export const Route = createFileRoute('/auth/login/')({
+  staticData: {
+    getBreadcrumb: () => 'Connexion',
+    title: 'Connexion',
+  },
   component: LoginPage,
   beforeLoad: async ({ context }) => {
     if (!context.auth.isLoading && context.auth.isAuthenticated) {

@@ -1,20 +1,24 @@
 import type { FileRouteTypes } from './routeTree.gen';
 
 export type AppRoutePaths = FileRouteTypes['fullPaths'];
-
 export type AppRouteIds = FileRouteTypes['id'];
 
-export const appRoutes: Record<string, AppRoutePaths> = {
+export const appRoutes = {
   index: '/',
   login: '/auth/login',
   signup: '/auth/signup',
-  // account: '/auth/account',
   verifyEmail: '/auth/verify-email',
+
+  account: '/account',
+
+  admin: '/admin',
   adminUsers: '/admin/users',
-  imageFormatter: '/image/formatter',
-  // imageResize: '/image/resize',
-  // imageConvert: '/image/convert',
-  // imageOptimize: '/image/optimize',
+  adminUserDetail: '/admin/users/$id',
+
+  auth: '/auth',
+
   imageGenerator: '/image/generator',
   imageTinyLmg: '/image/tiny-lmg',
-} as const;
+} as const satisfies Record<string, AppRoutePaths>;
+
+export type AppRouteValues = (typeof appRoutes)[keyof typeof appRoutes];
