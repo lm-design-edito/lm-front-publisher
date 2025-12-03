@@ -1,18 +1,12 @@
-export * from './to-width';
-
-import type { ImageResponseSuccessPayload } from '@api/query/responses';
+import type {
+  APIResponseErrorType,
+  APIResponseSuccessType,
+  ImageResponseSuccessPayload,
+} from '@api/query/responses';
 import { api } from '../../..';
 import API_ROUTES from '../../../routes';
-
-type ImageFormat = {
-  width: number;
-  height: number;
-  type: string;
-  fit: string;
-  quality: number;
-  compressionLevel: number;
-  file: File;
-};
+import { createFormDataForAPI } from '@utils/create-form-data-for-api';
+import type { Publisher } from '@api/publisher';
 
 const supportedProperties = [
   'width',
@@ -23,28 +17,22 @@ const supportedProperties = [
   'compressionLevel',
   'file',
 ];
-export const imageFormat = async (params: ImageFormat) => {
-  const formData = new FormData();
-  const jsonData: Record<string, unknown> = {};
 
-  for (const key in params) {
-    const _key = key as keyof typeof params;
-    if (Object.prototype.hasOwnProperty.call(params, _key)) {
-      if (supportedProperties.includes(_key)) {
-        const value = params[_key];
+export type ImageFormatRequestParams = Publisher.BodyOf<'IMAGE_FORMAT'>;
 
-        if (typeof value === 'object' && value instanceof File) {
-          formData.append('image', params.file);
-        } else {
-          jsonData[_key] = value;
-          formData.append(_key, value.toString());
-        }
-      }
-    }
-  }
+export type ImageFormatResponseSuccessType =
+  APIResponseSuccessType<ImageResponseSuccessPayload>;
 
-  formData.append('_json', JSON.stringify(jsonData));
+export type ImageFormatResponse =
+  | ImageFormatResponseSuccessType
+  | APIResponseErrorType;
 
+export const imageFormat = async (
+  params: ImageFormatRequestParams,
+): Promise<ImageFormatResponse> => {
+  const formData = createFormDataForAPI(params, supportedProperties, {
+    file: 'image',
+  });
   return await api.query<ImageResponseSuccessPayload>(API_ROUTES.IMAGE_FORMAT, {
     method: 'POST',
     body: formData,

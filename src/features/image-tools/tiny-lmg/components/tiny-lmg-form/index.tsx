@@ -9,7 +9,7 @@ import { Button } from '@common/components/buttons/button';
 import { Display } from '@common/components/display';
 
 import './style.css';
-import { useImageMultiFormat } from '../../api/use-image-multi-format';
+import { useImageMultiFormat } from '../../services/use-image-multi-format';
 import { Logger } from '@utils/logger';
 import { ToastContext } from '@common/providers/toast/toastContext';
 
@@ -54,7 +54,7 @@ const tinyLMGFormSchema = zod.object({
     message: 'Veuillez sélectionner un mode de redimensionnement.',
   }),
   quality: zod.coerce.number().min(1).max(100).optional(),
-  compressionLevel: zod.coerce.number().min(1).max(100).optional(),
+  compressionLevel: zod.coerce.number().min(0).max(90).optional(),
 });
 type TinyLMGFormSchemaValues = zod.infer<typeof tinyLMGFormSchema>;
 
@@ -132,7 +132,9 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
       formats: data.formats,
       fit: data.fit,
       quality: data.quality ?? 100,
-      compressionLevel: data.compressionLevel ?? 90,
+      compressionLevel: data.compressionLevel
+        ? Math.round(data.compressionLevel / 10)
+        : 9,
       file: data.image,
     });
     // Handle form submission logic here
@@ -333,15 +335,17 @@ export const TinyLMGForm = ({ onDownloadReady }: TinyLMGFormProps) => {
         inputProps={{
           id: 'compressionLevel',
           type: 'number',
-          min: 1,
-          max: 100,
+          min: 0,
+          max: 90,
           defaultValue: 90,
           ...register('compressionLevel'),
         }}
         error={errors['compressionLevel']}
       />
       <Form.Footer>
-        <Form.Submit isLoading={isPending}>Compresser</Form.Submit>
+        <Form.Submit isLoading={isPending} disabled={isPending}>
+          Compresser
+        </Form.Submit>
       </Form.Footer>
     </Form>
   );

@@ -1,39 +1,36 @@
 import { useMutation } from '@tanstack/react-query';
 import { api } from '@api/index';
-import type { APIResponseErrorType } from '@api/query/responses';
+import type {
+  APIResponseErrorType,
+  ImageResponseSuccessPayload,
+} from '@api/query/responses';
 import type { FormattedAPIErrorType } from '@api/helpers';
 
-type UseImageFormatParams = Omit<
+type UseImageMultiFormatParams = Omit<
   Parameters<typeof api.queries.image.format>[0],
   'type'
 > & {
   formats: string[];
 };
 
-type UseImageFormatSuccessReturns = {
-  list: {
-    source: {
-      name: string;
-    };
-    date: Date;
-    url: string;
-    size: number;
+export type FormattedImage = ImageResponseSuccessPayload & {
+  source: {
     name: string;
-    mimeType: string;
-    quality: number;
-    dimensions: {
-      width: number;
-      height: number;
-    };
-  }[];
+  };
+  date: Date;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  quality: number;
 };
 
 export function useImageMultiFormat(clbs?: {
-  onSuccess?: (data: UseImageFormatSuccessReturns) => void;
+  onSuccess?: (data: { list: FormattedImage[] }) => void;
   onError?: (error: FormattedAPIErrorType) => void;
 }) {
   return useMutation({
-    mutationFn: (params: UseImageFormatParams) => {
+    mutationFn: (params: UseImageMultiFormatParams) => {
       return Promise.all(
         params.formats.map(format =>
           api.queries.image.format({ ...params, type: format }),
@@ -55,10 +52,7 @@ export function useImageMultiFormat(clbs?: {
             source: {
               name: variables.file.name,
             },
-            url: data.payload.url,
-            size: data.payload.size,
-            name: data.payload.name,
-            mimeType: data.payload.mimeType,
+            ...data.payload,
             date: new Date(),
             dimensions: {
               width: variables.width,
