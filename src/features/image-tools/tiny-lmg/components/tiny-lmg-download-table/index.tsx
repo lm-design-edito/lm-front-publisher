@@ -2,26 +2,16 @@ import { Table, type Column, type Row } from '@common/components/tables';
 import './style.css';
 import { Badge } from '@common/components/badge';
 import { Display } from '@common/components/display';
-
-export type TinyLMGDownload = {
-  name: string;
-  url: string;
-  mimeType: string;
-  date: Date;
-  new?: boolean; // Optional property to indicate if the download is new
-  dimensions: { width: number; height: number }; // The dimensions of the image
-  sourceName: string; // The name of the original file
-  quality: number;
-};
+import type { DownloadItem } from '../types';
 
 export type TinyLMGDownloadTableProps = {
-  downloads: TinyLMGDownload[];
+  downloads: (DownloadItem & { isNew: boolean })[];
 };
 
 type TinyLMGDownloadTableRow = {
   name: string;
   url: string;
-  new: boolean;
+  isNew: boolean;
   sourceName: string;
   dimensions: string; // e.g., "800x600"
   format: string;
@@ -69,7 +59,7 @@ export const TinyLMGDownloadTable = ({
             >
               Télécharger
             </a>
-            {row.new ? <Badge color="green">Nouveau</Badge> : null}
+            {row.isNew ? <Badge color="green">Nouveau</Badge> : null}
           </Display>
         ),
       },
@@ -92,7 +82,7 @@ export const TinyLMGDownloadTable = ({
       quality: download.quality,
       url: download.url,
       date: download.date.toLocaleTimeString(),
-      new: download.new || false, // Use the new property if it exists
+      isNew: download.isNew || false, // Use the new property if it exists
     }),
   );
 

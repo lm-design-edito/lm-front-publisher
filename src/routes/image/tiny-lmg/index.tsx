@@ -9,17 +9,16 @@ import {
   type TinyLMGDownloadTableProps,
 } from '@features/image-tools/tiny-lmg/components/tiny-lmg-download-table';
 import { Display } from '@common/components/display';
+import type { DownloadItem } from '@features/image-tools/tiny-lmg/components/types';
 
-type Download = TinyLMGDownloadTableProps['downloads'][0];
+type DownloadForTable = TinyLMGDownloadTableProps['downloads'][0];
 
 const TinyLMGPage = () => {
-  const [downloads, setDownloads] = useState<Download[]>([]);
-  const handleDownloadReady = (
-    downloads: TinyLMGDownloadTableProps['downloads'],
-  ) => {
-    setDownloads((prev: Download[]) => [
-      ...downloads.map(download => ({ ...download, new: true })),
-      ...prev.map(download => ({ ...download, new: false })),
+  const [downloads, setDownloads] = useState<DownloadForTable[]>([]);
+  const handleDownloadReady = (downloads: DownloadItem[]) => {
+    setDownloads((prev: DownloadForTable[]) => [
+      ...downloads.map(download => ({ ...download, isNew: true })),
+      ...prev.map(download => ({ ...download, isNew: false })),
     ]);
   };
   return (

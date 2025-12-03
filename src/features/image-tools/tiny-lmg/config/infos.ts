@@ -5,6 +5,7 @@ export const ImageTinyLMGInfos = {
   description:
     'Optimiser ses images sous différents formats avec ou sans compression',
   badge: 'image.format',
+  version: '1.0 Beta',
   url: appRoutes.imageTinyLmg,
   icon: 'icon5.png',
 };
