@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-type UserStatusProps = {
+export type UserStatusProps = {
   status: string;
 };
 

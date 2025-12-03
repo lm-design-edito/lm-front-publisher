@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import {
   ImageGeneratorForm,
@@ -6,9 +7,9 @@ import {
 } from '@features/image-tools/generator';
 import { Headline } from '@common/components/headline';
 import { appRoutes } from '@src/appRoutes';
-import { useState } from 'react';
 import { Divider } from '@common/components/divider';
 import { Badge } from '@common/components/badge';
+import { useToastContext } from '@common/hooks/useToastContext';
 
 type GeneratedImage = {
   name: string;
@@ -18,6 +19,8 @@ type GeneratedImage = {
 
 const ImageGeneratorPage = () => {
   const [generatedList, setGeneratedList] = useState<GeneratedImage[]>([]);
+  const { showToast, hideToast } = useToastContext();
+
   const handleOnGenerated = (generatedImage: { name: string; url: string }) => {
     setGeneratedList((prev: GeneratedImage[]) => [
       { ...generatedImage, isNew: true },
@@ -28,6 +31,22 @@ const ImageGeneratorPage = () => {
       })),
     ]);
   };
+
+  useEffect(() => {
+    showToast({
+      id: 'image-generator-beta-info',
+      type: 'info',
+      message:
+        'Le générateur est en version beta, les résultats peuvent varier.',
+    });
+  }, [showToast]);
+
+  useEffect(() => {
+    return () => {
+      hideToast('image-generator-beta-info');
+    };
+  }, [hideToast]);
+
   return (
     <>
       <Headline

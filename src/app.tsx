@@ -4,9 +4,14 @@ import { router } from './router';
 import { Headline } from '@common/components/headline';
 import { Loader } from '@common/components/loader';
 import { Text } from '@common/components/text';
+import { useQueryClient } from '@tanstack/react-query';
+import { useToastContext } from '@common/hooks/useToastContext';
 
 export default function App() {
   const { isAuthenticated, isLoading } = useWhoAmI();
+  const toastContext = useToastContext();
+  const queryClient = useQueryClient();
+
   if (isLoading) {
     return (
       <div className="app-content">
@@ -28,7 +33,11 @@ export default function App() {
   return (
     <RouterProvider
       router={router}
-      context={{ auth: { isAuthenticated, isLoading } }}
+      context={{
+        auth: { isAuthenticated, isLoading },
+        queryClient,
+        toaster: toastContext,
+      }}
     />
   );
 }

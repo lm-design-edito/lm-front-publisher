@@ -185,6 +185,10 @@ th {
   gap: var(--lm-publisher-spacer-2);
 }
 
+.lm-publisher-flex-self-align-end {
+  align-self: flex-end;
+}
+
 .lm-publisher-w-100 {
   width: 100%;
 }

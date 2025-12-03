@@ -14,6 +14,9 @@ const API_ROUTES = {
 
   ADMIN_USERS_UPDATE: 'admin/users/update',
   ADMIN_USERS_LIST: 'admin/users/list',
+  ADMIN_USERS_GET: 'POST:/admin/users/get',
+  ADMIN_USERS_GET_UPLOAD_QUOTA: 'POST:/admin/users/get-upload-quota',
+  ADMIN_USERS_RESET_UPLOAD_QUOTA: 'POST:/admin/users/reset-upload-quota',
 
   IMAGE_FORMAT: 'image/format',
   IMAGE_FORMAT_TO_WIDTH: 'image/format/to-width',

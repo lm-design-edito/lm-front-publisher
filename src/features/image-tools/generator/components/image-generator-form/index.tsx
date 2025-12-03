@@ -3,7 +3,6 @@ import { useSelectedModelForm } from './use-selected-model-form';
 import { FormProvider } from 'react-hook-form';
 import { ModelSelectionSection } from './model-selection-section';
 import { ImageSelectionSection } from './image-selection-section';
-import { Display } from '@common/components/display';
 import { Form } from '@common/components/forms';
 
 import './style.css';

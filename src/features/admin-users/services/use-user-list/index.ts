@@ -1,23 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../../../../api';
 
-type useUserListParams = Parameters<typeof api.queries.admin.usersList>[0];
-type useUserListReturn = {
-  isLoading: boolean;
-  list: {
-    _id: string;
-    role: string;
-    username: string;
-    email: string;
-    badges: string[];
-    verified: boolean;
-  }[];
-};
-export function useUserList(params?: useUserListParams): useUserListReturn {
+type useUserListParams = Parameters<typeof api.queries.admin.users.list>[0];
+
+export function useUserList(params: useUserListParams) {
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['users-list'],
     queryFn: () => {
-      return api.queries.admin.usersList(params);
+      return api.queries.admin.users.list(params);
     },
   });
 
@@ -33,7 +23,7 @@ export function useUserList(params?: useUserListParams): useUserListReturn {
   if (isSuccess && data.success) {
     return {
       ...returnProps,
-      list: data?.payload.list || [],
+      list: data?.payload || [],
     };
   } else {
     return returnProps;

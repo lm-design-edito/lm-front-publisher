@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { useImageThumbsUpload } from '../../services/use-image-thumbs-upload';
 import { useImageGenerate } from '../../services/use-image-generate';
-import { createDynamicImageGeneratorFormSchema } from './form-schema';
+import { createDynamicImageGeneratorFormSchema } from './schema';
 import { getModelConfigDefaultOptions } from '../../utils/get-model-config-default-options';
 
 export function useImageGeneratorForm(

@@ -3,16 +3,19 @@ import { ThemeProvider } from '@features/theme';
 import { DebugDevBar } from '@features/debug';
 import { Header } from '@common/components/header';
 import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster';
-import { ToastProvider } from '@common/providers/toast/toastProvider';
+// import { ToastProvider } from '@common/providers/toast/toastProvider';
+import type { QueryClient } from '@tanstack/react-query';
+import type { ToastContextType } from '@common/providers/toast/toastContext';
 
 // Create a client
 
 type RouterContext = {
-  // The ReturnType of your useAuth hook or the value of your AuthContext
+  queryClient: QueryClient;
   auth: {
     isAuthenticated: boolean;
     isLoading: boolean;
   };
+  toaster: ToastContextType;
 };
 
 export const RootPage = () => {
@@ -31,8 +34,8 @@ export const RootPage = () => {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => (
-    <ToastProvider>
+    // <ToastProvider>
       <RootPage />
-    </ToastProvider>
+    // </ToastProvider>
   ),
 });

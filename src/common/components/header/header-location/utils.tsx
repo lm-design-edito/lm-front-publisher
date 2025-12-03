@@ -16,6 +16,10 @@ export const relativeRoutes = [
     name: "Valider l'inscription",
   },
   {
+    path: 'admin/users/',
+    name: 'Profil utilisateur',
+  },
+  {
     path: 'admin/users',
     name: 'Liste des utilisateurs',
   },

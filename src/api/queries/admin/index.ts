@@ -1,6 +1,5 @@
-import { adminUsersList, adminUsersUpdate } from './users';
+import * as users from './users';
 
 export const admin = {
-  usersList: adminUsersList,
-  usersUpdate: adminUsersUpdate,
+  users: users.users,
 };

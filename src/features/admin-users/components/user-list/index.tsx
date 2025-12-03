@@ -1,14 +1,12 @@
 import { useMemo } from 'react';
 import { Loader } from '@common/components/loader';
-import { useWhoAmI } from '../../../auth/api/use-who-am-i';
-import { useUserList } from '../../api/use-user-list';
+import { useUserList } from '../../services/use-user-list';
 import './style.css';
 import { Table, type Column, type Row } from '@common/components/tables';
-import { Button } from '@common/components/buttons/button';
-import { UserBadge } from '@common/components/user/user-badge';
 import { UserStatus } from '@common/components/user/user-status';
 import { UserVerified } from '@common/components/user/user-verified';
 import { UserRole } from '@common/components/user/user-role';
+import { ButtonLink } from '@common/components/buttons/button-link';
 
 export type UserListRow = {
   _id: string;
@@ -22,26 +20,32 @@ export type UserListRow = {
 };
 
 export const UserList = () => {
-  const { user } = useWhoAmI();
-  const { list, isLoading } = useUserList();
+  const { list, isLoading } = useUserList({});
 
   const userList = useMemo(() => {
-    const adminUser = user && user.role === 'admin' ? user : null;
+    if (!list) {
+      return [];
+    }
     // Sort badges alphabetically
-    return [adminUser, ...list]
-      .map(user =>
-        user
-          ? {
-              ...user,
-              badges:
-                user && 'badges' in user && user.badges
-                  ? user.badges.sort((a: string, b: string) => (a > b ? 1 : -1))
-                  : [],
-            }
-          : null,
-      )
-      .filter(user => user !== null);
-  }, [list, user]);
+    return (
+      list
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .map((user: any) =>
+          user
+            ? {
+                ...user,
+                badges:
+                  user && 'badges' in user && user.badges
+                    ? user.badges.sort((a: string, b: string) =>
+                        a > b ? 1 : -1,
+                      )
+                    : [],
+              }
+            : null,
+        )
+        .filter(user => user !== null)
+    );
+  }, [list]);
 
   const columns: Column<UserListRow>[] = useMemo(
     () => [
@@ -70,42 +74,47 @@ export const UserList = () => {
           render: row => <UserVerified verified={row.verified} />,
         },
       },
-      {
-        id: 'badges',
-        label: 'Badges',
-        cell: {
-          className: 'users-list__badges-cell',
-          render: row =>
-            row.badges ? (
-              <>
-                <span>Voir la liste</span>
-                <div className="users-list__badges">
-                  {row.badges.map(badge => (
-                    <UserBadge key={badge} badge={badge} />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <span>Aucun badge</span>
-            ),
-        },
-      },
+      // {
+      //   id: 'badges',
+      //   label: 'Badges',
+      //   cell: {
+      //     className: 'users-list__badges-cell',
+      //     render: row =>
+      //       row.badges ? (
+      //         <>
+      //           <span>Voir la liste</span>
+      //           <div className="users-list__badges">
+      //             {row.badges.map(badge => (
+      //               <UserBadge key={badge} badge={badge} />
+      //             ))}
+      //           </div>
+      //         </>
+      //       ) : (
+      //         <span>Aucun badge</span>
+      //       ),
+      //   },
+      // },
       {
         id: 'actions',
         label: 'Actions',
         cell: {
           className: 'users-list__actions-cell',
-          render: () => (
+          render: row => (
             <div className="users-list__actions lm-publisher-center-flex lm-publisher-flex-spacer">
-              <Button size="s" variant="secondary">
-                Modifier
-              </Button>
-              <Button size="s" variant="secondary" color="warning">
+              <ButtonLink
+                size="s"
+                variant="secondary"
+                to="/admin/users/$id"
+                params={{ id: row._id }}
+              >
+                Voir
+              </ButtonLink>
+              {/* <Button size="s" variant="secondary" color="warning">
                 Suspendre
               </Button>
               <Button size="s" variant="secondary" color="danger">
                 Bannir
-              </Button>
+              </Button> */}
             </div>
           ),
         },
