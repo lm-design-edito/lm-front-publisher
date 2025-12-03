@@ -34,13 +34,13 @@ const UserDetailsPage = () => {
 export const Route = createFileRoute('/admin/users/$id/')({
   component: RouteComponent,
   loader: async ({ context: { queryClient, toaster }, params: { id } }) => {
-    const data = await queryClient.ensureQueryData({
+    const data = await queryClient?.ensureQueryData({
       queryKey: ['user-get', id],
       queryFn: () => api.queries.admin.users.get({ _id: id }),
     });
     //
-    if (!data.success) {
-      toaster.showToast({
+    if (!data || !data.success) {
+      toaster?.showToast({
         type: 'error',
         message: (
           <>

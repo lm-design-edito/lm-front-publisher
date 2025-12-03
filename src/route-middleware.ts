@@ -1,11 +1,11 @@
-import { appRoutes } from '@src/appRoutes';
-import type { CustomRouteContext } from './router';
+import { appRoutes } from '@src/appRoutes';;
 import { redirect } from '@tanstack/react-router';
+import type { RouterContext } from './routes/__root';
 
 export const checkForAuthentifacted = ({
   context,
 }: {
-  context: CustomRouteContext;
+  context: RouterContext;
 }) => {
   if (!context.auth.isLoading && !context.auth.isAuthenticated) {
     throw redirect({

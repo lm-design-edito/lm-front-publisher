@@ -1,6 +1,5 @@
 import { ImageTinyLMGInfos, TinyLMGForm } from '@features/image-tools/tiny-lmg';
 import { createFileRoute } from '@tanstack/react-router';
-import type { CustomRouteContext } from '../../../router';
 import { checkForAuthentifacted } from '../../../route-middleware';
 
 import { Headline } from '@common/components/headline';
@@ -39,7 +38,7 @@ const TinyLMGPage = () => {
 
 export const Route = createFileRoute('/image/tiny-lmg/')({
   component: TinyLMGPage,
-  beforeLoad: async ({ context }: { context: CustomRouteContext }) => {
+  beforeLoad: async ({ context }) => {
     checkForAuthentifacted({ context });
     // You can add any pre-load logic here if needed
   },

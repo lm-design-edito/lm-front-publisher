@@ -9,13 +9,13 @@ import type { ToastContextType } from '@common/providers/toast/toastContext';
 
 // Create a client
 
-type RouterContext = {
-  queryClient: QueryClient;
+export type RouterContext = {
   auth: {
     isAuthenticated: boolean;
     isLoading: boolean;
   };
-  toaster: ToastContextType;
+  queryClient?: QueryClient;
+  toaster?: ToastContextType;
 };
 
 export const RootPage = () => {
@@ -35,7 +35,7 @@ export const RootPage = () => {
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => (
     // <ToastProvider>
-      <RootPage />
+    <RootPage />
     // </ToastProvider>
   ),
 });

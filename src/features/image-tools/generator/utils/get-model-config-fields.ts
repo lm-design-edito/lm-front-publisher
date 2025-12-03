@@ -7,4 +7,4 @@ export const getModelConfigFields = (
 ): ModelConfigField[] => {
   if (!modelName) return [];
   return MODEL_CONFIG_FIELDS[modelName]?.formFields ?? [];
-}
+};
