@@ -1,0 +1,7 @@
+.build-info-badge {
+  color: var(--color-text-secondary);
+}
+
+.build-info-badge__label {
+  font-weight: 500;
+}

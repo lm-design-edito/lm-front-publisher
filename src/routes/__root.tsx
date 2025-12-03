@@ -1,6 +1,7 @@
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { ThemeProvider } from '@features/theme';
 import { Header } from '@common/components/header';
+import { Footer } from '@common/components/footer';
 import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster';
 // import { ToastProvider } from '@common/providers/toast/toastProvider';
 import type { QueryClient } from '@tanstack/react-query';
@@ -43,6 +44,7 @@ export const RootPage = () => {
       <div className="app-content">
         <Outlet />
       </div>
+      <Footer />
     </ThemeProvider>
   );
 };

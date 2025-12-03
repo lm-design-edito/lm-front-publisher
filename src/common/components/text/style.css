@@ -1,3 +1,7 @@
+.text--xs {
+  font-size: 0.7rem;
+}
+
 .text--sm {
   font-size: smaller;
 }

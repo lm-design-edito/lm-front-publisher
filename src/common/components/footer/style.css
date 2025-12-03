@@ -1,0 +1,4 @@
+.footer {
+  padding: var(--lm-publisher-grid-margins);
+  text-align: center;
+}

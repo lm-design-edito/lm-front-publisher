@@ -4,6 +4,8 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
+  const buildDate = new Date().toISOString(); // ✅ Seulement la date
+
   return {
     plugins: [
       TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
@@ -18,6 +20,9 @@ export default defineConfig(({ command }) => {
         '@features': '/src/features',
         '@common': '/src/common',
       },
+    },
+    define: {
+      __BUILD_DATE__: JSON.stringify(buildDate), // ✅ Seulement ça
     },
   };
 });

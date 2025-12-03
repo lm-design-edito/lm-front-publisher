@@ -4,7 +4,7 @@ import './style.css';
 
 type TextProps = {
   tag?: 'p' | 'span';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   align?: 'left' | 'right' | 'center';
   children?: React.ReactNode;
   className?: HTMLAttributes<HTMLElement>['className'];

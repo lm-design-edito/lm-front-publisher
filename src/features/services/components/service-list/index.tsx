@@ -106,7 +106,6 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
         <div className={`available-service-list ${className}`}>
           <div className="available-service-list__header">
             <h2>Autre</h2>
-            <p>Outils disponibles pour tous les utilisateurs</p>
           </div>
           <div className="available-service-list__elements">
             {listTools(availableOtherServices, otherServices)}

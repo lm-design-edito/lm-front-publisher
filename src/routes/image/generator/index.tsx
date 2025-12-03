@@ -36,6 +36,7 @@ const ImageGeneratorPage = () => {
     showToast({
       id: 'image-generator-beta-info',
       type: 'info',
+      duration: 0,
       message:
         'Le générateur est en version beta, les résultats peuvent varier.',
     });
