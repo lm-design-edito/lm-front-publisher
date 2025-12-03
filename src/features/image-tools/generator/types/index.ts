@@ -23,7 +23,9 @@ export type Model = {
   template: string;
   label: string;
   thumbnail: string;
-  defaultOptions?: Record<string, unknown>;
+  getDefaultOptions?: (formValues: {
+    imageCount: number;
+  }) => Record<string, unknown>;
 };
 
 // Type pour les valeurs de template

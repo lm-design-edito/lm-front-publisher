@@ -19,17 +19,33 @@ export const ModelList: Model[] = [
     template: TemplateNames.BOOK,
     label: 'Couverture de livre',
     thumbnail: templateBookPreview,
-    defaultOptions: {
+    getDefaultOptions: ({ imageCount }) => ({
       backgroundType: 'plain',
-    },
+      ...(imageCount === 3
+        ? {
+            imageFitAreaRatios: {
+              width: 0.9,
+              height: 0.95,
+            },
+          }
+        : {}),
+    }),
   },
   {
     name: ModelNames.BOOK_COVER_STRIPES,
     template: TemplateNames.BOOK,
     label: 'Couverture de livre (rayures)',
     thumbnail: templateBookPreviewStripes,
-    defaultOptions: {
-      backgroundType: 'stripes',
-    },
+    getDefaultOptions: ({ imageCount }) => ({
+      backgroundType: 'plain',
+      ...(imageCount === 3
+        ? {
+            imageFitAreaRatios: {
+              width: 0.9,
+              height: 0.95,
+            },
+          }
+        : {}),
+    }),
   },
 ];

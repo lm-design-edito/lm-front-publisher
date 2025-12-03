@@ -1,4 +1,4 @@
-import { appRoutes } from '@src/appRoutes';;
+import { appRoutes } from '@src/appRoutes';
 import { redirect } from '@tanstack/react-router';
 import type { RouterContext } from './routes/__root';
 

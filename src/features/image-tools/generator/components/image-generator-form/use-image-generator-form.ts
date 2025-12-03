@@ -100,8 +100,11 @@ export function useImageGeneratorForm(
 
   const onSubmit = useCallback(
     (values: zod.infer<typeof dynamicSchema>) => {
-      const defaultOptions = getModelConfigDefaultOptions(values.model.name);
       const { fileIds, model, outputFileName, ...otherFields } = values;
+      const defaultOptions = getModelConfigDefaultOptions(values.model.name, {
+        imageCount: fileIds.length,
+        ...otherFields,
+      });
       imageGenerate({
         fileIds,
         template: model.template,
