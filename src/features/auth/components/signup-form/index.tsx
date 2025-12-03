@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import './style.css';
 import { Form } from '@common/components/forms';
-import { useSignup } from '../../api/use-signup';
+import { useSignup } from '../../services/use-signup';
 import { useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
 import { appRoutes } from '@src/appRoutes';

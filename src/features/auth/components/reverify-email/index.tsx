@@ -2,7 +2,7 @@ import { Display } from '@common/components/display';
 import { Loader } from '@common/components/loader';
 import { Text } from '@common/components/text';
 import { ToastContext } from '@common/providers/toast/toastContext';
-import { useRequestEmailVerificationToken } from '@features/auth/api/use-request-email-verification-token';
+import { useRequestEmailVerificationToken } from '@features/auth/services/use-request-email-verification-token';
 import { Logger } from '@utils/logger';
 import { useContext } from 'react';
 

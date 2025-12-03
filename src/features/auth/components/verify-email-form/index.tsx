@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import { Form } from '@common/components/forms';
-import { useWhoAmI } from '../../api/use-who-am-i';
+import { useWhoAmI } from '../../services/use-who-am-i';
 import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { useVerifyEmail } from '@features/auth/api/use-verify-email';
+import { useVerifyEmail } from '@features/auth/services/use-verify-email';
 import { appRoutes } from '@src/appRoutes';
 import { useToastContext } from '@common/hooks/useToastContext';
 

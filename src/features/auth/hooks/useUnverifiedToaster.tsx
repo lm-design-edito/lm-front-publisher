@@ -1,5 +1,5 @@
 import { useToastContext } from '@common/hooks/useToastContext';
-import { useWhoAmI } from '../api';
+import { useWhoAmI } from '../services';
 import { useEffect, useMemo } from 'react';
 import { appRoutes } from '@src/appRoutes';
 import { Link, useLocation } from '@tanstack/react-router';

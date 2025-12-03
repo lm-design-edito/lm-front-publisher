@@ -1,6 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 import { Button } from '@common/components/buttons/button';
-import { useLogout } from '../../api/use-logout';
+import { useLogout } from '../../services/use-logout';
 import { appRoutes } from '@src/appRoutes';
 import { useToastContext } from '@common/hooks/useToastContext';
 

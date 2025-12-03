@@ -4,4 +4,4 @@ export * from './components/logout-everywhere-button';
 export * from './components/logout-button';
 export * from './components/signup-form';
 
-export * from './api';
+export * from './services';
