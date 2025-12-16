@@ -3,10 +3,9 @@ import { ThemeProvider } from '@features/theme';
 import { Header } from '@common/components/header';
 import { Footer } from '@common/components/footer';
 import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster';
-// import { ToastProvider } from '@common/providers/toast/toastProvider';
 import type { QueryClient } from '@tanstack/react-query';
 import type { ToastContextType } from '@common/providers/toast/toastContext';
-import { Breadcrumb } from '@common/components/breadcrumb';
+// import { Breadcrumb } from '@common/components/breadcrumb';
 import { useSyncHeightToCSSVar } from '@common/hooks/useSyncHeightToCSSVar';
 import { useRef } from 'react';
 
@@ -46,7 +45,7 @@ export const RootPage = () => {
     <ThemeProvider>
       <Header />
       <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
       </div>
       <div className="app-content">
         <Outlet />
