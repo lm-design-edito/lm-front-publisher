@@ -4,7 +4,6 @@ import App from './app';
 import './main.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ToastProvider } from '@common/providers/toast/toastProvider';
 import { ThemeProvider } from '@features/theme';
 
 const queryClient = new QueryClient({
@@ -27,9 +26,7 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <ToastProvider>
-            <App />
-          </ToastProvider>
+          <App />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>

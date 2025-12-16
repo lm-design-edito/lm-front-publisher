@@ -12,6 +12,7 @@ import { Headline } from '@common/components/headline';
 import { Text } from '@common/components/text';
 import { Loader } from '@common/components/loader';
 import { useWhoAmI } from '@features/auth';
+import { ToastProvider } from '@common/providers/toast/toastProvider';
 
 // Create a client
 
@@ -68,7 +69,7 @@ const RootContent = () => {
   });
 
   return (
-    <>
+    <ToastProvider>
       <Header />
       <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
         {/* <Breadcrumb /> */}
@@ -77,7 +78,7 @@ const RootContent = () => {
         <Outlet />
       </div>
       <Footer />
-    </>
+    </ToastProvider>
   );
 };
 
