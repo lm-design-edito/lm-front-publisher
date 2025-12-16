@@ -1,7 +1,7 @@
 import './style.css';
 
 export type HelperProps = {
-  text?: string;
+  text?: string | React.ReactNode;
   size?: 'sm' | 'md';
   position?:
     | 'top-left'

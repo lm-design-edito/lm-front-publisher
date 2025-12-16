@@ -11,9 +11,11 @@ import { FormInputFile } from './form-input-file';
 import { FormInputCheckboxGroup } from './form-input-checkbox-group';
 import { FormInputRadio } from './form-input-radio';
 import { FormSelect } from './form-select';
+import { FormInputRange } from './form-input-range';
 
 export const Form = Object.assign(FormRoot, {
   Input: FormInput,
+  InputRange: FormInputRange,
   InputFile: FormInputFile,
   Checkbox: FormInputCheckbox,
   CheckboxGroup: FormInputCheckboxGroup,
@@ -30,6 +32,7 @@ export const Form = Object.assign(FormRoot, {
 export type { FormFieldsetProps } from './form-fieldset';
 export type { FormErrorType } from './form-error';
 export type { FormInputProps } from './form-input';
+export type { FormInputRangeProps } from './form-input-range';
 export type { FormInputFileProps } from './form-input-file';
 export type { FormInputCheckboxProps } from './form-input-checkbox';
 export type { FormInputCheckboxGroupProps } from './form-input-checkbox-group';

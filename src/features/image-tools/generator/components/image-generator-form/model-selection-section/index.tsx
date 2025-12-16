@@ -6,6 +6,7 @@ import { ModelFields } from './model-fields';
 import { ModelList } from '../../../config/models';
 import { getModelConfigFields } from '../../../utils/get-model-config-fields';
 import { Form } from '@common/components/forms';
+import './style.css';
 
 type Props = {
   control: Control;
@@ -38,7 +39,12 @@ export const ModelSelectionSection = ({
           />
         )}
       />
-      <Display type="flex" direction="column">
+      <Display
+        type="flex"
+        direction="column"
+        className="model-selection-section__model-fields"
+        gap="1"
+      >
         <Text className="lmui-form__placeholder form-label">
           Options du modèle
         </Text>

@@ -64,12 +64,15 @@
 .display-flex--justify-center {
   justify-content: center;
 }
+.display-flex--justify-space-between,
 .display-flex--justify-between {
   justify-content: space-between;
 }
+.display-flex--justify-space-between
 .display-flex--justify-around {
   justify-content: space-around;
 }
+..display-flex--justify-space-evenly,
 .display-flex--justify-evenly {
   justify-content: space-evenly;
 }

@@ -106,6 +106,19 @@ export const ModelFields = ({
                       error={errors[field.name] as FieldError}
                     />
                   );
+                case 'input-range':
+                  return (
+                    <Form.InputRange
+                      {...field.properties}
+                      inputProps={{
+                        ...field.properties.inputProps,
+                        id: field.name,
+                        value: currentValue || 0,
+                        onChange: e => onChange(Number(e.target.value)),
+                      }}
+                      error={errors[field.name] as FieldError}
+                    />
+                  );
                 default:
                   return null;
               }

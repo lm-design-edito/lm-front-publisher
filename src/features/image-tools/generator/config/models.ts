@@ -9,6 +9,7 @@ export const TemplateNames = {
 export const ModelNames = {
   BOOK_COVER_PLAIN: 'book-cover-plain',
   BOOK_COVER_STRIPES: 'book-cover-stripes',
+  BOOK_COVER_GRADIENT: 'book-cover-gradient',
 } as const;
 
 export const TemplateNameValues = Object.values(TemplateNames);
@@ -38,6 +39,23 @@ export const ModelList: Model[] = [
     thumbnail: templateBookPreviewStripes,
     getDefaultOptions: ({ imageCount }) => ({
       backgroundType: 'plain',
+      ...(imageCount === 3
+        ? {
+            imageFitAreaRatios: {
+              width: 0.9,
+              height: 0.95,
+            },
+          }
+        : {}),
+    }),
+  },
+  {
+    name: ModelNames.BOOK_COVER_GRADIENT,
+    template: TemplateNames.BOOK,
+    label: 'Couverture de livre (dégradé)',
+    thumbnail: templateBookPreviewStripes,
+    getDefaultOptions: ({ imageCount }) => ({
+      backgroundType: 'gradient',
       ...(imageCount === 3
         ? {
             imageFitAreaRatios: {
