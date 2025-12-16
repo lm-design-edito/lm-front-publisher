@@ -1,11 +1,9 @@
 // Types de configuration des modèles
 export type {
-  ModelConfigField,
-  InputModelConfigField,
-  CheckboxModelConfigField,
-  RadioGroupModelConfigField,
-  ModelConfigFieldTypes,
-} from '../config/model-config-fields';
+  ModelFormConfig,
+  ModelFormFieldConfig,
+  ModelConfigRegistry,
+} from '../config/model-form-config';
 
 // Réexporter les constantes en tant que valeurs
 export {

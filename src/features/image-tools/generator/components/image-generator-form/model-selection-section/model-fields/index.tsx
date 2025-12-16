@@ -1,5 +1,5 @@
 import { Controller, type FieldError, type FieldErrors } from 'react-hook-form';
-import type { ModelConfigField } from '../../../../config/model-config-fields';
+import type { ModelFormFieldConfig } from '@features/image-tools/generator/config/model-form-config/types';
 import { Text } from '@common/components/text';
 import { Form } from '@common/components/forms';
 import { useCallback } from 'react';
@@ -8,7 +8,7 @@ type ConfigFieldName = string;
 
 export type Props = {
   modelName?: string;
-  configFields: ModelConfigField[];
+  configFields: ModelFormFieldConfig[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
 
@@ -21,7 +21,7 @@ export const ModelFields = ({
   control,
   errors,
 }: Props) => {
-  const getDefaultValue = useCallback((field: ModelConfigField) => {
+  const getDefaultValue = useCallback((field: ModelFormFieldConfig) => {
     switch (field.type) {
       case 'checkbox':
         if ('defaultChecked' in field && field.defaultChecked) {
