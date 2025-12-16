@@ -58,6 +58,7 @@ export const ModelFields = ({
                       inputProps={{
                         ...field.properties.inputProps,
                         id: field.name,
+                        name: field.name,
                         value: currentValue || '',
                         onChange,
                       }}
@@ -71,6 +72,7 @@ export const ModelFields = ({
                       inputProps={{
                         ...field.properties.inputProps,
                         id: field.name,
+                        name: field.name,
                         // defaultChecked: field.defaultChecked,
                         checked: Boolean(currentValue),
                         onChange: e => onChange(e.target.checked),
@@ -113,8 +115,23 @@ export const ModelFields = ({
                       inputProps={{
                         ...field.properties.inputProps,
                         id: field.name,
+                        name: field.name,
                         value: currentValue || 0,
                         onChange: e => onChange(Number(e.target.value)),
+                      }}
+                      error={errors[field.name] as FieldError}
+                    />
+                  );
+                case 'input-color':
+                  return (
+                    <Form.InputColor
+                      {...field.properties}
+                      inputProps={{
+                        ...field.properties.inputProps,
+                        id: field.name,
+                        name: field.name,
+                        value: currentValue || '',
+                        onChange,
                       }}
                       error={errors[field.name] as FieldError}
                     />

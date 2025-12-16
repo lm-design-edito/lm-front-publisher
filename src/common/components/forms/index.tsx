@@ -12,11 +12,13 @@ import { FormInputCheckboxGroup } from './form-input-checkbox-group';
 import { FormInputRadio } from './form-input-radio';
 import { FormSelect } from './form-select';
 import { FormInputRange } from './form-input-range';
+import { FormInputColor } from './form-input-color';
 
 export const Form = Object.assign(FormRoot, {
   Input: FormInput,
   InputRange: FormInputRange,
   InputFile: FormInputFile,
+  InputColor: FormInputColor,
   Checkbox: FormInputCheckbox,
   CheckboxGroup: FormInputCheckboxGroup,
   Radio: FormInputRadio,
@@ -33,6 +35,7 @@ export type { FormFieldsetProps } from './form-fieldset';
 export type { FormErrorType } from './form-error';
 export type { FormInputProps } from './form-input';
 export type { FormInputRangeProps } from './form-input-range';
+export type { FormInputColorProps } from './form-input-color';
 export type { FormInputFileProps } from './form-input-file';
 export type { FormInputCheckboxProps } from './form-input-checkbox';
 export type { FormInputCheckboxGroupProps } from './form-input-checkbox-group';

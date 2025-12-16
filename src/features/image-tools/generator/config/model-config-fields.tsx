@@ -5,8 +5,10 @@ import type {
   FormInputCheckboxProps,
   FormInputRadioGroupProps,
   FormInputRangeProps,
+  FormInputColorProps,
 } from '@common/components/forms';
 import { Text } from '@common/components/text';
+import { colorSchema } from '@utils/schema-validations';
 export type FormInputFieldText = FormInputProps | FormInputCheckboxProps;
 
 export type DefaultModelConfigField = {
@@ -38,10 +40,17 @@ export type InputRangeModelConfigField = {
   properties: FormInputRangeProps;
 } & DefaultModelConfigField;
 
+export type InputColorModelConfigField = {
+  type: 'input-color';
+  defaultValue?: number;
+  properties: FormInputColorProps;
+} & DefaultModelConfigField;
+
 export type ModelConfigField =
   | InputModelConfigField
   | CheckboxModelConfigField
   | InputRangeModelConfigField
+  | InputColorModelConfigField
   | RadioGroupModelConfigField;
 
 export type ModelConfigFieldTypes = Record<
@@ -172,6 +181,9 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
         defaultValue: 90,
         properties: {
           label: 'Angle du dégradé :',
+          labelProps: {
+            htmlFor: 'angle',
+          },
           helperProps: {
             text: (
               <>
@@ -183,7 +195,7 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
                 </Text>
               </>
             ),
-            position: 'top-left',
+            position: 'right',
           },
           inputProps: {
             type: 'range',
@@ -191,6 +203,7 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
             max: 360,
             step: 1,
           },
+
           formattedValue: value => `${value}°`,
         },
         validation: zod
@@ -203,6 +216,34 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
             }
             return parsed;
           }),
+      },
+      {
+        name: 'color-start',
+        type: 'input-color',
+        properties: {
+          label: 'Couleur de début du dégradé :',
+          labelProps: { htmlFor: 'color-start' },
+          helperProps: {
+            text: "Définit la couleur de fin du dégradé de fond. Laisser vide pour un calcul automatique à partir des couleurs de l'image.",
+            position: 'top-left',
+          },
+          inputProps: {},
+        },
+        validation: colorSchema,
+      },
+      {
+        name: 'color-end',
+        type: 'input-color',
+        properties: {
+          label: 'Couleur de fin du dégradé :',
+          labelProps: { htmlFor: 'color-end' },
+          helperProps: {
+            text: "Définit la couleur de début du dégradé de fond. Laisser vide pour un calcul automatique à partir des couleurs de l'image.",
+            position: 'top-left',
+          },
+          inputProps: {},
+        },
+        validation: colorSchema,
       },
     ],
   },

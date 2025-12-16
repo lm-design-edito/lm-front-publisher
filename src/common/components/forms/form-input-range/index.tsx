@@ -2,10 +2,11 @@ import type { FieldError } from 'react-hook-form';
 import { FormLabel } from '../form-label';
 import { FormError } from '../form-error';
 
-import './style.css';
 import { FormHelper, type FormHelperProps } from '../form-helper';
 import { Display } from '@common/components/display';
 import { Badge } from '@common/components/badge';
+
+import './style.css';
 
 export type FormInputRangeProps = {
   className?: string;
@@ -41,30 +42,24 @@ export const FormInputRange = ({
       <Display type="flex" direction="row" align="center" gap="1">
         <div className="lm-publisher-w-100">
           <div className="lmui-form__input-wrapper">
+            <span className="form-input-range__min-value">
+              {inputProps.min}
+            </span>
             <input
               {...inputProps}
               className={`${inputProps.className || ''} lmui-form__input ${error ? 'lmui-form__input-error-state' : ''} ${isValid ? 'lmui-form__input-valid-state' : ''}`}
             />
             <FormLabel {...labelProps}>
               {label} {formattedVal !== null && <Badge>{formattedVal}</Badge>}
+              {helperProps && <FormHelper {...helperProps} />}
             </FormLabel>
-            <Display
-              type="flex"
-              justify="space-between"
-              className="form-input-range__min-max-values"
-            >
-              <span className="form-input-range__min-value">
-                {inputProps.min}
-              </span>
-              <span className="form-input-range__max-value">
-                {inputProps.max}
-              </span>
-            </Display>
+            <span className="form-input-range__max-value">
+              {inputProps.max}
+            </span>
           </div>
           {children}
           <FormError error={error} />
         </div>
-        {helperProps && <FormHelper {...helperProps} />}
       </Display>
     </div>
   );
