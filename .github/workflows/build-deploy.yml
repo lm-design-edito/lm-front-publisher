@@ -1,12 +1,18 @@
-name: Build & deploy
+name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch: # Permet le déclenchement manuel
-# Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: 'SHA du commit à déployer (laissez vide pour le dernier commit de main)'
+        required: falsegit log main --oneline -10
+        type: string
+        default: ''
+
 permissions:
   contents: read
-  pages: write # to deploy to Pages
-  id-token: write # to verify the deployment originates from an appropriate source
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -22,6 +28,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.commit_sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Validate commit
+        run: |
+          if [ -n "${{ inputs.commit_sha }}" ]; then
+            echo "🔍 Validating custom commit: ${{ inputs.commit_sha }}"
+            if ! git cat-file -e ${{ inputs.commit_sha }}^{commit} 2>/dev/null; then
+              echo "❌ Commit ${{ inputs.commit_sha }} not found!"
+              exit 1
+            fi
+            echo "✅ Commit validated"
+          else
+            echo "ℹ️  Using latest commit from workflow trigger"
+          fi
+
+      - name: Display deployment info
+        run: |
+          echo "🚀 Deploying commit:"
+          git log -1 --oneline
+          echo ""
+          echo "📝 Commit SHA: $(git rev-parse HEAD)"
+          echo "👤 Author: $(git log -1 --pretty=format:'%an')"
+          echo "📅 Date: $(git log -1 --pretty=format:'%ar')"
 
       - name: Set up Node
         uses: actions/setup-node@v5
@@ -38,15 +69,31 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_CAN_LOG: ${{ secrets.VITE_CAN_LOG }}
 
+      # ✅ Ajoute le postbuild pour copier index.html vers 404.html
+      - name: Copy 404 page
+        run: cp dist/index.html dist/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          # Upload dist folder
           path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # ✅ Ajoute un récapitulatif
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "### ✅ Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`$(git rev-parse --short HEAD)\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Message:** $(git log -1 --pretty=%s)" >> $GITHUB_STEP_SUMMARY
+          echo "**Author:** $(git log -1 --pretty=%an)" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(git log -1 --pretty=%ar)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY

@@ -11,7 +11,8 @@
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "postbuild": "cp dist/index.html dist/404.html",
-    "start": "npx http-server ./dist --cors --port 5001 -c-1"
+    "start": "vite preview --port 5173",
+    "build:start": "npm run build && npm run start"
   },
   "dependencies": {
     "@design-edito/publisher": "^0.1.15",
