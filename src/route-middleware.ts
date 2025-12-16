@@ -7,6 +7,10 @@ export const checkForAuthentifacted = ({
 }: {
   context: RouterContext;
 }) => {
+  if (context.auth.isLoading) {
+    return;
+  }
+
   if (!context.auth.isLoading && !context.auth.isAuthenticated) {
     throw redirect({
       to: appRoutes.login,

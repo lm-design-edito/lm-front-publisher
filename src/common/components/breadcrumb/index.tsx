@@ -17,10 +17,12 @@ export const Breadcrumb = () => {
       ) {
         return true;
       }
-      console.log(
-        'Missing static data for breadcrumb in route:',
-        match.routeId,
-      );
+      if (match.routeId !== '__root__') {
+        console.log(
+          'Missing static data for breadcrumb in route:',
+          match.routeId,
+        );
+      }
     }) // ✅ Filtre seulement si getBreadcrumb existe
     .map(match => {
       const title = match.staticData.getBreadcrumb

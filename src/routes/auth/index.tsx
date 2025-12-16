@@ -1,3 +1,4 @@
+import { appRoutes } from '@src/appRoutes';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/auth/')({
@@ -8,7 +9,7 @@ export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
   beforeLoad: async () => {
     throw redirect({
-      to: '/',
+      to: appRoutes.index,
       search: {
         redirect: location.href,
       },

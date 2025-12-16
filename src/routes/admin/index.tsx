@@ -1,5 +1,5 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
-import { appRoutes } from '@src/appRoutes';
+import { createFileRoute } from '@tanstack/react-router';
+import { checkForAuthentifacted } from '@src/route-middleware';
 
 export const Route = createFileRoute('/admin/')({
   staticData: {
@@ -8,14 +8,7 @@ export const Route = createFileRoute('/admin/')({
   },
   component: RouteComponent,
   beforeLoad: async ({ context }) => {
-    if (!context.auth.isLoading && !context.auth.isAuthenticated) {
-      throw redirect({
-        to: appRoutes.login,
-        search: {
-          redirect: location.href,
-        },
-      });
-    }
+    checkForAuthentifacted({ context });
     // This is a placeholder for any pre-load logic you might want to implement
     // For example, you could check user permissions or load initial data
     console.log('Loading admin route...');

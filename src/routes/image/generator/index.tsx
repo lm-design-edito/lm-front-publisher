@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import {
   ImageGeneratorForm,
   ImageGeneratorInfos,
   GeneratedImageList,
 } from '@features/image-tools/generator';
 import { Headline } from '@common/components/headline';
-import { appRoutes } from '@src/appRoutes';
 import { Divider } from '@common/components/divider';
 import { Badge } from '@common/components/badge';
 import { useToastContext } from '@common/hooks/useToastContext';
+import { checkForAuthentifacted } from '@src/route-middleware';
 
 type GeneratedImage = {
   name: string;
@@ -75,14 +75,7 @@ export const Route = createFileRoute('/image/generator/')({
   },
   component: ImageGeneratorPage,
   beforeLoad: async ({ context }) => {
-    if (!context.auth.isAuthenticated) {
-      throw redirect({
-        to: appRoutes.login,
-        search: {
-          redirect: location.href,
-        },
-      });
-    }
+    checkForAuthentifacted({ context });
     // You can add any pre-load logic here if needed
   },
 });
