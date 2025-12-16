@@ -5,7 +5,7 @@ on:
     inputs:
       commit_sha:
         description: 'SHA du commit à déployer (laissez vide pour le dernier commit de main)'
-        required: false  # ✅ Corrige "falsegit log main --oneline -10"
+        required: false
         type: string
         default: ''
 
@@ -84,7 +84,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Deployment summary
+      # ✅ Message de succès
+      - name: Deployment summary (success)
         if: success()
         run: |
           echo "### ✅ Deployment Successful" >> $GITHUB_STEP_SUMMARY
@@ -95,3 +96,18 @@ jobs:
           echo "**Date:** $(git log -1 --pretty=%ar)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+
+      # ✅ Message d'erreur
+      - name: Deployment summary (failure)
+        if: failure()
+        run: |
+          echo "### ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`$(git rev-parse --short HEAD)\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Message:** $(git log -1 --pretty=%s)" >> $GITHUB_STEP_SUMMARY
+          echo "**Author:** $(git log -1 --pretty=%an)" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(git log -1 --pretty=%ar)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Failed at:** ${{ github.job }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "⚠️ Please check the logs above for more details." >> $GITHUB_STEP_SUMMARY
