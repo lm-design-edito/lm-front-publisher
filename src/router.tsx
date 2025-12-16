@@ -7,6 +7,8 @@ const isProd = import.meta.env.MODE === 'production';
 export const router = createRouter({
   routeTree,
   basepath: isProd ? '/lm-front-publisher/' : '',
+  defaultPreload: 'intent',
+  defaultPreloadStaleTime: 0,
   context: {
     auth: {
       isAuthenticated: false,
