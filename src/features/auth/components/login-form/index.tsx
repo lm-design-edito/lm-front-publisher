@@ -28,20 +28,20 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const { showToast, hideAllToasts } = useContext(ToastContext);
+  const { showToast, hideToast } = useContext(ToastContext);
 
   const { isAuthenticated } = useWhoAmI();
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
-      hideAllToasts('login-form');
+      hideToast('login-form');
       showToast({
         type: 'success',
+        id: 'login-success',
         message: 'Vous êtes connecté',
       });
     },
     onError: error => {
-      hideAllToasts('login-form');
       showToast({
         groupId: 'login-form',
         type: 'error',

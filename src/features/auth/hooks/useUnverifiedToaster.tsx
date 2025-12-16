@@ -40,8 +40,6 @@ export const useUnverifiedToaster = () => {
         type: 'warning',
         duration: 0,
       });
-    } else {
-      hideToast('unverified-user-toaster');
     }
     return () => {
       hideToast('unverified-user-toaster');
