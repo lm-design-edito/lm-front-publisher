@@ -1,11 +1,9 @@
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
-// import { ThemeProvider } from '@features/theme';
 import { Header } from '@common/components/header';
 import { Footer } from '@common/components/footer';
 import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster';
 import type { QueryClient } from '@tanstack/react-query';
 import type { ToastContextType } from '@common/providers/toast/toastContext';
-// import { Breadcrumb } from '@common/components/breadcrumb';
 import { useSyncHeightToCSSVar } from '@common/hooks/useSyncHeightToCSSVar';
 import { useRef } from 'react';
 import { Headline } from '@common/components/headline';
@@ -13,6 +11,7 @@ import { Text } from '@common/components/text';
 import { Loader } from '@common/components/loader';
 import { useWhoAmI } from '@features/auth';
 import { ToastProvider } from '@common/providers/toast/toastProvider';
+import { Breadcrumb } from '@common/components/breadcrumb';
 
 // Create a client
 
@@ -38,28 +37,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-// export const RootPage = () => {
-//   useUnverifiedToaster();
-//   const $appBbreadcrumbRef = useRef<HTMLDivElement>(null);
-//   useSyncHeightToCSSVar({
-//     target: $appBbreadcrumbRef,
-//     cssPropertyName: '--lm-publisher-breadcrumb-height',
-//   });
-
-//   return (
-//     <ThemeProvider>
-//       <Header />
-//       <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
-//         {/* <Breadcrumb /> */}
-//       </div>
-//       <div className="app-content">
-//         <Outlet />
-//       </div>
-//       <Footer />
-//     </ThemeProvider>
-//   );
-// };
-
 const RootContent = () => {
   useUnverifiedToaster();
   const $appBbreadcrumbRef = useRef<HTMLDivElement>(null);
@@ -72,7 +49,7 @@ const RootContent = () => {
     <ToastProvider>
       <Header />
       <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
-        {/* <Breadcrumb /> */}
+        <Breadcrumb />
       </div>
       <div className="app-content">
         <Outlet />
