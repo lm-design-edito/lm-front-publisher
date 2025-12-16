@@ -1,4 +1,7 @@
 :root {
+  --lm-publisher-header-height: 64px;
+  --lm-publisher-breadcrumb-height: 0px;
+  --lm-publisher-footer-height: 0;
 
   --lm-publisher-bg-color: var(--lmui-c-snow-lighter);
   --lm-publisher-text-color: var(--lmui-c-slate-dark);
@@ -79,9 +82,16 @@ body {
   max-width: var(--lm-publisher-width);
 }
 .app-content {
-  margin: var(--lm-publisher-grid-margins) auto;
-  padding: var(--lm-publisher-grid-margins);
+  --v-margin: var(--lm-publisher-grid-margins);
+  --v-bottom-margin: var(--lm-publisher-spacer-6);
+  --padding: var(--lm-publisher-grid-margins);
+  --outer-height: calc( var(--lm-publisher-header-height) + var(--lm-publisher-breadcrumb-height) + var(--lm-publisher-footer-height));
+  --spacings: calc( var(--v-margin) + var(--v-bottom-margin) + var(--padding) * 2 );
+
+  margin: var(--v-margin) auto var(--v-bottom-margin);
+  padding: var(--padding);
   max-width: var(--lm-publisher-width);
+  min-height: calc(100vh - (var(--outer-height) + var(--spacings)));
 }
 
 a {

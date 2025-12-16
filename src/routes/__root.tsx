@@ -7,6 +7,8 @@ import { useUnverifiedToaster } from '@features/auth/hooks/useUnverifiedToaster'
 import type { QueryClient } from '@tanstack/react-query';
 import type { ToastContextType } from '@common/providers/toast/toastContext';
 import { Breadcrumb } from '@common/components/breadcrumb';
+import { useSyncHeightToCSSVar } from '@common/hooks/useSyncHeightToCSSVar';
+import { useRef } from 'react';
 
 // Create a client
 
@@ -34,11 +36,16 @@ declare module '@tanstack/react-router' {
 
 export const RootPage = () => {
   useUnverifiedToaster();
+  const $appBbreadcrumbRef = useRef<HTMLDivElement>(null);
+  useSyncHeightToCSSVar({
+    target: $appBbreadcrumbRef,
+    cssPropertyName: '--lm-publisher-breadcrumb-height',
+  });
 
   return (
     <ThemeProvider>
       <Header />
-      <div className="app-breadcrumb">
+      <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
         <Breadcrumb />
       </div>
       <div className="app-content">
