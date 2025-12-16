@@ -133,7 +133,7 @@ const MODEL_CONFIG_FIELDS: ModelConfigFieldTypes = {
               },
               helperProps: {
                 text: "Cette option permet de sélectionner la couleur la plus utilisée dans l'image et d'en obtenir sa couleur complémentaire.",
-                position: 'bottom-right',
+                position: 'top-right',
                 size: 'sm',
               },
             },
