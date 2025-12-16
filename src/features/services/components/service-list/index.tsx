@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 import { AdminUserInfos } from '@features/admin-users';
 import { ImageToolsInfos } from '@features/image-tools';
 import { AccountInfo } from '@features/account';
 
 import { useAvailableServiceList } from '../../api/use-available-service-list';
 
-import { ServiceItem } from '../service-item';
+// import { ServiceItem } from '../service-item';
 
 import './style.css';
 
@@ -51,33 +51,33 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
   const avaialableAdminServices = useAvailableServiceList(adminServicesBadges);
   const availableOtherServices = useAvailableServiceList(otherServicesBadges);
 
-  const listTools = useCallback(
-    (badgesList: string[], serviceInfoList: ServiceInfo[]) => {
-      return badgesList.map(toolName => {
-        const servicesData = serviceInfoList.filter(
-          t => 'badge' in t && t.badge === toolName,
-        );
-        if (!servicesData.length) {
-          return null;
-        }
-        return servicesData.map(toolData => (
-          <ServiceItem
-            key={'url' in toolData ? toolData.url : toolName}
-            name={
-              'formattedName' in toolData && toolData.formattedName
-                ? toolData.formattedName
-                : toolData.name
-            }
-            version={'version' in toolData ? toolData.version : ''}
-            description={'description' in toolData ? toolData.description : ''}
-            url={toolData.url}
-            disabled={toolData.disabled || false}
-          />
-        ));
-      });
-    },
-    [],
-  );
+  // const listTools = useCallback(
+  //   (badgesList: string[], serviceInfoList: ServiceInfo[]) => {
+  //     return badgesList.map(toolName => {
+  //       const servicesData = serviceInfoList.filter(
+  //         t => 'badge' in t && t.badge === toolName,
+  //       );
+  //       if (!servicesData.length) {
+  //         return null;
+  //       }
+  //       return servicesData.map(toolData => (
+  //         <ServiceItem
+  //           key={'url' in toolData ? toolData.url : toolName}
+  //           name={
+  //             'formattedName' in toolData && toolData.formattedName
+  //               ? toolData.formattedName
+  //               : toolData.name
+  //           }
+  //           version={'version' in toolData ? toolData.version : ''}
+  //           description={'description' in toolData ? toolData.description : ''}
+  //           url={toolData.url}
+  //           disabled={toolData.disabled || false}
+  //         />
+  //       ));
+  //     });
+  //   },
+  //   [],
+  // );
 
   return (
     <>
@@ -87,7 +87,7 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
             <h2>Outils</h2>
           </div>
           <div className="available-service-list__elements">
-            {listTools(availableToolServices, toolsServices)}
+            {/* {listTools(availableToolServices, toolsServices)} */}
           </div>
         </div>
       )}
@@ -98,7 +98,7 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
             <p>Outils disponibles pour les administrateurs ou ROOT</p>
           </div>
           <div className="available-service-list__elements">
-            {listTools(avaialableAdminServices, adminServices)}
+            {/* {listTools(avaialableAdminServices, adminServices)} */}
           </div>
         </div>
       )}
@@ -108,7 +108,7 @@ export const ServiceList = ({ className = '' }: ServiceListProps) => {
             <h2>Autre</h2>
           </div>
           <div className="available-service-list__elements">
-            {listTools(availableOtherServices, otherServices)}
+            {/* {listTools(availableOtherServices, otherServices)} */}
           </div>
         </div>
       )}
