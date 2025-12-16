@@ -5,7 +5,7 @@ on:
     inputs:
       commit_sha:
         description: 'SHA du commit à déployer (laissez vide pour le dernier commit de main)'
-        required: falsegit log main --oneline -10
+        required: false  # ✅ Corrige "falsegit log main --oneline -10"
         type: string
         default: ''
 
@@ -69,7 +69,6 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_CAN_LOG: ${{ secrets.VITE_CAN_LOG }}
 
-      # ✅ Ajoute le postbuild pour copier index.html vers 404.html
       - name: Copy 404 page
         run: cp dist/index.html dist/404.html
 
@@ -85,7 +84,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # ✅ Ajoute un récapitulatif
       - name: Deployment summary
         if: success()
         run: |
