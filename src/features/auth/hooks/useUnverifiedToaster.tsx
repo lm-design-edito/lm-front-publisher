@@ -2,7 +2,7 @@ import { useToastContext } from '@common/hooks/useToastContext';
 import { useWhoAmI } from '../services';
 import { useEffect, useMemo } from 'react';
 import { appRoutes } from '@src/appRoutes';
-import { Link, useLocation } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 
 export const useUnverifiedToaster = () => {
   const location = useLocation();
@@ -27,14 +27,14 @@ export const useUnverifiedToaster = () => {
           <>
             Certaines fonctionnalités seront peut-être désactivées tant que vous
             n'avez pas vérifié votre email.{' '}
-            <Link
+            {/* <Link
               to={appRoutes.verifyEmail}
               search={{
                 email: user && 'email' in user ? user?.email : '',
               }}
             >
               Vérifier mon email
-            </Link>
+            </Link> */}
           </>
         ),
         type: 'warning',
@@ -44,5 +44,5 @@ export const useUnverifiedToaster = () => {
     return () => {
       hideToast('unverified-user-toaster');
     };
-  }, [user, needsToDisplayToaster, showToast, hideToast]);
+  }, [needsToDisplayToaster, showToast, hideToast]);
 };

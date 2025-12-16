@@ -25,14 +25,14 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ToastProvider>
-          <ThemeProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider>
             <App />
-          </ThemeProvider>
-        </ToastProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+          </ToastProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ThemeProvider>
     </StrictMode>,
   );
 }
