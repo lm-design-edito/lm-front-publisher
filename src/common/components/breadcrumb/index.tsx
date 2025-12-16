@@ -9,15 +9,30 @@ export const Breadcrumb = () => {
   });
 
   const breadcrumb = matches
-    .filter(match => match.staticData?.getBreadcrumb) // ✅ Filtre seulement si getBreadcrumb existe
-    .map(match => ({
-      title: match.staticData.getBreadcrumb!({
+    .filter(match => {
+      if (match && match.staticData && match.staticData.getBreadcrumb) {
+        return true;
+      }
+      console.log(
+        'Missing static data for breadcrumb in route:',
+        match.routeId,
+      );
+    }) // ✅ Filtre seulement si getBreadcrumb existe
+    .map(match => {
+      const title = match.staticData.getBreadcrumb!({
         params: match.params,
         pathname: match.pathname,
         routeId: match.routeId,
-      }),
-      path: match.pathname,
-    }));
+      });
+
+      if (!title) {
+        console.log('Breadcrumb title is empty for route:', match.routeId);
+      }
+      return {
+        title,
+        path: match.pathname,
+      };
+    });
 
   // Ne pas afficher le breadcrumb sur la page d'accueil
   if (isHomePage || breadcrumb.length === 0) return null;
