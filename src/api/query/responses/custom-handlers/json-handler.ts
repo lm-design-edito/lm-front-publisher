@@ -1,3 +1,4 @@
+import { Logger } from '@utils/logger';
 import type { ClbHandlers } from './types';
 
 export const responseJsonHandler = async (
@@ -10,7 +11,7 @@ export const responseJsonHandler = async (
   try {
     return await response.json();
   } catch (error) {
-    console.log('Error handling JSON response:', error);
+    Logger.error('ResponseJsonHandler:', error);
     return response;
   }
 };

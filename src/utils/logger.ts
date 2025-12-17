@@ -1,6 +1,7 @@
 const LOG_TYPES = {
   ERROR: 'ERROR',
   LOG: 'LOG',
+  REDIRECTION: 'REDIRECTION',
   SUCCESS: 'SUCCESS',
   QUERY: 'QUERY',
 };
@@ -38,6 +39,10 @@ export class Logger {
     this._consoleLog(LOG_TYPES.QUERY, key, message);
   }
 
+  static redirection(key: string, message?: unknown) {
+    this._consoleLog(LOG_TYPES.REDIRECTION, key, message);
+  }
+
   static getLogHeader(level: string, key: string) {
     const options = [];
     switch (level) {
@@ -52,6 +57,9 @@ export class Logger {
         break;
       case LOG_TYPES.QUERY:
         options.push('color: #ba99ff');
+        break;
+      case LOG_TYPES.REDIRECTION:
+        options.push('color: #deff66');
         break;
     }
     return {

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { ToastContext, type Toast } from './toastContext';
 import { Alert } from '@common/components/alert';
-import { Logger } from '@utils/logger';
 
 const DEFAULT_TOAST_DURATION = 5000;
 
@@ -9,7 +8,6 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const hideToast = useCallback((toastId: string) => {
-    Logger.log('Hide toast:', toastId);
     if (!toastId) {
       console.warn('hideToast called without toastId');
       return;
@@ -23,7 +21,6 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const hideAllToasts = useCallback((groupId: string) => {
-    Logger.log('Hide All toast:', groupId);
     setToasts(prevToasts => {
       if (!groupId) {
         return [];
@@ -37,7 +34,6 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
 
   const showToast = useCallback(
     (toast: Toast) => {
-      Logger.log('Showing toast:', toast.id);
       const id = toast.id || Math.random().toString(36);
       const newToast = { ...toast, id };
       setToasts(prevToasts => {

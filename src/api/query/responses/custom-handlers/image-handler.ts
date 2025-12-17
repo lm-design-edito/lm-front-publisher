@@ -1,3 +1,4 @@
+import { Logger } from '@utils/logger';
 import type { ClbHandlers } from './types';
 
 export type ImageResponseSuccessPayload = {
@@ -59,7 +60,7 @@ export const responseImageHandler = async (
       format,
     });
   } catch (error) {
-    console.log('Error handling image response:', error);
+    Logger.error('ResponseImageHandler:', error);
     return clb.onError(response);
   }
 };

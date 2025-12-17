@@ -16,4 +16,5 @@ export type {
   ModelFormConfig,
   ModelFormFieldConfig,
   ModelConfigRegistry,
+  CustomModelConfigField,
 } from './types';

@@ -18,7 +18,7 @@ export function useImageThumbsUpload(clbs?: {
       // Vérifier le statut du serveur
       const statusCheck = await api.queries.system.statusCheck();
       if (statusCheck.success && !statusCheck.payload.isHealthy) {
-        Logger.log('image-tools.api.useImageThumbsUpload', 'Server is down');
+        Logger.error('image-tools.api.useImageThumbsUpload', 'Server is down');
         clbs?.onServerDown?.();
         throw new Error('Server is down');
       }

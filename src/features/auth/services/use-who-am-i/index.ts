@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../../../../api';
-import { Logger } from '@utils/logger';
 
 export function useWhoAmI(
   params?: Parameters<typeof api.queries.auth.whoAmI>[0],
@@ -8,7 +7,6 @@ export function useWhoAmI(
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['who-am-i'],
     queryFn: () => {
-      Logger.log('features.auth.api.useWhoAmI');
       return api.queries.auth.whoAmI(params);
     },
   });

@@ -13,16 +13,13 @@ export const Breadcrumb = () => {
       if (match && match.staticData && match.staticData.getBreadcrumb) {
         return true;
       }
-    }) // ✅ Filtre seulement si getBreadcrumb existe
+    })
     .map(match => {
       const title = match.staticData?.getBreadcrumb?.({
         params: match.params,
         pathname: match.pathname,
         routeId: match.routeId,
       });
-      if (!title) {
-        console.log('Breadcrumb title is empty for route:', match.routeId);
-      }
       return {
         title,
         path: match.pathname,

@@ -56,6 +56,9 @@ export const ModelList: Model[] = [
     thumbnail: templateBookPreviewStripes,
     getDefaultOptions: ({ imageCount }) => ({
       backgroundType: 'gradient',
+      colors: {
+        useMain: true,
+      },
       ...(imageCount === 3
         ? {
             imageFitAreaRatios: {

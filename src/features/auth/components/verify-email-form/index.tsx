@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useVerifyEmail } from '@features/auth/services/use-verify-email';
 import { appRoutes } from '@src/appRoutes';
 import { useToastContext } from '@common/hooks/useToastContext';
+import { Logger } from '@utils/logger';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -67,7 +68,10 @@ export const VerifyEmailForm = () => {
 
   useEffect(() => {
     if (user?.verified) {
-      console.log('User is already verified, redirecting to /');
+      Logger.redirection(
+        'VerifyEmailForm:',
+        'User is already verified, redirecting to /',
+      );
       navigate({ to: appRoutes.index });
     }
   }, [user?.verified, navigate]);

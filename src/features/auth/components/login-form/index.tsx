@@ -8,6 +8,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { useContext, useEffect } from 'react';
 import { appRoutes } from '@src/appRoutes';
 import { ToastContext } from '@common/providers/toast/toastContext';
+import { Logger } from '@utils/logger';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -59,7 +60,10 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log('User is already logged in, redirecting to /');
+      Logger.redirection(
+        'LoginForm:',
+        'User is already logged in, redirecting to /',
+      );
       navigate({ to: appRoutes.index });
     }
   }, [isAuthenticated, navigate]);

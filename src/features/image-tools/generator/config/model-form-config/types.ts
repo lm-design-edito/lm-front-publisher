@@ -43,6 +43,7 @@ export type InputColorModelConfigField = {
 } & DefaultModelConfigField;
 
 export type CustomModelConfigField = {
+  name: string;
   type: 'custom';
   // Fonction qui reçoit les valeurs du formulaire et retourne un ReactNode
   render: (values: Record<string, unknown>) => React.ReactNode;
@@ -50,15 +51,27 @@ export type CustomModelConfigField = {
   dependencies?: string[];
 };
 
-export type ModelFormFieldConfig = DefaultModelConfigField &
-  (
-    | InputModelConfigField
-    | CheckboxModelConfigField
-    | InputRangeModelConfigField
-    | InputColorModelConfigField
-    | RadioGroupModelConfigField
-    | CustomModelConfigField
-  );
+export type FieldsetModelConfigField = {
+  name: string;
+  type: 'fieldset';
+  properties: {
+    legend: string;
+    description?: string;
+  };
+  fields: ModelFormFieldConfig[];
+};
+
+export type ModelFormFieldConfig =
+  | ((
+      | InputModelConfigField
+      | CheckboxModelConfigField
+      | InputRangeModelConfigField
+      | InputColorModelConfigField
+      | RadioGroupModelConfigField
+    ) &
+      DefaultModelConfigField)
+  | FieldsetModelConfigField
+  | CustomModelConfigField;
 
 export type ModelFormConfig = {
   formFields: ModelFormFieldConfig[];
