@@ -12,6 +12,7 @@ import { Loader } from '@common/components/loader';
 import { useWhoAmI } from '@features/auth';
 import { ToastProvider } from '@common/providers/toast/toastProvider';
 import { Breadcrumb } from '@common/components/breadcrumb';
+import { checkForAuthentifacted } from '@src/route-middleware';
 
 // Create a client
 
@@ -86,4 +87,7 @@ export const RootPage = () => {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => <RootPage />,
+  beforeLoad: async ({ context }) => {
+    checkForAuthentifacted({ context });
+  },
 });

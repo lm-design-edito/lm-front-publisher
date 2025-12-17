@@ -1,6 +1,8 @@
 .circle-badge {
-  width: 24px;
-  height: 24px;
+  --width: 24px;
+  --icon-width: 12px;
+  width: var(--width);
+  height: var(--width);
   border-radius: 50%;
   background-color: var(--lm-publisher-accent-color);
   display: flex;
@@ -9,7 +11,21 @@
   color: var(--lmui-c-snow-lighter);
 }
 
+.circle-badge_s {
+  --width: 16px;
+  --icon-width: 8px;
+}
+
+.circle-badge_l {
+  --width: 32px;
+  --icon-width: 16px;
+}
+
 .circle-badge img {
-  width: 12px;
-  height: 12px;
+  width: var(--icon-width);
+  height: var(--icon-width);
+}
+
+.circle-badge_inline-flex {
+  display: inline-flex;
 }

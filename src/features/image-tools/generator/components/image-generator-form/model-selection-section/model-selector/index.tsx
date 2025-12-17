@@ -1,13 +1,15 @@
 import { CircleBadge } from '@common/components/circle-badge';
 import { Form, type FormErrorType } from '@common/components/forms';
-import './style.css';
 import { OverflowList } from '@common/components/overflow-list';
+import { Badge } from '@common/components/badge';
+import './style.css';
 
 export type ModelSelectorProps = {
   modelList: {
-    template: string;
     name: string;
+    template: string;
     label: string;
+    category?: string;
     thumbnail?: string;
   }[];
   selectedModel?: { name: string; template: string };
@@ -41,7 +43,16 @@ export const ModelSelector = (props: ModelSelectorProps) => {
               )}
               <CircleBadge icon="check" className="model-selector__badge" />
             </div>
-            <div className="model-selector__info">{model.label}</div>
+            <div className="model-selector__info">
+              {model.category && (
+                <span className="model-selector__category">
+                  <Badge color="purple" size="s">
+                    {model.category}
+                  </Badge>
+                </span>
+              )}
+              <span>{model.label}</span>
+            </div>
           </div>
         ))}
       </OverflowList>

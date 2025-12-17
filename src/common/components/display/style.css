@@ -64,6 +64,9 @@
 .display-flex--justify-center {
   justify-content: center;
 }
+.display-flex--justify-end {
+  justify-content: flex-end;
+}
 .display-flex--justify-space-between,
 .display-flex--justify-between {
   justify-content: space-between;

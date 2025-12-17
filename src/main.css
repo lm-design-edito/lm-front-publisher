@@ -169,12 +169,24 @@ p {
   margin-top: var(--lm-publisher-spacer-8);
 }
 
+.lm-publisher-m-r-spacer-05 {
+  margin-right: var(--lm-publisher-spacer-05);
+}
+
+.lm-publisher-m-l-spacer-05 {
+  margin-left: var(--lm-publisher-spacer-05);
+}
+
 th {
   font-weight: 500;
 }
 
 .lm-publisher-flex {
   display: flex;
+}
+
+.lm-publisher-inline-flex {
+  display: inline-flex
 }
 
 .lm-publisher-flex-1 {

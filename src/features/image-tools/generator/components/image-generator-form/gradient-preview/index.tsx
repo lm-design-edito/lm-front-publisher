@@ -11,10 +11,15 @@ export type GradientPreviewProps = {
 export const GradientPreview = ({
   angle = 90,
   startColor = '#000',
-  stopColor = '#ffffff00',
+  stopColor = '#fff',
 }: GradientPreviewProps) => {
   return (
-    <Display type="flex" align="center" className="gradient-preview">
+    <Display
+      type="flex"
+      align="center"
+      justify="end"
+      className="gradient-preview"
+    >
       <Text>Aperçu du gradient</Text>
       <div
         className="gradient-preview__box"

@@ -1,3 +1,9 @@
+.gradient-preview {
+  background-color: var(--lm-publisher-form-highlight-bg);
+  border-radius: 4px;
+  padding: var(--lm-publisher-spacer-2);
+}
+
 .gradient-preview__box {
   width: 32px;
   height: 32px;

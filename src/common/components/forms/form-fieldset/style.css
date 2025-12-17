@@ -10,10 +10,13 @@ fieldset {
     font-size: var(--lmui-len-font-size-placeholder-focus);
 }
 
+.form-fieldset_transparent {
+    border-color: transparent;
+}
+
 .form-fieldset_error {
     border: 1px solid var(--lm-publisher-form-error-color);
 }
-
 
 .form-fieldset_error legend {
     color: var(--lm-publisher-form-error-color);

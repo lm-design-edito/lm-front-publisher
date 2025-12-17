@@ -1,4 +1,5 @@
 import type {
+  FormFieldsetProps,
   FormInputCheckboxProps,
   FormInputColorProps,
   FormInputProps,
@@ -7,10 +8,18 @@ import type {
 } from '@common/components/forms';
 import * as zod from 'zod';
 
-export type DefaultModelConfigField = {
+export type BaseFormField = {
   name: string;
-  validation: zod.ZodTypeAny;
+  conditional?: {
+    field: string;
+    value: unknown;
+    supportDefault?: boolean;
+  };
 };
+
+export type DefaultModelConfigField = {
+  validation: zod.ZodTypeAny;
+} & BaseFormField;
 
 export type InputModelConfigField = {
   type: 'input';
@@ -43,25 +52,20 @@ export type InputColorModelConfigField = {
 } & DefaultModelConfigField;
 
 export type CustomModelConfigField = {
-  name: string;
   type: 'custom';
   // Fonction qui reçoit les valeurs du formulaire et retourne un ReactNode
   render: (values: Record<string, unknown>) => React.ReactNode;
   // Liste des champs dont dépend ce composant (pour optimisation)
   dependencies?: string[];
-};
+} & BaseFormField;
 
 export type FieldsetModelConfigField = {
-  name: string;
   type: 'fieldset';
-  properties: {
-    legend: string;
-    description?: string;
-  };
-  fields: ModelFormFieldConfig[];
-};
+  properties: FormFieldsetProps;
+  fields: ModelConfigField[];
+} & BaseFormField;
 
-export type ModelFormFieldConfig =
+export type ModelConfigField =
   | ((
       | InputModelConfigField
       | CheckboxModelConfigField
@@ -74,10 +78,36 @@ export type ModelFormFieldConfig =
   | CustomModelConfigField;
 
 export type ModelFormConfig = {
-  formFields: ModelFormFieldConfig[];
+  fields: ModelConfigField[];
 };
 
-export type ModelConfigRegistry = Record<
-  string,
-  { formFields: ModelFormFieldConfig[] }
->;
+export type CommonAPIPayloadContext = {
+  imageCount: number;
+};
+
+export type ModelConfig<
+  EntryFormValues = Record<string, unknown>,
+  OutputFormValues = Record<string, unknown>,
+> = {
+  fields: ModelConfigField[];
+  buildAPIPayload?: (
+    values: EntryFormValues,
+    context: CommonAPIPayloadContext,
+  ) => OutputFormValues;
+};
+
+export type ModelConfigWrapper<
+  EntryFormValues = Record<string, unknown>,
+  OutputFormValues = Record<string, unknown>,
+> = {
+  name: string;
+  config: ModelConfig<EntryFormValues, OutputFormValues>;
+};
+
+export type ModelMetadata = {
+  name: string;
+  template: string;
+  label: string;
+  thumbnail: string;
+  category?: string;
+};

@@ -3,7 +3,7 @@ import './style.css';
 export type BadgeProps = {
   color?:
     | 'blue'
-    | 'violet'
+    | 'purple'
     | 'yellow'
     | 'sea'
     | 'grey'

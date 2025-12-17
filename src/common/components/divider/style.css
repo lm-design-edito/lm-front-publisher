@@ -1,7 +1,11 @@
 .lmui-divider {
+  --margin-top: var(--lm-publisher-spacer-3);
+  --margin-bottom: var(--lm-publisher-spacer-3);
+  --margin-left: auto;
+  --margin-right: auto;
   border: none;
   border-top: 1px solid var(--lm-publisher-border-color);
-  margin: var(--lm-publisher-spacer-3) auto;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
   align-self: center;
 }
 
@@ -19,4 +23,24 @@
 
 .lmui-divider_l {
   width: 100%;
+}
+
+.lmui-divider_space-s {
+  --margin-top: var(--lm-publisher-spacer-1);
+  --margin-bottom: var(--lm-publisher-spacer-1);
+}
+
+.lmui-divider_space-m {
+  --margin-top: var(--lm-publisher-spacer-2);
+  --margin-bottom: var(--lm-publisher-spacer-2);
+}
+
+.lmui-divider_position-left {
+  --margin-left: 0;
+  --margin-right: auto;
+}
+
+.lmui-divider_position-right {
+  --margin-left: auto;
+  --margin-right: 0;
 }

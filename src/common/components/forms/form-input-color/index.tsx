@@ -31,7 +31,7 @@ export const FormInputColor = ({
   const colorPickerId = `${inputProps.name || ''}-color-picker`;
 
   const triggerEvent = useCallback(
-    (value: string) => {
+    (value: string | undefined) => {
       const syntheticEvent = {
         target: { value, name: inputProps.name },
       } as React.ChangeEvent<HTMLInputElement>;
@@ -45,7 +45,7 @@ export const FormInputColor = ({
 
   const formatHexColor = useCallback((color: string) => {
     if (!color) {
-      return '';
+      return undefined;
     }
 
     color = color.toUpperCase();
@@ -80,6 +80,7 @@ export const FormInputColor = ({
                 id={colorPickerId}
                 value={inputProps.value as string}
                 onChange={onPickColor}
+                required={false}
                 className="form-input-color__picker"
               />
               <div

@@ -3,10 +3,10 @@ import { Display } from '@common/components/display';
 import { Text } from '@common/components/text';
 import { ModelSelector } from './model-selector';
 import { ModelFields } from './model-fields';
-import { ModelList } from '../../../config/models';
 import { getModelConfigFields } from '../../../utils/get-model-config-fields';
 import { Form } from '@common/components/forms';
 import './style.css';
+import { ModelListMetadata } from '@features/image-tools/generator/config';
 
 type Props = {
   control: Control;
@@ -32,7 +32,7 @@ export const ModelSelectionSection = ({
         control={control}
         render={({ field: { onChange, value } }) => (
           <ModelSelector
-            modelList={ModelList}
+            modelList={ModelListMetadata}
             selectedModel={value}
             onSelectModel={onChange}
             error={errors['model']}

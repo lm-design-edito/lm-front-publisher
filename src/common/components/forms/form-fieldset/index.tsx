@@ -1,8 +1,9 @@
-import './style.css';
 import { FormError, type FormErrorProps } from '../form-error';
+import './style.css';
 
 export type FormFieldsetProps = {
   className?: string;
+  type?: 'solid' | 'transparent',
   legend?: string | React.ReactNode;
   contentClassName?: string;
   children?: React.ReactNode;
@@ -12,6 +13,7 @@ export type FormFieldsetProps = {
 
 export const FormFieldset = ({
   className = '',
+  type = 'solid',
   legend: _legend,
   contentClassName,
   children,
@@ -21,7 +23,7 @@ export const FormFieldset = ({
 }: FormFieldsetProps) => {
   return (
     <fieldset
-      className={`form-fieldset ${className} ${error ? 'form-fieldset_error' : ''}`}
+      className={`form-fieldset form-fieldset_${type} ${className} ${error ? 'form-fieldset_error' : ''}`}
       {...props}
     >
       {_legend && <legend>{_legend}</legend>}

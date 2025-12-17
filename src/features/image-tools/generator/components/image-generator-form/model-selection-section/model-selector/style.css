@@ -23,7 +23,8 @@
 }
 
 .model-selector__selectable {
-  width: 200px;
+  position: relative;
+  width: 170px;
   flex-shrink: 0;
   border: 1px solid var(--lm-publisher-border-color);
   border-radius: 4px;
@@ -46,12 +47,18 @@
 }
 
 .model-selector__info {
-  padding: var(--lm-publisher-spacer-2);
+  padding: var(--lm-publisher-spacer-1) var(--lm-publisher-spacer-2);
+}
+
+.model-selector__category {
+  position: absolute;
+  top: 8px;
+  left: 8px;
 }
 
 .model-selector__thumbnail {
   position: relative;
-  height: 132px;
+  height: 98px;
 }
 
 .model-selector__thumbnail > img {

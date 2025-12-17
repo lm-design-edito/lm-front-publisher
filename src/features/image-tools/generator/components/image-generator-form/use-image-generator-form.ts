@@ -6,7 +6,7 @@ import { useToastContext } from '@common/hooks/useToastContext';
 import { useImageThumbsUpload } from '../../services/use-image-thumbs-upload';
 import { useImageGenerate } from '../../services/use-image-generate';
 import { createDynamicImageGeneratorFormSchema } from './schema';
-import { getModelConfigDefaultOptions } from '../../utils/get-model-config-default-options';
+import { getModelAPIPayload } from '../../utils/get-model-api-payload';
 
 export function useImageGeneratorForm(
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void,
@@ -101,18 +101,14 @@ export function useImageGeneratorForm(
   const onSubmit = useCallback(
     (values: zod.infer<typeof dynamicSchema>) => {
       const { fileIds, model, outputFileName, ...otherFields } = values;
-      const defaultOptions = getModelConfigDefaultOptions(values.model.name, {
+      const formValues = getModelAPIPayload(values.model.name, otherFields, {
         imageCount: fileIds.length,
-        ...otherFields,
       });
       imageGenerate({
         fileIds,
         template: model.template,
         outputFileName,
-        options: {
-          ...defaultOptions,
-          ...otherFields,
-        },
+        options: formValues,
       });
     },
     [imageGenerate],

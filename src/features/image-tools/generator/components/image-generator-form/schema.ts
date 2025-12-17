@@ -1,7 +1,6 @@
 import * as zod from 'zod';
-import { TemplateNameValues } from '../../types';
 import { getModelConfigFields } from '../../utils/get-model-config-fields';
-import type { ModelFormFieldConfig } from '../../config';
+import { templateNameValues, type ModelConfigField } from '../../config';
 
 export const baseImageGeneratorFormSchema = zod.object({
   fileIds: zod
@@ -19,7 +18,7 @@ export const baseImageGeneratorFormSchema = zod.object({
   model: zod.object(
     {
       name: zod.string(),
-      template: zod.enum(TemplateNameValues as [string, ...string[]], {
+      template: zod.enum(templateNameValues as [string, ...string[]], {
         message: 'Veuillez sélectionner un modèle.',
       }),
     },
@@ -31,9 +30,7 @@ export const baseImageGeneratorFormSchema = zod.object({
 });
 
 // ✅ Type guard pour vérifier si un champ a une validation
-function hasValidation(
-  field: ModelFormFieldConfig,
-): field is ModelFormFieldConfig & {
+function hasValidation(field: ModelConfigField): field is ModelConfigField & {
   name: string;
   validation: zod.ZodTypeAny;
 } {
@@ -48,13 +45,13 @@ function hasValidation(
 
 // ✅ Fonction récursive pour extraire tous les champs avec validation
 function extractValidatableFields(
-  fields: ModelFormFieldConfig[],
-): Array<ModelFormFieldConfig & { name: string; validation: zod.ZodTypeAny }> {
+  fields: ModelConfigField[],
+): Array<ModelConfigField & { name: string; validation: zod.ZodTypeAny }> {
   const validatableFields: Array<
-    ModelFormFieldConfig & { name: string; validation: zod.ZodTypeAny }
+    ModelConfigField & { name: string; validation: zod.ZodTypeAny }
   > = [];
 
-  function traverse(fieldList: ModelFormFieldConfig[]) {
+  function traverse(fieldList: ModelConfigField[]) {
     fieldList.forEach(field => {
       if (field.type === 'fieldset' && 'fields' in field && field.fields) {
         // ✅ Fieldset : explorer les champs enfants

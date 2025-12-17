@@ -1,10 +1,10 @@
-import MODEL_CONFIG_FIELDS, {
-  type ModelFormFieldConfig,
-} from '../config/model-form-config';
+import type { ModelConfigField } from '../config';
+import { getModelConfig } from './get-model-config';
 
 export const getModelConfigFields = (
   modelName?: string,
-): ModelFormFieldConfig[] => {
-  if (!modelName) return [];
-  return MODEL_CONFIG_FIELDS[modelName]?.formFields ?? [];
+): ModelConfigField[] => {
+  const modelConfig = getModelConfig(modelName ?? '');
+  if (!modelConfig) return [];
+  return modelConfig?.fields ?? [];
 };

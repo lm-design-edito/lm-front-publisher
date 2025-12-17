@@ -6,7 +6,7 @@
     justify-content: space-between;
 }
 
-.theme-switch {
+.header .theme-switch {
     display: none;
 }
 
