@@ -20,7 +20,6 @@ export const ModelSelectionSection = ({
   currentModelName,
 }: Props) => {
   const modelConfigFields = getModelConfigFields(currentModelName);
-
   return (
     <Form.Fieldset
       legend="Choix du modèle"

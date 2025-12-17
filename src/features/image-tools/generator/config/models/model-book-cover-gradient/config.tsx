@@ -13,6 +13,7 @@ export type FormValues = {
   gradient: {
     colorMode: 'gray' | 'main' | 'complementary' | 'custom';
     angle: number;
+    type: 'linear' | 'radial';
     startColor?: string;
     stopColor?: string;
   };
@@ -26,6 +27,7 @@ export type OutputAPIPayload = {
   };
   gradient: {
     angle: number;
+    type: 'linear' | 'radial';
     startColor?: string;
     stopColor?: string;
   };
@@ -47,6 +49,7 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
         : {}),
       gradient: {
         angle: gradient.angle,
+        type: gradient.type,
         startColor: gradient.startColor,
         stopColor: gradient.stopColor,
       },
@@ -104,8 +107,38 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
       },
       fields: [
         {
+          name: 'gradient.type',
+          type: 'radio-group',
+          defaultValue: 'linear',
+          properties: {
+            label: 'Type de dégradé :',
+            inputGroupProps: [
+              {
+                label: 'Linéaire',
+                id: 'linear',
+                inputProps: {
+                  type: 'radio',
+                },
+              },
+              {
+                label: 'Radial',
+                id: 'radial',
+                inputProps: {
+                  type: 'radio',
+                },
+              },
+            ],
+          },
+          validation: zod.enum(['radial', 'linear']).default('linear'),
+        },
+        {
           name: 'gradient.angle',
           type: 'input-range',
+          conditional: {
+            field: 'gradient.type',
+            value: 'linear',
+            supportDefault: true,
+          },
           defaultValue: 90,
           properties: {
             label: 'Angle du dégradé :',
@@ -162,7 +195,7 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
                 },
               },
               {
-                label: 'Couleur principale',
+                label: 'Couleur secondaire',
                 id: 'main',
                 inputProps: {
                   type: 'radio',
@@ -170,10 +203,11 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
                 helperProps: {
                   text: (
                     <Text tag="span">
-                      Utilise la couleur principale de l'image{' '}
+                      Utilise la 2e couleur principale de l'image{' '}
                       <CircleBadge
                         size="s"
-                        display="inline-flex"                        className="lm-publisher-m-r-spacer-05"
+                        display="inline-flex"
+                        className="lm-publisher-m-r-spacer-05"
                       >
                         1
                       </CircleBadge>
@@ -279,12 +313,14 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
           name: 'gradient-preview',
           dependencies: [
             'gradient.colorMode',
+            'gradient.type',
             'gradient.angle',
             'gradient.startColor',
             'gradient.stopColor',
           ],
           render: values => (
             <GradientPreview
+              type={values['gradient.type'] as 'linear' | 'radial'}
               angle={values['gradient.angle'] as number}
               startColor={values['gradient.startColor'] as string}
               stopColor={values['gradient.stopColor'] as string}

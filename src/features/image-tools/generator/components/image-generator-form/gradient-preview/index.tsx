@@ -4,12 +4,14 @@ import './style.css';
 
 export type GradientPreviewProps = {
   angle?: number;
+  type?: 'linear' | 'radial';
   startColor?: string;
   stopColor?: string;
 };
 
 export const GradientPreview = ({
   angle = 90,
+  type = 'linear',
   startColor = '#000',
   stopColor = '#fff',
 }: GradientPreviewProps) => {
@@ -24,7 +26,10 @@ export const GradientPreview = ({
       <div
         className="gradient-preview__box"
         style={{
-          background: `linear-gradient(${angle}deg, ${startColor}, ${stopColor})`,
+          background:
+            type === 'linear'
+              ? `linear-gradient(${angle}deg, ${startColor}, ${stopColor}) `
+              : `radial-gradient(50% 75% at 50% 50%, ${startColor} 0%, ${stopColor} 100%)`,
         }}
       ></div>
     </Display>
