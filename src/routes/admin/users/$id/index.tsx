@@ -25,14 +25,14 @@ export const Route = createFileRoute('/admin/users/$id/')({
     title: 'Détails',
   },
   component: RouteComponent,
-  loader: async ({ context: { queryClient, toaster }, params: { id } }) => {
-    const data = await queryClient?.ensureQueryData({
+  loader: async ({ context, params: { id } }) => {
+    const data = await context?.queryClient?.ensureQueryData({
       queryKey: ['user-get', id],
       queryFn: () => api.queries.admin.users.get({ _id: id }),
     });
     //
     if (!data || !data.success) {
-      toaster?.showToast({
+      context?.toaster?.showToast({
         type: 'error',
         message: (
           <>
