@@ -26,6 +26,13 @@ export const baseImageGeneratorFormSchema = zod.object({
       message: 'Veuillez sélectionner un modèle.',
     },
   ),
+  outputFormat: zod
+    .enum(['png', 'jpg', 'webp'], {
+      message: "Le format de sortie doit être 'png', 'jpg' ou 'webp'.",
+    })
+    .default('png')
+    .optional()
+    .transform(val => ({ type: val || 'png' })),
   outputFileName: zod.string().optional(),
 });
 
@@ -118,18 +125,10 @@ export const createDynamicImageGeneratorFormSchema = (modelName?: string) => {
 
   const modelConfigFields = getModelConfigFields(modelName);
 
-  // ✅ Extraire tous les champs validables (recursive)
   const validatableFields = extractValidatableFields(modelConfigFields);
 
-  console.log(
-    '✅ Extracted fields:',
-    validatableFields.map(f => f.name),
-  );
-
-  // ✅ Construire le schéma des champs additionnels
   const additionalFields = buildNestedSchema(validatableFields);
 
-  console.log('🏗️  Additional fields:', Object.keys(additionalFields));
   console.groupEnd();
   // ✅ Étendre le schéma de base
   return baseImageGeneratorFormSchema.extend(additionalFields);

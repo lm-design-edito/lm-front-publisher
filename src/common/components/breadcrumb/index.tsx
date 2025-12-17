@@ -5,7 +5,15 @@ import { appRoutes } from '@src/appRoutes';
 export const Breadcrumb = () => {
   const matches = useMatches();
   const isHomePage = useRouterState({
-    select: s => s.location.pathname === '/',
+    select: s => {
+      const currentPath = s.location.pathname;
+      return (
+        currentPath === appRoutes.index ||
+        currentPath === '/' ||
+        currentPath === '/lm-publisher' ||
+        currentPath === '/lm-publisher/'
+      );
+    },
   });
 
   const breadcrumb = matches

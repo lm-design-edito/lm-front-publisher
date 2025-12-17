@@ -30,6 +30,10 @@ export function useImageGeneratorForm(
   // Form
   const formMethods = useForm({
     resolver: zodResolver(dynamicSchema),
+    defaultValues: {
+      fileIds: [],
+      outputFormat: 'jpg',
+    },
   });
 
   // Image uploads

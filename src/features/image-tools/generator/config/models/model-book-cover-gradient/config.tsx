@@ -5,8 +5,6 @@ import { Text } from '@common/components/text';
 import { colorSchema } from '@utils/schema-validations';
 import { GradientPreview } from '../../../components/image-generator-form/gradient-preview';
 import { Divider } from '@common/components/divider';
-import { Form } from '@common/components/forms';
-import { Display } from '@common/components/display';
 import { CircleBadge } from '@common/components/circle-badge';
 
 export type FormValues = {
@@ -250,17 +248,7 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
           type: 'fieldset',
           name: 'gradient-color-custom',
           properties: {
-            legend: (
-              <Display type="flex" align="center" gap="05">
-                Couleur personalisées du dégradé
-                <Form.Helper
-                  position="top-right"
-                  text=" Si une des champs est laissé vidé, la couleur sera remplacée
-                  par l'option sélectionnée en haut (Gris / Couleur principale /
-                  Couleur complémentaire)."
-                />
-              </Display>
-            ),
+            legend: 'Couleur personalisées du dégradé',
           },
           fields: [
             {
@@ -270,7 +258,16 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
                 label: 'Couleur de début du dégradé :',
                 labelProps: { htmlFor: 'gradient.startColor' },
                 helperProps: {
-                  text: 'Définit la couleur de fin du dégradé de fond.',
+                  text: (
+                    <Text tag="span">
+                      Définit la couleur de fin du dégradé de fond.{' '}
+                      <Text size="xs" tag="span">
+                        Laisser le champ vide pour que le système choisisse une
+                        couleur automatiquement en fonction du mode de couleur
+                        choisi (Gris / secondaire / complémentaire).
+                      </Text>
+                    </Text>
+                  ),
                   position: 'top-left',
                 },
                 inputProps: {},

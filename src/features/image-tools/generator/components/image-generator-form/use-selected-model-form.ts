@@ -36,6 +36,7 @@ export function useSelectedModelForm({
         model: currentValues.model,
         fileIds: currentValues.fileIds,
         outputFileName: currentValues.outputFileName,
+        outputFormat: currentValues.outputFormat,
       });
     }
   }, [

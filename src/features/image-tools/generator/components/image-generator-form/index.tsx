@@ -6,12 +6,19 @@ import { ImageSelectionSection } from './image-selection-section';
 import { Form } from '@common/components/forms';
 
 import './style.css';
+import { useMemo } from 'react';
 
 type ImageGeneratorForm = {
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void;
 };
 
 const NB_MAX_IMAGE_SELECTION = 3;
+
+const OUTPUT_FORMATS = [
+  { label: 'JPG', value: 'jpg' },
+  { label: 'PNG', value: 'png' },
+  { label: 'WEBP', value: 'webp' },
+];
 
 export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   const {
@@ -27,6 +34,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
   } = useImageGeneratorForm(onGenerated);
 
   const { formState, register, handleSubmit, control } = formMethods;
+  const errors = useMemo(() => formState.errors, [formState.errors]);
 
   useSelectedModelForm({
     formMethods,
@@ -39,7 +47,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
       <Form className="image-generator-form" onSubmit={handleSubmit(onSubmit)}>
         <ImageSelectionSection
           control={formMethods.control}
-          errors={formState.errors}
+          errors={errors}
           uploadIds={uploadIds}
           downloadPlaceholderCount={downloadPlaceholderCount}
           onChangeUpload={onChangeUpload}
@@ -48,7 +56,7 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
         />
         <ModelSelectionSection
           control={control}
-          errors={formState.errors}
+          errors={errors}
           currentModelName={currentModelName}
         />
         <Form.Input
@@ -65,6 +73,24 @@ export const ImageGeneratorForm = ({ onGenerated }: ImageGeneratorForm) => {
             position: 'left',
           }}
           className="lm-publisher-w-100"
+        />
+        <Form.RadioGroup
+          label="Format de sortie"
+          defaultValue="jpg"
+          inputGroupProps={OUTPUT_FORMATS.map(outputFormat => ({
+            id: `format-${outputFormat.value}`,
+            label: outputFormat.label,
+            labelProps: {
+              htmlFor: `format-input-${outputFormat.value}`,
+            },
+            inputProps: {
+              id: `format-input-${outputFormat.value}`,
+              value: outputFormat.value,
+              ...register('outputFormat'),
+            },
+          }))}
+          /* @ts-expect-error: todo */
+          error={errors['outputFormat']?.message as string | undefined}
         />
         <Form.Footer>
           <Form.Submit

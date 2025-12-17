@@ -3,7 +3,7 @@ import './style.css';
 
 export type FormFieldsetProps = {
   className?: string;
-  type?: 'solid' | 'transparent',
+  type?: 'solid' | 'transparent';
   legend?: string | React.ReactNode;
   contentClassName?: string;
   children?: React.ReactNode;
