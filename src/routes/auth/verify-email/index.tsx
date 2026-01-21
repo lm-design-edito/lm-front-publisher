@@ -4,6 +4,7 @@ import { Headline } from '@common/components/headline';
 import { ReverifyEmail } from '@features/auth/components/reverify-email';
 import { VerifyEmailForm } from '@features/auth/components/verify-email-form';
 import { createFileRoute, redirect, useSearch } from '@tanstack/react-router';
+import { Logger } from '@utils/logger';
 
 import * as zod from 'zod';
 
@@ -34,7 +35,25 @@ const VerifyEmailPage = () => {
 export const Route = createFileRoute('/auth/verify-email/')({
   component: VerifyEmailPage,
   validateSearch: search => verifyEmailSchema.parse(search),
+  beforeLoad: async ({ context }) => {
+    if (context.auth.isLoading) {
+      return;
+    }
+    if (context.auth.isAuthenticated && context.auth.isVerified) {
+      Logger.redirection(
+        'RouteMiddleware:',
+        "User's email is already verified, redirecting to home page",
+      );
+      throw redirect({
+        to: '/',
+      });
+    }
+  },
   onError: () => {
+    Logger.redirection(
+      'RouteMiddleware:',
+      'Invalid or missing email in query params, redirecting to home page',
+    );
     throw redirect({
       to: '/',
     });

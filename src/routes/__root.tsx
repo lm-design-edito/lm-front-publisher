@@ -6,19 +6,15 @@ import type { QueryClient } from '@tanstack/react-query';
 import type { ToastContextType } from '@common/providers/toast/toastContext';
 import { useSyncHeightToCSSVar } from '@common/hooks/useSyncHeightToCSSVar';
 import { useRef } from 'react';
-import { Headline } from '@common/components/headline';
-import { Text } from '@common/components/text';
-import { Loader } from '@common/components/loader';
-import { useWhoAmI } from '@features/auth';
 import { ToastProvider } from '@common/providers/toast/toastProvider';
 import { Breadcrumb } from '@common/components/breadcrumb';
-import { checkForAuthentifacted } from '@src/route-middleware';
 
 // Create a client
 
 export type RouterContext = {
   auth: {
     isAuthenticated: boolean;
+    isVerified: boolean;
     isLoading: boolean;
   };
   queryClient?: QueryClient;
@@ -61,33 +57,9 @@ const RootContent = () => {
 };
 
 export const RootPage = () => {
-  const { isLoading } = useWhoAmI();
-
-  if (isLoading) {
-    return (
-      <div className="app-content">
-        <Headline
-          title="LM Publisher"
-          description={
-            <div>
-              <Text>
-                The app is loading, you should wait. If it loads indefinitely,
-                please contact us.
-              </Text>
-              <Loader />
-            </div>
-          }
-        />
-      </div>
-    );
-  }
-
   return <RootContent />;
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => <RootPage />,
-  beforeLoad: async ({ context }) => {
-    checkForAuthentifacted({ context });
-  },
 });

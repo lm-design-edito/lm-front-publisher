@@ -12,6 +12,7 @@ export const router = createRouter({
   context: {
     auth: {
       isAuthenticated: false,
+      isVerified: false,
       isLoading: true,
     },
     queryClient: undefined,

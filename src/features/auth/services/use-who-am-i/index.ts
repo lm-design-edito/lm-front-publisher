@@ -15,6 +15,7 @@ export function useWhoAmI(
     return {
       user: null,
       isAuthenticated: false,
+      isVerified: false,
       isLoading: true,
       isError: false,
     };

@@ -3,12 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import { Form } from '@common/components/forms';
 import { useLogin } from '../../services/use-login';
-import { useWhoAmI } from '../../services/use-who-am-i';
-import { useNavigate } from '@tanstack/react-router';
-import { useContext, useEffect } from 'react';
-import { appRoutes } from '@src/appRoutes';
+import { useContext } from 'react';
 import { ToastContext } from '@common/providers/toast/toastContext';
-import { Logger } from '@utils/logger';
+import { appRoutes } from '@src/appRoutes';
+import { useNavigate } from '@tanstack/react-router';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -31,8 +29,6 @@ export const LoginForm = () => {
 
   const { showToast, hideToast } = useContext(ToastContext);
 
-  const { isAuthenticated } = useWhoAmI();
-
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
       hideToast('login-form');
@@ -41,6 +37,7 @@ export const LoginForm = () => {
         id: 'login-success',
         message: 'Vous êtes connecté',
       });
+      navigate({ to: appRoutes.index })
     },
     onError: error => {
       showToast({
@@ -57,16 +54,6 @@ export const LoginForm = () => {
       password: values.password,
     });
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      Logger.redirection(
-        'LoginForm:',
-        'User is already logged in, redirecting to /',
-      );
-      navigate({ to: appRoutes.index });
-    }
-  }, [isAuthenticated, navigate]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

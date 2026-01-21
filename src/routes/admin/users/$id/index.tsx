@@ -4,6 +4,7 @@ import { Loader } from '@common/components/loader';
 import { UserDetail } from '@features/admin-users/components/user-detail';
 import { createFileRoute, useParams } from '@tanstack/react-router';
 import { redirect } from '@tanstack/react-router';
+import { Logger } from '@utils/logger';
 
 const UserDetailPage = () => {
   const { id } = useParams({ strict: false });
@@ -34,12 +35,17 @@ export const Route = createFileRoute('/admin/users/$id/')({
     if (!data || !data.success) {
       context?.toaster?.showToast({
         type: 'error',
+        id: 'user-not-found',
         message: (
           <>
             Aucun utilisateur trouvé avec l'id: <code>{id}</code>
           </>
         ),
       });
+      Logger.redirection(
+        'RouteLoader:Admin/users/$id',
+        `No user found with id: ${id}, redirecting to /admin/users`,
+      );
       return redirect({ to: '/admin/users' });
     }
     return <Loader />;
