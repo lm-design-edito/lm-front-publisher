@@ -12,6 +12,8 @@ import {
 import { ThemeSwitch } from '@features/theme';
 import { ClearImageUploadIdsCacheButton } from '@features/image-tools/generator';
 import { Display } from '@common/components/display';
+import { ButtonLink } from '@common/components/buttons/button-link';
+import { appRoutes } from '@src/appRoutes';
 
 export const MyUserProfile = () => {
   const { user, isLoading } = useWhoAmI();
@@ -100,6 +102,12 @@ export const MyUserProfile = () => {
         className="lm-publisher-m-spacer-8"
       >
         <ClearImageUploadIdsCacheButton buttonProps={{ size: 'm' }} />
+      </Form.Fieldset>
+
+      <Form.Fieldset legend="Sécurité">
+        <ButtonLink to={appRoutes.requestNewPassword} variant="secondary">
+          Aller à la page de réinitialisation mon mot de passe
+        </ButtonLink>
       </Form.Fieldset>
       <Form.Fieldset
         legend="Déconnexion"

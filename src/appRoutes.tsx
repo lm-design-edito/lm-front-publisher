@@ -8,6 +8,8 @@ export const appRoutes = {
   login: '/auth/login',
   signup: '/auth/signup',
   verifyEmail: '/auth/verify-email',
+  requestNewPassword: '/auth/request-new-password',
+  submitNewPassword: '/auth/submit-new-password',
 
   account: '/account',
 

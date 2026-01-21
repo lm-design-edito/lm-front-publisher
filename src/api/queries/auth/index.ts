@@ -5,6 +5,8 @@ import { requestEmailVerificationToken } from './request-email-verification-toke
 import { signup } from './signup';
 import { verifyEmail } from './verify-email';
 import { whoAmI } from './whoami';
+import { requestNewPassword } from './request-new-password';
+import { submitNewPassword } from './submit-new-password';
 
 export const auth = {
   whoAmI,
@@ -14,6 +16,8 @@ export const auth = {
   signup,
   requestEmailVerificationToken,
   verifyEmail,
+  requestNewPassword,
+  submitNewPassword,
   debugRefreshToken: () => {
     console.warn(
       'Debug refresh token called, this should not be used in production!',

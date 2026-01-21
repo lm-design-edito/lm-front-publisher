@@ -19,7 +19,9 @@ import { Route as AdminUsersRouteImport } from './routes/admin/users/route'
 import { Route as ImageTinyLmgIndexImport } from './routes/image/tiny-lmg/index'
 import { Route as ImageGeneratorIndexImport } from './routes/image/generator/index'
 import { Route as AuthVerifyEmailIndexImport } from './routes/auth/verify-email/index'
+import { Route as AuthSubmitNewPasswordIndexImport } from './routes/auth/submit-new-password/index'
 import { Route as AuthSignupIndexImport } from './routes/auth/signup/index'
+import { Route as AuthRequestNewPasswordIndexImport } from './routes/auth/request-new-password/index'
 import { Route as AuthLoginIndexImport } from './routes/auth/login/index'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
 import { Route as AdminUsersIdIndexImport } from './routes/admin/users/$id/index'
@@ -74,11 +76,26 @@ const AuthVerifyEmailIndexRoute = AuthVerifyEmailIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthSubmitNewPasswordIndexRoute = AuthSubmitNewPasswordIndexImport.update(
+  {
+    id: '/auth/submit-new-password/',
+    path: '/auth/submit-new-password/',
+    getParentRoute: () => rootRoute,
+  } as any,
+)
+
 const AuthSignupIndexRoute = AuthSignupIndexImport.update({
   id: '/auth/signup/',
   path: '/auth/signup/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const AuthRequestNewPasswordIndexRoute =
+  AuthRequestNewPasswordIndexImport.update({
+    id: '/auth/request-new-password/',
+    path: '/auth/request-new-password/',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 const AuthLoginIndexRoute = AuthLoginIndexImport.update({
   id: '/auth/login/',
@@ -151,11 +168,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexImport
       parentRoute: typeof rootRoute
     }
+    '/auth/request-new-password/': {
+      id: '/auth/request-new-password/'
+      path: '/auth/request-new-password'
+      fullPath: '/auth/request-new-password'
+      preLoaderRoute: typeof AuthRequestNewPasswordIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/signup/': {
       id: '/auth/signup/'
       path: '/auth/signup'
       fullPath: '/auth/signup'
       preLoaderRoute: typeof AuthSignupIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/submit-new-password/': {
+      id: '/auth/submit-new-password/'
+      path: '/auth/submit-new-password'
+      fullPath: '/auth/submit-new-password'
+      preLoaderRoute: typeof AuthSubmitNewPasswordIndexImport
       parentRoute: typeof rootRoute
     }
     '/auth/verify-email/': {
@@ -213,7 +244,9 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
+  '/auth/request-new-password': typeof AuthRequestNewPasswordIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/submit-new-password': typeof AuthSubmitNewPasswordIndexRoute
   '/auth/verify-email': typeof AuthVerifyEmailIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
@@ -227,7 +260,9 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/auth/login': typeof AuthLoginIndexRoute
+  '/auth/request-new-password': typeof AuthRequestNewPasswordIndexRoute
   '/auth/signup': typeof AuthSignupIndexRoute
+  '/auth/submit-new-password': typeof AuthSubmitNewPasswordIndexRoute
   '/auth/verify-email': typeof AuthVerifyEmailIndexRoute
   '/image/generator': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg': typeof ImageTinyLmgIndexRoute
@@ -243,7 +278,9 @@ export interface FileRoutesById {
   '/auth/': typeof AuthIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
   '/auth/login/': typeof AuthLoginIndexRoute
+  '/auth/request-new-password/': typeof AuthRequestNewPasswordIndexRoute
   '/auth/signup/': typeof AuthSignupIndexRoute
+  '/auth/submit-new-password/': typeof AuthSubmitNewPasswordIndexRoute
   '/auth/verify-email/': typeof AuthVerifyEmailIndexRoute
   '/image/generator/': typeof ImageGeneratorIndexRoute
   '/image/tiny-lmg/': typeof ImageTinyLmgIndexRoute
@@ -260,7 +297,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin/users/'
     | '/auth/login'
+    | '/auth/request-new-password'
     | '/auth/signup'
+    | '/auth/submit-new-password'
     | '/auth/verify-email'
     | '/image/generator'
     | '/image/tiny-lmg'
@@ -273,7 +312,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin/users'
     | '/auth/login'
+    | '/auth/request-new-password'
     | '/auth/signup'
+    | '/auth/submit-new-password'
     | '/auth/verify-email'
     | '/image/generator'
     | '/image/tiny-lmg'
@@ -287,7 +328,9 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/admin/users/'
     | '/auth/login/'
+    | '/auth/request-new-password/'
     | '/auth/signup/'
+    | '/auth/submit-new-password/'
     | '/auth/verify-email/'
     | '/image/generator/'
     | '/image/tiny-lmg/'
@@ -302,7 +345,9 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   AuthIndexRoute: typeof AuthIndexRoute
   AuthLoginIndexRoute: typeof AuthLoginIndexRoute
+  AuthRequestNewPasswordIndexRoute: typeof AuthRequestNewPasswordIndexRoute
   AuthSignupIndexRoute: typeof AuthSignupIndexRoute
+  AuthSubmitNewPasswordIndexRoute: typeof AuthSubmitNewPasswordIndexRoute
   AuthVerifyEmailIndexRoute: typeof AuthVerifyEmailIndexRoute
   ImageGeneratorIndexRoute: typeof ImageGeneratorIndexRoute
   ImageTinyLmgIndexRoute: typeof ImageTinyLmgIndexRoute
@@ -315,7 +360,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   AuthIndexRoute: AuthIndexRoute,
   AuthLoginIndexRoute: AuthLoginIndexRoute,
+  AuthRequestNewPasswordIndexRoute: AuthRequestNewPasswordIndexRoute,
   AuthSignupIndexRoute: AuthSignupIndexRoute,
+  AuthSubmitNewPasswordIndexRoute: AuthSubmitNewPasswordIndexRoute,
   AuthVerifyEmailIndexRoute: AuthVerifyEmailIndexRoute,
   ImageGeneratorIndexRoute: ImageGeneratorIndexRoute,
   ImageTinyLmgIndexRoute: ImageTinyLmgIndexRoute,
@@ -337,7 +384,9 @@ export const routeTree = rootRoute
         "/admin/",
         "/auth/",
         "/auth/login/",
+        "/auth/request-new-password/",
         "/auth/signup/",
+        "/auth/submit-new-password/",
         "/auth/verify-email/",
         "/image/generator/",
         "/image/tiny-lmg/"
@@ -369,8 +418,14 @@ export const routeTree = rootRoute
     "/auth/login/": {
       "filePath": "auth/login/index.tsx"
     },
+    "/auth/request-new-password/": {
+      "filePath": "auth/request-new-password/index.tsx"
+    },
     "/auth/signup/": {
       "filePath": "auth/signup/index.tsx"
+    },
+    "/auth/submit-new-password/": {
+      "filePath": "auth/submit-new-password/index.tsx"
     },
     "/auth/verify-email/": {
       "filePath": "auth/verify-email/index.tsx"

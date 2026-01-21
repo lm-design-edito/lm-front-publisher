@@ -11,6 +11,8 @@ const API_ROUTES = {
   AUTH_POST_REQUEST_EMAIL_VERIFICATION_TOKEN:
     'auth/request-email-verification-token',
   AUTH_POST_VERIFY_EMAIL: 'POST:/auth/verify-email',
+  AUTH_POST_REQUEST_NEW_PASSWORD: 'POST:/auth/request-new-password',
+  AUTH_POST_SUBMIT_NEW_PASSWORD: 'POST:/auth/submit-new-password',
 
   ADMIN_USERS_UPDATE: 'admin/users/update',
   ADMIN_USERS_LIST: 'admin/users/list',

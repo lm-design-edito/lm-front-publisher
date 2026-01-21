@@ -1,13 +1,26 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { LoginForm } from '@features/auth';
 import { Headline } from '@common/components/headline';
 import { Logger } from '@utils/logger';
+import { Divider } from '@common/components/divider';
+import { Text } from '@common/components/text';
+import { appRoutes } from '@src/appRoutes';
 
 const LoginPage = () => {
   return (
     <>
       <Headline title="Connexion" />
       <LoginForm />
+      <Divider />
+      <Text size="sm">
+        Vous avez oublié votre mot de passe ?{' '}
+        <Link
+          to={appRoutes.requestNewPassword}
+          search={{ forgotPassword: true }}
+        >
+          Rendez-vous sur la page de ré-initialisation de mot de passe
+        </Link>
+      </Text>
     </>
   );
 };
@@ -31,5 +44,5 @@ export const Route = createFileRoute('/auth/login/')({
         to: '/',
       });
     }
-  }
+  },
 });

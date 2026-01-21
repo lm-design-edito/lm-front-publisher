@@ -37,7 +37,7 @@ export const LoginForm = () => {
         id: 'login-success',
         message: 'Vous êtes connecté',
       });
-      navigate({ to: appRoutes.index })
+      navigate({ to: appRoutes.index });
     },
     onError: error => {
       showToast({

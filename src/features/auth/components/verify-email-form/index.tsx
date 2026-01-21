@@ -86,7 +86,6 @@ export const VerifyEmailForm = () => {
         inputProps={{
           type: 'text',
           id: 'email',
-          autoComplete: 'email',
           ...register('email'),
           disabled: true,
           required: true,
