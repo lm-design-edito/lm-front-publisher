@@ -22,11 +22,19 @@ export const modelConfig: ModelConfig<FormValues, OutputAPIPayload> = {
     return {
       ...restFormValues,
       backgroundType: 'stripes',
-      ...(context.imageCount === 3
+      ...(context.imageCount === 2
         ? {
             imageFitAreaRatios: {
-              width: 0.9,
-              height: 0.95,
+              width: 0.8,
+              height: 0.8,
+            },
+          }
+        : {}),
+      ...(context.imageCount === 1
+        ? {
+            imageFitAreaRatios: {
+              width: 0.8,
+              height: 0.8,
             },
           }
         : {}),
