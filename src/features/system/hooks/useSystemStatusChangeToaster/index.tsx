@@ -1,21 +1,18 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSystemStatusCheck } from '@features/system/services/use-system-status-check';
 import { useToastContext } from '@common/hooks/useToastContext';
-
-const SystemStatusToaster = {
-  UNHEALTHY: 'system-unhealthy-toaster',
-  RECOVERED: 'system-recovered-toaster',
-} as const;
+import { Toaster } from '@features/system/config';
 
 export const useSystemStatusChangeToaster = () => {
-  const { showToast, hideToast } = useToastContext();
+  const { showToast, hideToast, hideAllToasts } = useToastContext();
 
   const onStatusChange = useCallback(
     ({ isHealthy }: { isHealthy: boolean }) => {
       if (!isHealthy) {
-        hideToast(SystemStatusToaster.RECOVERED);
+        hideToast(Toaster.SYSTEM_STATUS_RECOVERED);
         showToast({
-          id: SystemStatusToaster.UNHEALTHY,
+          id: Toaster.SYSTEM_STATUS_ISSUE,
+          groupId: Toaster.Groups.SYSTEM_STATUS,
           message: 'Le serveur rencontre des problèmes.',
           icon: 'danger',
           duration: 5000,
@@ -30,9 +27,10 @@ export const useSystemStatusChangeToaster = () => {
         });
         return;
       }
-      hideToast(SystemStatusToaster.UNHEALTHY);
+      hideToast(Toaster.SYSTEM_STATUS_ISSUE);
       showToast({
-        id: SystemStatusToaster.RECOVERED,
+        id: Toaster.SYSTEM_STATUS_RECOVERED,
+        groupId: Toaster.Groups.SYSTEM_STATUS,
         message: 'Le serveur est de nouveau opérationnel.',
         description: <></>,
         type: 'success',
@@ -41,6 +39,12 @@ export const useSystemStatusChangeToaster = () => {
     },
     [showToast, hideToast],
   );
+
+  useEffect(() => {
+    return () => {
+      hideAllToasts(Toaster.Groups.SYSTEM_STATUS);
+    };
+  }, [hideAllToasts]);
 
   useSystemStatusCheck({
     onStatusChange: onStatusChange,

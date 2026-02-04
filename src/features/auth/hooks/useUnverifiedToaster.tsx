@@ -3,6 +3,7 @@ import { useWhoAmI } from '../services';
 import { useEffect, useMemo } from 'react';
 import { appRoutes } from '@src/appRoutes';
 import { useLocation } from '@tanstack/react-router';
+import { Toaster } from '../config';
 
 export const useUnverifiedToaster = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ export const useUnverifiedToaster = () => {
   useEffect(() => {
     if (needsToDisplayToaster) {
       showToast({
-        id: 'unverified-user-toaster',
+        id: Toaster.UNVERIFIED_USER,
         message: "Votre compte n'est pas vérifié.",
         icon: 'danger',
         description: (
@@ -42,7 +43,7 @@ export const useUnverifiedToaster = () => {
       });
     }
     return () => {
-      hideToast('unverified-user-toaster');
+      hideToast(Toaster.UNVERIFIED_USER);
     };
   }, [needsToDisplayToaster, showToast, hideToast]);
 };

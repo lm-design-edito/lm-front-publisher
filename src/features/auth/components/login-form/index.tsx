@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { ToastContext } from '@common/providers/toast/toastContext';
 import { appRoutes } from '@src/appRoutes';
 import { useNavigate } from '@tanstack/react-router';
+import { Toaster } from '@features/auth/config';
 
 const loginFormSchema = zod.object({
   email: zod.string().email("L'adresse e-mail doit être valide"),
@@ -27,21 +28,21 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const { showToast, hideToast } = useContext(ToastContext);
+  const { showToast, hideAllToasts } = useContext(ToastContext);
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: () => {
-      hideToast('login-form');
+      hideAllToasts(Toaster.Groups.LOGIN_FORM);
       showToast({
         type: 'success',
-        id: 'login-success',
+        groupId: Toaster.Groups.LOGIN_FORM,
         message: 'Vous êtes connecté',
       });
       navigate({ to: appRoutes.index });
     },
     onError: error => {
       showToast({
-        groupId: 'login-form',
+        groupId: Toaster.Groups.LOGIN_FORM,
         type: 'error',
         message: error.message,
       });

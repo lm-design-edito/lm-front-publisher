@@ -28,7 +28,7 @@ export function useImageThumbsUpload(clbs?: {
         clbs?.onWaitingForServer?.();
         throw new Error('Server might be down, waiting for it to be healthy');
       }
-  
+
       // Uploader les thumbs
       Logger.log('image-tools.api.useImageThumbsUpload', 'Uploading');
       const response = await api.queries.designEdito.thumbsUpload(params);

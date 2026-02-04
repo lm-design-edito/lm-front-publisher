@@ -7,6 +7,7 @@ import { useImageThumbsUpload } from '../../services/use-image-thumbs-upload';
 import { useImageGenerate } from '../../services/use-image-generate';
 import { createDynamicImageGeneratorFormSchema } from './schema';
 import { getModelAPIPayload } from '../../utils/get-model-api-payload';
+import { Toaster } from '../../../config';
 
 export function useImageGeneratorForm(
   onGenerated: (image: { url: string; mimeType: string; name: string }) => void,
@@ -41,7 +42,7 @@ export function useImageGeneratorForm(
     onWaitingForServer: () => {
       showToast({
         type: 'warning',
-        id: 'upload-server-error',
+        id: Toaster.UPLOAD_SERVER_ERROR,
         message: 'Le serveur est occupé. Veuillez patienter',
       });
     },
@@ -68,7 +69,7 @@ export function useImageGeneratorForm(
       onWaitingForServer: () => {
         showToast({
           type: 'warning',
-          id: 'generate-server-error',
+          id: Toaster.GENERATE_SERVER_ERROR,
           message: 'Le serveur est occupé. Veuillez patienter',
         });
       },

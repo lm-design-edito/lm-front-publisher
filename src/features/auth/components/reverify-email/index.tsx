@@ -3,7 +3,6 @@ import { Loader } from '@common/components/loader';
 import { Text } from '@common/components/text';
 import { ToastContext } from '@common/providers/toast/toastContext';
 import { useRequestEmailVerificationToken } from '@features/auth/services/use-request-email-verification-token';
-import { Logger } from '@utils/logger';
 import { useContext } from 'react';
 
 type ReverifyEmailProps = {
@@ -20,10 +19,8 @@ export const ReverifyEmail = ({ email }: ReverifyEmailProps) => {
           message: `Un nouveau code de vérification a été envoyé à ${email}.`,
           withCloseBtn: true,
         });
-        Logger.success('useRequestEmailVerificationToken');
       },
       onError: error => {
-        Logger.error('useRequestEmailVerificationToken', error);
         showToast({
           type: 'error',
           message: error.message,

@@ -17,7 +17,8 @@ export function useImageGenerate(clbs?: {
   onSuccess?: (data: ImageTransformResponseSuccessType) => void;
   onError?: (error: ReturnType<typeof api.helpers.formatAPIError>) => void;
 }) {
-  const { isHealthy: isSystemHealthy, isLoading: isLoadingSystemStatusCheck } = useSystemStatusCheck();
+  const { isHealthy: isSystemHealthy, isLoading: isLoadingSystemStatusCheck } =
+    useSystemStatusCheck();
 
   return useMutation({
     mutationFn: async (params: UseImageGenerateParams) => {

@@ -10,6 +10,7 @@ import { Divider } from '@common/components/divider';
 import { Badge } from '@common/components/badge';
 import { useToastContext } from '@common/hooks/useToastContext';
 import { checkForAuthentifacted } from '@src/route-middleware';
+import { Toaster } from '@features/image-tools';
 
 type GeneratedImage = {
   name: string;
@@ -34,7 +35,7 @@ const ImageGeneratorPage = () => {
 
   useEffect(() => {
     showToast({
-      id: 'image-generator-beta-info',
+      id: Toaster.IMAGE_GENERATOR_BETA,
       type: 'info',
       duration: 0,
       message:
@@ -44,7 +45,7 @@ const ImageGeneratorPage = () => {
 
   useEffect(() => {
     return () => {
-      hideToast('image-generator-beta-info');
+      hideToast(Toaster.IMAGE_GENERATOR_BETA);
     };
   }, [hideToast]);
 

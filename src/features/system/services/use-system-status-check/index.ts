@@ -1,4 +1,5 @@
 import { api } from '@api/index';
+import { useWhoAmI } from '@features/auth';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
@@ -10,16 +11,18 @@ export type useSystemStatusCheckProps = {
 
 export function useSystemStatusCheck(props?: useSystemStatusCheckProps) {
   const { onStatusChange } = props || {};
+  const { isAuthenticated } = useWhoAmI();
   const isPreviousHealthy = useRef<boolean>(true);
   const { isSuccess, data, isLoading } = useQuery({
     queryKey: ['system-status-check'],
     retry: 3,
     refetchInterval: refetchInterval,
+    enabled: isAuthenticated,
     queryFn: async () => api.queries.system.statusCheck(),
   });
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || !isAuthenticated) {
       return;
     }
 
@@ -31,7 +34,7 @@ export function useSystemStatusCheck(props?: useSystemStatusCheckProps) {
     if (onStatusChange && hasChanged) {
       onStatusChange({ isHealthy: isPreviousHealthy.current || false });
     }
-  }, [isLoading, isSuccess, data, onStatusChange]);
+  }, [isLoading, isAuthenticated, isSuccess, data, onStatusChange]);
 
   return {
     isLoading,
