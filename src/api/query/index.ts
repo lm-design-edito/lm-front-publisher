@@ -66,7 +66,9 @@ export const query = async <T>(
     formattedQuery.options,
   );
 
-  Logger.query('api.query', { handledResponse });
+  Logger.query(`${request}${handledResponse.success ? '✅' : '❌'}`, {
+    response: handledResponse,
+  });
 
   const authError = isAuthError(handledResponse);
 
@@ -81,8 +83,6 @@ export const query = async <T>(
 /* Ca c'est la fonction qui ajoute les auths */
 export const authQuery = async (request: string, options?: QueryOptions) => {
   const authedOptions = await getAuthedOptions(options);
-  Logger.query('api.query.authQuery', { request, authedOptions });
-
   return fetch(getAPIUrl(request), authedOptions);
 };
 
@@ -109,10 +109,16 @@ export const authQueryOnError = async (errorCode: string) => {
   const authedOptions = await getAuthedOptions();
   switch (errorCode) {
     case HANDLED_AUTH_ERRORS.CSRF_TOKEN:
-      console.warn('CSRF token error, fetching new token');
+      Logger.warn(
+        'api.query.authQueryOnError',
+        'CSRF token error, fetching new token',
+      );
       return getCsrfToken();
     case HANDLED_AUTH_ERRORS.JWT_TOKEN:
-      console.warn('JWT token error, refreshing token');
+      Logger.warn(
+        'api.query.authQueryOnError',
+        'JWT token error, refreshing token',
+      );
       alert(
         'AUTH.ERROR JWT: Votre session a expiré, nous allons vous reconnecter.',
       );

@@ -17,15 +17,13 @@ export const LogoutButton = ({ size }: LogoutButtonProps) => {
         type: 'success',
         message: 'Vous êtes déconnecté',
       });
-      console.warn('Logout successful, user logged out.');
       navigate({ to: appRoutes.index });
     },
-    onError: error => {
+    onError: () => {
       showToast({
         type: 'error',
         message: 'Erreur lors de la déconnexion',
       });
-      console.error('Logout failed:', error);
     },
   });
 

@@ -1,6 +1,7 @@
 import * as zod from 'zod';
 import { getModelConfigFields } from '../../utils/get-model-config-fields';
 import { templateNameValues, type ModelConfigField } from '../../config';
+import { Logger } from '@utils/logger';
 
 export const baseImageGeneratorFormSchema = zod.object({
   fileIds: zod
@@ -108,7 +109,8 @@ function buildNestedSchema(
             [childKey]: field.validation,
           });
         } else {
-          console.warn(
+          Logger.warn(
+            'image-generator-form.schema.buildNestedSchema',
             `Field "${parentKey}" already exists but is not an object. Skipping "${field.name}".`,
           );
         }

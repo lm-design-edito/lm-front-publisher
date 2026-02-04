@@ -58,8 +58,6 @@ export const SignupForm = () => {
         type: 'error',
         message: error.message,
       });
-      console.error('Signup failed:', error);
-      // Handle signup error, e.g., show error message
     },
   }); // Assuming you have a useSignup hook for handling signup logic
 

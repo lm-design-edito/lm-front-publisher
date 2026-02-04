@@ -13,7 +13,6 @@ export const LogoutEverywhereButton = ({
   const navigate = useNavigate();
   const { mutate: logout, isPending: isPendingLogout } = useLogoutEverywhere({
     onSuccess: () => {
-      console.warn('Logout successful, user logged out.');
       navigate({ to: appRoutes.index });
     },
     onError: error => {
