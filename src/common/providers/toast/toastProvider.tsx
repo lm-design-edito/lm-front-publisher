@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { ToastContext, type Toast } from './toastContext';
 import { Alert } from '@common/components/alert';
+import { Logger } from '@utils/logger';
 
 const DEFAULT_TOAST_DURATION = 5000;
 
@@ -8,8 +9,12 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const hideToast = useCallback((toastId: string) => {
+    Logger.info('ToastProvider:HideToast', toastId);
     if (!toastId) {
-      console.warn('hideToast called without toastId');
+      Logger.warn(
+        'ToastProvider',
+        `Hide toast called without toastId. Skipping hide operation.`,
+      );
       return;
     }
     setToasts(prevToasts => {
@@ -21,6 +26,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const hideAllToasts = useCallback((groupId: string) => {
+    Logger.info('ToastProvider:HideAllToasts', groupId);
     setToasts(prevToasts => {
       if (!groupId) {
         return [];
@@ -34,11 +40,15 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
 
   const showToast = useCallback(
     (toast: Toast) => {
+      Logger.info('ToastProvider:ShowToast:Try', toast);
       const id = toast.id || Math.random().toString(36);
       const newToast = { ...toast, id };
       setToasts(prevToasts => {
         if (prevToasts.find(t => t.id === id)) {
-          console.warn('Toast with this id already exists:', id);
+          Logger.warn(
+            'ToastProvider',
+            `Toast with id ${id} already exists. Skipping addition.`,
+          );
           return prevToasts;
         }
         return [...prevToasts, newToast];

@@ -30,6 +30,7 @@ export default function App() {
   const queryClient = useQueryClient();
   const toaster = useToastContext();
   const { isAuthenticated, user, isLoading } = useWhoAmI();
+
   if (isLoading) {
     return <LoadingFallback />;
   }

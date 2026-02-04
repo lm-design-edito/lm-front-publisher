@@ -4,6 +4,7 @@ const LOG_TYPES = {
   REDIRECTION: 'REDIRECTION',
   SUCCESS: 'SUCCESS',
   QUERY: 'QUERY',
+  INFO: 'INFO',
 };
 
 const canLog =
@@ -17,6 +18,19 @@ export class Logger {
 
     const logHeader = this.getLogHeader(level, key);
     console.log(
+      logHeader.head,
+      logHeader.options,
+      message ? this.formatter(message) : '',
+    );
+  }
+
+  static warn(key: string, message?: unknown) {
+    if (!canLog) {
+      return;
+    }
+
+    const logHeader = this.getLogHeader('WARN', key);
+    console.warn(
       logHeader.head,
       logHeader.options,
       message ? this.formatter(message) : '',
@@ -43,6 +57,10 @@ export class Logger {
     this._consoleLog(LOG_TYPES.REDIRECTION, key, message);
   }
 
+  static info(key: string, message?: unknown) {
+    this._consoleLog(LOG_TYPES.INFO, key, message);
+  }
+
   static getLogHeader(level: string, key: string) {
     const options = [];
     switch (level) {
@@ -60,6 +78,9 @@ export class Logger {
         break;
       case LOG_TYPES.REDIRECTION:
         options.push('color: #deff66');
+        break;
+      case LOG_TYPES.INFO:
+        options.push('color: #ffd67d');
         break;
     }
     return {

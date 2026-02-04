@@ -8,6 +8,7 @@ import { useSyncHeightToCSSVar } from '@common/hooks/useSyncHeightToCSSVar';
 import { useRef } from 'react';
 import { ToastProvider } from '@common/providers/toast/toastProvider';
 import { Breadcrumb } from '@common/components/breadcrumb';
+import { useSystemStatusChangeToaster } from '@features/system/hooks/useSystemStatusChangeToaster';
 
 // Create a client
 
@@ -35,7 +36,9 @@ declare module '@tanstack/react-router' {
 }
 
 const RootContent = () => {
+  useSystemStatusChangeToaster();
   useUnverifiedToaster();
+
   const $appBbreadcrumbRef = useRef<HTMLDivElement>(null);
   useSyncHeightToCSSVar({
     target: $appBbreadcrumbRef,
@@ -43,7 +46,7 @@ const RootContent = () => {
   });
 
   return (
-    <ToastProvider>
+    <>
       <Header />
       <div className="app-breadcrumb" ref={$appBbreadcrumbRef}>
         <Breadcrumb />
@@ -52,12 +55,16 @@ const RootContent = () => {
         <Outlet />
       </div>
       <Footer />
-    </ToastProvider>
+    </>
   );
 };
 
 export const RootPage = () => {
-  return <RootContent />;
+  return (
+    <ToastProvider>
+      <RootContent />
+    </ToastProvider>
+  );
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({

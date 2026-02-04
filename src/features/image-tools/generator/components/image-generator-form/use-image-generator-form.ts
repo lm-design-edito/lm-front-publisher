@@ -38,11 +38,11 @@ export function useImageGeneratorForm(
 
   // Image uploads
   const { mutate: imageThumbUpload } = useImageThumbsUpload({
-    onServerDown: () => {
+    onWaitingForServer: () => {
       showToast({
         type: 'warning',
         id: 'upload-server-error',
-        message: 'Le serveur ne répond pas. Veuillez patienter',
+        message: 'Le serveur est occupé. Veuillez patienter',
       });
     },
     onSuccess: data => {
@@ -65,11 +65,11 @@ export function useImageGeneratorForm(
   // Image generation
   const { mutate: imageGenerate, isPending: isPendingGenerate } =
     useImageGenerate({
-      onServerDown: () => {
+      onWaitingForServer: () => {
         showToast({
           type: 'warning',
           id: 'generate-server-error',
-          message: 'Le serveur ne répond pas. Veuillez patienter',
+          message: 'Le serveur est occupé. Veuillez patienter',
         });
       },
       onSuccess: data => {

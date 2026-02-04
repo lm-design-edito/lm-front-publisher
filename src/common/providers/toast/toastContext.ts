@@ -16,15 +16,9 @@ export type ToastContextType = {
 };
 
 const defaultToastContext: ToastContextType = {
-  showToast: toast => {
-    console.log('Toast:', toast);
-  },
-  hideToast: toastId => {
-    console.log('Hide Toast with id:', toastId);
-  },
-  hideAllToasts: groupId => {
-    console.log('Hide all Toasts starting with groupId:', groupId);
-  },
+  showToast: () => {},
+  hideToast: () => {},
+  hideAllToasts: () => {},
 };
 
 export const ToastContextProviderValue = defaultToastContext;
